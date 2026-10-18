@@ -811,7 +811,7 @@
           <span class="tok"><span class="tok-t">▁mechanics</span><span class="tok-id">52347</span></span>
           <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
         </div>
-        <div class="idrow">▁ 表示前导空格 &nbsp;·&nbsp; celestial → cel + estial</div>
+        <div class="idrow">▁ 表示前导空格 &nbsp;·&nbsp; Celestial → Cel + estial</div>
       </div>
 
       <div class="stats4">
@@ -872,7 +872,7 @@
           <div class="calc">200,019 × 4,096 <span>≈</span> <b>8.2 亿参数</b></div>
         </div>
       </div>
-      <div class="keyline">ID 不是名字，是<b>行号</b>；换模型，就是换一张表。</div>
+      <div class="keyline">ID 是<b>行号</b>；换模型，就是换一张表。</div>
     </div>
     <div class="footer"><span>vocabulary</span><span class="pnum">04 / 44</span></div>
   </section>
@@ -1166,7 +1166,7 @@
         <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">行为</div><p>看示范，学会按指令回答</p></div>
         <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">策略</div><p>做题对答案，学会搜索与纠错</p></div>
       </div>
-      <div class="keyline">不是换了模型，是换了<b>训练信号</b>。</div>
+      <div class="keyline">换的是<b>训练信号</b>。</div>
     </div>
     <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 44</span></div>
   </section>
@@ -1195,7 +1195,7 @@
           <div class="card"><div class="k">产出</div><div class="big">base model</div><p>会续写，不会回答问题</p></div>
         </div>
       </div>
-      <div class="keyline">它学会的是世界的<b>统计结构</b>，不是任务。</div>
+      <div class="keyline">它学会的是世界的<b>统计结构</b>。</div>
     </div>
     <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 44</span></div>
   </section>
@@ -1283,7 +1283,7 @@
           <div class="card accent"><div class="k">最小化</div><p>= 最大似然 = 最优压缩</p></div>
         </div>
       </div>
-      <div class="keyline">这不是随便选的 loss；它就是用模型给数据<b>编码的长度</b>。</div>
+      <div class="keyline">这个 loss 就是模型给数据<b>编码的长度</b>。</div>
     </div>
     <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 44</span></div>
   </section>
@@ -1411,7 +1411,7 @@
       <div class="three" style="margin-top:28px">
         <div class="card"><div class="k">没有标准答案</div><div class="big" style="font-size:22px">只有奖励</div><p>不告诉你该做什么，只告诉你结果好不好</p></div>
         <div class="card"><div class="k">试错</div><div class="big" style="font-size:22px">动作 → 反馈</div><p>好就强化，坏就改</p></div>
-        <div class="card accent"><div class="k">目标</div><div class="big" style="font-size:22px">累积奖励</div><p>不是眼前一步，是长期回报</p></div>
+        <div class="card accent"><div class="k">目标</div><div class="big" style="font-size:22px">累积奖励</div><p>目标是长期回报</p></div>
       </div>
       <div class="mathblock" style="margin-top:24px;font-size:24px">
         <math>
@@ -1425,13 +1425,13 @@
         </math>
       </div>
       <p class="micro" style="margin-top:10px">最早：最优控制 · 机器人 · 运筹优化 · 游戏</p>
-      <div class="keyline">RL 学的不是答案，是<b>策略</b>。</div>
+      <div class="keyline">RL 学的是<b>策略</b>。</div>
     </div>
     <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 44</span></div>
   </section>
 
   <!-- ============ S21 · RL 的游戏前史 ============ -->
-  <section class="slide" data-notes="RL 不是新东西。Atari、AlphaGo、Dota、StarCraft，都是在 simulator 里试错，用明确奖励改策略。共同点是：有环境、有奖励、可以无限重来。注意：AlphaFold 不是 RL，它是监督学习，用已知结构做标签，没有奖励也没有试错；2024 诺贝尔化学奖表彰的是蛋白质结构预测，不是 RL。真实问题没有 simulator，数学和代码是例外。">
+  <section class="slide" data-notes="RL 不是新东西。Atari、AlphaGo、Dota、StarCraft，都是在 simulator 里试错，用明确奖励改策略。共同点是：有环境、有奖励、可以无限重来。注意：AlphaFold 是监督学习，用已知结构做标签，没有奖励也没有试错；2024 诺贝尔化学奖表彰的是蛋白质结构预测。真实问题没有 simulator，数学和代码是例外。">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>RL 的老战场：先打赢游戏</h2>
     <div class="content">
@@ -1447,8 +1447,8 @@
         <span class="pill"><i></i>可无限试错</span>
       </div>
       <p class="micro" style="margin-top:16px">DeepMind：Atari · AlphaGo · AlphaStar（RL） &nbsp;|&nbsp; AlphaFold → 2024 诺贝尔化学奖（Hassabis &amp; Jumper）</p>
-      <div class="sidenote"><b>但 AlphaFold 不是 RL。</b> 它是监督学习：用已知结构做标签；没有奖励，也没有试错。</div>
-      <div class="keyline">真实问题没有 simulator；<b>数学和代码是例外</b>。</div>
+      <div class="sidenote"><b>AlphaFold 是监督学习。</b> 它用已知结构做标签；没有奖励，也没有试错。</div>
+      <div class="keyline">数学和代码自带 <b>simulator</b>。</div>
     </div>
     <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 44</span></div>
   </section>
@@ -1570,7 +1570,7 @@
           <div class="card accent"><div class="k">但仍然不会</div><p>不会用工具，不会记事，不会验证</p></div>
         </div>
       </div>
-      <div class="keyline">会说话，是训练出来的，不是涌现的。</div>
+      <div class="keyline">会说话，是训练出来的。</div>
     </div>
     <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 44</span></div>
   </section>
@@ -1664,7 +1664,7 @@
         <div class="card"><div class="k">慢</div><p>prefill 与注意力成本上升</p></div>
         <div class="card accent"><div class="k">稀释</div><p>中间信息被忽略；信号被噪声淹没</p></div>
       </div>
-      <div class="keyline">窗口变长，不等于信息变多。</div>
+      <div class="keyline">信息密度比窗口长度更重要。</div>
     </div>
     <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 44</span></div>
   </section>
@@ -1694,7 +1694,7 @@
           <div class="card accent"><div class="k">含义</div><p>窗口大 ≠ 找得到</p></div>
         </div>
       </div>
-      <div class="keyline">长上下文不等于找得到。</div>
+      <div class="keyline">检索准确率才是关键。</div>
     </div>
     <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 44</span></div>
   </section>
@@ -1702,7 +1702,7 @@
   <!-- ============ S31 · Context ============ -->
   <section class="slide" data-notes="上下文窗口是工作台，不是仓库。放什么、怎么放，比放多少更重要。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context engineering：工作台，不是仓库</h2>
+    <h2>Context engineering：把窗口当工作台</h2>
     <div class="content">
       <div class="two">
         <div>
@@ -1722,7 +1722,7 @@
           <div class="card accent"><div class="k">超窗</div><p>压缩、摘要、子 agent</p></div>
         </div>
       </div>
-      <div class="keyline">上下文不是越长越好，是越相关越好。</div>
+      <div class="keyline">上下文越相关越好。</div>
     </div>
     <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 44</span></div>
   </section>
@@ -1730,7 +1730,7 @@
   <!-- ============ S32 · CoT pruning ============ -->
   <section class="slide" data-notes="推理模型会写很长的思维链。不是所有步骤都值得保留：剪枝、摘要、蒸馏、预算，都是为了让思考更短、更便宜。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>CoT pruning：不是所有思考都值得写</h2>
+    <h2>CoT pruning：只写值得写的思考</h2>
     <div class="content">
       <p class="micro">一条长思维链</p>
       <div class="chain">
@@ -1829,13 +1829,13 @@
           <div class="card accent"><div class="k">程序记忆</div><p>system + tools；规则与能力</p></div>
         </div>
       </div>
-      <div class="keyline">记忆不是存得多，是取得准。</div>
+      <div class="keyline">记忆的关键是取得准。</div>
     </div>
     <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 44</span></div>
   </section>
 
   <!-- ============ S36 · Harness ============ -->
-  <section class="slide" data-notes="LLM 是概率系统。0.1% 的失败率，在 100 万次请求里就是 1000 次失败——墨菲定律在规模上一定成立。harness 不是让模型不犯错，而是让错误可发现、可拦住、可回滚。">
+  <section class="slide" data-notes="LLM 是概率系统。0.1% 的失败率，在 100 万次请求里就是 1000 次失败——墨菲定律在规模上一定成立。harness 让错误可发现、可拦住、可回滚。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Harness：接住小概率事件</h2>
     <div class="content">
@@ -1845,7 +1845,7 @@
           <p class="micro">System · 规则</p>
           <div class="stack" style="gap:10px">
             <div class="card" style="padding:14px 16px"><div class="k">作用</div><p>角色、规则、输出格式</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">边界</div><p>不是安全沙箱，可被注入</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">边界</div><p>它是规则文本，可被注入</p></div>
             <div class="card" style="padding:14px 16px"><div class="k">原则</div><p>规则写死，权限放运行时</p></div>
           </div>
         </div>
@@ -1897,7 +1897,7 @@
   </section>
 
   <!-- ============ S38 · 加速 ============ -->
-  <section class="slide" data-notes="2023 年之前，AI 在数学里主要是解释概念、查文献、写代码；简单计算经常错，复杂证明仍要人。2024 年 7 月 IMO 银牌 28/42；2025 年 7 月金牌级 35/42——12 个月，+7 分。2026 年 10 月，OpenAI 报告用内部模型解决 372 个开放问题、722 篇论文，平均约 3 小时/题；其中 3 个撤回，同行评议未完成；这是公司声称，不是已核实事实。不是平滑曲线，是台阶。">
+  <section class="slide" data-notes="2023 年之前，AI 在数学里主要是解释概念、查文献、写代码；简单计算经常错，复杂证明仍要人。2024 年 7 月 IMO 银牌 28/42；2025 年 7 月金牌级 35/42——12 个月，+7 分。2026 年 10 月，OpenAI 报告用内部模型解决 372 个开放问题、722 篇论文，平均约 3 小时/题；其中 3 个撤回，同行评议未完成；这是公司声称，不是已核实事实。这是一条阶梯，三个台阶。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>加速：从基本应用到金牌</h2>
     <div class="content">
@@ -1930,7 +1930,7 @@
         <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">金牌级</span></div>
         <div class="note">12 个月，+7 分</div>
       </div>
-      <div class="keyline">不是一条平滑的线，是<b>三个台阶</b>。</div>
+      <div class="keyline">这是一条阶梯：<b>三个台阶</b>。</div>
     </div>
     <div class="footer"><span>from basic apps to research-level</span><span class="pnum">38 / 44</span></div>
   </section>
@@ -1973,7 +1973,7 @@
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>他们怎么说的</h2>
     <div class="content">
-      <div class="caveat">公开材料只覆盖一部分，完整的训练配方仍不可见。下面只看论文、博客和赛后声明里的<strong>公开表述</strong>（节选 / 意译）。</div>
+      <div class="caveat">公开材料覆盖了方法的一部分；完整的训练配方仍未公开。下面只看论文、博客和赛后声明里的<strong>公开表述</strong>（节选 / 意译）。</div>
       <table class="claims">
         <thead><tr><th>时间</th><th>工作</th><th>公开表述</th><th>读法</th></tr></thead>
         <tbody>
@@ -2016,11 +2016,11 @@
   </section>
 
   <!-- ============ S42 · 猜测 ============ -->
-  <section class="slide" data-notes="以下是从公开材料反推的猜测，不是内部信息。数据上，自动形式化、合成题、拒绝采样；训练上，RLVR + 长 CoT；推理上，test-time search；工程上，把搜索蒸馏回模型；再加上大规模并行和 eval harness。OpenAI 说 372 题平均约 3 小时/题；如果让我猜，这不是一次生成，而是大量并行采样 + 自动验证 + 搜索/agent 群 + 蒸馏；3 小时是墙钟时间，背后可能是大量并发算力。">
+  <section class="slide" data-notes="以下机制假设来自公开论文、博客和 benchmark 的交叉印证，标注为猜测。数据上，自动形式化、合成题、拒绝采样；训练上，RLVR + 长 CoT；推理上，test-time search；工程上，把搜索蒸馏回模型；再加上大规模并行和 eval harness。OpenAI 说 372 题平均约 3 小时/题；我的判断是：372 题的速度来自大量并行采样、自动验证、搜索/agent 群和蒸馏的组合；3 小时是墙钟时间，背后是大量并发算力。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>一些猜测：大结果可能是怎么来的</h2>
     <div class="content">
-      <div class="caveat">以下不是内部信息，只是从公开论文、博客和 benchmark 反推的<strong>猜测</strong>。</div>
+      <div class="caveat">以下机制假设，来自公开论文、博客和 benchmark 的交叉印证，标注为<strong>猜测</strong>。</div>
       <div class="four spec">
         <div class="card"><div class="k">01 数据</div><p><b>自动形式化 + 合成</b>：非形式题转 Lean；拒绝采样留下可验证的。</p></div>
         <div class="card"><div class="k">02 训练</div><p><b>RLVR + 长 CoT</b>：答案可验证，奖励才能规模化。</p></div>

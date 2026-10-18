@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>从下一个 token 到下一个定理</title>
+<title>From the Next Token to the Next Theorem</title>
 <style>
   :root{
     --paper:#f6f4ee;
@@ -725,12 +725,12 @@
 
   <!-- ============ S1 · 封面 ============ -->
   <section class="slide active cover" data-notes="开场 20 秒。不自我介绍超过一句。直接抛问题：一个只会预测下一个词的模型，凭什么能证明定理。">
-    <div class="kicker">天体力学 × AI · 2026</div>
-    <h1>从下一个 token<br><span class="thin">到下一个定理</span></h1>
-    <p class="sub">一个模型如何工作，以及我们该如何使用它</p>
+    <div class="kicker">Celestial Mechanics × AI · 2026</div>
+    <h1>From the next token<br><span class="thin">to the next theorem</span></h1>
+    <p class="sub">How a model works — and how we should use it</p>
     <div class="meta">
-      <span>刘博文</span>
-      <span>报告草稿 v0.1</span>
+      <span>Bowen Liu</span>
+      <span>Draft v0.1</span>
       <span>45 min</span>
     </div>
     <svg class="orbit" viewBox="0 0 760 760" aria-hidden="true">
@@ -743,12 +743,12 @@
 
   <!-- ============ S2 · 10 个整数 ============ -->
   <section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
-    <p class="eyebrow"><b>00</b> / 开场</p>
-    <h2>模型看到的，是 10 个整数</h2>
+    <p class="eyebrow"><b>00</b> / opening</p>
+    <h2>What the model sees: ten integers</h2>
     <div class="content">
       <div class="examples">
         <div class="panel">
-          <div class="exlabel">EN · 一句话</div>
+          <div class="exlabel">EN · one sentence</div>
           <div class="sentence">Celestial mechanics is the poetry of orbits.</div>
           <div class="tokens">
             <span class="tok"><span class="tok-t">Cel</span><span class="tok-id">69126</span></span>
@@ -762,10 +762,10 @@
             <span class="tok"><span class="tok-t">bits</span><span class="tok-id">24043</span></span>
             <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
           </div>
-          <div class="idrow"><b>46</b> 个字符 &nbsp;→&nbsp; <b>10</b> 个 token &nbsp;→&nbsp; 10 个整数 &nbsp;&nbsp;·&nbsp;&nbsp; ▁ 表示前导空格</div>
+          <div class="idrow"><b>46</b> characters &nbsp;→&nbsp; <b>10</b> tokens &nbsp;→&nbsp; 10 integers &nbsp;&nbsp;·&nbsp;&nbsp; ▁ marks a leading space</div>
         </div>
         <div class="panel">
-          <div class="exlabel">中文 · 《天体力学基础》内容简介</div>
+          <div class="exlabel">Chinese · Foundations of Celestial Mechanics</div>
           <div class="sentence">本书系统地介绍了天体力学</div>
           <div class="tokens">
             <span class="tok"><span class="tok-t">本</span><span class="tok-id">4087</span></span>
@@ -779,13 +779,14 @@
             <span class="tok"><span class="tok-t">力</span><span class="tok-id">11343</span></span>
             <span class="tok"><span class="tok-t">学</span><span class="tok-id">8590</span></span>
           </div>
-          <div class="idrow"><b>12</b> 个字符 &nbsp;→&nbsp; <b>10</b> 个 token &nbsp;→&nbsp; 10 个整数 &nbsp;&nbsp;·&nbsp;&nbsp; 系统 / 介绍 各占一个 token</div>
+          <div class="idrow"><b>12</b> characters &nbsp;→&nbsp; <b>10</b> tokens &nbsp;→&nbsp; 10 integers &nbsp;&nbsp;·&nbsp;&nbsp; two-character words often map to one token</div>
+          <div class="micro" style="margin-top:6px;color:#8b8f98">“This book systematically introduces celestial mechanics.”</div>
         </div>
       </div>
       <div class="qgrid">
-        <div class="q"><span class="n">01</span>这串整数是怎么来的？</div>
-        <div class="q"><span class="n">02</span>它怎么预测下一个？</div>
-        <div class="q"><span class="n">03</span>我们怎么用它干活？</div>
+        <div class="q"><span class="n">01</span>Where do these integers come from?</div>
+        <div class="q"><span class="n">02</span>How does it predict the next one?</div>
+        <div class="q"><span class="n">03</span>How do we put it to work?</div>
       </div>
     </div>
     <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 44</span></div>
@@ -794,14 +795,14 @@
   <!-- ============ S3 · 切分 ============ -->
   <section class="slide" data-notes="指着 celestial：cel + estial。指着 ▁is：空格属于 token。中文不是一个字一个 token。然后讲三个数字：英文平均单词约 5 字符，平均 token 约 4 字符，所以 1 词约 1.3 token；词表一般 5–20 万。为什么是子词：字母级序列太长，词级词表爆炸，子词是折中。">
     <p class="eyebrow"><b>01</b> / token</p>
-    <h2>切分是查表的结果</h2>
+    <h2>Tokenization is table lookup</h2>
     <div class="content">
       <div class="panel">
-        <div class="sentence">三体问题 is a classic problem in celestial mechanics.</div>
+        <div class="sentence">Three-body problem is a classic problem in celestial mechanics.</div>
         <div class="tokens">
-          <span class="tok"><span class="tok-t">三</span><span class="tok-id">3236</span></span>
-          <span class="tok"><span class="tok-t">体</span><span class="tok-id">7074</span></span>
-          <span class="tok"><span class="tok-t">问题</span><span class="tok-id">28917</span></span>
+          <span class="tok"><span class="tok-t">Three</span><span class="tok-id">25843</span></span>
+          <span class="tok"><span class="tok-t">-body</span><span class="tok-id">19146</span></span>
+          <span class="tok"><span class="tok-t">problem</span><span class="tok-id">4792</span></span>
           <span class="tok"><span class="tok-t">▁is</span><span class="tok-id">382</span></span>
           <span class="tok"><span class="tok-t">▁a</span><span class="tok-id">261</span></span>
           <span class="tok"><span class="tok-t">▁classic</span><span class="tok-id">13686</span></span>
@@ -811,68 +812,68 @@
           <span class="tok"><span class="tok-t">▁mechanics</span><span class="tok-id">52347</span></span>
           <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
         </div>
-        <div class="idrow">▁ 表示前导空格 &nbsp;·&nbsp; celestial → cel + estial</div>
+        <div class="idrow">▁ marks a leading space &nbsp;·&nbsp; Celestial → Cel + estial</div>
       </div>
 
       <div class="stats4">
-        <div class="item"><div class="num">≈5</div><div class="lbl">字符 / 英文单词<br>含空格，常见值</div></div>
-        <div class="item"><div class="num">≈4</div><div class="lbl">字符 / token<br>英文经验值</div></div>
-        <div class="item"><div class="num">≈1.3</div><div class="lbl">token / 英文单词<br>≈ 5 ÷ 4</div></div>
-        <div class="item"><div class="num">5–20 万</div><div class="lbl">常见词表大小<br>50k – 200k</div></div>
+        <div class="item"><div class="num">≈5</div><div class="lbl">characters / English word<br>including the space, typical</div></div>
+        <div class="item"><div class="num">≈4</div><div class="lbl">characters / token<br>English rule of thumb</div></div>
+        <div class="item"><div class="num">≈1.3</div><div class="lbl">tokens / English word<br>≈ 5 ÷ 4</div></div>
+        <div class="item"><div class="num">50k–200k</div><div class="lbl">typical vocabulary size<br>50k – 200k</div></div>
       </div>
 
       <div class="why">
-        <span class="tag">为什么</span>
-        <span>字母级：信息少，序列长 4–5 倍</span>
+        <span class="tag">Why</span>
+        <span>Characters: little information, 4–5× longer</span>
         <span class="arrow">→</span>
-        <span>词级：词表爆炸（百万级）</span>
+        <span>Words: vocabulary explodes (millions)</span>
         <span class="arrow">→</span>
-        <span class="accent">子词：折中</span>
+        <span class="accent">Subwords: the compromise</span>
       </div>
 
       <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
-      <div class="keyline">子词不是语义单位，是<b>序列长度</b>与<b>词表大小</b>之间的工程折中。</div>
+      <div class="keyline">Subwords are an engineering compromise between <b>sequence length</b> and <b>vocabulary size</b>.</div>
     </div>
-    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">03 / 44</span></div>
+    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">03 / 44</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
   <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，后面的 embedding 就按它取行。词表大小直接决定输入输出两层参数量。">
     <p class="eyebrow"><b>01</b> / token</p>
-    <h2>词表：一张固定的映射表</h2>
+    <h2>The vocabulary: a fixed lookup table</h2>
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro" style="margin:0 0 8px"><span style="color:var(--accent)">《天体力学基础》</span> &nbsp;·&nbsp; 行号 = ID &nbsp;·&nbsp; 按 ID 排序</p>
+          <p class="micro" style="margin:0 0 8px"><span style="color:var(--accent)">Foundations of Celestial Mechanics</span> &nbsp;·&nbsp; row number = ID &nbsp;·&nbsp; sorted by ID</p>
           <div class="ledger">
-            <div class="ledger-head"><span>ID</span><span>片段</span><span></span></div>
-            <div class="ledger-row"><span class="ln">867</span><span class="tk">天</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">7074</span><span class="tk">体</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">8590</span><span class="tk">学</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">11343</span><span class="tk">力</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">20121</span><span class="tk">书</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">31936</span><span class="tk">系统</span><span class="tag"></span></div>
-            <div class="ledger-row hl"><span class="ln">78580</span><span class="tk">基础</span><span class="tag">← 本次查询</span></div>
-            <div class="ledger-row special"><span class="ln">199999</span><span class="tk">&lt;|endoftext|&gt;</span><span class="tag">特殊</span></div>
-            <div class="ledger-foot"><span>只展示 8 行</span><span>共 200,019 行</span></div>
+            <div class="ledger-head"><span>ID</span><span>Token</span><span></span></div>
+            <div class="ledger-row"><span class="ln">290</span><span class="tk">▁the</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">2392</span><span class="tk">▁book</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">2500</span><span class="tk">This</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">18864</span><span class="tk">▁fundamental</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">23753</span><span class="tk">▁concepts</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">52347</span><span class="tk">▁mechanics</span><span class="tag"></span></div>
+            <div class="ledger-row hl"><span class="ln">134437</span><span class="tk">▁celestial</span><span class="tag">← query</span></div>
+            <div class="ledger-row special"><span class="ln">199999</span><span class="tk">&lt;|endoftext|&gt;</span><span class="tag">special</span></div>
+            <div class="ledger-foot"><span>8 rows shown</span><span>200,019 rows in total</span></div>
           </div>
         </div>
         <div>
-          <p class="micro" style="margin:0 0 6px">词表大小 = 行数</p>
+          <p class="micro" style="margin:0 0 6px">Vocabulary size = number of rows</p>
           <div class="vocab-num">200,019</div>
-          <div class="vocab-cap">o200k · GPT-4o 代</div>
+          <div class="vocab-cap">o200k · GPT-4o generation</div>
           <div class="ruler">
             <div class="axis"></div>
             <div class="tick" style="top:2%"><span class="lab"><b>0</b></span></div>
             <div class="tick" style="top:25%"><span class="lab"><b>50k</b>GPT-2</span></div>
-            <div class="tick" style="top:50%"><span class="lab"><b>100k</b>GPT-4 代</span></div>
+            <div class="tick" style="top:50%"><span class="lab"><b>100k</b>GPT-4 gen</span></div>
             <div class="tick" style="top:64%"><span class="lab"><b>128k</b>Llama 3</span></div>
-            <div class="tick on" style="top:98%"><span class="lab"><b>200k</b>GPT-4o 代</span></div>
+            <div class="tick on" style="top:98%"><span class="lab"><b>200k</b>GPT-4o gen</span></div>
           </div>
-          <div class="calc">200,019 × 4,096 <span>≈</span> <b>8.2 亿参数</b></div>
+          <div class="calc">200,019 × 4,096 <span>≈</span> <b>820M parameters</b></div>
         </div>
       </div>
-      <div class="keyline">ID 不是名字，是<b>行号</b>；换模型，就是换一张表。</div>
+      <div class="keyline">An ID is a <b>row number</b>; changing models means changing the table.</div>
     </div>
     <div class="footer"><span>vocabulary</span><span class="pnum">04 / 44</span></div>
   </section>
@@ -880,16 +881,16 @@
   <!-- ============ S5 · 用量与换算 ============ -->
   <section class="slide" data-notes="这是 DeepSeek 后台的真实用量：2,599 次请求，2.85 亿 token，27 块钱。平均一次 11 万 token，约一分钱。token 就是账单单位。右边的换算是经验值：英文字符 0.3、中文字符 0.6，实际以 usage 为准。">
     <p class="eyebrow"><b>01</b> / token</p>
-    <h2>Token 是模型的单位，也是账单的单位</h2>
+    <h2>Tokens: the model's unit and the billing unit</h2>
     <div class="content">
-      <img class="shot" src="assets/figures/deepseek_usage.png" alt="DeepSeek 用量：2.85 亿 token，2,599 次请求，27.18 元" style="max-width:1060px">
-      <p class="micro" style="margin-top:10px">上月用量 · 平均每次 ≈ 110k token · ≈ 1 分钱</p>
+      <img class="shot" src="assets/figures/deepseek_usage.png" alt="DeepSeek usage: 285M tokens, 2,599 requests, ¥27.18" style="max-width:1060px">
+      <p class="micro" style="margin-top:10px">Last month · ≈110k tokens per request · ≈¥0.01 each</p>
       <div class="ratio2">
-        <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">1 个英文字符</div></div>
-        <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">1 个中文字符</div></div>
+        <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">per English character</div></div>
+        <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">per Chinese character</div></div>
       </div>
-      <p class="micro" style="margin-top:12px">直观理解：一个词、一个数字、一个符号 ≈ 1 token；不同 tokenizer 不同，以返回的 usage 为准。</p>
-      <div class="keyline">Token 既是模型的最小单位，也是账单的最小单位。</div>
+      <p class="micro" style="margin-top:12px">Rule of thumb: a word, a number or a symbol ≈ 1 token; tokenizers differ, so trust the usage the API returns.</p>
+      <div class="keyline">Token is both the smallest unit of the model and the smallest unit of the bill.</div>
     </div>
     <div class="footer"><span>usage · billing</span><span class="pnum">05 / 44</span></div>
   </section>
@@ -897,24 +898,24 @@
   <!-- ============ S6 · 价格 ============ -->
   <section class="slide" data-notes="1M 上下文，384K 输出。价格分缓存命中、未命中，以及空闲/高峰。100k 输入加 2k 输出，命中缓存 1 分钱，不命中 1 毛 1，差一个数量级。所以长上下文一定要做缓存或检索。">
     <p class="eyebrow"><b>01</b> / token</p>
-    <h2>一次调用，钱花在哪</h2>
+    <h2>Where the money goes on a single call</h2>
     <div class="content">
       <div class="two">
         <div>
-          <img class="shot" src="assets/figures/deepseek_pricing.png" alt="DeepSeek 价格表">
-          <p class="micro" style="margin-top:10px">deepseek-flash · 1M 上下文 · 384K 输出 · 元 / 百万 token</p>
-          <p class="micro" style="margin-top:6px">1M 上下文 ≈ 一部《三体》三部曲</p>
+          <img class="shot" src="assets/figures/deepseek_pricing.png" alt="DeepSeek price list">
+          <p class="micro" style="margin-top:10px">deepseek-flash · 1M context · 384K output · CNY per million tokens</p>
+          <p class="micro" style="margin-top:6px">1M context ≈ the whole Three-Body trilogy</p>
         </div>
         <div style="align-self:center">
           <div class="calcbox">
-            <p class="micro" style="margin:0">一次调用 · 空闲时段</p>
-            <div class="cline">输入 100k + 输出 2k</div>
-            <div class="cres">¥0.01<span>缓存命中</span></div>
-            <div class="cres">¥0.11<span>缓存未命中</span></div>
+            <p class="micro" style="margin:0">One call · off-peak</p>
+            <div class="cline">Input 100k + output 2k</div>
+            <div class="cres">¥0.01<span>cache hit</span></div>
+            <div class="cres">¥0.11<span>cache miss</span></div>
           </div>
         </div>
       </div>
-      <div class="keyline">同一段上下文，命中缓存与不命中，差一个<b>数量级</b>。</div>
+      <div class="keyline">The same context, cached or not, differs by an <b>order of magnitude</b>.</div>
     </div>
     <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 44</span></div>
   </section>
@@ -922,29 +923,29 @@
   <!-- ============ S7 · 从 ID 到向量 ============ -->
   <section class="slide" data-notes="文字组合先被切成 token，查表得到 ID，再用 ID 去 embedding 表里取一行向量。ID 是地址，向量是内容。这一步没有魔法，就是一次查表。">
     <p class="eyebrow"><b>01</b> / token</p>
-    <h2>文字先变成 ID，再变成向量</h2>
+    <h2>Text becomes an ID, then a vector</h2>
     <div class="content">
       <div class="flow">
         <div class="stagecard">
-          <div class="k">片段</div>
-          <div class="big">问题</div>
-          <div class="foot">切分后的单位</div>
+          <div class="k">Piece</div>
+          <div class="big">problem</div>
+          <div class="foot">A unit after tokenization</div>
         </div>
         <div class="flowarrow">→</div>
         <div class="stagecard">
           <div class="k">ID</div>
-          <div class="big">28917</div>
-          <div class="foot">词表第 28917 行</div>
+          <div class="big">4792</div>
+          <div class="foot">Row 4792 of the vocabulary</div>
         </div>
         <div class="flowarrow">→</div>
         <div class="stagecard">
-          <div class="k">向量</div>
+          <div class="k">Vector</div>
           <div class="vec">0.12&nbsp; −0.44&nbsp; 0.08&nbsp; …</div>
-          <div class="foot">4096 维 · 训练得到</div>
+          <div class="foot">4,096 dimensions · learned</div>
         </div>
       </div>
-      <div class="keyline">ID 是<b>地址</b>，向量是<b>内容</b>。</div>
-      <p class="micro" style="margin-top:14px">这一步叫 embedding；每一维没有名字，但距离有意义。</p>
+      <div class="keyline">The ID is an <b>address</b>; the vector is the <b>content</b>.</div>
+      <p class="micro" style="margin-top:14px">This step is called embedding; no dimension has a name, yet distance carries meaning.</p>
     </div>
     <div class="footer"><span>embedding</span><span class="pnum">07 / 44</span></div>
   </section>
@@ -952,37 +953,38 @@
   <!-- ============ S8 · 输入到概率分布 ============ -->
   <section class="slide" data-notes="模型的任务只有一句话：给定输入，输出词表上每个 token 的概率。数学上先算 logits z，再 softmax 成概率；所有概率加起来等于 1。中间是 Transformer，可能是各种变体。不要把它想成数据库，它在算分布。">
     <p class="eyebrow"><b>02</b> / model</p>
-    <h2>模型的工作：输入 → 概率分布</h2>
+    <h2>What the model does: input → probability distribution</h2>
     <div class="content">
       <div class="modelrow">
         <div>
-          <p class="micro" style="margin:0">输入 token</p>
+          <p class="micro" style="margin:0">Input tokens</p>
           <div class="chips2">
-            <span class="chip2">从</span>
-            <span class="chip2">下一个</span>
+            <span class="chip2">From</span>
+            <span class="chip2">the</span>
+            <span class="chip2">next</span>
             <span class="chip2">token</span>
-            <span class="chip2">到</span>
-            <span class="chip2">下一个</span>
+            <span class="chip2">to</span>
+            <span class="chip2">the</span>
           </div>
-          <p class="micro" style="margin-top:12px">每个 token 已经是一个向量</p>
+          <p class="micro" style="margin-top:12px">Each token is already a vector</p>
         </div>
         <div>
-          <p class="micro" style="margin:0 0 8px;text-align:center">模型</p>
+          <p class="micro" style="margin:0 0 8px;text-align:center">Model</p>
           <div class="transformer">
             <div class="tf">Transformer</div>
             <div class="layers"><i></i><i></i><i></i></div>
-            <div class="cap">N 层 · 自注意力</div>
+            <div class="cap">N layers · self-attention</div>
           </div>
-          <p class="micro" style="text-align:center;margin-top:10px">GPT · Llama · Qwen 都是变体</p>
+          <p class="micro" style="text-align:center;margin-top:10px">GPT · Llama · Qwen are all variants</p>
         </div>
         <div>
           <p class="micro" style="margin:0">softmax(z)</p>
           <div class="probs">
-            <div class="prob top"><span class="ptok">定理</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
-            <div class="prob"><span class="ptok">问题</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
-            <div class="prob"><span class="ptok">模型</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
-            <div class="prob"><span class="ptok">的</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
-            <div class="prob"><span class="ptok">其他</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
+            <div class="prob top"><span class="ptok">theorem</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
+            <div class="prob"><span class="ptok">problem</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
+            <div class="prob"><span class="ptok">model</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
+            <div class="prob"><span class="ptok">step</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
+            <div class="prob"><span class="ptok">other</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
           </div>
         </div>
       </div>
@@ -1007,7 +1009,7 @@
         </div>
         <div class="eqnote">|V| = 200,019<br>Σ<sub>y</sub> p<sub>θ</sub>(y | x<sub>1:t</sub>) = 1</div>
       </div>
-      <div class="keyline">它不查数据库，也不“理解”；它给词表里每个 token <b>打分</b>，再把分数变成<b>概率</b>。</div>
+      <div class="keyline">A scorer: it gives every token in the vocabulary a <b>score</b>, then turns scores into <b>probabilities</b>.</div>
     </div>
     <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 44</span></div>
   </section>
@@ -1015,11 +1017,11 @@
   <!-- ============ S9 · 采样 ============ -->
   <section class="slide" data-notes="有了分布，还要决定怎么取。贪心取最大，采样按概率抽。temperature 和 top-p 控制随机性。取出来的 token 接回输入，再算下一步，这就是自回归。">
     <p class="eyebrow"><b>02</b> / model</p>
-    <h2>采样：从分布里取一个</h2>
+    <h2>Sampling: draw one token from the distribution</h2>
     <div class="content">
       <div class="two even">
         <div style="align-self:center">
-          <p class="micro" style="margin:0">概率分布</p>
+          <p class="micro" style="margin:0">Probability distribution</p>
           <p class="math-inline" style="margin:8px 0 10px">
             <math>
               <msub><mi>y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub>
@@ -1029,27 +1031,27 @@
             </math>
           </p>
           <div class="probs">
-            <div class="prob top"><span class="ptok">定理</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
-            <div class="prob"><span class="ptok">问题</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
-            <div class="prob"><span class="ptok">模型</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
-            <div class="prob"><span class="ptok">的</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
-            <div class="prob"><span class="ptok">其他</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
+            <div class="prob top"><span class="ptok">theorem</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
+            <div class="prob"><span class="ptok">problem</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
+            <div class="prob"><span class="ptok">model</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
+            <div class="prob"><span class="ptok">step</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
+            <div class="prob"><span class="ptok">other</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">贪心</div><p style="margin:0">取最大 → <b>定理</b></p></div>
-          <div class="card accent"><div class="k">采样</div><p style="margin:0">按概率抽 → 这次可能是 <b>问题</b></p></div>
-          <div class="card"><div class="k">旋钮</div><p style="margin:0"><b>temperature</b> · <b>top-p</b> 控制随机性</p></div>
+          <div class="card"><div class="k">Greedy</div><p style="margin:0">Take the max → <b>theorem</b></p></div>
+          <div class="card accent"><div class="k">Sampling</div><p style="margin:0">Draw by probability → this time maybe <b>problem</b></p></div>
+          <div class="card"><div class="k">Knobs</div><p style="margin:0"><b>temperature</b> · <b>top-p</b> control randomness</p></div>
         </div>
       </div>
       <div class="loop">
-        <span class="step">输入</span><span class="arr">→</span>
+        <span class="step">Input</span><span class="arr">→</span>
         <span class="step">Transformer</span><span class="arr">→</span>
-        <span class="step">概率分布</span><span class="arr">→</span>
-        <span class="step hl">采样</span><span class="arr">→</span>
-        <span class="step">接回输入</span><span class="arr">↺</span>
+        <span class="step">Probability distribution</span><span class="arr">→</span>
+        <span class="step hl">Sampling</span><span class="arr">→</span>
+        <span class="step">Append to input</span><span class="arr">↺</span>
       </div>
-      <div class="keyline">同一个 prompt，两次结果可能不同——这是<b>采样</b>，相当于<b>掷骰子</b>，不是 bug。</div>
+      <div class="keyline">The same prompt can give two different results — that is <b>sampling</b>, a <b>dice roll</b> by design.</div>
     </div>
     <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 44</span></div>
   </section>
@@ -1057,18 +1059,18 @@
   <!-- ============ S10 · 采样算法 ============ -->
   <section class="slide" data-notes="把分布变成 token，需要一个随机数。按概率排序、累加，得到累积分布 F。抽一个 u ~ U(0,1)，落在哪一段就取哪个 token。temperature 改变分布的陡峭程度，top-p 截掉长尾再归一化。">
     <p class="eyebrow"><b>02</b> / model</p>
-    <h2>采样：在累积分布上扔一个随机数</h2>
+    <h2>Sampling: throw a random number onto the CDF</h2>
     <div class="content">
       <div class="two">
         <div>
           <table class="dist">
             <thead><tr><th>token</th><th>p</th><th>F(y)</th></tr></thead>
             <tbody>
-              <tr><td>定理</td><td>0.41</td><td>0.41</td></tr>
-              <tr class="hl"><td>问题</td><td>0.22</td><td>0.63</td></tr>
-              <tr><td>模型</td><td>0.12</td><td>0.75</td></tr>
-              <tr><td>的</td><td>0.08</td><td>0.83</td></tr>
-              <tr><td>其他</td><td>0.17</td><td>1.00</td></tr>
+              <tr><td>theorem</td><td>0.41</td><td>0.41</td></tr>
+              <tr class="hl"><td>problem</td><td>0.22</td><td>0.63</td></tr>
+              <tr><td>model</td><td>0.12</td><td>0.75</td></tr>
+              <tr><td>step</td><td>0.08</td><td>0.83</td></tr>
+              <tr><td>other</td><td>0.17</td><td>1.00</td></tr>
             </tbody>
           </table>
         </div>
@@ -1089,7 +1091,7 @@
             <span style="left:83%">0.83</span>
             <span style="left:100%">1.00</span>
           </div>
-          <p class="micro" style="margin-top:14px">u = 0.57 ∈ [0.41, 0.63) → 取「问题」</p>
+          <p class="micro" style="margin-top:14px">u = 0.57 ∈ [0.41, 0.63) → pick “problem”</p>
         </div>
       </div>
 
@@ -1106,7 +1108,7 @@
               </mfrac>
             </math>
           </div>
-          <p style="margin:6px 0 0">T 小 → 更尖锐；T 大 → 更平坦</p>
+          <p style="margin:6px 0 0">Small T → sharper; large T → flatter</p>
         </div>
         <div class="card">
           <div class="k">top-p</div>
@@ -1119,11 +1121,11 @@
               <mo>≥</mo><mn>0.9</mn>
             </math>
           </div>
-          <p style="margin:6px 0 0">截掉长尾，再归一化</p>
+          <p style="margin:6px 0 0">Trim the long tail, then renormalize</p>
         </div>
       </div>
 
-      <div class="keyline">温度改形状，top-p 截尾巴，<b>u</b> 决定落在哪一段。</div>
+      <div class="keyline">Temperature reshapes, top-p trims the tail, <b>u</b> decides where it lands.</div>
     </div>
     <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 44</span></div>
   </section>
@@ -1131,26 +1133,26 @@
   <!-- ============ S11 · 无状态 ============ -->
   <section class="slide" data-notes="这是最关键的一页，后面 prompt、context、memory 全都从这里来。模型每次调用都是独立的，参数不变。所谓对话，是客户端把历史重新发一遍。">
     <p class="eyebrow"><b>02</b> / model</p>
-    <h2>模型没有记忆</h2>
+    <h2>The model is stateless</h2>
     <div class="content">
       <div class="two even">
         <div class="term">
-          <div class="tcap">调用 A</div>
-          <div class="row"><span class="role">system</span><span class="txt">你是天体力学助手</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">希尔区是什么？</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">希尔区是……</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">它为什么重要？</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">因为它界定了……</span></div>
+          <div class="tcap">Call A</div>
+          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">What is the Hill region?</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt">The Hill region is …</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt">Because it defines …</span></div>
         </div>
         <div class="term">
-          <div class="tcap">调用 B · 新的一次</div>
-          <div class="row"><span class="role">system</span><span class="txt">你是天体力学助手</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">它为什么重要？</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt empty">（不知道“它”指什么）</span></div>
+          <div class="tcap">Call B · a fresh call</div>
+          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt empty">(“it” has no referent here)</span></div>
         </div>
       </div>
-      <div class="keyline">模型无状态；所谓“对话”，是客户端把历史<b>重发</b>一遍。</div>
-      <p class="micro" style="margin-top:14px">参数在推理时不更新；状态只存在于上下文里。</p>
+      <div class="keyline">The model is stateless; a “conversation” is the client <b>resending</b> the history.</div>
+      <p class="micro" style="margin-top:14px">Parameters stay fixed at inference time; state lives only in the context.</p>
     </div>
     <div class="footer"><span>stateless</span><span class="pnum">11 / 44</span></div>
   </section>
@@ -1159,14 +1161,14 @@
   <!-- ============ S12 · 从预测到解题 ============ -->
   <section class="slide" data-notes="预测下一个词本身不会做题。真正发生变化的是训练信号：预训练给知识，SFT 给行为，RL 给策略。模型还是同一个，换的是数据和奖励。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>预测下一个词，怎么就变成了做题？</h2>
+    <h2>From next token to problem solving</h2>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">Pretrain</div><div class="big" style="font-size:28px">知识</div><p>读遍语料，学会语言与世界</p></div>
-        <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">行为</div><p>看示范，学会按指令回答</p></div>
-        <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">策略</div><p>做题对答案，学会搜索与纠错</p></div>
+        <div class="card"><div class="k">Pretrain</div><div class="big" style="font-size:28px">Knowledge</div><p>Reads the corpus, learns language and the world</p></div>
+        <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">Behavior</div><p>Sees demonstrations, learns to follow instructions</p></div>
+        <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">Policy</div><p>Solves problems, checks answers, learns to search and correct</p></div>
       </div>
-      <div class="keyline">不是换了模型，是换了<b>训练信号</b>。</div>
+      <div class="keyline">The model stays the same; the <b>training signal</b> changes.</div>
     </div>
     <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 44</span></div>
   </section>
@@ -1174,7 +1176,7 @@
   <!-- ============ S13 · Pretrain ============ -->
   <section class="slide" data-notes="预训练只有一个目标：最小化交叉熵。数据是万亿 token，算力是千到万卡、月级。产出是一个 base model：会续写，但不会回答问题。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>Pretrain：把互联网读一遍</h2>
+    <h2>Pretrain: read the internet once</h2>
     <div class="content">
       <div class="two">
         <div style="align-self:center">
@@ -1187,15 +1189,15 @@
               <mo>(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>∣</mo><msub><mi>x</mi><mrow><mo>&lt;</mo><mi>t</mi></mrow></msub><mo>)</mo>
             </math>
           </div>
-          <p class="micro" style="margin-top:12px">给定前文，预测下一个 token</p>
+          <p class="micro" style="margin-top:12px">Given the preceding text, predict the next token</p>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">数据</div><div class="big">万亿 token</div><p>网页、代码、论文、书</p></div>
-          <div class="card"><div class="k">算力</div><div class="big">千–万卡</div><p>月级训练</p></div>
-          <div class="card"><div class="k">产出</div><div class="big">base model</div><p>会续写，不会回答问题</p></div>
+          <div class="card"><div class="k">Data</div><div class="big">Trillions of tokens</div><p>Web pages, code, papers, books</p></div>
+          <div class="card"><div class="k">Compute</div><div class="big">1k–10k GPUs</div><p>Months of training</p></div>
+          <div class="card"><div class="k">Output</div><div class="big">base model</div><p>Completes text; SFT teaches it to answer</p></div>
         </div>
       </div>
-      <div class="keyline">它学会的是世界的<b>统计结构</b>，不是任务。</div>
+      <div class="keyline">It learns the world's <b>statistical structure</b>; tasks come later.</div>
     </div>
     <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 44</span></div>
   </section>
@@ -1203,55 +1205,55 @@
   <!-- ============ S14 · 前 20 个 token ============ -->
   <section class="slide" data-notes="这是《天体力学基础》的简介。先看全文，再只看前 20 个 token：本、书、系统、地、介绍、了……。每个位置都用左边的全部 token 预测下一个，20 个 token 得到 19 个训练样本。训练时并行算完，推理时才一个接一个。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>前 20 个 token，19 个样本</h2>
+    <h2>The first 20 tokens, 19 samples</h2>
     <div class="content">
-      <div class="quote-full"><span class="quote-src">《天体力学基础》· 内容简介</span>本书系统地介绍了天体力学的基本概念和定理，以及一些比较有代表性的研究成果。全书共五章：第一章二体问题，第二章限制性三体问题，第三章受摄二体问题，第四章天体运动中的共振现象，第五章保守系统中的有序与混沌运动。本书论述严谨，深入浅出，具有天体力学、分析力学和现代数学基础的读者可以较流畅地阅读。<br>本书可作为高等学校天文学类专业的教材，也可供其他相关专业选用，还可作为天文学工作者的参考书。</div>
+      <div class="quote-full" style="font-size:12px;line-height:1.55"><span class="quote-src">Foundations of Celestial Mechanics · blurb</span>This book systematically introduces the fundamental concepts and theorems of celestial mechanics, together with a selection of representative research results. It has five chapters: the two-body problem; the restricted three-body problem; the perturbed two-body problem; resonance phenomena in celestial motion; and order and chaos in conservative systems.</div>
 
-      <p class="micro" style="margin:10px 0 7px">前 20 个 token</p>
+      <p class="micro" style="margin:9px 0 6px">First 20 tokens</p>
       <div class="chips2" style="margin-top:0;gap:5px">
-        <span class="chip2 chip-sm">本</span>
-        <span class="chip2 chip-sm">书</span>
-        <span class="chip2 chip-sm">系统</span>
-        <span class="chip2 chip-sm">地</span>
-        <span class="chip2 chip-sm">介绍</span>
-        <span class="chip2 chip-sm">了</span>
-        <span class="chip2 chip-sm">天</span>
-        <span class="chip2 chip-sm">体</span>
-        <span class="chip2 chip-sm">力</span>
-        <span class="chip2 chip-sm">学</span>
-        <span class="chip2 chip-sm">的</span>
-        <span class="chip2 chip-sm">基本</span>
-        <span class="chip2 chip-sm">概</span>
-        <span class="chip2 chip-sm">念</span>
-        <span class="chip2 chip-sm">和</span>
-        <span class="chip2 chip-sm">定</span>
-        <span class="chip2 chip-sm">理</span>
-        <span class="chip2 chip-sm">，以及</span>
-        <span class="chip2 chip-sm">一些</span>
-        <span class="chip2 chip-sm">比较</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">This</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁book</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁systematically</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁introduces</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁the</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁fundamental</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁concepts</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁and</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁the</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">ore</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">ms</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁of</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁celestial</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁mechanics</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">,</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁together</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁with</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁a</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁selection</span>
+        <span class="chip2 chip-sm" style="font-size:11.5px;padding:3px 6px">▁of</span>
       </div>
 
-      <div class="two" style="margin-top:18px">
+      <div class="two" style="margin-top:14px">
         <table class="pairs">
-          <thead><tr><th>输入（前缀）</th><th>目标</th></tr></thead>
+          <thead><tr><th>Input (prefix)</th><th>Target</th></tr></thead>
           <tbody>
-            <tr><td>本</td><td>书</td></tr>
-            <tr><td>本 书</td><td>系统</td></tr>
-            <tr><td>本 书 系统</td><td>地</td></tr>
-            <tr><td>本 书 系统 地</td><td>介绍</td></tr>
-            <tr><td>本 书 系统 地 介绍</td><td>了</td></tr>
-            <tr><td>本 书 系统 … 一些</td><td>比较</td></tr>
+            <tr><td>This</td><td>book</td></tr>
+            <tr><td>This book</td><td>systematically</td></tr>
+            <tr><td>This book systematically</td><td>introduces</td></tr>
+            <tr><td>This book systematically introduces</td><td>the</td></tr>
+            <tr><td>This book systematically introduces the</td><td>fundamental</td></tr>
+            <tr><td>This book … a selection</td><td>of</td></tr>
           </tbody>
         </table>
         <div style="align-self:center">
           <div class="vocab-num">19</div>
-          <div class="vocab-cap">个训练样本</div>
-          <p class="micro" style="margin-top:8px">每个位置都预测下一个 token</p>
+          <div class="vocab-cap">training samples</div>
+          <p class="micro" style="margin-top:8px">Every position predicts the next token</p>
         </div>
       </div>
 
-      <div class="lossex">L = −[ log p(书|本) + log p(系统|本 书) + … + log p(比较|前 19 个) ]</div>
-      <div class="keyline" style="margin-top:10px">训练并行，推理串行。</div>
+      <div class="lossex">L = −[ log p(book | This) + log p(systematically | This book) + … + log p(of | first 19 tokens) ]</div>
+      <div class="keyline" style="margin-top:10px">Training runs in parallel; inference runs one token at a time.</div>
     </div>
     <div class="footer"><span>pretrain</span><span class="pnum">14 / 44</span></div>
   </section>
@@ -1259,13 +1261,13 @@
   <!-- ============ S15 · loss 是什么 ============ -->
   <section class="slide" data-notes="这是负对数似然，也是交叉熵。单个位置：正确 token 的概率越高，−log p 越小；p=1 时 loss 为 0。它叫惊讶度，也叫编码长度。整句相加再平均、取 exp，才是困惑度。最小化它等于最大似然，也等于最优压缩。对 logits 求导，梯度是 p 减去 onehot。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>这个 loss 是什么</h2>
+    <h2>What this loss is</h2>
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro" style="margin:0 0 6px">负对数似然 · 交叉熵</p>
+          <p class="micro" style="margin:0 0 6px">Negative log-likelihood · cross-entropy</p>
           <table class="loss">
-            <thead><tr><th>p(正确 token)</th><th>−log p</th></tr></thead>
+            <thead><tr><th>p(correct token)</th><th>−log p</th></tr></thead>
             <tbody>
               <tr><td>1.00</td><td>0</td></tr>
               <tr><td>0.50</td><td>0.69</td></tr>
@@ -1273,17 +1275,17 @@
               <tr><td>0.01</td><td>4.61</td></tr>
             </tbody>
           </table>
-          <p class="micro" style="margin-top:12px">单位：nats · ÷ ln 2 = bits</p>
-          <p class="micro" style="margin-top:6px">困惑度 PPL = exp(平均 −log p)</p>
+          <p class="micro" style="margin-top:12px">Units: nats · ÷ ln 2 = bits</p>
+          <p class="micro" style="margin-top:6px">Perplexity PPL = exp(mean −log p)</p>
           <p class="micro" style="margin-top:6px">∂L/∂z = p − onehot(y)</p>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">单个位置</div><p>−log p = 惊讶度，也是编码这个 token 的长度</p></div>
-          <div class="card"><div class="k">整句</div><p>相加 = 编码整句的总长度；平均后取 exp，就是困惑度</p></div>
-          <div class="card accent"><div class="k">最小化</div><p>= 最大似然 = 最优压缩</p></div>
+          <div class="card"><div class="k">Single position</div><p>−log p = surprise, and the code length of this token</p></div>
+          <div class="card"><div class="k">Whole sentence</div><p>Sum = total code length; average, then exp, gives perplexity</p></div>
+          <div class="card accent"><div class="k">Minimize</div><p>= maximum likelihood = optimal compression</p></div>
         </div>
       </div>
-      <div class="keyline">这不是随便选的 loss；它就是用模型给数据<b>编码的长度</b>。</div>
+      <div class="keyline">This loss carries meaning: it is the <b>code length</b> the model assigns to the data.</div>
     </div>
     <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 44</span></div>
   </section>
@@ -1291,16 +1293,16 @@
   <!-- ============ S16 · 压缩即智能 ============ -->
   <section class="slide" data-notes="这是我信的一句话。预训练表面是预测下一个 token，本质是压缩。要压得好，必须发现语法、因果、物理结构。参数不是数据库，是压缩后的世界模型。但压缩只解释知识从哪来，不解释为什么会搜索——后者是 RL。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>压缩即智能</h2>
+    <h2>Compression is intelligence</h2>
     <div class="content">
-      <div class="bigquote">要预测得准，<br>就必须把世界<b>压进参数</b>里。</div>
+      <div class="bigquote">To predict well,<br>you must <b>compress the world</b> into the parameters.</div>
       <div class="three" style="margin-top:34px">
-        <div class="card"><div class="k">预测</div><div class="big" style="font-size:22px">解释每个 token</div><p>不能跳过任何细节</p></div>
-        <div class="card"><div class="k">压缩</div><div class="big" style="font-size:22px">挤掉冗余</div><p>留下可复用的结构</p></div>
-        <div class="card accent"><div class="k">结构</div><div class="big" style="font-size:22px">语法 · 因果 · 物理</div><p>迁移到没见过的题</p></div>
+        <div class="card"><div class="k">Predict</div><div class="big" style="font-size:22px">Explain every token</div><p>Skip no detail</p></div>
+        <div class="card"><div class="k">Compress</div><div class="big" style="font-size:22px">Squeeze out redundancy</div><p>Keep the reusable structure</p></div>
+        <div class="card accent"><div class="k">Structure</div><div class="big" style="font-size:22px">Grammar · causality · physics</div><p>Transfer to unseen problems</p></div>
       </div>
-      <p class="micro" style="margin-top:18px">压缩解释知识从哪来；搜索与纠错，靠后面的 RL。</p>
-      <div class="keyline">这也是我近几年最相信的一句话。</div>
+      <p class="micro" style="margin-top:18px">Compression explains where knowledge comes from; search and correction come from RL, later.</p>
+      <div class="keyline">This is the sentence I have believed most in recent years.</div>
     </div>
     <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 44</span></div>
   </section>
@@ -1308,60 +1310,60 @@
   <!-- ============ S17 · SFT ============ -->
   <section class="slide" data-notes="SFT 还是预测下一个 token，但只对 assistant 的 answer token 算 loss；system 和 user 只是条件。它做的是行为克隆：把示范的答法压进条件分布，教格式、语气、工具调用、拒绝，不注入新知识。它不创造新能力，只是把 pretrain 里已有的能力以对话形式叫出来。结果是会回答了，但难题不一定做对。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>SFT：看标准答案学做事</h2>
-    <p class="micro" style="margin:8px 0 0">supervised fine-tuning · 监督微调 / 指令微调</p>
+    <h2>SFT: learn the job from worked answers</h2>
+    <p class="micro" style="margin:8px 0 0">supervised fine-tuning · instruction tuning</p>
     <div class="content">
       <div class="two">
         <div>
           <div class="chat">
-            <div class="row"><span class="role">system</span><span class="txt">你是《天体力学基础》的助教。</span><span class="tag">输入</span></div>
-            <div class="row"><span class="role">user</span><span class="txt">这本书讲什么？</span><span class="tag">输入</span></div>
-            <div class="row target"><span class="role">assistant</span><span class="txt">系统介绍天体力学的基本概念和定理，以及一些有代表性的研究成果。</span><span class="tag">目标</span></div>
-            <div class="row"><span class="role">user</span><span class="txt">全书共几章？</span><span class="tag">输入</span></div>
-            <div class="row target"><span class="role">assistant</span><span class="txt">五章：二体、限制性三体、受摄二体、共振、有序与混沌。</span><span class="tag">目标</span></div>
+            <div class="row"><span class="role">system</span><span class="txt">You are the teaching assistant for Foundations of Celestial Mechanics.</span><span class="tag">Input</span></div>
+            <div class="row"><span class="role">user</span><span class="txt">What is this book about?</span><span class="tag">Input</span></div>
+            <div class="row target"><span class="role">assistant</span><span class="txt">It systematically introduces the fundamental concepts and theorems of celestial mechanics, with representative research results.</span><span class="tag">Target</span></div>
+            <div class="row"><span class="role">user</span><span class="txt">How many chapters does it have?</span><span class="tag">Input</span></div>
+            <div class="row target"><span class="role">assistant</span><span class="txt">Five: two-body, restricted three-body, perturbed two-body, resonance, and order and chaos.</span><span class="tag">Target</span></div>
           </div>
           <div class="rolelegend">
-            <span><b>system</b>开发者规则</span>
-            <span><b>user</b>用户任务</span>
-            <span><b>assistant</b>模型回答（目标）</span>
+            <span><b>system</b>developer rules</span>
+            <span><b>user</b>user task</span>
+            <span><b>assistant</b>model answer (target)</span>
           </div>
-          <p class="micro" style="margin-top:7px">白 = 输入（条件） &nbsp;·&nbsp; 橙 = 学习目标（算 loss）</p>
+          <p class="micro" style="margin-top:7px">White = input (condition) &nbsp;·&nbsp; Orange = learning target (loss)</p>
           <div class="sftloss">
             <div class="fl"><span class="fl-k">pretrain</span><span class="fl-eq">−Σ<sub>t∈text</sub> log p(x<sub>t</sub> | x<sub>&lt;t</sub>)</span></div>
             <div class="fl on"><span class="fl-k">SFT</span><span class="fl-eq">−Σ<sub>t∈answer</sub> log p(y<sub>t</sub> | prompt, y<sub>&lt;t</sub>)</span></div>
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">数据</div><p>（指令, 标准答案）对；只对橙色算 loss</p></div>
-          <div class="card"><div class="k">目标</div><p>还是下一个 token；条件换成 system + user + 已答部分</p></div>
-          <div class="card"><div class="k">本质</div><p>行为克隆：模仿示范，不探索</p></div>
-          <div class="card accent"><div class="k">边界</div><p>不注入新知识；难题不一定做对</p></div>
+          <div class="card"><div class="k">Data</div><p>(instruction, answer) pairs; loss on the orange text only</p></div>
+          <div class="card"><div class="k">Objective</div><p>Still the next token; the condition is system + user + partial answer</p></div>
+          <div class="card"><div class="k">Essence</div><p>Behavior cloning: imitate the demonstrations</p></div>
+          <div class="card accent"><div class="k">Boundary</div><p>Knowledge comes from pretraining; hard problems can still fail</p></div>
         </div>
       </div>
-      <div class="keyline">同一套 loss，换了一个<b>求和范围</b>。</div>
+      <div class="keyline">Same loss, different <b>summation range</b>.</div>
     </div>
-    <div class="footer"><span>《天体力学基础》· SFT</span><span class="pnum">17 / 44</span></div>
+    <div class="footer"><span>Foundations of Celestial Mechanics · SFT</span><span class="pnum">17 / 44</span></div>
   </section>
 
   <!-- ============ S18 · 三种角色 ============ -->
   <section class="slide" data-notes="对话不是一个字符串，而是一组带角色的消息。system 定身份和规则，user 给任务，assistant 是模型的回答。SFT 训练时只对 assistant 的 token 算 loss，system 和 user 只是条件。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>一条消息，三种角色</h2>
+    <h2>One message, three roles</h2>
     <div class="content">
       <div class="two">
         <div class="msgstack">
-          <div class="msg sys"><div class="role">system</div><p>你是《天体力学基础》的助教，只回答本书内容。</p></div>
-          <div class="msg usr"><div class="role">user</div><p>第四章讲什么？</p></div>
-          <div class="msg ast"><div class="role">assistant</div><p>天体运动中的共振现象。</p></div>
+          <div class="msg sys"><div class="role">system</div><p>You are the teaching assistant for Foundations of Celestial Mechanics. Answer only from the book.</p></div>
+          <div class="msg usr"><div class="role">user</div><p>What is Chapter 4 about?</p></div>
+          <div class="msg ast"><div class="role">assistant</div><p>Resonance phenomena in celestial motion.</p></div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">system</div><p>身份、规则、边界；由开发者写</p></div>
-          <div class="card"><div class="k">user</div><p>任务与材料；由用户写</p></div>
-          <div class="card accent"><div class="k">assistant</div><p>模型的回答；训练时只对它算 loss</p></div>
+          <div class="card"><div class="k">system</div><p>Identity, rules, boundaries; written by the developer</p></div>
+          <div class="card"><div class="k">user</div><p>Task and material; written by the user</p></div>
+          <div class="card accent"><div class="k">assistant</div><p>The model's answer; the only part that carries loss</p></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:16px">system / user = 条件 &nbsp;·&nbsp; assistant = 监督目标（只算这些 token 的 loss）</p>
-      <div class="keyline">system 定规则，user 给任务，assistant 是学习目标。</div>
+      <p class="micro" style="margin-top:16px">system / user = condition &nbsp;·&nbsp; assistant = supervision target (loss on these tokens only)</p>
+      <div class="keyline">system sets the rules, user sets the task, assistant is the learning target.</div>
     </div>
     <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 44</span></div>
   </section>
@@ -1369,28 +1371,28 @@
   <!-- ============ S19 · 怎么预测 ============ -->
   <section class="slide" data-notes="把刚才的问答拆开看：模型一次只生成一个 token。给定已生成的全部内容，算下一个 token 的概率，按概率取一个，接回输入，再算下一个。所谓回答，就是这个循环走 21 步。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>它到底怎么预测</h2>
+    <h2>How it actually predicts</h2>
     <div class="content">
       <div class="two">
         <table class="pred">
-          <thead><tr><th>已生成</th><th>候选（概率）</th><th>采样</th></tr></thead>
+          <thead><tr><th>Generated so far</th><th>Candidates (probability)</th><th>Sampled</th></tr></thead>
           <tbody>
-            <tr><td>（空）</td><td>系统 .62 · 本书 .11 · 天体 .08</td><td>系统</td></tr>
-            <tr><td>系统</td><td>介绍 .48 · 是 .12 · 主要 .09</td><td>介绍</td></tr>
-            <tr><td>系统介绍</td><td>天 .71 · 本 .06 · 了 .05</td><td>天</td></tr>
-            <tr><td>系统介绍天</td><td>体 .66 · 文 .12 · 气 .08</td><td>体</td></tr>
-            <tr><td>系统介绍天体</td><td>力 .58 · 学 .21 · 的 .07</td><td>力</td></tr>
-            <tr><td>系统介绍天体力学</td><td>的 .44 · 学 .18 · 是 .09</td><td>的</td></tr>
+            <tr><td>(empty)</td><td>This .62 · The .11 · It .08</td><td>This</td></tr>
+            <tr><td>This</td><td>book .48 · volume .12 · text .09</td><td>book</td></tr>
+            <tr><td>This book</td><td>systematically .71 · provides .06 · introduces .05</td><td>systematically</td></tr>
+            <tr><td>… systematically</td><td>introduces .66 · covers .12 · presents .08</td><td>introduces</td></tr>
+            <tr><td>… introduces</td><td>the .58 · a .21 · fundamental .07</td><td>the</td></tr>
+            <tr><td>… the</td><td>fundamental .44 · basic .18 · core .09</td><td>fundamental</td></tr>
           </tbody>
         </table>
         <div class="stack">
-          <div class="card" style="padding:14px 16px"><div class="k">01 算概率</div><p>给定已生成的全部 token</p></div>
-          <div class="card" style="padding:14px 16px"><div class="k">02 采样</div><p>按概率取一个</p></div>
-          <div class="card accent" style="padding:14px 16px"><div class="k">03 接回</div><p>拼到输入末尾，重复</p></div>
+          <div class="card" style="padding:14px 16px"><div class="k">01 Score</div><p>Given every token generated so far</p></div>
+          <div class="card" style="padding:14px 16px"><div class="k">02 Sample</div><p>Draw one by probability</p></div>
+          <div class="card accent" style="padding:14px 16px"><div class="k">03 Append</div><p>Add it to the input and repeat</p></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">概率为示意，用于说明机制 · 真实输出以模型为准</p>
-      <div class="keyline">一次只走一步；把结果接回输入，再走下一步。</div>
+      <p class="micro" style="margin-top:14px">Probabilities are illustrative, to show the mechanism · real outputs follow the model</p>
+      <div class="keyline">One step at a time: append the result, then take the next step.</div>
     </div>
     <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 44</span></div>
   </section>
@@ -1398,20 +1400,20 @@
   <!-- ============ S20 · 什么是强化学习 ============ -->
   <section class="slide" data-notes="强化学习是另一套范式：没有标准答案，只有一个奖励信号。智能体在环境里动作，得到奖励和新状态，目标是最大化累积奖励。最早用在控制、运筹、机器人和游戏。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>什么是强化学习</h2>
-    <p class="sub" style="margin-top:10px">在环境里试错，用奖励信号调整策略，让长期回报最大。</p>
+    <h2>What reinforcement learning is</h2>
+    <p class="sub" style="margin-top:10px">Trial and error in an environment, using a reward signal to adjust the policy so long-run return is maximal.</p>
     <div class="content">
       <div class="loop">
-        <span class="step">状态 s<sub>t</sub></span><span class="arr">→</span>
-        <span class="step hl">智能体</span><span class="arr">→</span>
-        <span class="step">动作 a<sub>t</sub></span><span class="arr">→</span>
-        <span class="step">环境</span><span class="arr">→</span>
-        <span class="step">奖励 r<sub>t</sub> · s<sub>t+1</sub></span><span class="arr">↺</span>
+        <span class="step">state s<sub>t</sub></span><span class="arr">→</span>
+        <span class="step hl">agent</span><span class="arr">→</span>
+        <span class="step">action a<sub>t</sub></span><span class="arr">→</span>
+        <span class="step">environment</span><span class="arr">→</span>
+        <span class="step">reward r<sub>t</sub> · s<sub>t+1</sub></span><span class="arr">↺</span>
       </div>
       <div class="three" style="margin-top:28px">
-        <div class="card"><div class="k">没有标准答案</div><div class="big" style="font-size:22px">只有奖励</div><p>不告诉你该做什么，只告诉你结果好不好</p></div>
-        <div class="card"><div class="k">试错</div><div class="big" style="font-size:22px">动作 → 反馈</div><p>好就强化，坏就改</p></div>
-        <div class="card accent"><div class="k">目标</div><div class="big" style="font-size:22px">累积奖励</div><p>不是眼前一步，是长期回报</p></div>
+        <div class="card"><div class="k">No answer key</div><div class="big" style="font-size:22px">Only reward</div><p>It scores the outcome and leaves the choice to the agent</p></div>
+        <div class="card"><div class="k">Trial and error</div><div class="big" style="font-size:22px">Action → feedback</div><p>Reinforce what works, revise what fails</p></div>
+        <div class="card accent"><div class="k">Goal</div><div class="big" style="font-size:22px">Cumulative reward</div><p>Long-run return over the immediate step</p></div>
       </div>
       <div class="mathblock" style="margin-top:24px;font-size:24px">
         <math>
@@ -1424,31 +1426,31 @@
           <mo>]</mo>
         </math>
       </div>
-      <p class="micro" style="margin-top:10px">最早：最优控制 · 机器人 · 运筹优化 · 游戏</p>
-      <div class="keyline">RL 学的不是答案，是<b>策略</b>。</div>
+      <p class="micro" style="margin-top:10px">Early uses: optimal control · robotics · operations research · games</p>
+      <div class="keyline">What RL learns is a <b>policy</b>.</div>
     </div>
     <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 44</span></div>
   </section>
 
   <!-- ============ S21 · RL 的游戏前史 ============ -->
-  <section class="slide" data-notes="RL 不是新东西。Atari、AlphaGo、Dota、StarCraft，都是在 simulator 里试错，用明确奖励改策略。共同点是：有环境、有奖励、可以无限重来。注意：AlphaFold 不是 RL，它是监督学习，用已知结构做标签，没有奖励也没有试错；2024 诺贝尔化学奖表彰的是蛋白质结构预测，不是 RL。真实问题没有 simulator，数学和代码是例外。">
+  <section class="slide" data-notes="RL 不是新东西。Atari、AlphaGo、Dota、StarCraft，都是在 simulator 里试错，用明确奖励改策略。共同点是：有环境、有奖励、可以无限重来。注意：AlphaFold 是监督学习，用已知结构做标签，没有奖励也没有试错；2024 诺贝尔化学奖表彰的是蛋白质结构预测。真实问题没有 simulator，数学和代码是例外。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>RL 的老战场：先打赢游戏</h2>
+    <h2>RL's old battlefield: win games first</h2>
     <div class="content">
       <div class="timeline">
-        <div class="tl"><div class="year">2013</div><h4>Atari · DQN</h4><p>从像素学会打游戏</p></div>
-        <div class="tl"><div class="year">2016</div><h4>AlphaGo</h4><p>自我对弈 + 树搜索</p></div>
-        <div class="tl"><div class="year">2018</div><h4>Dota 2 · OpenAI Five</h4><p>长时程、团队协作</p></div>
-        <div class="tl"><div class="year">2019</div><h4>StarCraft II · AlphaStar</h4><p>不完全信息、大动作空间</p></div>
+        <div class="tl"><div class="year">2013</div><h4>Atari · DQN</h4><p>Learn to play from pixels</p></div>
+        <div class="tl"><div class="year">2016</div><h4>AlphaGo</h4><p>Self-play + tree search</p></div>
+        <div class="tl"><div class="year">2018</div><h4>Dota 2 · OpenAI Five</h4><p>Long horizons, team play</p></div>
+        <div class="tl"><div class="year">2019</div><h4>StarCraft II · AlphaStar</h4><p>Imperfect information, huge action space</p></div>
       </div>
       <div class="tl-facts">
-        <span class="pill"><i></i>有 simulator</span>
-        <span class="pill"><i></i>有 reward</span>
-        <span class="pill"><i></i>可无限试错</span>
+        <span class="pill"><i></i>has a simulator</span>
+        <span class="pill"><i></i>has a reward</span>
+        <span class="pill"><i></i>unlimited retries</span>
       </div>
-      <p class="micro" style="margin-top:16px">DeepMind：Atari · AlphaGo · AlphaStar（RL） &nbsp;|&nbsp; AlphaFold → 2024 诺贝尔化学奖（Hassabis &amp; Jumper）</p>
-      <div class="sidenote"><b>但 AlphaFold 不是 RL。</b> 它是监督学习：用已知结构做标签；没有奖励，也没有试错。</div>
-      <div class="keyline">真实问题没有 simulator；<b>数学和代码是例外</b>。</div>
+      <p class="micro" style="margin-top:16px">DeepMind: Atari · AlphaGo · AlphaStar (RL) &nbsp;|&nbsp; AlphaFold → 2024 Nobel Prize in Chemistry (Hassabis &amp; Jumper)</p>
+      <div class="sidenote"><b>AlphaFold is supervised learning:</b> labels are known structures; no reward, no trial and error.</div>
+      <div class="keyline">Math and code bring their own <b>simulator</b>.</div>
     </div>
     <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 44</span></div>
   </section>
@@ -1456,7 +1458,7 @@
   <!-- ============ S22 · RL ============ -->
   <section class="slide" data-notes="环境从游戏 simulator 换成了验证器。奖励还是 0/1，只是判分的从游戏引擎变成了答案、测试和编译器。经典例子：strawberry 里有几个 r？GPT-4o 常答 2；o1/R1 会先把字母拆开再数，答 3。验证器只看最后答案，但模型自己学出中间步骤。时间点：2024.09 o1，2025.01 R1（DeepSeek moment）。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>RL 的新战场：做题，对答案</h2>
+    <h2>RL's new battlefield: solve, then check</h2>
     <div class="content">
       <div class="two">
         <div style="align-self:center">
@@ -1470,46 +1472,46 @@
               <mo>(</mo><msub><mi>p</mi><mi>θ</mi></msub><mo>‖</mo><msub><mi>p</mi><mtext>ref</mtext></msub><mo>)</mo>
             </math>
           </div>
-          <p class="micro" style="margin-top:12px">奖励来自程序：答案匹配、单元测试、Lean 编译</p>
+          <p class="micro" style="margin-top:12px">Reward comes from programs: answer matching, unit tests, Lean compilation</p>
         </div>
         <div class="rlex">
-          <div class="q">Q：第四章讲什么？</div>
-          <div class="a bad"><span>受摄二体问题</span><b>0</b></div>
-          <div class="a good"><span>天体运动中的共振现象</span><b>1</b></div>
-          <div class="a bad"><span>有序与混沌运动</span><b>0</b></div>
-          <div class="foot">采样 3 条 → 验证器判分 → 更新策略</div>
+          <div class="q">Q: What is Chapter 4 about?</div>
+          <div class="a bad"><span>Perturbed two-body problem</span><b>0</b></div>
+          <div class="a good"><span>Resonance phenomena in celestial motion</span><b>1</b></div>
+          <div class="a bad"><span>Order and chaos</span><b>0</b></div>
+          <div class="foot">Sample 3 → verifier scores → update policy</div>
         </div>
       </div>
       <div class="straw">
-        <div class="sq">“strawberry” 里有几个 r？</div>
+        <div class="sq">How many r's are in “strawberry”?</div>
         <div class="letters"><span>s</span><span>t</span><span class="r">r</span><span>a</span><span>w</span><span>b</span><span>e</span><span class="r">r</span><span class="r">r</span><span>y</span></div>
-        <div class="sa"><span class="bad">GPT-4o 常答 2</span><span class="ar">→</span><span class="good">o1 / R1 答 3</span></div>
-        <div class="note">先拆字母，再数</div>
+        <div class="sa"><span class="bad">GPT-4o often says 2</span><span class="ar">→</span><span class="good">o1 / R1 says 3</span></div>
+        <div class="note">Split the letters, then count</div>
       </div>
-      <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · DeepSeek moment</p>
-      <div class="keyline">同一段文字，从“预测下一个词”变成“答对才给分”。</div>
+      <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · the DeepSeek moment</p>
+      <div class="keyline">Same text, new objective: the reward arrives only when the answer checks out.</div>
     </div>
-    <div class="footer"><span>《天体力学基础》· RLVR</span><span class="pnum">22 / 44</span></div>
+    <div class="footer"><span>Foundations of Celestial Mechanics · RLVR</span><span class="pnum">22 / 44</span></div>
   </section>
 
   <!-- ============ S23 · RL 算法 ============ -->
   <section class="slide" data-notes="RL 的算法不止一个。PPO 是策略梯度加 critic，RLHF 的经典选择；GRPO 用同一题的一组样本做相对比较，省掉 critic，数学和代码常用；RLOO 用留一法做基线；DPO 直接学偏好对，不走 RL 循环。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>RL 的常见算法</h2>
+    <h2>Common RL algorithms</h2>
     <div class="content">
       <div class="four">
-        <div class="card"><div class="k">PPO</div><div class="big" style="font-size:20px">策略梯度 + critic</div><p>RLHF 的经典选择</p></div>
-        <div class="card"><div class="k">GRPO</div><div class="big" style="font-size:20px">组内相对优势</div><p>省掉 critic；数学/代码常用</p></div>
-        <div class="card"><div class="k">RLOO</div><div class="big" style="font-size:20px">留一法基线</div><p>轻量，方差更小</p></div>
-        <div class="card"><div class="k">DPO</div><div class="big" style="font-size:20px">直接学偏好</div><p>不走 RL 循环</p></div>
+        <div class="card"><div class="k">PPO</div><div class="big" style="font-size:20px">Policy gradient + critic</div><p>The classic choice for RLHF</p></div>
+        <div class="card"><div class="k">GRPO</div><div class="big" style="font-size:20px">Group-relative advantage</div><p>Drops the critic; common in math and code</p></div>
+        <div class="card"><div class="k">RLOO</div><div class="big" style="font-size:20px">Leave-one-out baseline</div><p>Lightweight, lower variance</p></div>
+        <div class="card"><div class="k">DPO</div><div class="big" style="font-size:20px">Learn preferences directly</div><p>Skips the RL loop</p></div>
       </div>
       <div class="loop">
-        <span class="step">采样</span><span class="arr">→</span>
-        <span class="step">奖励</span><span class="arr">→</span>
-        <span class="step hl">更新</span>
+        <span class="step">Sample</span><span class="arr">→</span>
+        <span class="step">Reward</span><span class="arr">→</span>
+        <span class="step hl">Update</span>
       </div>
-      <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO 是 RL；DPO 是偏好优化，常被归到 RLHF 谱系。</p>
-      <div class="keyline">算法不同，循环相同：采样 → 打分 → 更新。</div>
+      <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO are RL; DPO is preference optimization, usually placed in the RLHF family.</p>
+      <div class="keyline">Different algorithms, same loop: sample → score → update.</div>
     </div>
     <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 44</span></div>
   </section>
@@ -1517,24 +1519,24 @@
   <!-- ============ S24 · 天然优势 ============ -->
   <section class="slide" data-notes="一般任务的奖励要靠人打分或奖励模型，贵、慢、有噪声；数学和代码的奖励由程序判定，几乎免费、即时、可无限生成。反馈还更具体：代码直接告诉你错在哪一行。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>数学和代码的天然优势</h2>
+    <h2>Math and code: a natural advantage</h2>
     <div class="content">
       <table class="compare">
-        <thead><tr><th></th><th>一般任务</th><th>数学 / 代码</th></tr></thead>
+        <thead><tr><th></th><th>General tasks</th><th>Math / code</th></tr></thead>
         <tbody>
-          <tr><td>奖励</td><td>人打分 / 奖励模型</td><td>程序判定</td></tr>
-          <tr><td>成本</td><td>贵、慢、有噪声</td><td>几乎为零</td></tr>
-          <tr><td>供给</td><td>有限</td><td>可无限生成</td></tr>
-          <tr><td>反馈</td><td>一个分数</td><td>具体错误位置</td></tr>
+          <tr><td>Reward</td><td>Human rating / reward model</td><td>Program verdict</td></tr>
+          <tr><td>Cost</td><td>Expensive, slow, noisy</td><td>Near zero</td></tr>
+          <tr><td>Supply</td><td>Limited</td><td>Unlimited generation</td></tr>
+          <tr><td>Feedback</td><td>A single score</td><td>The exact error location</td></tr>
         </tbody>
       </table>
       <div class="four" style="margin-top:20px">
-        <div class="card"><div class="k">01 分解</div><p>函数、模块 → 子目标</p></div>
-        <div class="card"><div class="k">02 验证</div><p>测试 → 自己检查</p></div>
-        <div class="card"><div class="k">03 调试</div><p>报错 → 定位 → 修正</p></div>
-        <div class="card"><div class="k">04 长程约束</div><p>类型、变量、控制流 → 不丢状态</p></div>
+        <div class="card"><div class="k">01 Decompose</div><p>Functions, modules → subgoals</p></div>
+        <div class="card"><div class="k">02 Verify</div><p>Tests → self-check</p></div>
+        <div class="card"><div class="k">03 Debug</div><p>Error → locate → fix</p></div>
+        <div class="card"><div class="k">04 Long-horizon constraints</div><p>Types, variables, control flow → state preserved</p></div>
       </div>
-      <div class="keyline">反馈越明确，试错越便宜，RL 越有效。</div>
+      <div class="keyline">Clearer feedback makes trial and error cheaper — and RL more effective.</div>
     </div>
     <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 44</span></div>
   </section>
@@ -1542,14 +1544,14 @@
   <!-- ============ S25 · 从会说话到会干活 ============ -->
   <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>从会说话到会干活</h2>
+    <h2>From talking to working</h2>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">会说话 · 2023</div><div class="big" style="font-size:24px">ChatGPT</div><p>指令微调 + RLHF<br>prompt / system</p></div>
-        <div class="card"><div class="k">会思考</div><div class="big" style="font-size:24px">CoT</div><p>写出中间步骤<br>context engineering · pruning</p></div>
-        <div class="card accent"><div class="k">会干活</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>memory</p></div>
+        <div class="card"><div class="k">Talking · 2023</div><div class="big" style="font-size:24px">ChatGPT</div><p>Instruction tuning + RLHF<br>prompt / system</p></div>
+        <div class="card"><div class="k">Thinking</div><div class="big" style="font-size:24px">CoT</div><p>Write the intermediate steps<br>context engineering · pruning</p></div>
+        <div class="card accent"><div class="k">Working</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>memory</p></div>
       </div>
-      <div class="keyline">每一步都在解决前一步留下的问题。</div>
+      <div class="keyline">Each step solves the problem the previous step left open.</div>
     </div>
     <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 44</span></div>
   </section>
@@ -1557,20 +1559,20 @@
   <!-- ============ S26 · ChatGPT ============ -->
   <section class="slide" data-notes="2023 年的 ChatGPT 让 next-token 模型变成了对话产品。关键不是模型变大，而是指令微调 + RLHF 让它学会按格式回答、说人觉得有用的话。但它仍然不会用工具、不会记事。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>2023：从补全到对话</h2>
+    <h2>2023: from completion to conversation</h2>
     <div class="content">
       <div class="two">
         <div class="chat">
-          <div class="row"><span class="role">user</span><span class="txt">用一句话解释希尔区。</span><span class="tag"></span></div>
-          <div class="row target"><span class="role">assistant</span><span class="txt">给定能量下，天体可能出现的空间区域。</span><span class="tag"></span></div>
+          <div class="row"><span class="role">user</span><span class="txt">Explain the Hill region in one sentence.</span><span class="tag"></span></div>
+          <div class="row target"><span class="role">assistant</span><span class="txt">The region of space a body can reach at a given energy.</span><span class="tag"></span></div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">指令微调</div><p>学会对话格式：该回答，而不是续写</p></div>
-          <div class="card"><div class="k">RLHF</div><p>学会人觉得好的回答：有用、无害</p></div>
-          <div class="card accent"><div class="k">但仍然不会</div><p>不会用工具，不会记事，不会验证</p></div>
+          <div class="card"><div class="k">Instruction tuning</div><p>Learns the dialogue format: respond to the request</p></div>
+          <div class="card"><div class="k">RLHF</div><p>Learns answers people prefer: helpful, harmless</p></div>
+          <div class="card accent"><div class="k">Scope</div><p>Text only: no tools, no memory, no verification</p></div>
         </div>
       </div>
-      <div class="keyline">会说话，是训练出来的，不是涌现的。</div>
+      <div class="keyline">Conversation is a trained behavior.</div>
     </div>
     <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 44</span></div>
   </section>
@@ -1578,35 +1580,35 @@
   <!-- ============ S27 · Prompt ============ -->
   <section class="slide" data-notes="prompt 不是许愿，是改条件概率。左边是一条完整 prompt：system 给角色，约束规定写法，user 给任务，few-shot 给两个开普勒第三定律的例子。右边是同一个答案 token 的分布：原始提问下 16 只占 18%，加上角色、约束和例子后变成 71%。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Prompt：用内容改变分布</h2>
+    <h2>Prompt: change the distribution with content</h2>
     <div class="content">
       <div class="two">
         <div class="pstack">
-          <div class="pblock"><div class="role">system · 角色</div><p>你是天体力学助教。</p></div>
-          <div class="pblock"><div class="role">constraints · 约束</div><p>先写公式，再代入，最后给数值。</p></div>
-          <div class="pblock"><div class="role">user · 任务</div><p>周期 2 年，半长轴变为 4 倍，周期变成多少？</p></div>
-          <div class="pblock few"><div class="role">few-shot · 例子</div>
-            <div class="ex">a 变为 9 倍 → T 变为 27 倍</div>
-            <div class="ex">a 变为 16 倍 → T 变为 64 倍</div>
+          <div class="pblock"><div class="role">system · role</div><p>You are a celestial mechanics teaching assistant.</p></div>
+          <div class="pblock"><div class="role">constraints</div><p>Write the formula first, then substitute, then give the number.</p></div>
+          <div class="pblock"><div class="role">user · task</div><p>A period of 2 years; the semi-major axis grows 4×. What is the new period?</p></div>
+          <div class="pblock few"><div class="role">few-shot · examples</div>
+            <div class="ex">a × 9 → T × 27</div>
+            <div class="ex">a × 16 → T × 64</div>
           </div>
         </div>
         <div>
-          <p class="micro">答案 token 的分布</p>
+          <p class="micro">Distribution of the answer token</p>
           <div class="dist2">
             <div>
-              <div class="glabel">原始提问</div>
+              <div class="glabel">Original question</div>
               <div class="row"><span>8</span><div class="bar"><i style="width:52%"></i></div><span>52%</span></div>
               <div class="row"><span>16</span><div class="bar"><i style="width:18%"></i></div><span>18%</span></div>
               <div class="row"><span>32</span><div class="bar"><i style="width:12%"></i></div><span>12%</span></div>
             </div>
             <div>
-              <div class="glabel">加 system + 约束 + few-shot</div>
+              <div class="glabel">With system + constraints + few-shot</div>
               <div class="row"><span>8</span><div class="bar"><i style="width:8%"></i></div><span>8%</span></div>
               <div class="row top"><span>16</span><div class="bar"><i style="width:71%"></i></div><span>71%</span></div>
               <div class="row"><span>32</span><div class="bar"><i style="width:11%"></i></div><span>11%</span></div>
             </div>
           </div>
-          <p class="micro" style="margin-top:10px">概率为示意</p>
+          <p class="micro" style="margin-top:10px">Probabilities are illustrative</p>
         </div>
       </div>
       <div class="mathband" style="margin-top:16px">
@@ -1619,7 +1621,7 @@
         </div>
         <div class="eqnote">p(16 | x) = 0.18<br>p(16 | x, c, e) = 0.71</div>
       </div>
-      <div class="keyline">加内容，就是在改<b>条件概率</b>。</div>
+      <div class="keyline">Adding content is how you change the <b>conditional probability</b>.</div>
     </div>
     <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 44</span></div>
   </section>
@@ -1627,22 +1629,22 @@
   <!-- ============ S28 · CoT ============ -->
   <section class="slide" data-notes="多步问题，直接给答案容易错。CoT 让模型把中间步骤写出来，每个 token 都是一次额外计算。代价是更慢、更贵，也可能绕圈。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>CoT：把思考写出来</h2>
+    <h2>CoT: write the thinking down</h2>
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro">问题</p>
-          <p style="font-size:17px;margin:6px 0 12px">周期 2 年，半长轴变为 4 倍，周期变成多少？</p>
-          <div class="promptbox bad"><div class="tag">直接答</div><p>8 年 ✗</p></div>
-          <div class="promptbox good"><div class="tag">分步</div><p>T ∝ a<sup>3/2</sup>；4<sup>3/2</sup> = 8；T = 2 × 8 = 16 年 ✓</p></div>
+          <p class="micro">Question</p>
+          <p style="font-size:17px;margin:6px 0 12px">A period of 2 years; the semi-major axis grows 4×. What is the new period?</p>
+          <div class="promptbox bad"><div class="tag">Direct answer</div><p>8 years ✗</p></div>
+          <div class="promptbox good"><div class="tag">Step by step</div><p>T ∝ a<sup>3/2</sup>; 4<sup>3/2</sup> = 8; T = 2 × 8 = 16 years ✓</p></div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">为什么有效</div><p>每个 token 都是一次额外计算</p></div>
-          <div class="card"><div class="k">代价</div><p>更慢、更贵、可能绕圈</p></div>
-          <div class="card accent"><div class="k">本质</div><p>把隐式推理摊成显式步骤</p></div>
+          <div class="card"><div class="k">Why it works</div><p>Every token is extra computation</p></div>
+          <div class="card"><div class="k">Cost</div><p>Slower, pricier, sometimes circular</p></div>
+          <div class="card accent"><div class="k">Essence</div><p>Spread implicit reasoning into explicit steps</p></div>
         </div>
       </div>
-      <div class="keyline">写出来，就是算出来。</div>
+      <div class="keyline">Writing it out is computing it out.</div>
     </div>
     <div class="footer"><span>chain of thought</span><span class="pnum">28 / 44</span></div>
   </section>
@@ -1650,7 +1652,7 @@
   <!-- ============ S29 · Context 膨胀 ============ -->
   <section class="slide" data-notes="最早 GPT-3 只有 2k token，ChatGPT 是 4k；后来 32k、128k，再到 1M。窗口变长带来三个问题：贵、慢、稀释。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context window 的膨胀</h2>
+    <h2>The inflation of the context window</h2>
     <div class="content">
       <div class="ctxbars">
         <div class="cb"><span class="y">2020</span><div class="track"><div class="fill" style="width:12%"></div></div><span class="n">2k</span></div>
@@ -1660,11 +1662,11 @@
         <div class="cb hl"><span class="y">2026</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="n">1M+</span></div>
       </div>
       <div class="three">
-        <div class="card"><div class="k">贵</div><p>按 token 计费；长上下文预填更慢</p></div>
-        <div class="card"><div class="k">慢</div><p>prefill 与注意力成本上升</p></div>
-        <div class="card accent"><div class="k">稀释</div><p>中间信息被忽略；信号被噪声淹没</p></div>
+        <div class="card"><div class="k">Cost</div><p>Billed per token; long prefills are slower</p></div>
+        <div class="card"><div class="k">Latency</div><p>Prefill and attention costs rise</p></div>
+        <div class="card accent"><div class="k">Dilution</div><p>Middle content gets ignored; signal drowns in noise</p></div>
       </div>
-      <div class="keyline">窗口变长，不等于信息变多。</div>
+      <div class="keyline">A longer window raises the ceiling; relevance decides what lands.</div>
     </div>
     <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 44</span></div>
   </section>
@@ -1672,29 +1674,29 @@
   <!-- ============ S30 · 大海捞针 ============ -->
   <section class="slide" data-notes="上下文窗口是固定预算。大海捞针测试：在长文里藏一句话，问模型那句话是什么；换长度、换位置，重复很多次。结果是越长越难，中间位置最差。窗口大不等于找得到。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context 是有限的</h2>
+    <h2>Context is finite</h2>
     <div class="content">
-      <p class="micro">大海捞针：在长文里藏一句话</p>
+      <p class="micro">Needle in a haystack: hide one sentence in a long document</p>
       <div class="needle">
         <span class="pin" style="left:70%"></span>
-        <span class="lab" style="left:70%">针</span>
+        <span class="lab" style="left:70%">needle</span>
       </div>
       <div class="two" style="margin-top:24px">
         <div>
-          <p class="micro">检索准确率（示意）</p>
+          <p class="micro">Retrieval accuracy (illustrative)</p>
           <div class="heatwrap">
             <div class="heaty"><span>4k</span><span>8k</span><span>32k</span><span>128k</span></div>
             <div class="heat"><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.40"></i><i style="--a:0.40"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.30"></i><i style="--a:0.20"></i><i style="--a:0.20"></i><i style="--a:0.30"></i><i style="--a:0.50"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.35"></i><i style="--a:0.18"></i><i style="--a:0.10"></i><i style="--a:0.10"></i><i style="--a:0.18"></i><i style="--a:0.35"></i><i style="--a:0.50"></i></div>
           </div>
-          <p class="micro" style="margin-top:8px">横轴：针的位置 0 → 100%</p>
+          <p class="micro" style="margin-top:8px">Horizontal axis: needle position 0 → 100%</p>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">怎么做</div><p>藏一句话，换长度、换位置，问它是什么</p></div>
-          <div class="card"><div class="k">结果</div><p>越长越难；中间位置最差</p></div>
-          <div class="card accent"><div class="k">含义</div><p>窗口大 ≠ 找得到</p></div>
+          <div class="card"><div class="k">Method</div><p>Hide a sentence, vary length and position, ask what it was</p></div>
+          <div class="card"><div class="k">Result</div><p>Harder as length grows; worst in the middle</p></div>
+          <div class="card accent"><div class="k">Implication</div><p>A big window is a budget; retrieval still matters</p></div>
         </div>
       </div>
-      <div class="keyline">长上下文不等于找得到。</div>
+      <div class="keyline">Long context is a budget; retrieval decides the recall.</div>
     </div>
     <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 44</span></div>
   </section>
@@ -1702,27 +1704,27 @@
   <!-- ============ S31 · Context ============ -->
   <section class="slide" data-notes="上下文窗口是工作台，不是仓库。放什么、怎么放，比放多少更重要。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context engineering：工作台，不是仓库</h2>
+    <h2>Context engineering: the window is a workbench</h2>
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro">窗口里装什么</p>
+          <p class="micro">What goes in the window</p>
           <div class="ctxwin">
-            <div class="blk">system：规则</div>
-            <div class="blk">历史：前几轮</div>
-            <div class="blk hl">检索：相关文档</div>
-            <div class="blk">工具：返回结果</div>
-            <div class="blk">当前：这次的问题</div>
+            <div class="blk">system: rules</div>
+            <div class="blk">history: recent turns</div>
+            <div class="blk hl">retrieval: relevant documents</div>
+            <div class="blk">tools: returned results</div>
+            <div class="blk">current: this question</div>
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">太长</div><p>检索，只放相关的</p></div>
-          <div class="card"><div class="k">太散</div><p>结构化，分块标注</p></div>
-          <div class="card"><div class="k">中间丢失</div><p>关键信息放首尾</p></div>
-          <div class="card accent"><div class="k">超窗</div><p>压缩、摘要、子 agent</p></div>
+          <div class="card"><div class="k">Too long</div><p>Retrieve; keep only what is relevant</p></div>
+          <div class="card"><div class="k">Too scattered</div><p>Structure it; label the blocks</p></div>
+          <div class="card"><div class="k">Lost in the middle</div><p>Put key facts at the start and end</p></div>
+          <div class="card accent"><div class="k">Overflow</div><p>Compress, summarize, sub-agents</p></div>
         </div>
       </div>
-      <div class="keyline">上下文不是越长越好，是越相关越好。</div>
+      <div class="keyline">Relevance beats length.</div>
     </div>
     <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 44</span></div>
   </section>
@@ -1730,32 +1732,32 @@
   <!-- ============ S32 · CoT pruning ============ -->
   <section class="slide" data-notes="推理模型会写很长的思维链。不是所有步骤都值得保留：剪枝、摘要、蒸馏、预算，都是为了让思考更短、更便宜。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>CoT pruning：不是所有思考都值得写</h2>
+    <h2>CoT pruning: keep the thoughts that matter</h2>
     <div class="content">
-      <p class="micro">一条长思维链</p>
+      <p class="micro">A long chain of thought</p>
       <div class="chain">
-        <span class="c">读题</span><span class="arr">→</span>
-        <span class="c keep">设变量</span><span class="arr">→</span>
-        <span class="c">展开</span><span class="arr">→</span>
-        <span class="c cut">重复展开</span><span class="arr">→</span>
-        <span class="c">分类讨论</span><span class="arr">→</span>
-        <span class="c cut">无关分支</span><span class="arr">→</span>
-        <span class="c keep">回到主线</span><span class="arr">→</span>
-        <span class="c keep">代入</span><span class="arr">→</span>
-        <span class="c keep">验算</span><span class="arr">→</span>
-        <span class="c keep">答案</span>
+        <span class="c">Read problem</span><span class="arr">→</span>
+        <span class="c keep">Name variables</span><span class="arr">→</span>
+        <span class="c">Expand</span><span class="arr">→</span>
+        <span class="c cut">Repeat</span><span class="arr">→</span>
+        <span class="c">Case split</span><span class="arr">→</span>
+        <span class="c cut">Side branch</span><span class="arr">→</span>
+        <span class="c keep">Main line</span><span class="arr">→</span>
+        <span class="c keep">Substitute</span><span class="arr">→</span>
+        <span class="c keep">Check</span><span class="arr">→</span>
+        <span class="c keep">Answer</span>
       </div>
       <div class="two" style="margin-top:22px">
         <div class="stack">
-          <div class="card"><div class="k">剪枝</div><p>去掉重复、无关的分支</p></div>
-          <div class="card"><div class="k">摘要</div><p>长链压成短链</p></div>
+          <div class="card"><div class="k">Prune</div><p>Drop repeated and irrelevant branches</p></div>
+          <div class="card"><div class="k">Summarize</div><p>Compress a long chain into a short one</p></div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">蒸馏</div><p>用长 CoT 教短 CoT</p></div>
-          <div class="card accent"><div class="k">预算</div><p>限制思考 token，早停</p></div>
+          <div class="card"><div class="k">Distill</div><p>Teach a short CoT from a long one</p></div>
+          <div class="card accent"><div class="k">Budget</div><p>Cap thinking tokens; stop early</p></div>
         </div>
       </div>
-      <div class="keyline">思考也有预算。</div>
+      <div class="keyline">Thinking has a budget too.</div>
     </div>
     <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 44</span></div>
   </section>
@@ -1763,22 +1765,22 @@
   <!-- ============ S33 · Tool calling ============ -->
   <section class="slide" data-notes="模型自己算 4**1.5 可能错；它只需要写一行 Python，由运行时执行，结果回到上下文。工具不只是计算器，也是模型接触外部世界的接口。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Tool calling：算不准，就交给程序</h2>
+    <h2>Tool calling: let a program do the arithmetic</h2>
     <div class="content">
       <div class="two">
         <div class="panel">
-          <div class="sentence">工具：run_python(code: str) → str</div>
+          <div class="sentence">Tool: run_python(code: str) → str</div>
           <div class="idrow" style="margin-top:10px;color:#cfd2d9">call&nbsp; run_python("print(2 * 4**1.5)")<br>obs&nbsp;&nbsp; 16.0</div>
           <div class="idrow" style="margin-top:12px;color:#8b8f98">// T = 2 × 4**1.5 = 16</div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">01 定义</div><p>工具签名：名字、参数、返回</p></div>
-          <div class="card"><div class="k">02 调用</div><p>模型输出一段代码</p></div>
-          <div class="card"><div class="k">03 执行</div><p>沙箱里真的跑</p></div>
-          <div class="card accent"><div class="k">04 观察</div><p>结果回到上下文，继续</p></div>
+          <div class="card"><div class="k">01 Define</div><p>Tool signature: name, arguments, return</p></div>
+          <div class="card"><div class="k">02 Call</div><p>The model emits a snippet</p></div>
+          <div class="card"><div class="k">03 Execute</div><p>It really runs, in a sandbox</p></div>
+          <div class="card accent"><div class="k">04 Observe</div><p>The result returns to the context; continue</p></div>
         </div>
       </div>
-      <div class="keyline">模型负责提议，程序负责算对。</div>
+      <div class="keyline">The model proposes; the program computes.</div>
     </div>
     <div class="footer"><span>function calling</span><span class="pnum">33 / 44</span></div>
   </section>
@@ -1786,18 +1788,18 @@
   <!-- ============ S34 · Agent 与客户端 ============ -->
   <section class="slide" data-notes="这是真实的 agent 客户端截图。左边是循环：Thought → 工具调用 → 观察，重复。右上是上下文用量，底部是模型、模式和这次会话的成本。模型只负责提议，客户端负责执行、记录、计费和停手。">
     <p class="eyebrow"><b>03</b> / agent</p>
-    <h2>Agent：模型被放进一个循环</h2>
+    <h2>Agent: the model inside a loop</h2>
     <div class="content">
       <div class="agent">
-        <img class="shot-wide" src="assets/figures/agent_client.png" alt="Agent 客户端：Thought、工具调用、上下文与成本">
+        <img class="shot-wide" src="assets/figures/agent_client.png" alt="Agent client: thoughts, tool calls, context and cost">
         <div class="anno">
-          <div class="item"><div class="n">01</div><h4>循环</h4><p>Thought → 工具调用 → 观察，重复</p></div>
-          <div class="item"><div class="n">02</div><h4>上下文</h4><p>234K tokens · 23% used · $0.22</p></div>
-          <div class="item"><div class="n">03</div><h4>客户端</h4><p>模型 + 工具 + 会话 + 账单</p></div>
-          <div class="item"><div class="n">04</div><h4>模型</h4><p>DeepSeek V4.1 Flash · high</p></div>
+          <div class="item"><div class="n">01</div><h4>Loop</h4><p>Thought → tool call → observation, repeat</p></div>
+          <div class="item"><div class="n">02</div><h4>Context</h4><p>234K tokens · 23% used · $0.22</p></div>
+          <div class="item"><div class="n">03</div><h4>Client</h4><p>Model + tools + session + billing</p></div>
+          <div class="item"><div class="n">04</div><h4>Model</h4><p>DeepSeek V4.1 Flash · high</p></div>
         </div>
       </div>
-      <div class="keyline">模型负责提议，客户端负责把提议变成<b>行动</b>。</div>
+      <div class="keyline">The model proposes; the client turns proposals into <b>actions</b>.</div>
     </div>
     <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 44</span></div>
   </section>
@@ -1806,30 +1808,30 @@
   <!-- ============ S35 · Memory ============ -->
   <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Memory：信号与噪声</h2>
+    <h2>Memory: signal and noise</h2>
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro">窗口里的内容</p>
+          <p class="micro">What is in the window</p>
           <div class="memgrid">
-            <div class="box sig"><b>信号</b><span>任务 · 约束 · 决定 · 已验证事实</span></div>
-            <div class="box noi"><b>噪声</b><span>闲聊 · 重复 · 过期 · 原始日志</span></div>
+            <div class="box sig"><b>Signal</b><span>Task · constraints · decisions · verified facts</span></div>
+            <div class="box noi"><b>Noise</b><span>Chat · repetition · stale info · raw logs</span></div>
           </div>
           <div class="memacts">
-            <div><b>写入</b><span>只存决定与事实</span></div>
-            <div><b>检索</b><span>按当前任务取</span></div>
-            <div><b>压缩</b><span>摘要、合并</span></div>
-            <div><b>遗忘</b><span>过期即删</span></div>
+            <div><b>Write</b><span>Store decisions and facts only</span></div>
+            <div><b>Retrieve</b><span>Fetch for the current task</span></div>
+            <div><b>Compress</b><span>Summarize, merge</span></div>
+            <div><b>Forget</b><span>Delete when stale</span></div>
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">工作记忆</div><p>当前窗口；只放这次要用的</p></div>
-          <div class="card"><div class="k">情节记忆</div><p>历史摘要；决定与未决问题</p></div>
-          <div class="card"><div class="k">语义记忆</div><p>外部库 + 检索；按需取</p></div>
-          <div class="card accent"><div class="k">程序记忆</div><p>system + tools；规则与能力</p></div>
+          <div class="card"><div class="k">Working memory</div><p>The current window; only what this step needs</p></div>
+          <div class="card"><div class="k">Episodic memory</div><p>Past summaries; decisions and open questions</p></div>
+          <div class="card"><div class="k">Semantic memory</div><p>External store + retrieval; fetch on demand</p></div>
+          <div class="card accent"><div class="k">Procedural memory</div><p>system + tools; rules and capabilities</p></div>
         </div>
       </div>
-      <div class="keyline">记忆不是存得多，是取得准。</div>
+      <div class="keyline">Memory works by selection: store little, retrieve precisely.</div>
     </div>
     <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 44</span></div>
   </section>
@@ -1837,29 +1839,29 @@
   <!-- ============ S36 · Harness ============ -->
   <section class="slide" data-notes="LLM 是概率系统。0.1% 的失败率，在 100 万次请求里就是 1000 次失败——墨菲定律在规模上一定成立。harness 不是让模型不犯错，而是让错误可发现、可拦住、可回滚。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Harness：接住小概率事件</h2>
+    <h2>Harness: catch the rare failure</h2>
     <div class="content">
-      <div class="scaleband">LLM 是概率的：0.1% 失败率 × 100 万次请求 = <b>1,000 次失败</b></div>
+      <div class="scaleband">LLMs are probabilistic: a 0.1% failure rate × 1M requests = <b>1,000 failures</b></div>
       <div class="two" style="margin-top:22px">
         <div>
-          <p class="micro">System · 规则</p>
+          <p class="micro">System · rules</p>
           <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">作用</div><p>角色、规则、输出格式</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">边界</div><p>不是安全沙箱，可被注入</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">原则</div><p>规则写死，权限放运行时</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Role</div><p>Identity, rules, output format</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Limits</div><p>Prompts guide; the runtime enforces</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Principle</div><p>Rules fixed in the prompt; permissions in the runtime</p></div>
           </div>
         </div>
         <div>
-          <p class="micro">Harness · 运行框架（工程脚手架）</p>
+          <p class="micro">Harness · the runtime scaffold</p>
           <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">验证</div><p>测试、编译、Lean</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">重试</div><p>失败重跑、回退、换路</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">权限</div><p>沙箱、白名单、预算</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">观测</div><p>日志、回放、评测</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Verify</div><p>Tests, compilation, Lean</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Retry</div><p>Rerun, roll back, change route</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Permissions</div><p>Sandbox, allowlist, budget</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">Observe</div><p>Logs, replay, evals</p></div>
           </div>
         </div>
       </div>
-      <div class="keyline">模型负责概率，harness 负责必然。</div>
+      <div class="keyline">The model handles probability; the harness handles certainty.</div>
     </div>
     <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 44</span></div>
   </section>
@@ -1867,7 +1869,7 @@
   <!-- ============ S37 · 系统图 ============ -->
   <section class="slide" data-notes="把前面几页收成一张图：LLM 在中心，prompt 和 context 是这一次的输入；memory 和 agent loop 跨多次调用；harness 在最外面，管工具、权限、验证和日志。模型是 CPU，外面全是运行时。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>把模型放回系统里</h2>
+    <h2>Put the model back in the system</h2>
     <div class="content">
       <div class="sysmap">
         <div class="ringmap">
@@ -1882,88 +1884,88 @@
           <div class="tag ctx">Context</div>
         </div>
         <div class="syslegend">
-          <p class="micro" style="margin:0 0 2px">内圈：一次调用 · 中圈：跨调用 · 外圈：工程边界</p>
-          <div class="row"><span class="n">01</span><b>LLM</b><p>概率生成器：输入 token，输出下一个 token 的分布</p></div>
-          <div class="row"><span class="n">02</span><b>Prompt</b><p>这次的条件：system / user / few-shot</p></div>
-          <div class="row"><span class="n">03</span><b>Context</b><p>这次能看到的全部 token；窗口有限</p></div>
-          <div class="row"><span class="n">04</span><b>Memory</b><p>窗口外的状态：写入 / 检索 / 压缩 / 遗忘</p></div>
-          <div class="row"><span class="n">05</span><b>Agent loop</b><p>观察 → 行动 → 观察；状态放到外部</p></div>
-          <div class="row"><span class="n">06</span><b>Harness</b><p>工具、沙箱、权限、验证、日志</p></div>
+          <p class="micro" style="margin:0 0 2px">Inner ring: one call · Middle ring: across calls · Outer ring: engineering boundary</p>
+          <div class="row"><span class="n">01</span><b>LLM</b><p>A probability generator: tokens in, a distribution over the next token out</p></div>
+          <div class="row"><span class="n">02</span><b>Prompt</b><p>This call's conditions: system / user / few-shot</p></div>
+          <div class="row"><span class="n">03</span><b>Context</b><p>Every token visible to this call; the window is finite</p></div>
+          <div class="row"><span class="n">04</span><b>Memory</b><p>State beyond the window: write / retrieve / compress / forget</p></div>
+          <div class="row"><span class="n">05</span><b>Agent loop</b><p>Observe → act → observe; state lives outside</p></div>
+          <div class="row"><span class="n">06</span><b>Harness</b><p>Tools, sandbox, permissions, verification, logs</p></div>
         </div>
       </div>
-      <div class="keyline">模型是 CPU；prompt、context、memory、loop、harness 是运行时。</div>
+      <div class="keyline">The model is the CPU; prompt, context, memory, loop and harness are the runtime.</div>
     </div>
     <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 44</span></div>
   </section>
 
   <!-- ============ S38 · 加速 ============ -->
-  <section class="slide" data-notes="2023 年之前，AI 在数学里主要是解释概念、查文献、写代码；简单计算经常错，复杂证明仍要人。2024 年 7 月 IMO 银牌 28/42；2025 年 7 月金牌级 35/42——12 个月，+7 分。2026 年 10 月，OpenAI 报告用内部模型解决 372 个开放问题、722 篇论文，平均约 3 小时/题；其中 3 个撤回，同行评议未完成；这是公司声称，不是已核实事实。不是平滑曲线，是台阶。">
+  <section class="slide" data-notes="2023 年之前，AI 在数学里主要是解释概念、查文献、写代码；简单计算经常错，复杂证明仍要人。2024 年 7 月 IMO 银牌 28/42；2025 年 7 月金牌级 35/42——12 个月，+7 分。2026 年 10 月，OpenAI 报告用内部模型解决 372 个开放问题、722 篇论文，平均约 3 小时/题；其中 3 个撤回，同行评议未完成；这是公司声称，不是已核实事实。这是一条阶梯，三个台阶。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>加速：从基本应用到金牌</h2>
+    <h2>Acceleration: from basic use to gold medals</h2>
     <div class="content">
       <div class="ba">
         <div class="side">
-          <div class="yr">2023 · 之前</div>
-          <h3>基本应用</h3>
+          <div class="yr">2023 · before</div>
+          <h3>Basic use</h3>
           <ul>
-            <li>解释概念、查文献、写代码</li>
-            <li>做简单计算，经常算错</li>
-            <li>复杂证明仍要人</li>
-            <li>角色：助手</li>
+            <li>Explain concepts, search the literature, write code</li>
+            <li>Do simple calculations, often wrong</li>
+            <li>Complex proofs still need people</li>
+            <li>Role: assistant</li>
           </ul>
         </div>
-        <div class="mid"><div class="ar">→</div><div class="lab">约 19 个月</div></div>
+        <div class="mid"><div class="ar">→</div><div class="lab">19 months</div></div>
         <div class="side now">
-          <div class="yr">2025 · 之后</div>
-          <h3>研究级</h3>
+          <div class="yr">2025 · after</div>
+          <h3>Research level</h3>
           <ul>
-            <li>IMO 2025 金牌级 35/42</li>
-            <li>Lean 形式证明可验</li>
-            <li>OpenAI 2026：372 题，平均 3 小时/题（报告）</li>
-            <li>角色：候选生成器</li>
+            <li>IMO 2025 gold level 35/42</li>
+            <li>Lean proofs, machine-checkable</li>
+            <li>OpenAI 2026: 372 problems, ≈3 h each (report)</li>
+            <li>Role: candidate generator</li>
           </ul>
         </div>
       </div>
       <div class="accel">
-        <div class="st"><span class="d">2024.07</span><b>28/42</b><span class="m">银牌</span></div>
+        <div class="st"><span class="d">2024.07</span><b>28/42</b><span class="m">silver</span></div>
         <div class="ar">→</div>
-        <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">金牌级</span></div>
-        <div class="note">12 个月，+7 分</div>
+        <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">gold level</span></div>
+        <div class="note">12 months, +7 points</div>
       </div>
-      <div class="keyline">不是一条平滑的线，是<b>三个台阶</b>。</div>
+      <div class="keyline">This is a staircase with <b>three steps</b>.</div>
     </div>
-    <div class="footer"><span>from basic apps to research-level</span><span class="pnum">38 / 44</span></div>
+    <div class="footer"><span>from basic apps to research level</span><span class="pnum">38 / 44</span></div>
   </section>
 
   <!-- ============ S39 · AI math 时间线 ============ -->
   <section class="slide" data-notes="两年时间线：2023 年底 FunSearch 把 LLM 放进进化搜索；2024 年初 AlphaGeometry 解几何；2024 年 7 月 AlphaProof 在 IMO 拿银牌；2024 年 9 月 o1 把 test-time compute 变成产品；2025 年初 R1 用可验证奖励做 RL；2025 年 5 月 AlphaEvolve 改进矩阵乘法；2025 年 7 月两家在 IMO 拿金牌级；2026 年 5 月 OpenAI 模型给出 Erdős 单位距离猜想的反例；9 月声称解决 Navier–Stokes（千禧年问题之一），争议很大；10 月报告 372 个开放问题、722 篇论文（其中含与黎曼猜想相关的声称，不是完整证明；3 个撤回，待同行评议）。这些是公开声称，不是已核实结论。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>时间线：三个台阶</h2>
+    <h2>Timeline: three steps</h2>
     <div class="content">
       <div class="mathline">
         <div class="phase">
           <div class="ph">2023–24</div>
-          <h3>工具：搜索 + 验证</h3>
-          <div class="ms"><div class="d">2023.12</div><b>FunSearch</b><span>LLM + evaluator + 进化搜索；cap set 新构造</span></div>
-          <div class="ms"><div class="d">2024.01</div><b>AlphaGeometry</b><span>神经符号；IMO 几何 25/30</span></div>
-          <div class="ms"><div class="d">2024.07</div><b>AlphaProof</b><span>Lean + RL；IMO 2024 银牌 28/42（+AG2）</span></div>
+          <h3>Tools: search + verification</h3>
+          <div class="ms"><div class="d">2023.12</div><b>FunSearch</b><span>LLM + evaluator + evolutionary search; a new cap-set construction</span></div>
+          <div class="ms"><div class="d">2024.01</div><b>AlphaGeometry</b><span>Neuro-symbolic; IMO geometry 25/30</span></div>
+          <div class="ms"><div class="d">2024.07</div><b>AlphaProof</b><span>Lean + RL; IMO 2024 silver 28/42 (+AG2)</span></div>
         </div>
         <div class="phase">
           <div class="ph">2024–25</div>
-          <h3>推理：RL + 测试时计算</h3>
-          <div class="ms"><div class="d">2024.09</div><b>OpenAI o1</b><span>RL 学思考；test-time compute</span></div>
-          <div class="ms"><div class="d">2025.01</div><b>DeepSeek-R1</b><span>RLVR；推理行为涌现；开放权重</span></div>
-          <div class="ms"><div class="d">2025.05</div><b>AlphaEvolve</b><span>进化编码 agent；4×4 复矩阵乘法 48 次</span></div>
+          <h3>Reasoning: RL + test-time compute</h3>
+          <div class="ms"><div class="d">2024.09</div><b>OpenAI o1</b><span>RL teaches thinking; test-time compute</span></div>
+          <div class="ms"><div class="d">2025.01</div><b>DeepSeek-R1</b><span>RLVR; reasoning behavior emerges; open weights</span></div>
+          <div class="ms"><div class="d">2025.05</div><b>AlphaEvolve</b><span>Evolutionary coding agent; 4×4 complex matrix product in 48 multiplications</span></div>
         </div>
         <div class="phase">
           <div class="ph">2025–26</div>
-          <h3>规模：从 benchmark 到开放问题</h3>
-          <div class="ms"><div class="d">2025.07</div><b>IMO 2025</b><span>金牌级 35/42；自然语言、无工具</span></div>
-          <div class="ms"><div class="d">2025</div><b>形式化金牌（声称）</b><span>Aristotle 等；Lean 可验</span></div>
-          <div class="ms"><div class="d">2026.05–10</div><b>OpenAI</b><span>单位距离反例；NS / 黎曼相关（声称）；372 个问题（报告）</span></div>
+          <h3>Scale: from benchmarks to open problems</h3>
+          <div class="ms"><div class="d">2025.07</div><b>IMO 2025</b><span>Gold level 35/42; natural language, no tools</span></div>
+          <div class="ms"><div class="d">2025</div><b>Formal gold (claimed)</b><span>Aristotle et al.; Lean-checkable</span></div>
+          <div class="ms"><div class="d">2026.05–10</div><b>OpenAI</b><span>Unit-distance counterexample; NS / Riemann-related (claimed); 372 problems (report)</span></div>
         </div>
       </div>
-      <div class="keyline">每一次跃迁，都是<b>生成器 + 验证器 + 搜索</b>。</div>
+      <div class="keyline">Every leap combines a <b>generator, a verifier and search</b>.</div>
     </div>
     <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 44</span></div>
   </section>
@@ -1971,125 +1973,125 @@
   <!-- ============ S40 · 公开表述 ============ -->
   <section class="slide" data-notes="这些是公开表述，不是内部细节。FunSearch 强调 evaluator 和进化；AlphaGeometry 强调 1 亿条合成证明；AlphaProof 强调自动形式化、Lean、RL 和 test-time RL；o1 强调多花时间思考；R1 强调直接在基座模型上做 RL、用规则奖励；AlphaEvolve 强调进化编码 agent；IMO 2025 强调自然语言、无工具、人工评分；OpenAI 2026.10 报告 372 个开放问题、722 篇论文，但 3 个撤回、同行评议未完成。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>他们怎么说的</h2>
+    <h2>How they describe it</h2>
     <div class="content">
-      <div class="caveat">公开材料只覆盖一部分，完整的训练配方仍不可见。下面只看论文、博客和赛后声明里的<strong>公开表述</strong>（节选 / 意译）。</div>
+      <div class="caveat">Public material covers part of the method; the full training recipe stays private. Below are <strong>public statements</strong> from papers, blogs and post-contest reports (excerpted / paraphrased).</div>
       <table class="claims">
-        <thead><tr><th>时间</th><th>工作</th><th>公开表述</th><th>读法</th></tr></thead>
+        <thead><tr><th>Date</th><th>Work</th><th>Public statement</th><th>Reading</th></tr></thead>
         <tbody>
-          <tr><td>2023.12</td><td>FunSearch</td><td>"pairing a pre-trained LLM ... with an automated evaluator"</td><td>搜索</td></tr>
-          <tr><td>2024.01</td><td>AlphaGeometry</td><td>"100 million synthetic theorems and proofs"</td><td>合成数据</td></tr>
-          <tr><td>2024.07</td><td>AlphaProof</td><td>autoformalization → Lean; RL + test-time RL</td><td>形式化</td></tr>
-          <tr><td>2024.09</td><td>o1</td><td>"spend more time thinking through problems"</td><td>推理</td></tr>
+          <tr><td>2023.12</td><td>FunSearch</td><td>"pairing a pre-trained LLM ... with an automated evaluator"</td><td>search</td></tr>
+          <tr><td>2024.01</td><td>AlphaGeometry</td><td>"100 million synthetic theorems and proofs"</td><td>synthetic data</td></tr>
+          <tr><td>2024.07</td><td>AlphaProof</td><td>autoformalization → Lean; RL + test-time RL</td><td>formalization</td></tr>
+          <tr><td>2024.09</td><td>o1</td><td>"spend more time thinking through problems"</td><td>reasoning</td></tr>
           <tr><td>2025.01</td><td>R1</td><td>"directly apply RL ... rule-based rewards"</td><td>RLVR</td></tr>
-          <tr><td>2025.05</td><td>AlphaEvolve</td><td>"evolutionary coding agent"</td><td>进化</td></tr>
-          <tr><td>2025.07</td><td>IMO 2025</td><td>"natural language ... no tools"</td><td>端到端</td></tr>
-          <tr><td>2026.10</td><td>OpenAI</td><td>"372 open problems ... 722 papers"</td><td>开放问题</td></tr>
+          <tr><td>2025.05</td><td>AlphaEvolve</td><td>"evolutionary coding agent"</td><td>evolution</td></tr>
+          <tr><td>2025.07</td><td>IMO 2025</td><td>"natural language ... no tools"</td><td>end to end</td></tr>
+          <tr><td>2026.10</td><td>OpenAI</td><td>"372 open problems ... 722 papers"</td><td>open problems</td></tr>
         </tbody>
       </table>
-      <div class="keyline">关键词在变，底层动作没变：<b>提议、验证、再搜索</b>。</div>
+      <div class="keyline">The keywords change; the underlying move stays: <b>propose, verify, search again</b>.</div>
     </div>
-    <div class="footer"><span>public claims · not internals</span><span class="pnum">40 / 44</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">40 / 44</span></div>
   </section>
 
   <!-- ============ S41 · 共同模式 ============ -->
   <section class="slide" data-notes="把公开工作抽象成一个循环：LLM 生成候选；验证器给对错；搜索或 RL 把信号变成下一步；再回到生成器。模型提供概率，验证器提供梯度——严格说，验证器给的是奖励或筛选信号，梯度由训练算法算。没有验证器，就没有可规模化的信号。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>共同的模式：生成 → 验证 → 搜索</h2>
+    <h2>The common pattern: generate → verify → search</h2>
     <div class="content">
       <div class="flow">
-        <div class="fcard"><div class="k">生成</div><h4>LLM</h4><p>候选证明、程序、构造</p></div>
+        <div class="fcard"><div class="k">Generate</div><h4>LLM</h4><p>Candidate proofs, programs, constructions</p></div>
         <div class="farrow">→</div>
-        <div class="fcard"><div class="k">验证</div><h4>Lean / 测试 / 数值</h4><p>给出对错、分数、反例</p></div>
+        <div class="fcard"><div class="k">Verify</div><h4>Lean / tests / numerics</h4><p>Returns right or wrong, a score, a counterexample</p></div>
         <div class="farrow">→</div>
-        <div class="fcard accent"><div class="k">搜索 / 学习</div><h4>best-of-N · 树 · 进化 · RL</h4><p>把信号变成下一步策略</p></div>
+        <div class="fcard accent"><div class="k">Search / learn</div><h4>best-of-N · trees · evolution · RL</h4><p>Turns the signal into the next policy</p></div>
       </div>
-      <div class="loop">↺ 回到生成器：下一轮更强</div>
+      <div class="loop">↺ Back to the generator: the next round is stronger</div>
       <div class="three tight" style="margin-top:32px">
-        <div class="card"><div class="k">没有验证器</div><p>只能靠人看；无法规模化</p></div>
-        <div class="card"><div class="k">没有搜索</div><p>一次生成；好答案靠运气</p></div>
-        <div class="card accent"><div class="k">两者都有</div><p>概率被筛成正确，再写回模型</p></div>
+        <div class="card"><div class="k">Manual only</div><p>Review stays manual; scale stalls</p></div>
+        <div class="card"><div class="k">One shot</div><p>One draw per attempt; luck decides</p></div>
+        <div class="card accent"><div class="k">Both</div><p>Probability is filtered into correctness, then written back into the model</p></div>
       </div>
-      <div class="keyline">模型提供概率，<b>验证器提供梯度</b>。</div>
+      <div class="keyline">The model supplies probability; <b>the verifier supplies the gradient</b>.</div>
     </div>
     <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 44</span></div>
   </section>
 
   <!-- ============ S42 · 猜测 ============ -->
-  <section class="slide" data-notes="以下是从公开材料反推的猜测，不是内部信息。数据上，自动形式化、合成题、拒绝采样；训练上，RLVR + 长 CoT；推理上，test-time search；工程上，把搜索蒸馏回模型；再加上大规模并行和 eval harness。OpenAI 说 372 题平均约 3 小时/题；如果让我猜，这不是一次生成，而是大量并行采样 + 自动验证 + 搜索/agent 群 + 蒸馏；3 小时是墙钟时间，背后可能是大量并发算力。">
+  <section class="slide" data-notes="以下机制假设来自公开论文、博客和 benchmark 的交叉印证，标注为猜测。数据上，自动形式化、合成题、拒绝采样；训练上，RLVR + 长 CoT；推理上，test-time search；工程上，把搜索蒸馏回模型；再加上大规模并行和 eval harness。OpenAI 说 372 题平均约 3 小时/题；我的判断是：372 题的速度来自大量并行采样、自动验证、搜索/agent 群和蒸馏的组合；3 小时是墙钟时间，背后是大量并发算力。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>一些猜测：大结果可能是怎么来的</h2>
+    <h2>Some guesses: how the big results may have happened</h2>
     <div class="content">
-      <div class="caveat">以下不是内部信息，只是从公开论文、博客和 benchmark 反推的<strong>猜测</strong>。</div>
+      <div class="caveat">The following mechanism hypotheses come from public papers, blogs, and benchmarks, and are labeled as <strong>guesses</strong>.</div>
       <div class="four spec">
-        <div class="card"><div class="k">01 数据</div><p><b>自动形式化 + 合成</b>：非形式题转 Lean；拒绝采样留下可验证的。</p></div>
-        <div class="card"><div class="k">02 训练</div><p><b>RLVR + 长 CoT</b>：答案可验证，奖励才能规模化。</p></div>
-        <div class="card"><div class="k">03 推理</div><p><b>Test-time search</b>：best-of-N、树搜索、进化。</p></div>
-        <div class="card"><div class="k">04 蒸馏</div><p><b>把搜索写回模型</b>：下一次不用搜那么久。</p></div>
-        <div class="card"><div class="k">05 工程</div><p><b>Harness</b>：并行、缓存、评测、回放。</p></div>
-        <div class="card accent"><div class="k">06 赌注</div><p><b>验证</b>：谁有更硬的 verifier，谁就有更快的飞轮。</p></div>
+        <div class="card"><div class="k">01 Data</div><p><b>Autoformalization + synthesis</b>: informal problems → Lean; rejection sampling keeps the verifiable ones.</p></div>
+        <div class="card"><div class="k">02 Training</div><p><b>RLVR + long CoT</b>: verifiable answers let rewards scale.</p></div>
+        <div class="card"><div class="k">03 Inference</div><p><b>Test-time search</b>: best-of-N, tree search, evolution.</p></div>
+        <div class="card"><div class="k">04 Distillation</div><p><b>Write search back into the model</b>: less search next time.</p></div>
+        <div class="card"><div class="k">05 Engineering</div><p><b>Harness</b>: parallelism, caching, evals, replay.</p></div>
+        <div class="card accent"><div class="k">06 The bet</div><p><b>Verification</b>: the harder your verifier, the faster your flywheel.</p></div>
       </div>
-      <p class="micro" style="margin-top:10px">OpenAI：372 题，平均 3 小时/题（报告）</p>
-      <div class="keyline">3 小时/题，更像<b>并行采样 + 验证 + 搜索</b>。</div>
+      <p class="micro" style="margin-top:10px">OpenAI: 372 problems, ≈3 hours each (report)</p>
+      <div class="keyline">Three hours per problem looks more like <b>parallel sampling + verification + search</b>.</div>
     </div>
-    <div class="footer"><span>speculation · not internals</span><span class="pnum">42 / 44</span></div>
+    <div class="footer"><span>speculation · public sources</span><span class="pnum">42 / 44</span></div>
   </section>
 
   <!-- ============ S43 · 还没解决 ============ -->
   <section class="slide" data-notes="已经发生：竞赛题、形式证明、构造搜索、部分开放问题（2026 OpenAI 报告 372 个）。还没：选题、定义、长程研究计划、品味。解题可以搜索；做数学需要方向。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>还没解决的：从解题到做数学</h2>
+    <h2>What remains: from solving to doing mathematics</h2>
     <div class="content">
       <div class="two even">
         <div>
-          <p class="micro">已经发生</p>
+          <p class="micro">Already happening</p>
           <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">竞赛题</div><p>IMO 金牌级；自然语言、限时</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">形式证明</div><p>Lean 可验；不再依赖人眼</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">构造搜索</div><p>cap set、矩阵乘法、调度</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">开放问题</div><p>OpenAI 报告 372 个；筛选仍靠人</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Contest problems</div><p>IMO gold level; natural language, timed</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Formal proofs</div><p>Lean-checkable; machine verification</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Construction search</div><p>Cap sets, matrix multiplication, scheduling</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">Open problems</div><p>372 in the OpenAI report; humans still curate</p></div>
           </div>
         </div>
         <div>
-          <p class="micro">还没</p>
+          <p class="micro">Still open</p>
           <div class="stack" style="gap:10px">
-            <div class="card accent" style="padding:14px 16px"><div class="k">选题</div><p>什么问题值得做</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">定义</div><p>新概念、新结构</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">长程</div><p>几个月的研究计划</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">品味</div><p>美、重要、可生长</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">Choosing a problem</div><p>Which question is worth asking</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">Definitions</div><p>New concepts, new structures</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">Long horizon</div><p>A research plan spanning months</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">Taste</div><p>Beauty, importance, growth</p></div>
           </div>
         </div>
       </div>
-      <div class="keyline">解题可以搜索；<b>做数学需要方向</b>。</div>
+      <div class="keyline">Solving can be searched; <b>doing mathematics needs direction</b>.</div>
     </div>
     <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 44</span></div>
   </section>
 
   <!-- ============ S44 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
-    <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>从下一个 token 到下一个定理</h2>
+    <p class="eyebrow"><b>06</b> / conclusion</p>
+    <h2>From the next token to the next theorem</h2>
     <div class="content">
       <div class="chain">
         <span class="chip2">token</span><span class="arr">→</span>
-        <span class="chip2">概率</span><span class="arr">→</span>
-        <span class="chip2">候选</span><span class="arr">→</span>
-        <span class="chip2">验证</span><span class="arr">→</span>
-        <span class="chip2 last">定理</span>
+        <span class="chip2">probability</span><span class="arr">→</span>
+        <span class="chip2">candidate</span><span class="arr">→</span>
+        <span class="chip2">verification</span><span class="arr">→</span>
+        <span class="chip2 last">theorem</span>
       </div>
       <div class="closing">
-        <div><p>概率负责广度</p></div>
-        <div><p>验证负责正确</p></div>
-        <div class="last"><p>人负责方向</p></div>
+        <div><p>Probability gives breadth</p></div>
+        <div><p>Verification gives correctness</p></div>
+        <div class="last"><p>People set the direction</p></div>
       </div>
-      <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
+      <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
     </div>
     <div class="footer"><span>from next token to next theorem</span><span class="pnum">44 / 44</span></div>
   </section>
 
 </div>
 
-<div id="hint">← → 翻页 · N 讲稿 · F 全屏</div>
+<div id="hint">← → navigate · N notes · F fullscreen</div>
 <div id="notes"></div>
 
 <script>

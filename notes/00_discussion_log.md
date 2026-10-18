@@ -327,7 +327,7 @@ S27 的数学表达：p(y | x) → p(y | x, c, e)，示例 p(16)=0.18 → 0.71�
 
 ---
 
-## 第二十三轮：系统总图、3 小时/题与 2026 NS/千禧年（当前）
+## 第二十三轮：系统总图、3 小时/题与 2026 NS/千禧年
 
 - S37「把模型放回系统里」：LLM 中心；Prompt / Context 内圈；Memory / Agent loop 中圈；Harness 外圈。
 - S38 加速卡：`OpenAI 2026：372 题，平均 3 小时/题（报告）`。
@@ -335,6 +335,18 @@ S27 的数学表达：p(y | x) → p(y | x, c, e)，示例 p(16)=0.18 → 0.71�
 - S42 猜测：micro「OpenAI：372 题，平均 3 小时/题」；keyline「3 小时/题，更像并行采样 + 验证 + 搜索」。
 - 口径：NS / 千禧年相关是声称；372 是报告，3 个撤回、待评议。
 - 当前 44 页。
+
+---
+
+## 第二十四轮：英文主站与写作口径（当前）
+
+- 新建 `slides/en.html`：44 页英文版；`docs/index.html` 改为英文主站，中文版保留为 `docs/zh.html`。
+- 英文 PDF：`docs/from-next-token-to-next-theorem.pdf`；中文 PDF：`docs/from-next-token-to-next-theorem-zh.pdf`。
+- 写作口径：少用“不是 X”，改成正面陈述。已改：
+  - S42 caveat：改为“以下机制假设，来自公开论文、博客和 benchmark 的交叉印证，标注为猜测。”
+  - S21：AlphaFold 直接写“是监督学习”。
+  - S31 / S32 / S35 等标题与 keyline 改为正面说法。
+- 当前两版各 44 页。
 
 ---
 

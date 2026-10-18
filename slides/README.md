@@ -17,6 +17,11 @@
 
 已做：S1–S44（完整 deck：Token → 模型 → 训练 → 应用 → AI × math → 结论）。
 
+- `index.html`：中文源文件
+- `en.html`：English source
+- `docs/index.html`：English deployment copy (primary)
+- `docs/zh.html`：中文 deployment copy
+
 后续每加一节，就在 `index.html` 的 `#stage` 里追加一个 `<section class="slide">`，并更新页码。
 
 ## 设计约定

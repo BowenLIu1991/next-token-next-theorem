@@ -3,7 +3,7 @@
 
 A 45-minute talk on how large language models actually work — and how next-token prediction becomes mathematical problem solving.
 
-[**Live slides**](https://bowenliu1991.github.io/next-token-next-theorem/) · [**PDF**](docs/from-next-token-to-next-theorem.pdf) · [**Speaker notes**](notes/)
+[**English slides**](https://bowenliu1991.github.io/next-token-next-theorem/) · [**中文版**](https://bowenliu1991.github.io/next-token-next-theorem/zh.html) · [**English PDF**](docs/from-next-token-to-next-theorem.pdf) · [**中文 PDF**](docs/from-next-token-to-next-theorem-zh.pdf)
 
 ---
 
@@ -41,11 +41,12 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
   - `N`：显示讲稿备注
   - `F`：全屏
   - `?s=N`：直接跳到第 N 页（0-based）
-- 中文版是当前事实来源；英文版在计划中。
+- 英文版是主站，中文版保留在 `zh.html`。
 
 在线地址（启用 GitHub Pages 后）：
 
-> https://bowenliu1991.github.io/next-token-next-theorem/
+> 英文：https://bowenliu1991.github.io/next-token-next-theorem/  
+> 中文：https://bowenliu1991.github.io/next-token-next-theorem/zh.html
 
 GitHub Pages 设置（一次性）：
 
@@ -64,12 +65,17 @@ Settings → Pages → Build and deployment
 
 直接下载：
 
-> [docs/from-next-token-to-next-theorem.pdf](docs/from-next-token-to-next-theorem.pdf)
+- English: [docs/from-next-token-to-next-theorem.pdf](docs/from-next-token-to-next-theorem.pdf)
+- 中文: [docs/from-next-token-to-next-theorem-zh.pdf](docs/from-next-token-to-next-theorem-zh.pdf)
 
 重新生成：
 
 ```bash
-python3 assets/demos/render_pdf.py
+# English (docs/index.html)
+python3 assets/demos/render_pdf.py --html docs/index.html --out docs/from-next-token-to-next-theorem.pdf
+
+# 中文 (docs/zh.html)
+python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-token-to-next-theorem-zh.pdf
 ```
 
 脚本会用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、44 页的满版 PDF。依赖：
@@ -87,12 +93,15 @@ python3 -m pip install pillow pypdf
 ```
 .
 ├── docs/                         # GitHub Pages 站点
-│   ├── index.html                # 部署用副本
+│   ├── index.html                # English (primary)
+│   ├── zh.html                   # 中文版
 │   ├── assets/figures/           # 站点引用的截图
-│   ├── from-next-token-to-next-theorem.pdf
+│   ├── from-next-token-to-next-theorem.pdf      # English
+│   ├── from-next-token-to-next-theorem-zh.pdf   # 中文
 │   └── .nojekyll
 ├── slides/
-│   ├── index.html                # 源幻灯片（44 页，自包含）
+│   ├── en.html                   # English source (44 pages)
+│   ├── index.html                # 中文源文件（44 页，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -163,12 +172,11 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 
 ## 状态
 
-- [x] 44 页 HTML 幻灯片（中文）
-- [x] PDF 导出（44 页）
-- [x] GitHub Pages 目录（`docs/`）
+- [x] 44 页 HTML 幻灯片（English + 中文）
+- [x] PDF 导出（两版各 44 页）
+- [x] GitHub Pages 目录（`docs/`，英文主站）
 - [x] 讲稿、提纲、文献、Q&A
 - [x] tokenizer 实测数据
-- [ ] 英文版幻灯片
 - [ ] 试讲计时
 - [ ] 报告当日价格复核
 

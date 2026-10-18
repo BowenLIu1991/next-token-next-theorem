@@ -12,6 +12,7 @@ Usage:
 
 from __future__ import annotations
 
+import argparse
 import os
 import shutil
 import subprocess
@@ -24,7 +25,6 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs"
-OUT = DOCS / "from-next-token-to-next-theorem.pdf"
 CHROME = os.environ.get(
     "CHROME",
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -50,6 +50,13 @@ def screenshot(url: str, out: Path, profile: Path) -> None:
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--html", default="docs/index.html", help="HTML file to render")
+    ap.add_argument("--out", default="docs/from-next-token-to-next-theorem.pdf", help="PDF output")
+    args = ap.parse_args()
+    html_path = (ROOT / args.html).resolve()
+    out_path = (ROOT / args.out).resolve()
+
     if not Path(CHROME).exists():
         raise SystemExit(f"Chrome not found: {CHROME}")
 
@@ -58,7 +65,7 @@ def main() -> None:
     try:
         images = []
         for i in range(PAGES):
-            url = (DOCS / "index.html").as_uri() + f"?s={i}&clean=1&v={time.time_ns()}"
+            url = html_path.as_uri() + f"?s={i}&clean=1&v={time.time_ns()}"
             png = tmp / f"page-{i:02d}.png"
             screenshot(url, png, profile)
             im = Image.open(png).convert("RGB")
@@ -68,14 +75,14 @@ def main() -> None:
             print(f"  {i + 1:02d}/{PAGES}")
 
         images[0].save(
-            OUT,
+            out_path,
             "PDF",
             resolution=96.0,
             save_all=True,
             append_images=images[1:],
         )
-        print(f"\nwrote {OUT} ({OUT.stat().st_size / 1e6:.1f} MB)")
-        print(f"pages: {len(PdfReader(OUT).pages)}")
+        print(f"\nwrote {out_path} ({out_path.stat().st_size / 1e6:.1f} MB)")
+        print(f"pages: {len(PdfReader(out_path).pages)}")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
