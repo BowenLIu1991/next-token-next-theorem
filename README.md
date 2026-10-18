@@ -47,7 +47,9 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 > https://bowenliu1991.github.io/next-token-next-theorem/
 
-GitHub Pages 设置：
+仓库已带 `.github/workflows/pages.yml`：push 到 `main` 后会自动把 `docs/` 部署到 GitHub Pages。
+
+如果 Actions 没有自动启用 Pages，手动设置：
 
 ```
 Settings → Pages → Build and deployment
