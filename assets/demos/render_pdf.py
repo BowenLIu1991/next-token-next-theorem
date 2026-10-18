@@ -30,7 +30,7 @@ CHROME = os.environ.get(
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 )
 W, H = 1280, 720
-PAGES = 44
+PAGES = 45
 
 
 def screenshot(url: str, out: Path, profile: Path) -> None:

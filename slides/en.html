@@ -250,6 +250,10 @@
   .transformer .layers i:nth-child(2){opacity:.7}
   .transformer .layers i:nth-child(3){opacity:.45}
   .transformer .cap{font-family:var(--mono);font-size:10.5px;color:var(--panel-muted);letter-spacing:.06em}
+  .ctxline{display:inline-block;margin:6px 0 2px;padding:5px 9px;border:1px solid var(--line);
+    border-left:3px solid var(--accent);border-radius:7px;background:#fffdf8;
+    font-family:var(--mono);font-size:14px;color:#2a2722}
+
   .probs{display:flex;flex-direction:column;gap:12px;margin-top:14px}
   .prob{display:grid;grid-template-columns:56px 1fr 46px;align-items:center;gap:10px}
   .prob .ptok{font-family:var(--mono);font-size:14.5px}
@@ -738,7 +742,7 @@
       <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
-    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 44</span></div>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 45</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
@@ -789,7 +793,7 @@
         <div class="q"><span class="n">03</span>How do we put it to work?</div>
       </div>
     </div>
-    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 44</span></div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 45</span></div>
   </section>
 
   <!-- ============ S3 · 切分 ============ -->
@@ -834,7 +838,7 @@
       <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
       <div class="keyline">Subwords are an engineering compromise between <b>sequence length</b> and <b>vocabulary size</b>.</div>
     </div>
-    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">03 / 44</span></div>
+    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">03 / 45</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
@@ -875,7 +879,7 @@
       </div>
       <div class="keyline">An ID is a <b>row number</b>; changing models means changing the table.</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 44</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 45</span></div>
   </section>
 
   <!-- ============ S5 · 用量与换算 ============ -->
@@ -892,7 +896,7 @@
       <p class="micro" style="margin-top:12px">Rule of thumb: a word, a number or a symbol ≈ 1 token; tokenizers differ, so trust the usage the API returns.</p>
       <div class="keyline">Token is both the smallest unit of the model and the smallest unit of the bill.</div>
     </div>
-    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 44</span></div>
+    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 45</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
@@ -917,7 +921,7 @@
       </div>
       <div class="keyline">The same context, cached or not, differs by an <b>order of magnitude</b>.</div>
     </div>
-    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 44</span></div>
+    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 45</span></div>
   </section>
 
   <!-- ============ S7 · 从 ID 到向量 ============ -->
@@ -947,7 +951,7 @@
       <div class="keyline">The ID is an <b>address</b>; the vector is the <b>content</b>.</div>
       <p class="micro" style="margin-top:14px">This step is called embedding; no dimension has a name, yet distance carries meaning.</p>
     </div>
-    <div class="footer"><span>embedding</span><span class="pnum">07 / 44</span></div>
+    <div class="footer"><span>embedding</span><span class="pnum">07 / 45</span></div>
   </section>
 
   <!-- ============ S8 · 输入到概率分布 ============ -->
@@ -1011,7 +1015,7 @@
       </div>
       <div class="keyline">A scorer: it gives every token in the vocabulary a <b>score</b>, then turns scores into <b>probabilities</b>.</div>
     </div>
-    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 44</span></div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 45</span></div>
   </section>
 
   <!-- ============ S9 · 采样 ============ -->
@@ -1021,7 +1025,8 @@
     <div class="content">
       <div class="two even">
         <div style="align-self:center">
-          <p class="micro" style="margin:0">Probability distribution</p>
+          <p class="micro" style="margin:0">Probability distribution · prefix</p>
+          <p class="ctxline">“One important …”</p>
           <p class="math-inline" style="margin:8px 0 10px">
             <math>
               <msub><mi>y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub>
@@ -1053,7 +1058,7 @@
       </div>
       <div class="keyline">The same prompt can give two different results — that is <b>sampling</b>, a <b>dice roll</b> by design.</div>
     </div>
-    <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 44</span></div>
+    <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 45</span></div>
   </section>
 
   <!-- ============ S10 · 采样算法 ============ -->
@@ -1127,7 +1132,7 @@
 
       <div class="keyline">Temperature reshapes, top-p trims the tail, <b>u</b> decides where it lands.</div>
     </div>
-    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 44</span></div>
+    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 45</span></div>
   </section>
 
   <!-- ============ S11 · 无状态 ============ -->
@@ -1154,7 +1159,7 @@
       <div class="keyline">The model is stateless; a “conversation” is the client <b>resending</b> the history.</div>
       <p class="micro" style="margin-top:14px">Parameters stay fixed at inference time; state lives only in the context.</p>
     </div>
-    <div class="footer"><span>stateless</span><span class="pnum">11 / 44</span></div>
+    <div class="footer"><span>stateless</span><span class="pnum">11 / 45</span></div>
   </section>
 
 
@@ -1170,7 +1175,7 @@
       </div>
       <div class="keyline">The model stays the same; the <b>training signal</b> changes.</div>
     </div>
-    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 44</span></div>
+    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 45</span></div>
   </section>
 
   <!-- ============ S13 · Pretrain ============ -->
@@ -1199,7 +1204,7 @@
       </div>
       <div class="keyline">It learns the world's <b>statistical structure</b>; tasks come later.</div>
     </div>
-    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 44</span></div>
+    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 45</span></div>
   </section>
 
   <!-- ============ S14 · 前 20 个 token ============ -->
@@ -1255,7 +1260,7 @@
       <div class="lossex">L = −[ log p(book | This) + log p(systematically | This book) + … + log p(of | first 19 tokens) ]</div>
       <div class="keyline" style="margin-top:10px">Training runs in parallel; inference runs one token at a time.</div>
     </div>
-    <div class="footer"><span>pretrain</span><span class="pnum">14 / 44</span></div>
+    <div class="footer"><span>pretrain</span><span class="pnum">14 / 45</span></div>
   </section>
 
   <!-- ============ S15 · loss 是什么 ============ -->
@@ -1287,7 +1292,7 @@
       </div>
       <div class="keyline">This loss carries meaning: it is the <b>code length</b> the model assigns to the data.</div>
     </div>
-    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 44</span></div>
+    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 45</span></div>
   </section>
 
   <!-- ============ S16 · 压缩即智能 ============ -->
@@ -1304,11 +1309,11 @@
       <p class="micro" style="margin-top:18px">Compression explains where knowledge comes from; search and correction come from RL, later.</p>
       <div class="keyline">This is the sentence I have believed most in recent years.</div>
     </div>
-    <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 44</span></div>
+    <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 45</span></div>
   </section>
 
   <!-- ============ S17 · SFT ============ -->
-  <section class="slide" data-notes="SFT 还是预测下一个 token，但只对 assistant 的 answer token 算 loss；system 和 user 只是条件。它做的是行为克隆：把示范的答法压进条件分布，教格式、语气、工具调用、拒绝，不注入新知识。它不创造新能力，只是把 pretrain 里已有的能力以对话形式叫出来。结果是会回答了，但难题不一定做对。">
+  <section class="slide" data-notes="SFT 还是预测下一个 token，但只对 assistant 的 answer token 算 loss。数据是（指令, 标准答案）对；本质是行为克隆，知识仍来自 pretrain。">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>SFT: learn the job from worked answers</h2>
     <p class="micro" style="margin:8px 0 0">supervised fine-tuning · instruction tuning</p>
@@ -1316,33 +1321,24 @@
       <div class="two">
         <div>
           <div class="chat">
-            <div class="row"><span class="role">system</span><span class="txt">You are the teaching assistant for Foundations of Celestial Mechanics.</span><span class="tag">Input</span></div>
-            <div class="row"><span class="role">user</span><span class="txt">What is this book about?</span><span class="tag">Input</span></div>
-            <div class="row target"><span class="role">assistant</span><span class="txt">It systematically introduces the fundamental concepts and theorems of celestial mechanics, with representative research results.</span><span class="tag">Target</span></div>
-            <div class="row"><span class="role">user</span><span class="txt">How many chapters does it have?</span><span class="tag">Input</span></div>
-            <div class="row target"><span class="role">assistant</span><span class="txt">Five: two-body, restricted three-body, perturbed two-body, resonance, and order and chaos.</span><span class="tag">Target</span></div>
+            <div class="row"><span class="role">system</span><span class="txt">You are the teaching assistant for Foundations of Celestial Mechanics.</span><span class="tag">input</span></div>
+            <div class="row"><span class="role">user</span><span class="txt">What is this book about?</span><span class="tag">input</span></div>
+            <div class="row target"><span class="role">assistant</span><span class="txt">It systematically introduces the fundamental concepts and theorems of celestial mechanics.</span><span class="tag">target</span></div>
           </div>
-          <div class="rolelegend">
-            <span><b>system</b>developer rules</span>
-            <span><b>user</b>user task</span>
-            <span><b>assistant</b>model answer (target)</span>
-          </div>
-          <p class="micro" style="margin-top:7px">White = input (condition) &nbsp;·&nbsp; Orange = learning target (loss)</p>
+          <p class="micro" style="margin-top:8px">Orange = the only tokens that contribute to the loss.</p>
           <div class="sftloss">
-            <div class="fl"><span class="fl-k">pretrain</span><span class="fl-eq">−Σ<sub>t∈text</sub> log p(x<sub>t</sub> | x<sub>&lt;t</sub>)</span></div>
             <div class="fl on"><span class="fl-k">SFT</span><span class="fl-eq">−Σ<sub>t∈answer</sub> log p(y<sub>t</sub> | prompt, y<sub>&lt;t</sub>)</span></div>
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">Data</div><p>(instruction, answer) pairs; loss on the orange text only</p></div>
-          <div class="card"><div class="k">Objective</div><p>Still the next token; the condition is system + user + partial answer</p></div>
-          <div class="card"><div class="k">Essence</div><p>Behavior cloning: imitate the demonstrations</p></div>
-          <div class="card accent"><div class="k">Boundary</div><p>Knowledge comes from pretraining; hard problems can still fail</p></div>
+          <div class="card"><div class="k">Data</div><p>(instruction, answer) pairs</p></div>
+          <div class="card"><div class="k">Objective</div><p>Still next-token prediction; the condition is system + user + partial answer</p></div>
+          <div class="card accent"><div class="k">Boundary</div><p>Behavior cloning: it imitates demonstrations. Knowledge comes from pretraining; hard problems can still fail.</p></div>
         </div>
       </div>
       <div class="keyline">Same loss, different <b>summation range</b>.</div>
     </div>
-    <div class="footer"><span>Foundations of Celestial Mechanics · SFT</span><span class="pnum">17 / 44</span></div>
+    <div class="footer"><span>Foundations of Celestial Mechanics · SFT</span><span class="pnum">17 / 45</span></div>
   </section>
 
   <!-- ============ S18 · 三种角色 ============ -->
@@ -1365,7 +1361,7 @@
       <p class="micro" style="margin-top:16px">system / user = condition &nbsp;·&nbsp; assistant = supervision target (loss on these tokens only)</p>
       <div class="keyline">system sets the rules, user sets the task, assistant is the learning target.</div>
     </div>
-    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 44</span></div>
+    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 45</span></div>
   </section>
 
   <!-- ============ S19 · 怎么预测 ============ -->
@@ -1394,7 +1390,7 @@
       <p class="micro" style="margin-top:14px">Probabilities are illustrative, to show the mechanism · real outputs follow the model</p>
       <div class="keyline">One step at a time: append the result, then take the next step.</div>
     </div>
-    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 44</span></div>
+    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 45</span></div>
   </section>
 
   <!-- ============ S20 · 什么是强化学习 ============ -->
@@ -1415,7 +1411,8 @@
         <div class="card"><div class="k">Trial and error</div><div class="big" style="font-size:22px">Action → feedback</div><p>Reinforce what works, revise what fails</p></div>
         <div class="card accent"><div class="k">Goal</div><div class="big" style="font-size:22px">Cumulative reward</div><p>Long-run return over the immediate step</p></div>
       </div>
-      <div class="mathblock" style="margin-top:24px;font-size:24px">
+      <p class="micro" style="margin:0 0 6px">Objective · maximize expected discounted return</p>
+      <div class="mathblock" style="margin-top:8px;font-size:24px">
         <math>
           <munder><mtext>max</mtext><mi>π</mi></munder>
           <mspace width="0.25em"></mspace>
@@ -1426,10 +1423,10 @@
           <mo>]</mo>
         </math>
       </div>
-      <p class="micro" style="margin-top:10px">Early uses: optimal control · robotics · operations research · games</p>
+      <p class="micro" style="margin-top:10px">π policy · γ discount · r<sub>t</sub> reward · E expectation</p>
       <div class="keyline">What RL learns is a <b>policy</b>.</div>
     </div>
-    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 44</span></div>
+    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 45</span></div>
   </section>
 
   <!-- ============ S21 · RL 的游戏前史 ============ -->
@@ -1452,7 +1449,7 @@
       <div class="sidenote"><b>AlphaFold is supervised learning:</b> labels are known structures; no reward, no trial and error.</div>
       <div class="keyline">Math and code bring their own <b>simulator</b>.</div>
     </div>
-    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 44</span></div>
+    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 45</span></div>
   </section>
 
   <!-- ============ S22 · RL ============ -->
@@ -1491,7 +1488,7 @@
       <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · the DeepSeek moment</p>
       <div class="keyline">Same text, new objective: the reward arrives only when the answer checks out.</div>
     </div>
-    <div class="footer"><span>Foundations of Celestial Mechanics · RLVR</span><span class="pnum">22 / 44</span></div>
+    <div class="footer"><span>Foundations of Celestial Mechanics · RLVR</span><span class="pnum">22 / 45</span></div>
   </section>
 
   <!-- ============ S23 · RL 算法 ============ -->
@@ -1513,7 +1510,7 @@
       <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO are RL; DPO is preference optimization, usually placed in the RLHF family.</p>
       <div class="keyline">Different algorithms, same loop: sample → score → update.</div>
     </div>
-    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 44</span></div>
+    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 45</span></div>
   </section>
 
   <!-- ============ S24 · 天然优势 ============ -->
@@ -1538,7 +1535,7 @@
       </div>
       <div class="keyline">Clearer feedback makes trial and error cheaper — and RL more effective.</div>
     </div>
-    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 44</span></div>
+    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 45</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
@@ -1553,7 +1550,7 @@
       </div>
       <div class="keyline">Each step solves the problem the previous step left open.</div>
     </div>
-    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 44</span></div>
+    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 45</span></div>
   </section>
 
   <!-- ============ S26 · ChatGPT ============ -->
@@ -1574,7 +1571,7 @@
       </div>
       <div class="keyline">Conversation is a trained behavior.</div>
     </div>
-    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 44</span></div>
+    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 45</span></div>
   </section>
 
   <!-- ============ S27 · Prompt ============ -->
@@ -1623,7 +1620,7 @@
       </div>
       <div class="keyline">Adding content is how you change the <b>conditional probability</b>.</div>
     </div>
-    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 44</span></div>
+    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 45</span></div>
   </section>
 
   <!-- ============ S28 · CoT ============ -->
@@ -1646,7 +1643,7 @@
       </div>
       <div class="keyline">Writing it out is computing it out.</div>
     </div>
-    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 44</span></div>
+    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 45</span></div>
   </section>
 
   <!-- ============ S29 · Context 膨胀 ============ -->
@@ -1668,7 +1665,7 @@
       </div>
       <div class="keyline">A longer window raises the ceiling; relevance decides what lands.</div>
     </div>
-    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 44</span></div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 45</span></div>
   </section>
 
   <!-- ============ S30 · 大海捞针 ============ -->
@@ -1698,7 +1695,7 @@
       </div>
       <div class="keyline">Long context is a budget; retrieval decides the recall.</div>
     </div>
-    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 44</span></div>
+    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 45</span></div>
   </section>
 
   <!-- ============ S31 · Context ============ -->
@@ -1726,7 +1723,7 @@
       </div>
       <div class="keyline">Relevance beats length.</div>
     </div>
-    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 44</span></div>
+    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 45</span></div>
   </section>
 
   <!-- ============ S32 · CoT pruning ============ -->
@@ -1759,7 +1756,7 @@
       </div>
       <div class="keyline">Thinking has a budget too.</div>
     </div>
-    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 44</span></div>
+    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 45</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -1782,7 +1779,7 @@
       </div>
       <div class="keyline">The model proposes; the program computes.</div>
     </div>
-    <div class="footer"><span>function calling</span><span class="pnum">33 / 44</span></div>
+    <div class="footer"><span>function calling</span><span class="pnum">33 / 45</span></div>
   </section>
 
   <!-- ============ S34 · Agent 与客户端 ============ -->
@@ -1801,7 +1798,7 @@
       </div>
       <div class="keyline">The model proposes; the client turns proposals into <b>actions</b>.</div>
     </div>
-    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 44</span></div>
+    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 45</span></div>
   </section>
 
 
@@ -1833,7 +1830,7 @@
       </div>
       <div class="keyline">Memory works by selection: store little, retrieve precisely.</div>
     </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 44</span></div>
+    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 45</span></div>
   </section>
 
   <!-- ============ S36 · Harness ============ -->
@@ -1863,7 +1860,7 @@
       </div>
       <div class="keyline">The model handles probability; the harness handles certainty.</div>
     </div>
-    <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 44</span></div>
+    <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 45</span></div>
   </section>
 
   <!-- ============ S37 · 系统图 ============ -->
@@ -1895,7 +1892,7 @@
       </div>
       <div class="keyline">The model is the CPU; prompt, context, memory, loop and harness are the runtime.</div>
     </div>
-    <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 44</span></div>
+    <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 45</span></div>
   </section>
 
   <!-- ============ S38 · 加速 ============ -->
@@ -1934,7 +1931,7 @@
       </div>
       <div class="keyline">This is a staircase with <b>three steps</b>.</div>
     </div>
-    <div class="footer"><span>from basic apps to research level</span><span class="pnum">38 / 44</span></div>
+    <div class="footer"><span>from basic apps to research level</span><span class="pnum">38 / 45</span></div>
   </section>
 
   <!-- ============ S39 · AI math 时间线 ============ -->
@@ -1967,31 +1964,31 @@
       </div>
       <div class="keyline">Every leap combines a <b>generator, a verifier and search</b>.</div>
     </div>
-    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 44</span></div>
+    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 45</span></div>
   </section>
 
   <!-- ============ S40 · 公开表述 ============ -->
-  <section class="slide" data-notes="这些是公开表述，不是内部细节。FunSearch 强调 evaluator 和进化；AlphaGeometry 强调 1 亿条合成证明；AlphaProof 强调自动形式化、Lean、RL 和 test-time RL；o1 强调多花时间思考；R1 强调直接在基座模型上做 RL、用规则奖励；AlphaEvolve 强调进化编码 agent；IMO 2025 强调自然语言、无工具、人工评分；OpenAI 2026.10 报告 372 个开放问题、722 篇论文，但 3 个撤回、同行评议未完成。">
+  <section class="slide" data-notes="这些是公开表述，来自论文、博客和赛后声明。FunSearch 强调 evaluator 和进化；AlphaGeometry 强调 1 亿条合成证明；AlphaProof 强调自动形式化、Lean、RL 和 test-time RL；o1 强调多花时间思考；R1 强调直接在基座模型上做 RL、用规则奖励；AlphaEvolve 强调进化编码 agent；IMO 2025 强调自然语言、无工具、人工评分；OpenAI 2026.10 报告 372 个开放问题、722 篇论文，但 3 个撤回、同行评议未完成。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>How they describe it</h2>
     <div class="content">
-      <div class="caveat">Public material covers part of the method; the full training recipe stays private. Below are <strong>public statements</strong> from papers, blogs and post-contest reports (excerpted / paraphrased).</div>
+      <div class="caveat">Public material covers part of the method; the full training recipe stays private. Note the asymmetry: some results are easy to verify, hard to prove. Quotes below are <strong>public statements</strong>, excerpted or paraphrased.</div>
       <table class="claims">
-        <thead><tr><th>Date</th><th>Work</th><th>Public statement</th><th>Reading</th></tr></thead>
+        <thead><tr><th>Date</th><th>System / work</th><th>Public statement</th><th>Reading</th></tr></thead>
         <tbody>
           <tr><td>2023.12</td><td>FunSearch</td><td>"pairing a pre-trained LLM ... with an automated evaluator"</td><td>search</td></tr>
           <tr><td>2024.01</td><td>AlphaGeometry</td><td>"100 million synthetic theorems and proofs"</td><td>synthetic data</td></tr>
           <tr><td>2024.07</td><td>AlphaProof</td><td>autoformalization → Lean; RL + test-time RL</td><td>formalization</td></tr>
           <tr><td>2024.09</td><td>o1</td><td>"spend more time thinking through problems"</td><td>reasoning</td></tr>
           <tr><td>2025.01</td><td>R1</td><td>"directly apply RL ... rule-based rewards"</td><td>RLVR</td></tr>
-          <tr><td>2025.05</td><td>AlphaEvolve</td><td>"evolutionary coding agent"</td><td>evolution</td></tr>
+          <tr><td>2025.05</td><td>AlphaEvolve</td><td>"evolutionary coding agent"</td><td>evolve code</td></tr>
           <tr><td>2025.07</td><td>IMO 2025</td><td>"natural language ... no tools"</td><td>end to end</td></tr>
-          <tr><td>2026.10</td><td>OpenAI</td><td>"372 open problems ... 722 papers"</td><td>open problems</td></tr>
+          <tr><td>2026.09–10</td><td>OpenAI</td><td>"NS solution; 372 problems; 722 papers"</td><td>open problems</td></tr>
         </tbody>
       </table>
       <div class="keyline">The keywords change; the underlying move stays: <b>propose, verify, search again</b>.</div>
     </div>
-    <div class="footer"><span>public claims · public sources</span><span class="pnum">40 / 44</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">40 / 45</span></div>
   </section>
 
   <!-- ============ S41 · 共同模式 ============ -->
@@ -2014,7 +2011,7 @@
       </div>
       <div class="keyline">The model supplies probability; <b>the verifier supplies the gradient</b>.</div>
     </div>
-    <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 44</span></div>
+    <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 45</span></div>
   </section>
 
   <!-- ============ S42 · 猜测 ============ -->
@@ -2034,7 +2031,7 @@
       <p class="micro" style="margin-top:10px">OpenAI: 372 problems, ≈3 hours each (report)</p>
       <div class="keyline">Three hours per problem looks more like <b>parallel sampling + verification + search</b>.</div>
     </div>
-    <div class="footer"><span>speculation · public sources</span><span class="pnum">42 / 44</span></div>
+    <div class="footer"><span>speculation · public sources</span><span class="pnum">42 / 45</span></div>
   </section>
 
   <!-- ============ S43 · 还没解决 ============ -->
@@ -2064,10 +2061,43 @@
       </div>
       <div class="keyline">Solving can be searched; <b>doing mathematics needs direction</b>.</div>
     </div>
-    <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 44</span></div>
+    <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 45</span></div>
   </section>
 
-  <!-- ============ S44 · 结论 ============ -->
+  <!-- ============ S44 · Algorithm engineer ============ -->
+  <section class="slide" data-notes="算法工程师的困境一年前就出现了：模型会写代码之后，价值从实现转向定义问题、设计 harness、验证和对系统负责。数学正在经历同一件事。">
+    <p class="eyebrow"><b>06</b> / conclusion</p>
+    <h2>The algorithm engineer's dilemma</h2>
+    <p class="sub" style="margin-top:8px">It arrived about a year ago. Mathematics is next.</p>
+    <div class="content">
+      <p style="font-size:21px;line-height:1.45;color:#2f2b25;margin:0 0 18px">“If the model can write the code, what is my job?”</p>
+      <div class="ba">
+        <div class="side">
+          <div class="yr">Before agents</div>
+          <h3>Write the algorithm</h3>
+          <ul>
+            <li>Implement, debug, optimize</li>
+            <li>Own the code</li>
+            <li>Value = code shipped</li>
+          </ul>
+        </div>
+        <div class="mid"><div class="ar">→</div><div class="lab">~1 year</div></div>
+        <div class="side now">
+          <div class="yr">With agents</div>
+          <h3>Direct the search</h3>
+          <ul>
+            <li>Frame the problem</li>
+            <li>Design the harness</li>
+            <li>Verify and own the system</li>
+          </ul>
+        </div>
+      </div>
+      <div class="keyline">The job moves from producing answers to <b>directing the search</b>.</div>
+    </div>
+    <div class="footer"><span>engineer · agents · direction</span><span class="pnum">44 / 45</span></div>
+  </section>
+
+  <!-- ============ S45 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>From the next token to the next theorem</h2>
@@ -2086,7 +2116,7 @@
       </div>
       <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">44 / 44</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">45 / 45</span></div>
   </section>
 
 </div>
