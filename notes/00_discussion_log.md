@@ -359,7 +359,7 @@ S27 的数学表达：p(y | x) → p(y | x, c, e)，示例 p(16)=0.18 → 0.71�
 
 ---
 
-## 第二十六轮：CoT 的边界与 S40 口径（当前）
+## 第二十六轮：CoT 的边界与 S40 口径
 
 - S28 CoT：明确“CoT 负责言语/逻辑计划，算术交给程序”。例子改为：
   - 直接答 8 年 ✗
@@ -367,6 +367,15 @@ S27 的数学表达：p(y | x) → p(y | x, c, e)，示例 p(16)=0.18 → 0.71�
   - 工具：run_python("2 * 4**1.5") → 16.0 ✓
 - S40：OpenAI 行加入 NS；caveat 加入“有些结果验证容易、证明很难”的非对称；表头改为 System / work；AlphaEvolve 的 reading 改为 evolve code，明确它是系统/方法。
 - 两版各 45 页。
+
+---
+
+## 第二十七轮：从网页到 CLI / 桌面 agent（当前）
+
+- 新增 S45「从网页对话框到工作目录」：Web chat → IDE copilot → CLI / desktop agent；OpenCode / Claude Code / Codex CLI / Cursor / ChatGPT / Claude desktop。
+- 收尾：同一个模型，换一个 harness；在科研仓库里，它可以真的跑实验，把数字带回来。
+- 结论页顺延为 S46；两版各 46 页。
+- LinkedIn 素材和 post.md 同步为 46 页。
 
 ---
 
