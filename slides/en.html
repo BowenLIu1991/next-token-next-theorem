@@ -1624,24 +1624,26 @@
   </section>
 
   <!-- ============ S28 · CoT ============ -->
-  <section class="slide" data-notes="多步问题，直接给答案容易错。CoT 让模型把中间步骤写出来，每个 token 都是一次额外计算。代价是更慢、更贵，也可能绕圈。">
+  <section class="slide" data-notes="CoT 擅长把文字题拆成逻辑步骤：识别定律、设关系、定运算；它不保证算术正确。算术交给程序。范围是言语与逻辑推理，不是精确计算。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>CoT: write the thinking down</h2>
+    <p class="micro" style="margin:8px 0 0">Scope: verbal and logical reasoning; arithmetic is a separate step.</p>
     <div class="content">
       <div class="two">
         <div>
           <p class="micro">Question</p>
           <p style="font-size:17px;margin:6px 0 12px">A period of 2 years; the semi-major axis grows 4×. What is the new period?</p>
-          <div class="promptbox bad"><div class="tag">Direct answer</div><p>8 years ✗</p></div>
-          <div class="promptbox good"><div class="tag">Step by step</div><p>T ∝ a<sup>3/2</sup>; 4<sup>3/2</sup> = 8; T = 2 × 8 = 16 years ✓</p></div>
+          <div class="promptbox bad"><div class="tag">Direct answer</div><p>8 years ✗ <span class="micro">— a number without a plan</span></p></div>
+          <div class="promptbox"><div class="tag">CoT · plan</div><p>T ∝ a<sup>3/2</sup>; T = 2 × 4<sup>3/2</sup></p><p class="micro">plan ✓ · arithmetic next</p></div>
+          <div class="promptbox good"><div class="tag">Tool · compute</div><p><span style="font-family:var(--mono);font-size:13px">run_python("2 * 4**1.5") → 16.0</span> ✓</p></div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">Why it works</div><p>Every token is extra computation</p></div>
-          <div class="card"><div class="k">Cost</div><p>Slower, pricier, sometimes circular</p></div>
-          <div class="card accent"><div class="k">Essence</div><p>Spread implicit reasoning into explicit steps</p></div>
+          <div class="card"><div class="k">What CoT does</div><p>Turns words into a plan: parse, recall, set up the relation</p></div>
+          <div class="card"><div class="k">What remains</div><p>Arithmetic: a separate, tool-friendly step</p></div>
+          <div class="card accent"><div class="k">Essence</div><p>Explicit steps; exact numbers are a separate skill</p></div>
         </div>
       </div>
-      <div class="keyline">Writing it out is computing it out.</div>
+      <div class="keyline">CoT writes the plan; the tool computes the number.</div>
     </div>
     <div class="footer"><span>chain of thought</span><span class="pnum">28 / 45</span></div>
   </section>

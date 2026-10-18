@@ -126,6 +126,7 @@
 
 - prompt 是条件化，不是编程；加内容就是改条件概率
 - context 是有限预算；大海捞针说明"窗口大 ≠ 找得到"
+- CoT 负责言语/逻辑推理；精确算术交给程序
 - CoT 把隐式推理摊成显式步骤；pruning 控制思考预算
 - tool calling 把计算与行动交给程序
 - agent loop 把状态放到外部；memory 是产品，system 不是沙箱

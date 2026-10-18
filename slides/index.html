@@ -1625,21 +1625,23 @@
   <section class="slide" data-notes="多步问题，直接给答案容易错。CoT 让模型把中间步骤写出来，每个 token 都是一次额外计算。代价是更慢、更贵，也可能绕圈。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>CoT：把思考写出来</h2>
+    <p class="micro" style="margin:8px 0 0">范围：言语与逻辑推理；算术是另一件事。</p>
     <div class="content">
       <div class="two">
         <div>
           <p class="micro">问题</p>
           <p style="font-size:17px;margin:6px 0 12px">周期 2 年，半长轴变为 4 倍，周期变成多少？</p>
-          <div class="promptbox bad"><div class="tag">直接答</div><p>8 年 ✗</p></div>
-          <div class="promptbox good"><div class="tag">分步</div><p>T ∝ a<sup>3/2</sup>；4<sup>3/2</sup> = 8；T = 2 × 8 = 16 年 ✓</p></div>
+          <div class="promptbox bad"><div class="tag">直接答</div><p>8 年 ✗ <span class="micro">—— 一个没有计划的数字</span></p></div>
+          <div class="promptbox"><div class="tag">CoT · 计划</div><p>T ∝ a<sup>3/2</sup>；T = 2 × 4<sup>3/2</sup></p><p class="micro">计划 ✓ · 算术下一步</p></div>
+          <div class="promptbox good"><div class="tag">工具 · 计算</div><p><span style="font-family:var(--mono);font-size:13px">run_python("2 * 4**1.5") → 16.0</span> ✓</p></div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">为什么有效</div><p>每个 token 都是一次额外计算</p></div>
-          <div class="card"><div class="k">代价</div><p>更慢、更贵、可能绕圈</p></div>
-          <div class="card accent"><div class="k">本质</div><p>把隐式推理摊成显式步骤</p></div>
+          <div class="card"><div class="k">CoT 做什么</div><p>把文字题拆成计划：识别、回忆、设关系</p></div>
+          <div class="card"><div class="k">剩下什么</div><p>算术：另一件适合工具的事</p></div>
+          <div class="card accent"><div class="k">本质</div><p>显式步骤；精确数字是另一项能力</p></div>
         </div>
       </div>
-      <div class="keyline">写出来，就是算出来。</div>
+      <div class="keyline">CoT 负责写计划；程序负责算数。</div>
     </div>
     <div class="footer"><span>chain of thought</span><span class="pnum">28 / 45</span></div>
   </section>
