@@ -47,9 +47,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 > https://bowenliu1991.github.io/next-token-next-theorem/
 
-仓库已带 `.github/workflows/pages.yml`：push 到 `main` 后会自动把 `docs/` 部署到 GitHub Pages。
-
-如果 Actions 没有自动启用 Pages，手动设置：
+GitHub Pages 设置（一次性）：
 
 ```
 Settings → Pages → Build and deployment
@@ -71,18 +69,16 @@ Settings → Pages → Build and deployment
 重新生成：
 
 ```bash
-cd FromNextTokenToNextTheorem
-
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --headless=new --disable-gpu \
-  --no-pdf-header-footer \
-  --print-to-pdf="$PWD/docs/from-next-token-to-next-theorem.pdf" \
-  --virtual-time-budget=8000 \
-  --run-all-compositor-stages-before-draw \
-  "file://$PWD/docs/index.html?print=1"
+python3 assets/demos/render_pdf.py
 ```
 
-`?print=1` 会把 44 页全部展开，按 13.333 × 7.5 英寸逐页输出。
+脚本会用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、44 页的满版 PDF。依赖：
+
+```bash
+python3 -m pip install pillow pypdf
+```
+
+> 为什么不用 Chrome 直接 `--print-to-pdf`：Chrome 的默认打印边距会把 16:9 页面缩到约 88%，留下白边；逐页截图可以保证满版。
 
 ---
 
@@ -111,7 +107,7 @@ cd FromNextTokenToNextTheorem
 │   └── 09_token_measurements.md  # tokenizer 实测
 ├── assets/
 │   ├── figures/                  # 原始截图与裁切
-│   └── demos/                    # token 计数脚本
+│   └── demos/                    # token 计数 + PDF 渲染
 └── README.md
 ```
 

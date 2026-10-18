@@ -680,6 +680,11 @@
   .closing p{font-size:26px;line-height:1.4;margin:0;letter-spacing:-.01em}
   .closing .last p{color:var(--accent);font-weight:600}
 
+  /* ---------- clean screenshots ---------- */
+  body.clean #stage{position:static;left:0;top:0;transform:none!important;width:1280px;height:720px;margin:0;box-shadow:none}
+  body.clean .slide{position:absolute;inset:0}
+  body.clean #hint,body.clean #notes{display:none!important}
+
   /* ---------- print / PDF ---------- */
   body.print #stage{position:static;transform:none!important;width:1280px;height:auto;margin:0 auto;box-shadow:none}
   body.print .slide{position:relative;inset:auto;width:1280px;height:720px;opacity:1;pointer-events:auto;margin:0 auto 18px}
@@ -2100,6 +2105,7 @@
   let cur = 0;
 
   function fit(){
+    if (document.body.classList.contains('clean')) return;
     const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.985;
     stage.style.transform = `translate(-50%,-50%) scale(${s})`;
   }
@@ -2126,11 +2132,25 @@
 
   window.addEventListener('resize', fit);
   fit();
-  const hint = document.getElementById('hint');
-  setTimeout(() => hint.classList.add('hide'), 4500);
+
   const params = new URLSearchParams(location.search);
   const start = parseInt(params.get('s') || '0', 10);
   const printMode = params.get('print') === '1';
+  const cleanMode = params.get('clean') === '1';
+
+  if (cleanMode) {
+    document.body.classList.add('clean');
+    stage.style.transform = 'none';
+    stage.style.left = '0';
+    stage.style.top = '0';
+    stage.style.width = '1280px';
+    stage.style.height = '720px';
+  }
+
+  const hint = document.getElementById('hint');
+  if (cleanMode) hint.remove();
+  else setTimeout(() => hint.classList.add('hide'), 4500);
+
   if (printMode) {
     document.body.classList.add('print');
     slides.forEach(el => el.classList.add('active'));
