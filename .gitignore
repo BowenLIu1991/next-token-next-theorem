@@ -1,0 +1,6 @@
+.venv/
+.tiktoken_cache/
+__pycache__/
+*.pyc
+.DS_Store
+assets/figures/preview_*.png

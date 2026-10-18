@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从下一个 token 到下一个定理</title>
+<style>
+  :root{
+    --paper:#f6f4ee;
+    --ink:#15171c;
+    --muted:#6f6a60;
+    --line:#dcd7cb;
+    --accent:#c2410c;
+    --accent-2:#1d4ed8;
+    --panel:#12151b;
+    --panel-ink:#e9e6dc;
+    --panel-muted:#8b8f98;
+    --mono:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Hiragino Sans GB",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:#08090b;font-family:var(--sans);color:var(--ink);
+    overflow:hidden;
+  }
+  #stage{
+    position:absolute;left:50%;top:50%;width:1280px;height:720px;
+    transform-origin:center center;
+    box-shadow:0 30px 120px rgba(0,0,0,.55);
+  }
+  .slide{
+    position:absolute;inset:0;background:var(--paper);
+    padding:64px 84px 56px;
+    display:flex;flex-direction:column;
+    opacity:0;pointer-events:none;transition:opacity .22s ease;
+    background-image:radial-gradient(rgba(20,20,20,.045) 1px,transparent 1px);
+    background-size:26px 26px;
+  }
+  .slide.active{opacity:1;pointer-events:auto}
+  .slide::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
+    background:linear-gradient(90deg,var(--accent) 0 18%,transparent 18%);
+    opacity:.85;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 14px;
+  }
+  .eyebrow b{color:var(--accent);font-weight:600}
+  h1{
+    font-size:58px;line-height:1.08;letter-spacing:-.025em;font-weight:650;
+    margin:0;max-width:1000px;
+  }
+  h1 .thin{color:var(--muted);font-weight:400}
+  h2{
+    font-size:44px;line-height:1.12;letter-spacing:-.02em;font-weight:640;margin:0;
+  }
+  .sub{font-size:21px;color:var(--muted);margin:18px 0 0;line-height:1.5}
+  .content{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:30px}
+  .footer{
+    position:absolute;left:84px;right:84px;bottom:22px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;
+  }
+  .pnum{font-variant-numeric:tabular-nums}
+
+  /* ---------- cover ---------- */
+  .cover{justify-content:center}
+  .cover .kicker{
+    font-family:var(--mono);font-size:14px;letter-spacing:.18em;color:var(--accent);
+    text-transform:uppercase;margin-bottom:26px;
+  }
+  .cover h1{font-size:74px;max-width:1080px}
+  .cover .sub{max-width:720px;font-size:22px}
+  .orbit{
+    position:absolute;right:-170px;top:50%;width:760px;height:760px;
+    transform:translateY(-50%);pointer-events:none;opacity:.5;
+  }
+  .orbit ellipse{fill:none;stroke:var(--ink);stroke-width:1}
+  .orbit .planet{fill:var(--accent)}
+  .meta{
+    position:absolute;left:84px;bottom:64px;display:flex;gap:28px;
+    font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.05em;
+  }
+
+  /* ---------- token panel ---------- */
+  .panel{
+    background:var(--panel);color:var(--panel-ink);
+    border-radius:16px;padding:22px 24px;
+    box-shadow:0 18px 40px rgba(15,18,24,.18);
+  }
+  .panel .sentence{
+    font-family:var(--mono);font-size:18px;color:#cfd2d9;margin-bottom:18px;
+    letter-spacing:.01em;
+  }
+  .tokens{display:flex;flex-wrap:wrap;gap:7px}
+  .tok{
+    display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:8px;padding:6px 9px;min-width:44px;
+  }
+  .tok.hl{border-color:rgba(194,65,12,.85);background:rgba(194,65,12,.16)}
+  .tok-t{font-family:var(--mono);font-size:17px;line-height:1.15;white-space:nowrap}
+  .tok-id{font-family:var(--mono);font-size:10.5px;color:var(--panel-muted);letter-spacing:.02em}
+  .panel .idrow{
+    margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);
+    font-family:var(--mono);font-size:12.5px;color:var(--panel-muted);
+    letter-spacing:.03em;word-spacing:.18em;
+  }
+  .panel .idrow b{color:var(--panel-ink);font-weight:500}
+
+  /* ---------- generic layout ---------- */
+  .two{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start}
+  .two.even{grid-template-columns:1fr 1fr}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .three .card{min-height:172px;display:flex;flex-direction:column;justify-content:center}
+  .stack{display:flex;flex-direction:column;gap:14px}
+
+  .card{
+    background:#fffdf8;border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;
+  }
+  .card .k{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px;
+  }
+  .card .big{font-family:var(--mono);font-size:30px;letter-spacing:-.02em;line-height:1.1}
+  .card p{margin:8px 0 0;font-size:15.5px;line-height:1.55;color:#3f3b34}
+  .card.accent{border-color:rgba(194,65,12,.45);background:#fff8f2}
+
+  .stat{
+    display:flex;align-items:baseline;gap:14px;
+    padding:14px 0;border-bottom:1px solid var(--line);
+  }
+  .stat:last-child{border-bottom:none}
+  .stat .num{font-family:var(--mono);font-size:40px;letter-spacing:-.03em;line-height:1}
+  .stat .lbl{font-size:14.5px;color:var(--muted);line-height:1.35}
+
+  table.map{width:100%;border-collapse:collapse;font-size:16px}
+  table.map th{
+    text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);font-weight:500;
+    padding:0 0 10px;border-bottom:1px solid var(--line);
+  }
+  table.map td{padding:9px 0;border-bottom:1px solid #e8e3d7}
+  table.map tr:last-child td{border-bottom:none}
+  table.map td.id{font-family:var(--mono);color:var(--muted);text-align:right}
+  table.map td.tk{font-family:var(--mono);font-size:16px}
+  .panel table.map td{border-bottom-color:rgba(255,255,255,.1)}
+
+  .keyline{
+    font-size:22px;line-height:1.5;color:#2a2722;
+    border-left:3px solid var(--accent);padding-left:16px;margin-top:26px;
+  }
+  .keyline b{color:var(--accent);font-weight:600}
+  .micro{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+
+  .bpe{font-family:var(--mono);font-size:21px;line-height:2.15;color:#2a2722;align-self:center}
+  .bpe .arrow{color:var(--accent);padding:0 10px}
+  .bpe .chip{
+    background:#fffdf8;border:1px solid var(--line);border-radius:7px;padding:3px 9px;
+  }
+  .bpe .chip.new{border-color:rgba(194,65,12,.5);background:#fff8f2}
+
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+    color:var(--muted);border:1px solid var(--line);border-radius:999px;
+    padding:6px 12px;background:#fffdf8;
+  }
+  .pill i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:block}
+
+  .q{
+    display:flex;gap:14px;align-items:baseline;
+    font-size:19px;line-height:1.45;color:#2a2722;
+  }
+  .q span.n{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em}
+
+  .qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+  .qgrid .q{display:block;border-top:1px solid var(--line);padding-top:12px;font-size:19px;line-height:1.45}
+  .qgrid .q .n{display:block;margin-bottom:7px;font-size:11.5px;letter-spacing:.12em}
+
+  .stats4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
+  .stats4 .item{border-top:1px solid var(--line);padding-top:10px}
+  .stats4 .num{font-family:var(--mono);font-size:30px;letter-spacing:-.03em;line-height:1.1}
+  .stats4 .lbl{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:5px}
+  .why{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:14.5px;color:#3f3b34}
+  .why .arrow{color:var(--accent);font-family:var(--mono)}
+  .why .accent{color:var(--accent);font-weight:600}
+  .why .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+
+  /* ---------- vocabulary ledger ---------- */
+  .ledger{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fffdf8}
+  .ledger-head{display:grid;grid-template-columns:96px 1fr 92px;padding:9px 0;background:#eee9dd;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .ledger-head span:nth-child(1){text-align:right;padding-right:16px}
+  .ledger-head span:nth-child(2){padding-left:16px}
+  .ledger-row{display:grid;grid-template-columns:96px 1fr 92px;align-items:center;
+    border-top:1px solid #ece7db;height:38px}
+  .ledger-row .ln{font-family:var(--mono);font-size:13px;color:var(--muted);text-align:right;
+    padding-right:16px;border-right:1px solid var(--line);height:100%;display:flex;align-items:center;justify-content:flex-end}
+  .ledger-row .tk{font-family:var(--mono);font-size:16px;padding-left:16px}
+  .ledger-row .tag{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;padding-left:16px}
+  .ledger-row.hl{background:#fff2e8}
+  .ledger-row.hl .ln{color:var(--accent);font-weight:600}
+  .ledger-row.hl .tk{color:var(--accent)}
+  .ledger-row.special .tk{color:var(--muted)}
+  .ledger-foot{display:flex;justify-content:space-between;padding:9px 16px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:11px;color:var(--muted);background:#faf7f0}
+
+  .vocab-num{font-family:var(--mono);font-size:46px;letter-spacing:-.03em;line-height:1}
+  .vocab-cap{font-size:13px;color:var(--muted);margin-top:5px}
+  .calc{margin-top:18px;padding-top:11px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .calc b{color:var(--ink);font-weight:600;font-size:16px;margin-left:4px}
+  .calc span{color:var(--accent);margin:0 2px}
+  .ruler{position:relative;height:222px;margin-top:16px}
+  .ruler .axis{position:absolute;left:8px;top:2%;bottom:2%;width:1px;background:var(--line)}
+  .ruler .tick{position:absolute;left:0;right:0;transform:translateY(-50%)}
+  .ruler .tick::before{content:"";position:absolute;left:8px;top:50%;width:12px;height:1px;background:var(--ink)}
+  .ruler .tick::after{content:"";position:absolute;left:6px;top:50%;width:5px;height:5px;border-radius:50%;
+    background:var(--paper);border:1.5px solid var(--ink);transform:translateY(-50%)}
+  .ruler .tick .lab{position:absolute;left:30px;top:50%;transform:translateY(-50%);font-size:12.5px;color:#3f3b34;white-space:nowrap}
+  .ruler .tick .lab b{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink);margin-right:6px}
+  .ruler .tick.on::after{background:var(--accent);border-color:var(--accent)}
+  .ruler .tick.on .lab b{color:var(--accent)}
+
+  /* ---------- embedding flow ---------- */
+  .flow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1.4fr;align-items:center;gap:8px}
+  .stagecard{border:1px solid var(--line);border-radius:14px;background:#fffdf8;
+    padding:20px 22px;min-height:158px;display:flex;flex-direction:column;justify-content:center}
+  .stagecard .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px}
+  .stagecard .big{font-family:var(--mono);font-size:38px;letter-spacing:-.02em;line-height:1.1}
+  .stagecard .foot{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.4}
+  .flowarrow{font-family:var(--mono);font-size:22px;color:var(--accent);text-align:center}
+  .vec{font-family:var(--mono);font-size:21px;letter-spacing:.01em;white-space:nowrap}
+
+  /* ---------- model / probabilities ---------- */
+  .modelrow{display:grid;grid-template-columns:1.05fr .78fr 1.2fr;gap:22px;align-items:start}
+  .chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .chip2{font-family:var(--mono);font-size:15px;border:1px solid var(--line);background:#fffdf8;
+    border-radius:7px;padding:6px 9px}
+  .transformer{background:var(--panel);color:var(--panel-ink);border-radius:14px;padding:26px 18px;text-align:center}
+  .transformer .tf{font-family:var(--mono);font-size:17px;letter-spacing:.03em}
+  .transformer .layers{display:flex;flex-direction:column;gap:5px;margin:14px 0 10px}
+  .transformer .layers i{display:block;height:3px;background:rgba(255,255,255,.22);border-radius:2px}
+  .transformer .layers i:nth-child(2){opacity:.7}
+  .transformer .layers i:nth-child(3){opacity:.45}
+  .transformer .cap{font-family:var(--mono);font-size:10.5px;color:var(--panel-muted);letter-spacing:.06em}
+  .probs{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+  .prob{display:grid;grid-template-columns:56px 1fr 46px;align-items:center;gap:10px}
+  .prob .ptok{font-family:var(--mono);font-size:14.5px}
+  .prob .bar{height:11px;background:#e8e3d7;border-radius:6px;overflow:hidden}
+  .prob .bar i{display:block;height:100%;background:var(--ink);border-radius:6px}
+  .prob.top .bar i{background:var(--accent)}
+  .prob .pv{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+
+  /* ---------- loop ---------- */
+  .loop{display:flex;align-items:center;justify-content:center;gap:14px;
+    margin-top:28px;border-top:1px solid var(--line);padding-top:18px}
+  .loop .step{font-family:var(--mono);font-size:13px;border:1px solid var(--line);background:#fffdf8;
+    border-radius:9px;padding:9px 13px;white-space:nowrap}
+  .loop .arr{color:var(--accent);font-family:var(--mono)}
+  .loop .step.hl{border-color:rgba(194,65,12,.45);background:#fff8f2;color:var(--accent)}
+
+  /* ---------- terminal ---------- */
+  .term{background:var(--panel);color:var(--panel-ink);border-radius:14px;padding:18px 20px;
+    font-family:var(--mono);font-size:13px;line-height:1.75;min-height:190px}
+  .term .tcap{color:var(--panel-muted);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+  .term .row{display:flex;gap:10px}
+  .term .role{color:#f0b429;width:66px;flex:none}
+  .term .txt{color:#cfd2d9}
+  .term .empty{color:#5d626b}
+
+  /* ---------- usage panel ---------- */
+  .usage{background:var(--panel);color:var(--panel-ink);border-radius:16px;padding:26px 28px;
+    min-height:300px;display:flex;flex-direction:column}
+  .usage .uhead{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--panel-muted)}
+  .usage .ubig{font-family:var(--mono);font-size:52px;letter-spacing:-.03em;line-height:1;margin-top:18px}
+  .usage .ulbl{font-size:12px;color:var(--panel-muted);margin-top:6px}
+  .usage .urow{display:flex;gap:40px;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
+  .usage .urow b{display:block;font-family:var(--mono);font-size:22px;font-weight:500}
+  .usage .urow span{font-size:11.5px;color:var(--panel-muted)}
+  .usage .ufoot{margin-top:auto;padding-top:18px;font-family:var(--mono);font-size:12px;color:#f0b429}
+
+  /* ---------- ratios ---------- */
+  .ratio{display:flex;flex-direction:column}
+  .rrow{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;
+    border-bottom:1px solid var(--line);font-size:17px}
+  .rrow:first-child{border-top:1px solid var(--line)}
+  .rrow .req{font-family:var(--mono);font-size:24px;color:var(--accent)}
+
+  /* ---------- price ---------- */
+  table.price{width:100%;border-collapse:collapse;font-size:15.5px;margin-top:14px}
+  table.price th{text-align:right;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    color:var(--muted);font-weight:500;padding:0 0 10px;border-bottom:1px solid var(--line)}
+  table.price th:first-child{text-align:left}
+  table.price td{padding:15px 0;border-bottom:1px solid #e8e3d7;text-align:right;font-family:var(--mono)}
+  table.price td:first-child{text-align:left;font-family:var(--sans);font-size:14.5px}
+  .calcbox{border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:20px 22px}
+  .calcbox .cline{font-family:var(--mono);font-size:14px;color:var(--muted);margin-top:8px}
+  .calcbox .cres{font-family:var(--mono);font-size:30px;margin-top:14px;letter-spacing:-.02em}
+  .calcbox .cres span{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:8px;letter-spacing:0}
+
+  /* ---------- agent ---------- */
+  .agent{display:grid;grid-template-columns:1.7fr .8fr;gap:26px;align-items:start}
+  .shot-wide{width:100%;display:block;border-radius:12px;border:1px solid #2b2e35}
+  .anno{display:flex;flex-direction:column;gap:18px;padding-top:2px}
+  .anno .item{border-top:1px solid var(--line);padding-top:10px}
+  .anno .n{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.12em}
+  .anno h4{font-size:15px;margin:5px 0 4px;font-weight:600}
+  .anno p{font-size:12.5px;color:var(--muted);line-height:1.5;margin:0}
+
+  /* ---------- screenshots ---------- */
+  .shot{width:100%;display:block;border-radius:12px}
+  .ratio2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px}
+  .ratio2 .item{border-top:1px solid var(--line);padding-top:10px}
+  .ratio2 .big{font-family:var(--mono);font-size:28px;color:var(--accent);letter-spacing:-.02em}
+  .ratio2 .lbl{font-size:13px;color:var(--muted);margin-top:3px}
+
+  /* ---------- math band ---------- */
+  .mathband{display:flex;align-items:center;gap:34px;margin-top:24px;padding:14px 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .mathband .eq{white-space:nowrap;line-height:1.2}
+  .mathband math{font-family:"STIX Two Math","Times New Roman",serif;font-size:24px}
+  .math-inline{font-family:"STIX Two Math","Times New Roman",serif;font-size:18px;color:#3f3b34;margin:0}
+  .math-inline math{font-family:"STIX Two Math","Times New Roman",serif;font-size:18px}
+  .mathband .eqnote{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.65;
+    margin-left:auto;text-align:right;white-space:nowrap}
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;
+    margin:0 3px;font-size:18px;line-height:1.15}
+  .frac .num{border-bottom:1px solid var(--ink);padding:0 5px 2px}
+  .frac .den{padding:2px 5px 0}
+
+  /* ---------- sampling mechanism ---------- */
+  table.dist{width:100%;border-collapse:collapse;font-size:14.5px}
+  table.dist th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);
+    text-align:right;font-weight:500;padding:0 0 9px;border-bottom:1px solid var(--line)}
+  table.dist th:first-child{text-align:left}
+  table.dist td{padding:9px 0;border-bottom:1px solid #ece7db;font-family:var(--mono);text-align:right}
+  table.dist td:first-child{text-align:left}
+  table.dist tr.hl td{color:var(--accent);font-weight:600}
+
+  .cumbar{display:flex;height:38px;border-radius:8px;position:relative;margin-top:8px}
+  .cumbar .seg{height:100%;border-right:1px solid rgba(255,255,255,.35)}
+  .cumbar .seg:first-child{border-radius:8px 0 0 8px}
+  .cumbar .seg.c{border-radius:0 8px 8px 0}
+  .cumbar .seg.a{background:var(--accent)}
+  .cumbar .seg.b{background:#33363c}
+  .cumbar .seg.c{background:#9a9ea6}
+  .cumbar .needle{position:absolute;top:-7px;bottom:-7px;width:2px;background:var(--ink);z-index:2}
+  .cumbar .needle::after{content:"u = 0.57";position:absolute;top:-20px;left:6px;
+    font-family:var(--mono);font-size:11px;color:var(--ink);white-space:nowrap}
+  .cumlabels{position:relative;height:16px;margin-top:3px}
+  .cumlabels span{position:absolute;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--muted)}
+  .cumlabels span:first-child{transform:none}
+
+  .mathblock{font-family:"STIX Two Math","Times New Roman",serif;font-size:26px;line-height:1.45;color:#2a2722}
+  .mathblock math{font-family:"STIX Two Math","Times New Roman",serif;font-size:26px}
+  .chat{border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:14px 16px;
+    font-family:var(--mono);font-size:13px;line-height:1.7}
+  .chat .row{display:grid;grid-template-columns:78px 1fr 34px;gap:8px;align-items:baseline;padding:3px 0}
+  .chat .role{color:var(--accent);white-space:nowrap}
+  .chat .txt{color:#2a2722}
+  .chat .tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--muted);text-align:right}
+  .chat .row.target{background:#fff8f2}
+  .chat .row.target .role{font-weight:600}
+  .chat .row.target .tag{color:var(--accent);font-weight:600}
+
+  /* ---------- why math/code ---------- */
+  .feedback{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:22px;margin-bottom:24px}
+  .fb{border-top:2px solid var(--line);padding-top:10px}
+  .fb.accent{border-top-color:var(--accent)}
+  .fb .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+  .fb b{display:block;font-size:21px;margin-top:5px;letter-spacing:-.01em}
+  .fb span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+  .fb.accent b{color:var(--accent)}
+  .four{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .four .card{min-height:104px}
+  .four .card .k{color:var(--accent)}
+
+  /* ---------- RL timeline ---------- */
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;margin-top:6px}
+  .timeline::before{content:"";position:absolute;left:0;right:0;top:19px;height:1px;background:var(--line)}
+  .tl{position:relative;padding-top:54px}
+  .tl::before{content:"";position:absolute;left:0;top:14px;width:11px;height:11px;border-radius:50%;
+    background:var(--accent);border:2px solid var(--paper);box-sizing:border-box}
+  .tl .year{font-family:var(--mono);font-size:28px;color:var(--accent);letter-spacing:-.02em}
+  .tl h4{font-size:17px;margin:8px 0 6px;font-weight:600}
+  .tl p{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0;max-width:230px}
+  .tl-facts{display:flex;gap:10px;margin-top:30px}
+
+  /* ---------- compression quote ---------- */
+  .bigquote{font-size:34px;line-height:1.4;letter-spacing:-.02em;color:#2a2722;max-width:960px}
+  .bigquote b{color:var(--accent)}
+
+  /* ---------- next-token example ---------- */
+  table.pairs{width:100%;border-collapse:collapse;font-size:14.5px}
+  table.pairs th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);
+    text-transform:uppercase;font-weight:500;text-align:left;padding:0 0 9px;border-bottom:1px solid var(--line)}
+  table.pairs th:last-child{text-align:right}
+  table.pairs td{padding:7px 0;border-bottom:1px solid #ece7db}
+  table.pairs td:first-child{font-family:var(--mono);font-size:13px;color:#3f3b34}
+  table.pairs td:last-child{font-family:var(--mono);font-size:14px;color:var(--accent);text-align:right;font-weight:600}
+  .lossex{font-family:var(--mono);font-size:13.5px;color:#3f3b34;border-top:1px solid var(--line);
+    padding-top:12px;margin-top:18px}
+
+  table.loss{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+  table.loss th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);
+    text-transform:uppercase;font-weight:500;text-align:right;padding:0 0 9px;border-bottom:1px solid var(--line)}
+  table.loss th:first-child{text-align:left}
+  table.loss td{padding:10px 0;border-bottom:1px solid #ece7db;font-family:var(--mono);text-align:right}
+  table.loss td:first-child{text-align:left}
+
+  .quote-full{background:#fffdf8;border-left:3px solid var(--accent);padding:9px 14px;
+    font-size:13.5px;line-height:1.65;color:#3f3b34}
+  .quote-src{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    color:var(--accent);margin-bottom:5px}
+  .chip-sm{font-size:13px;padding:4px 7px}
+
+  /* ---------- RL example ---------- */
+  .rlex{border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:18px 20px}
+  .rlex .q{font-family:var(--mono);font-size:14px;color:var(--muted);margin-bottom:10px}
+  .rlex .a{display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:9px 0;border-top:1px solid #ece7db;font-size:14.5px}
+  .rlex .a b{font-family:var(--mono);font-size:15px}
+  .rlex .a.good{color:var(--accent);font-weight:600}
+  .rlex .a.bad{color:#6f6a60}
+  .rlex .foot{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px}
+
+  /* ---------- roles ---------- */
+  .msgstack{display:flex;flex-direction:column;gap:10px}
+  .msg{border:1px solid var(--line);border-radius:12px;background:#fffdf8;padding:12px 15px}
+  .msg .role{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .msg p{margin:4px 0 0;font-size:14.5px;line-height:1.5}
+  .msg.sys{border-left:3px solid var(--ink)}
+  .msg.usr{border-left:3px solid #9a9ea6}
+  .msg.ast{border-left:3px solid var(--accent);background:#fff8f2}
+
+  table.compare{width:100%;border-collapse:collapse;font-size:14.5px}
+  table.compare th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);
+    text-transform:uppercase;font-weight:500;text-align:right;padding:0 0 9px;border-bottom:1px solid var(--line)}
+  table.compare th:first-child{text-align:left}
+  table.compare td{padding:9px 0;border-bottom:1px solid #ece7db}
+  table.compare td:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    color:var(--muted);text-transform:uppercase;width:110px}
+  table.compare td:nth-child(2){color:#6f6a60;text-align:right}
+  table.compare td:nth-child(3){color:var(--accent);font-weight:600;text-align:right}
+
+  .rolelegend{display:flex;gap:20px;margin-top:9px;font-size:11.5px;color:var(--muted)}
+  .rolelegend b{font-family:var(--mono);color:var(--accent);font-weight:600;margin-right:5px}
+
+  /* ---------- prediction walkthrough ---------- */
+  table.pred{width:100%;border-collapse:collapse;font-size:13px}
+  table.pred th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);
+    text-transform:uppercase;font-weight:500;text-align:left;padding:0 0 9px;border-bottom:1px solid var(--line)}
+  table.pred th:last-child{text-align:right}
+  table.pred td{padding:9px 0;border-bottom:1px solid #ece7db;vertical-align:top}
+  table.pred td:first-child{font-family:var(--mono);font-size:12px;color:var(--muted);width:190px}
+  table.pred td:nth-child(2){font-family:var(--mono);font-size:12px;color:#3f3b34}
+  table.pred td:last-child{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600;text-align:right;width:62px}
+
+  /* ---------- application section ---------- */
+  .promptbox{border:1px solid var(--line);border-radius:12px;background:#fffdf8;padding:14px 16px;margin-bottom:12px}
+  .promptbox .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .promptbox p{margin:6px 0 0;font-size:14px;line-height:1.55}
+  .promptbox.bad{border-left:3px solid #9a9ea6}
+  .promptbox.good{border-left:3px solid var(--accent);background:#fff8f2}
+
+  .ctxwin{border:1px solid var(--line);border-radius:12px;background:#fffdf8;padding:10px;
+    display:flex;flex-direction:column;gap:6px}
+  .ctxwin .blk{border-radius:7px;padding:8px 10px;font-family:var(--mono);font-size:11.5px;
+    background:#f1ede3;color:#3f3b34}
+  .ctxwin .blk.hl{background:#fff2e8;color:var(--accent)}
+
+  .chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .chain .c{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:6px;
+    padding:4px 7px;background:#fffdf8}
+  .chain .c.cut{color:#a8a39a;text-decoration:line-through;border-style:dashed}
+  .chain .c.keep{border-color:rgba(194,65,12,.5);background:#fff8f2;color:var(--accent)}
+  .chain .arr{color:var(--accent);font-family:var(--mono);font-size:12px}
+
+  /* ---------- prompt stack ---------- */
+  .pstack{display:flex;flex-direction:column;gap:8px}
+  .pblock{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;
+    background:#fffdf8;padding:9px 12px}
+  .pblock .role{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+  .pblock p{margin:4px 0 0;font-size:12.5px;line-height:1.45}
+  .pblock.few{border-left-color:#9a9ea6;background:#f7f4ec}
+  .pblock .ex{font-family:var(--mono);font-size:11.5px;color:#3f3b34;margin-top:3px}
+
+  .dist2{display:flex;flex-direction:column;gap:16px;margin-top:8px}
+  .glabel{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:6px}
+  .dist2 .row{display:grid;grid-template-columns:34px 1fr 42px;gap:8px;align-items:center;margin-top:6px}
+  .dist2 .row span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .dist2 .row .bar{height:9px;background:#e8e3d7;border-radius:5px;overflow:hidden}
+  .dist2 .row .bar i{display:block;height:100%;background:var(--ink);border-radius:5px}
+  .dist2 .row.top .bar i{background:var(--accent)}
+  .dist2 .row.top span{color:var(--accent);font-weight:600}
+
+  /* ---------- needle / heatmap ---------- */
+  .needle{position:relative;height:52px;border:1px solid var(--line);border-radius:10px;
+    background:#f1ede3;margin-top:10px}
+  .needle::before{content:"";position:absolute;inset:0;border-radius:10px;
+    background-image:repeating-linear-gradient(90deg,transparent 0 39px,rgba(0,0,0,.06) 39px 40px)}
+  .needle .pin{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;
+    border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(194,65,12,.18)}
+  .needle .lab{position:absolute;top:-19px;transform:translateX(-50%);font-family:var(--mono);
+    font-size:10px;color:var(--accent)}
+  .heatwrap{display:grid;grid-template-columns:36px 1fr;gap:8px;align-items:center}
+  .heaty{display:grid;grid-template-rows:repeat(4,16px);gap:3px;font-family:var(--mono);
+    font-size:9px;color:var(--muted);text-align:right}
+  .heaty span{display:flex;align-items:center;justify-content:flex-end}
+  .heat{display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(4,16px);gap:3px}
+  .heat i{display:block;border-radius:2px;background:rgba(194,65,12,var(--a))}
+
+  /* ---------- context growth / memory ---------- */
+  .ctxbars{display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
+  .cb{display:grid;grid-template-columns:70px 1fr 70px;gap:12px;align-items:center}
+  .cb .y{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .cb .track{height:18px;background:#e8e3d7;border-radius:4px;overflow:hidden}
+  .cb .fill{height:100%;background:var(--ink);border-radius:4px}
+  .cb .n{font-family:var(--mono);font-size:13px;text-align:right}
+  .cb.hl .fill{background:var(--accent)}
+  .cb.hl .n{color:var(--accent);font-weight:600}
+
+  .memgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .memgrid .box{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fffdf8}
+  .memgrid .box.sig{border-left:3px solid var(--accent)}
+  .memgrid .box.noi{border-left:3px solid #9a9ea6}
+  .memgrid b{display:block;font-size:13px;margin-bottom:4px}
+  .memgrid span{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+  .memacts{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:14px}
+  .memacts div{border-top:1px solid var(--line);padding-top:6px}
+  .memacts b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--accent)}
+  .memacts span{font-size:11.5px;color:var(--muted)}
+
+  .scaleband{border-left:3px solid var(--accent);background:#fff8f2;padding:11px 15px;
+    font-family:var(--mono);font-size:13px;color:#3f3b34}
+  .scaleband b{color:var(--accent)}
+
+  /* ---------- opener examples ---------- */
+  .examples{display:flex;flex-direction:column;gap:12px}
+  .examples .panel{padding:12px 18px}
+  .examples .panel .sentence{font-size:16px;margin-bottom:7px}
+  .examples .panel .tokens{gap:6px}
+  .examples .panel .tok{padding:4px 8px;min-width:38px}
+  .examples .panel .tok-t{font-size:15px}
+  .examples .panel .tok-id{font-size:9.5px}
+  .examples .panel .idrow{margin-top:7px;padding-top:7px;font-size:11.5px}
+  .exlabel{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--panel-muted);text-transform:uppercase;margin-bottom:5px}
+  .examples + .qgrid{margin-top:18px}
+
+  /* ---------- sidenote ---------- */
+  .sidenote{margin-top:10px;padding:9px 13px;border-left:3px solid #9a9ea6;background:#fffdf8;
+    font-size:13px;line-height:1.55;color:#3f3b34}
+  .sidenote b{color:var(--accent);font-weight:600}
+
+  /* ---------- strawberry ---------- */
+  .straw{display:flex;align-items:center;gap:18px;margin-top:22px;padding:11px 16px;
+    border:1px solid var(--line);border-radius:12px;background:#fffdf8}
+  .straw .sq{font-size:14px;font-weight:600;white-space:nowrap}
+  .straw .letters{display:flex;gap:4px;font-family:var(--mono);font-size:13px}
+  .straw .letters span{display:inline-flex;width:18px;height:22px;align-items:center;justify-content:center;
+    background:#f1ece0;border-radius:4px;color:#3f3b34}
+  .straw .letters .r{background:#fff0e8;color:var(--accent);font-weight:600}
+  .straw .sa{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;white-space:nowrap}
+  .straw .sa .bad{color:var(--muted)}
+  .straw .sa .good{color:var(--accent);font-weight:600}
+  .straw .note{font-size:11.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+
+  /* ---------- SFT loss ---------- */
+  .sftloss{margin-top:10px;border:1px solid var(--line);border-radius:10px;background:#fffdf8;padding:7px 12px}
+  .sftloss .fl{display:flex;align-items:baseline;gap:12px;font-family:var(--mono);font-size:11.5px;line-height:1.9}
+  .sftloss .fl-k{width:62px;flex:none;color:var(--muted);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase}
+  .sftloss .fl-eq{color:#3f3b34;white-space:nowrap}
+  .sftloss .fl.on .fl-eq{color:var(--accent);font-weight:600}
+  .sftloss sub{font-size:9px}
+
+  /* ---------- system map ---------- */
+  .sysmap{display:grid;grid-template-columns:520px 1fr;gap:34px;align-items:center}
+  .ringmap{position:relative;width:420px;height:420px;margin:0 auto}
+  .ringmap .ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%}
+  .ringmap .rh{width:400px;height:400px;border:1.5px dashed rgba(194,65,12,.55)}
+  .ringmap .rl{width:300px;height:300px;border:1px solid #b9b3a6}
+  .ringmap .rc{width:200px;height:200px;border:1px solid var(--line)}
+  .ringmap .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:110px;height:110px;border-radius:50%;background:var(--panel);color:var(--panel-ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    box-shadow:0 14px 30px rgba(15,18,24,.18);z-index:3}
+  .ringmap .core b{font-family:var(--mono);font-size:20px;letter-spacing:.04em}
+  .ringmap .core span{font-family:var(--mono);font-size:9px;color:var(--panel-muted);letter-spacing:.08em}
+  .ringmap .tag{position:absolute;z-index:4;background:var(--paper);border:1px solid var(--line);
+    border-radius:5px;padding:2px 7px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+    color:#3f3b34;white-space:nowrap}
+  .ringmap .tag.h{left:50%;top:14px;transform:translateX(-50%);border-color:rgba(194,65,12,.5);color:var(--accent)}
+  .ringmap .tag.loop{right:24px;top:50%;transform:translateY(-50%);color:var(--accent)}
+  .ringmap .tag.mem{left:24px;top:50%;transform:translateY(-50%);color:var(--muted)}
+  .ringmap .tag.prompt{left:50%;top:101px;transform:translateX(-50%)}
+  .ringmap .tag.ctx{left:50%;bottom:101px;transform:translateX(-50%);color:var(--muted)}
+  .syslegend{display:flex;flex-direction:column;gap:9px}
+  .syslegend .row{display:grid;grid-template-columns:24px 84px 1fr;gap:9px;align-items:baseline;
+    border-top:1px solid var(--line);padding-top:7px}
+  .syslegend .row:first-child{border-top:none;padding-top:0}
+  .syslegend .n{font-family:var(--mono);font-size:9.5px;color:var(--accent);letter-spacing:.08em}
+  .syslegend b{font-size:14px;line-height:1.3}
+  .syslegend p{font-size:12px;color:var(--muted);line-height:1.45;margin:0}
+
+  /* ---------- AI × math ---------- */
+  .ba{display:grid;grid-template-columns:1fr 64px 1fr;align-items:stretch}
+  .ba .side{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fffdf8}
+  .ba .side.now{border-color:rgba(194,65,12,.45);background:#fff8f2}
+  .ba .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+  .ba h3{font-size:24px;line-height:1.2;margin:6px 0 12px;letter-spacing:-.01em}
+  .ba ul{margin:0;padding-left:17px}
+  .ba li{font-size:13.5px;line-height:1.7;color:#3f3b34}
+  .ba .mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--accent)}
+  .ba .mid .ar{font-size:24px}
+  .ba .mid .lab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted)}
+
+  .accel{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:24px;
+    padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .accel .st{display:flex;align-items:baseline;gap:8px}
+  .accel .st .d{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .accel .st b{font-family:var(--mono);font-size:24px;letter-spacing:-.02em}
+  .accel .st .m{font-size:12px;color:var(--muted)}
+  .accel .ar{color:var(--accent);font-size:20px}
+  .accel .note{font-family:var(--mono);font-size:11px;color:var(--accent);margin-left:8px}
+
+  .mathline{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .phase{border-top:2px solid var(--ink);padding-top:13px}
+  .phase .ph{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+  .phase h3{font-size:16.5px;margin:5px 0 8px;font-weight:600}
+  .ms{padding:8px 0;border-bottom:1px solid var(--line)}
+  .ms:last-child{border-bottom:none}
+  .ms .d{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em}
+  .ms b{display:block;font-size:13.5px;margin:2px 0;font-weight:600}
+  .ms span{font-size:11px;color:var(--muted);line-height:1.45;display:block}
+
+  .caveat{border-left:3px solid var(--accent);background:#fff8f2;padding:9px 14px;
+    font-size:12.5px;line-height:1.55;color:#3f3b34;margin-bottom:16px}
+  .caveat strong{color:var(--accent);font-weight:600}
+
+  table.claims{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.claims th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);font-weight:500;text-align:left;padding:0 10px 8px 0;border-bottom:1px solid var(--line)}
+  table.claims td{padding:8px 10px 8px 0;border-bottom:1px solid #ece7db;vertical-align:top;line-height:1.45}
+  table.claims td:first-child{font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+  table.claims td:nth-child(2){font-weight:600;white-space:nowrap}
+  table.claims td:nth-child(3){font-family:var(--mono);font-size:11.5px;color:#3f3b34}
+  table.claims td:last-child{font-family:var(--mono);font-size:10.5px;color:var(--accent);white-space:nowrap;text-align:right}
+  table.claims tr:last-child td{border-bottom:none}
+
+  .flow{display:grid;grid-template-columns:1fr 38px 1fr 38px 1fr;align-items:stretch}
+  .fcard{background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .fcard.accent{border-color:rgba(194,65,12,.45);background:#fff8f2}
+  .fcard .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .fcard h4{font-size:16.5px;margin:0 0 8px;font-weight:600;line-height:1.3}
+  .fcard p{font-size:12.5px;color:var(--muted);line-height:1.5;margin:0}
+  .farrow{display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--accent)}
+  .loop{text-align:center;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;margin-top:10px}
+
+  .spec .card{min-height:88px;padding:12px 14px}
+  .spec .card .k{margin-bottom:5px}
+  .spec .card p{font-size:12.5px;line-height:1.5;margin-top:0}
+  .spec .card b{color:var(--accent);font-weight:600}
+
+  .chain{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:14px}
+  .chain .chip2{border:1px solid var(--line);background:#fffdf8;border-radius:999px;padding:9px 16px;letter-spacing:.02em}
+  .chain .chip2.last{border-color:var(--accent);background:#fff8f2;color:var(--accent);font-weight:600}
+  .chain .arr{color:var(--muted)}
+
+  .three.tight .card{min-height:116px}
+  .closing{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:38px}
+  .closing > div{border-top:1px solid var(--line);padding-top:12px}
+  .closing p{font-size:26px;line-height:1.4;margin:0;letter-spacing:-.01em}
+  .closing .last p{color:var(--accent);font-weight:600}
+
+  /* ---------- print / PDF ---------- */
+  body.print #stage{position:static;transform:none!important;width:1280px;height:auto;margin:0 auto;box-shadow:none}
+  body.print .slide{position:relative;inset:auto;width:1280px;height:720px;opacity:1;pointer-events:auto;margin:0 auto 18px}
+  body.print #hint,body.print #notes{display:none}
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0}
+    html,body{width:1280px;height:auto;overflow:visible;background:#fff}
+    #stage{position:static!important;transform:none!important;width:1280px!important;height:auto!important;margin:0;box-shadow:none}
+    .slide{position:relative!important;inset:auto!important;width:1280px;height:720px;
+      opacity:1!important;pointer-events:auto;page-break-after:always;break-after:page}
+    .slide:last-child{page-break-after:auto;break-after:auto}
+    #hint,#notes{display:none!important}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+
+  /* ---------- notes ---------- */
+  #notes{
+    position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;
+    background:#0d0f13;color:#c9ccd3;border-top:1px solid #262a32;
+    padding:16px 26px;font-family:var(--mono);font-size:13px;line-height:1.65;
+    display:none;z-index:50;
+  }
+  #notes.on{display:block}
+  #notes b{color:#f0b429;font-weight:600}
+  #hint{
+    position:fixed;right:16px;bottom:12px;font-family:var(--mono);
+    font-size:11px;color:#5b6069;letter-spacing:.06em;z-index:40;
+    transition:opacity .8s ease;
+  }
+  #hint.hide{opacity:0}
+
+  @media print{
+    body{background:#fff;overflow:visible}
+    #stage{position:static;transform:none!important;box-shadow:none;width:auto;height:auto}
+    .slide{position:relative;opacity:1;pointer-events:auto;page-break-after:always;width:1280px;height:720px}
+    #hint,#notes{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+
+  <!-- ============ S1 · 封面 ============ -->
+  <section class="slide active cover" data-notes="开场 20 秒。不自我介绍超过一句。直接抛问题：一个只会预测下一个词的模型，凭什么能证明定理。">
+    <div class="kicker">天体力学 × AI · 2026</div>
+    <h1>从下一个 token<br><span class="thin">到下一个定理</span></h1>
+    <p class="sub">一个模型如何工作，以及我们该如何使用它</p>
+    <div class="meta">
+      <span>刘博文</span>
+      <span>报告草稿 v0.1</span>
+      <span>45 min</span>
+    </div>
+    <svg class="orbit" viewBox="0 0 760 760" aria-hidden="true">
+      <ellipse cx="380" cy="380" rx="330" ry="150" transform="rotate(-18 380 380)"/>
+      <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
+      <circle class="planet" cx="655" cy="268" r="9"/>
+    </svg>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 44</span></div>
+  </section>
+
+  <!-- ============ S2 · 10 个整数 ============ -->
+  <section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
+    <p class="eyebrow"><b>00</b> / 开场</p>
+    <h2>模型看到的，是 10 个整数</h2>
+    <div class="content">
+      <div class="examples">
+        <div class="panel">
+          <div class="exlabel">EN · 一句话</div>
+          <div class="sentence">Celestial mechanics is the poetry of orbits.</div>
+          <div class="tokens">
+            <span class="tok"><span class="tok-t">Cel</span><span class="tok-id">69126</span></span>
+            <span class="tok"><span class="tok-t">estial</span><span class="tok-id">90010</span></span>
+            <span class="tok"><span class="tok-t">▁mechanics</span><span class="tok-id">52347</span></span>
+            <span class="tok"><span class="tok-t">▁is</span><span class="tok-id">382</span></span>
+            <span class="tok"><span class="tok-t">▁the</span><span class="tok-id">290</span></span>
+            <span class="tok"><span class="tok-t">▁poetry</span><span class="tok-id">38153</span></span>
+            <span class="tok"><span class="tok-t">▁of</span><span class="tok-id">328</span></span>
+            <span class="tok"><span class="tok-t">▁or</span><span class="tok-id">503</span></span>
+            <span class="tok"><span class="tok-t">bits</span><span class="tok-id">24043</span></span>
+            <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
+          </div>
+          <div class="idrow"><b>46</b> 个字符 &nbsp;→&nbsp; <b>10</b> 个 token &nbsp;→&nbsp; 10 个整数 &nbsp;&nbsp;·&nbsp;&nbsp; ▁ 表示前导空格</div>
+        </div>
+        <div class="panel">
+          <div class="exlabel">中文 · 《天体力学基础》内容简介</div>
+          <div class="sentence">本书系统地介绍了天体力学</div>
+          <div class="tokens">
+            <span class="tok"><span class="tok-t">本</span><span class="tok-id">4087</span></span>
+            <span class="tok"><span class="tok-t">书</span><span class="tok-id">20121</span></span>
+            <span class="tok"><span class="tok-t">系统</span><span class="tok-id">31936</span></span>
+            <span class="tok"><span class="tok-t">地</span><span class="tok-id">5557</span></span>
+            <span class="tok"><span class="tok-t">介绍</span><span class="tok-id">37887</span></span>
+            <span class="tok"><span class="tok-t">了</span><span class="tok-id">4531</span></span>
+            <span class="tok"><span class="tok-t">天</span><span class="tok-id">867</span></span>
+            <span class="tok"><span class="tok-t">体</span><span class="tok-id">7074</span></span>
+            <span class="tok"><span class="tok-t">力</span><span class="tok-id">11343</span></span>
+            <span class="tok"><span class="tok-t">学</span><span class="tok-id">8590</span></span>
+          </div>
+          <div class="idrow"><b>12</b> 个字符 &nbsp;→&nbsp; <b>10</b> 个 token &nbsp;→&nbsp; 10 个整数 &nbsp;&nbsp;·&nbsp;&nbsp; 系统 / 介绍 各占一个 token</div>
+        </div>
+      </div>
+      <div class="qgrid">
+        <div class="q"><span class="n">01</span>这串整数是怎么来的？</div>
+        <div class="q"><span class="n">02</span>它怎么预测下一个？</div>
+        <div class="q"><span class="n">03</span>我们怎么用它干活？</div>
+      </div>
+    </div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 44</span></div>
+  </section>
+
+  <!-- ============ S3 · 切分 ============ -->
+  <section class="slide" data-notes="指着 celestial：cel + estial。指着 ▁is：空格属于 token。中文不是一个字一个 token。然后讲三个数字：英文平均单词约 5 字符，平均 token 约 4 字符，所以 1 词约 1.3 token；词表一般 5–20 万。为什么是子词：字母级序列太长，词级词表爆炸，子词是折中。">
+    <p class="eyebrow"><b>01</b> / token</p>
+    <h2>切分是查表的结果</h2>
+    <div class="content">
+      <div class="panel">
+        <div class="sentence">三体问题 is a classic problem in celestial mechanics.</div>
+        <div class="tokens">
+          <span class="tok"><span class="tok-t">三</span><span class="tok-id">3236</span></span>
+          <span class="tok"><span class="tok-t">体</span><span class="tok-id">7074</span></span>
+          <span class="tok"><span class="tok-t">问题</span><span class="tok-id">28917</span></span>
+          <span class="tok"><span class="tok-t">▁is</span><span class="tok-id">382</span></span>
+          <span class="tok"><span class="tok-t">▁a</span><span class="tok-id">261</span></span>
+          <span class="tok"><span class="tok-t">▁classic</span><span class="tok-id">13686</span></span>
+          <span class="tok"><span class="tok-t">▁problem</span><span class="tok-id">4792</span></span>
+          <span class="tok"><span class="tok-t">▁in</span><span class="tok-id">306</span></span>
+          <span class="tok"><span class="tok-t">▁celestial</span><span class="tok-id">134437</span></span>
+          <span class="tok"><span class="tok-t">▁mechanics</span><span class="tok-id">52347</span></span>
+          <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
+        </div>
+        <div class="idrow">▁ 表示前导空格 &nbsp;·&nbsp; celestial → cel + estial</div>
+      </div>
+
+      <div class="stats4">
+        <div class="item"><div class="num">≈5</div><div class="lbl">字符 / 英文单词<br>含空格，常见值</div></div>
+        <div class="item"><div class="num">≈4</div><div class="lbl">字符 / token<br>英文经验值</div></div>
+        <div class="item"><div class="num">≈1.3</div><div class="lbl">token / 英文单词<br>≈ 5 ÷ 4</div></div>
+        <div class="item"><div class="num">5–20 万</div><div class="lbl">常见词表大小<br>50k – 200k</div></div>
+      </div>
+
+      <div class="why">
+        <span class="tag">为什么</span>
+        <span>字母级：信息少，序列长 4–5 倍</span>
+        <span class="arrow">→</span>
+        <span>词级：词表爆炸（百万级）</span>
+        <span class="arrow">→</span>
+        <span class="accent">子词：折中</span>
+      </div>
+
+      <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
+      <div class="keyline">子词不是语义单位，是<b>序列长度</b>与<b>词表大小</b>之间的工程折中。</div>
+    </div>
+    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">03 / 44</span></div>
+  </section>
+
+  <!-- ============ S4 · 词表 ============ -->
+  <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，后面的 embedding 就按它取行。词表大小直接决定输入输出两层参数量。">
+    <p class="eyebrow"><b>01</b> / token</p>
+    <h2>词表：一张固定的映射表</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro" style="margin:0 0 8px"><span style="color:var(--accent)">《天体力学基础》</span> &nbsp;·&nbsp; 行号 = ID &nbsp;·&nbsp; 按 ID 排序</p>
+          <div class="ledger">
+            <div class="ledger-head"><span>ID</span><span>片段</span><span></span></div>
+            <div class="ledger-row"><span class="ln">867</span><span class="tk">天</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">7074</span><span class="tk">体</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">8590</span><span class="tk">学</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">11343</span><span class="tk">力</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">20121</span><span class="tk">书</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">31936</span><span class="tk">系统</span><span class="tag"></span></div>
+            <div class="ledger-row hl"><span class="ln">78580</span><span class="tk">基础</span><span class="tag">← 本次查询</span></div>
+            <div class="ledger-row special"><span class="ln">199999</span><span class="tk">&lt;|endoftext|&gt;</span><span class="tag">特殊</span></div>
+            <div class="ledger-foot"><span>只展示 8 行</span><span>共 200,019 行</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="micro" style="margin:0 0 6px">词表大小 = 行数</p>
+          <div class="vocab-num">200,019</div>
+          <div class="vocab-cap">o200k · GPT-4o 代</div>
+          <div class="ruler">
+            <div class="axis"></div>
+            <div class="tick" style="top:2%"><span class="lab"><b>0</b></span></div>
+            <div class="tick" style="top:25%"><span class="lab"><b>50k</b>GPT-2</span></div>
+            <div class="tick" style="top:50%"><span class="lab"><b>100k</b>GPT-4 代</span></div>
+            <div class="tick" style="top:64%"><span class="lab"><b>128k</b>Llama 3</span></div>
+            <div class="tick on" style="top:98%"><span class="lab"><b>200k</b>GPT-4o 代</span></div>
+          </div>
+          <div class="calc">200,019 × 4,096 <span>≈</span> <b>8.2 亿参数</b></div>
+        </div>
+      </div>
+      <div class="keyline">ID 不是名字，是<b>行号</b>；换模型，就是换一张表。</div>
+    </div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 44</span></div>
+  </section>
+
+  <!-- ============ S5 · 用量与换算 ============ -->
+  <section class="slide" data-notes="这是 DeepSeek 后台的真实用量：2,599 次请求，2.85 亿 token，27 块钱。平均一次 11 万 token，约一分钱。token 就是账单单位。右边的换算是经验值：英文字符 0.3、中文字符 0.6，实际以 usage 为准。">
+    <p class="eyebrow"><b>01</b> / token</p>
+    <h2>Token 是模型的单位，也是账单的单位</h2>
+    <div class="content">
+      <img class="shot" src="assets/figures/deepseek_usage.png" alt="DeepSeek 用量：2.85 亿 token，2,599 次请求，27.18 元" style="max-width:1060px">
+      <p class="micro" style="margin-top:10px">上月用量 · 平均每次 ≈ 110k token · ≈ 1 分钱</p>
+      <div class="ratio2">
+        <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">1 个英文字符</div></div>
+        <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">1 个中文字符</div></div>
+      </div>
+      <p class="micro" style="margin-top:12px">直观理解：一个词、一个数字、一个符号 ≈ 1 token；不同 tokenizer 不同，以返回的 usage 为准。</p>
+      <div class="keyline">Token 既是模型的最小单位，也是账单的最小单位。</div>
+    </div>
+    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 44</span></div>
+  </section>
+
+  <!-- ============ S6 · 价格 ============ -->
+  <section class="slide" data-notes="1M 上下文，384K 输出。价格分缓存命中、未命中，以及空闲/高峰。100k 输入加 2k 输出，命中缓存 1 分钱，不命中 1 毛 1，差一个数量级。所以长上下文一定要做缓存或检索。">
+    <p class="eyebrow"><b>01</b> / token</p>
+    <h2>一次调用，钱花在哪</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <img class="shot" src="assets/figures/deepseek_pricing.png" alt="DeepSeek 价格表">
+          <p class="micro" style="margin-top:10px">deepseek-flash · 1M 上下文 · 384K 输出 · 元 / 百万 token</p>
+          <p class="micro" style="margin-top:6px">1M 上下文 ≈ 一部《三体》三部曲</p>
+        </div>
+        <div style="align-self:center">
+          <div class="calcbox">
+            <p class="micro" style="margin:0">一次调用 · 空闲时段</p>
+            <div class="cline">输入 100k + 输出 2k</div>
+            <div class="cres">¥0.01<span>缓存命中</span></div>
+            <div class="cres">¥0.11<span>缓存未命中</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="keyline">同一段上下文，命中缓存与不命中，差一个<b>数量级</b>。</div>
+    </div>
+    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 44</span></div>
+  </section>
+
+  <!-- ============ S7 · 从 ID 到向量 ============ -->
+  <section class="slide" data-notes="文字组合先被切成 token，查表得到 ID，再用 ID 去 embedding 表里取一行向量。ID 是地址，向量是内容。这一步没有魔法，就是一次查表。">
+    <p class="eyebrow"><b>01</b> / token</p>
+    <h2>文字先变成 ID，再变成向量</h2>
+    <div class="content">
+      <div class="flow">
+        <div class="stagecard">
+          <div class="k">片段</div>
+          <div class="big">问题</div>
+          <div class="foot">切分后的单位</div>
+        </div>
+        <div class="flowarrow">→</div>
+        <div class="stagecard">
+          <div class="k">ID</div>
+          <div class="big">28917</div>
+          <div class="foot">词表第 28917 行</div>
+        </div>
+        <div class="flowarrow">→</div>
+        <div class="stagecard">
+          <div class="k">向量</div>
+          <div class="vec">0.12&nbsp; −0.44&nbsp; 0.08&nbsp; …</div>
+          <div class="foot">4096 维 · 训练得到</div>
+        </div>
+      </div>
+      <div class="keyline">ID 是<b>地址</b>，向量是<b>内容</b>。</div>
+      <p class="micro" style="margin-top:14px">这一步叫 embedding；每一维没有名字，但距离有意义。</p>
+    </div>
+    <div class="footer"><span>embedding</span><span class="pnum">07 / 44</span></div>
+  </section>
+
+  <!-- ============ S8 · 输入到概率分布 ============ -->
+  <section class="slide" data-notes="模型的任务只有一句话：给定输入，输出词表上每个 token 的概率。数学上先算 logits z，再 softmax 成概率；所有概率加起来等于 1。中间是 Transformer，可能是各种变体。不要把它想成数据库，它在算分布。">
+    <p class="eyebrow"><b>02</b> / model</p>
+    <h2>模型的工作：输入 → 概率分布</h2>
+    <div class="content">
+      <div class="modelrow">
+        <div>
+          <p class="micro" style="margin:0">输入 token</p>
+          <div class="chips2">
+            <span class="chip2">从</span>
+            <span class="chip2">下一个</span>
+            <span class="chip2">token</span>
+            <span class="chip2">到</span>
+            <span class="chip2">下一个</span>
+          </div>
+          <p class="micro" style="margin-top:12px">每个 token 已经是一个向量</p>
+        </div>
+        <div>
+          <p class="micro" style="margin:0 0 8px;text-align:center">模型</p>
+          <div class="transformer">
+            <div class="tf">Transformer</div>
+            <div class="layers"><i></i><i></i><i></i></div>
+            <div class="cap">N 层 · 自注意力</div>
+          </div>
+          <p class="micro" style="text-align:center;margin-top:10px">GPT · Llama · Qwen 都是变体</p>
+        </div>
+        <div>
+          <p class="micro" style="margin:0">softmax(z)</p>
+          <div class="probs">
+            <div class="prob top"><span class="ptok">定理</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
+            <div class="prob"><span class="ptok">问题</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
+            <div class="prob"><span class="ptok">模型</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
+            <div class="prob"><span class="ptok">的</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
+            <div class="prob"><span class="ptok">其他</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mathband">
+        <div class="eq">
+          <math>
+            <mi>z</mi><mo>=</mo><msub><mi>f</mi><mi>θ</mi></msub>
+            <mo>(</mo><msub><mi>x</mi><mrow><mn>1</mn><mo>:</mo><mi>t</mi></mrow></msub><mo>)</mo>
+            <mo>∈</mo><msup><mi>ℝ</mi><mrow><mo>|</mo><mi>V</mi><mo>|</mo></mrow></msup>
+          </math>
+        </div>
+        <div class="eq">
+          <math>
+            <msub><mi>p</mi><mi>θ</mi></msub>
+            <mo>(</mo><mi>y</mi><mo>∣</mo><msub><mi>x</mi><mrow><mn>1</mn><mo>:</mo><mi>t</mi></mrow></msub><mo>)</mo>
+            <mo>=</mo>
+            <mfrac>
+              <mrow><mi mathvariant="normal">exp</mi><mo>(</mo><msub><mi>z</mi><mi>y</mi></msub><mo>)</mo></mrow>
+              <mrow><munder><mo>∑</mo><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><mi mathvariant="normal">exp</mi><mo>(</mo><msub><mi>z</mi><mi>v</mi></msub><mo>)</mo></mrow>
+            </mfrac>
+          </math>
+        </div>
+        <div class="eqnote">|V| = 200,019<br>Σ<sub>y</sub> p<sub>θ</sub>(y | x<sub>1:t</sub>) = 1</div>
+      </div>
+      <div class="keyline">它不查数据库，也不“理解”；它给词表里每个 token <b>打分</b>，再把分数变成<b>概率</b>。</div>
+    </div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 44</span></div>
+  </section>
+
+  <!-- ============ S9 · 采样 ============ -->
+  <section class="slide" data-notes="有了分布，还要决定怎么取。贪心取最大，采样按概率抽。temperature 和 top-p 控制随机性。取出来的 token 接回输入，再算下一步，这就是自回归。">
+    <p class="eyebrow"><b>02</b> / model</p>
+    <h2>采样：从分布里取一个</h2>
+    <div class="content">
+      <div class="two even">
+        <div style="align-self:center">
+          <p class="micro" style="margin:0">概率分布</p>
+          <p class="math-inline" style="margin:8px 0 10px">
+            <math>
+              <msub><mi>y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub>
+              <mo>∼</mo>
+              <msub><mi>p</mi><mi>θ</mi></msub>
+              <mo>(</mo><mo>·</mo><mo>∣</mo><msub><mi>x</mi><mrow><mn>1</mn><mo>:</mo><mi>t</mi></mrow></msub><mo>)</mo>
+            </math>
+          </p>
+          <div class="probs">
+            <div class="prob top"><span class="ptok">定理</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
+            <div class="prob"><span class="ptok">问题</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
+            <div class="prob"><span class="ptok">模型</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
+            <div class="prob"><span class="ptok">的</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
+            <div class="prob"><span class="ptok">其他</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">贪心</div><p style="margin:0">取最大 → <b>定理</b></p></div>
+          <div class="card accent"><div class="k">采样</div><p style="margin:0">按概率抽 → 这次可能是 <b>问题</b></p></div>
+          <div class="card"><div class="k">旋钮</div><p style="margin:0"><b>temperature</b> · <b>top-p</b> 控制随机性</p></div>
+        </div>
+      </div>
+      <div class="loop">
+        <span class="step">输入</span><span class="arr">→</span>
+        <span class="step">Transformer</span><span class="arr">→</span>
+        <span class="step">概率分布</span><span class="arr">→</span>
+        <span class="step hl">采样</span><span class="arr">→</span>
+        <span class="step">接回输入</span><span class="arr">↺</span>
+      </div>
+      <div class="keyline">同一个 prompt，两次结果可能不同——这是<b>采样</b>，相当于<b>掷骰子</b>，不是 bug。</div>
+    </div>
+    <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 44</span></div>
+  </section>
+
+  <!-- ============ S10 · 采样算法 ============ -->
+  <section class="slide" data-notes="把分布变成 token，需要一个随机数。按概率排序、累加，得到累积分布 F。抽一个 u ~ U(0,1)，落在哪一段就取哪个 token。temperature 改变分布的陡峭程度，top-p 截掉长尾再归一化。">
+    <p class="eyebrow"><b>02</b> / model</p>
+    <h2>采样：在累积分布上扔一个随机数</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <table class="dist">
+            <thead><tr><th>token</th><th>p</th><th>F(y)</th></tr></thead>
+            <tbody>
+              <tr><td>定理</td><td>0.41</td><td>0.41</td></tr>
+              <tr class="hl"><td>问题</td><td>0.22</td><td>0.63</td></tr>
+              <tr><td>模型</td><td>0.12</td><td>0.75</td></tr>
+              <tr><td>的</td><td>0.08</td><td>0.83</td></tr>
+              <tr><td>其他</td><td>0.17</td><td>1.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="align-self:center">
+          <div class="cumbar">
+            <span class="seg b" style="width:41%"></span>
+            <span class="seg a" style="width:22%"></span>
+            <span class="seg b" style="width:12%"></span>
+            <span class="seg b" style="width:8%"></span>
+            <span class="seg c" style="width:17%"></span>
+            <span class="needle" style="left:57%"></span>
+          </div>
+          <div class="cumlabels">
+            <span style="left:0">0</span>
+            <span style="left:41%">0.41</span>
+            <span style="left:63%">0.63</span>
+            <span style="left:75%">0.75</span>
+            <span style="left:83%">0.83</span>
+            <span style="left:100%">1.00</span>
+          </div>
+          <p class="micro" style="margin-top:14px">u = 0.57 ∈ [0.41, 0.63) → 取「问题」</p>
+        </div>
+      </div>
+
+      <div class="two" style="margin-top:26px">
+        <div class="card">
+          <div class="k">temperature</div>
+          <div class="mathblock" style="font-size:20px;margin-top:4px">
+            <math>
+              <msubsup><mi>p</mi><mi>i</mi><mrow><mo>(</mo><mi>T</mi><mo>)</mo></mrow></msubsup>
+              <mo>=</mo>
+              <mfrac>
+                <msubsup><mi>p</mi><mi>i</mi><mrow><mn>1</mn><mo>/</mo><mi>T</mi></mrow></msubsup>
+                <mrow><munder><mo>∑</mo><mi>j</mi></munder><msubsup><mi>p</mi><mi>j</mi><mrow><mn>1</mn><mo>/</mo><mi>T</mi></mrow></msubsup></mrow>
+              </mfrac>
+            </math>
+          </div>
+          <p style="margin:6px 0 0">T 小 → 更尖锐；T 大 → 更平坦</p>
+        </div>
+        <div class="card">
+          <div class="k">top-p</div>
+          <div class="mathblock" style="font-size:20px;margin-top:4px">
+            <math>
+              <mtext>min |S| s.t.</mtext>
+              <mspace width="0.3em"></mspace>
+              <munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder>
+              <msub><mi>p</mi><mi>i</mi></msub>
+              <mo>≥</mo><mn>0.9</mn>
+            </math>
+          </div>
+          <p style="margin:6px 0 0">截掉长尾，再归一化</p>
+        </div>
+      </div>
+
+      <div class="keyline">温度改形状，top-p 截尾巴，<b>u</b> 决定落在哪一段。</div>
+    </div>
+    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 44</span></div>
+  </section>
+
+  <!-- ============ S11 · 无状态 ============ -->
+  <section class="slide" data-notes="这是最关键的一页，后面 prompt、context、memory 全都从这里来。模型每次调用都是独立的，参数不变。所谓对话，是客户端把历史重新发一遍。">
+    <p class="eyebrow"><b>02</b> / model</p>
+    <h2>模型没有记忆</h2>
+    <div class="content">
+      <div class="two even">
+        <div class="term">
+          <div class="tcap">调用 A</div>
+          <div class="row"><span class="role">system</span><span class="txt">你是天体力学助手</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">希尔区是什么？</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt">希尔区是……</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">它为什么重要？</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt">因为它界定了……</span></div>
+        </div>
+        <div class="term">
+          <div class="tcap">调用 B · 新的一次</div>
+          <div class="row"><span class="role">system</span><span class="txt">你是天体力学助手</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">它为什么重要？</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt empty">（不知道“它”指什么）</span></div>
+        </div>
+      </div>
+      <div class="keyline">模型无状态；所谓“对话”，是客户端把历史<b>重发</b>一遍。</div>
+      <p class="micro" style="margin-top:14px">参数在推理时不更新；状态只存在于上下文里。</p>
+    </div>
+    <div class="footer"><span>stateless</span><span class="pnum">11 / 44</span></div>
+  </section>
+
+
+  <!-- ============ S12 · 从预测到解题 ============ -->
+  <section class="slide" data-notes="预测下一个词本身不会做题。真正发生变化的是训练信号：预训练给知识，SFT 给行为，RL 给策略。模型还是同一个，换的是数据和奖励。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>预测下一个词，怎么就变成了做题？</h2>
+    <div class="content">
+      <div class="three">
+        <div class="card"><div class="k">Pretrain</div><div class="big" style="font-size:28px">知识</div><p>读遍语料，学会语言与世界</p></div>
+        <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">行为</div><p>看示范，学会按指令回答</p></div>
+        <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">策略</div><p>做题对答案，学会搜索与纠错</p></div>
+      </div>
+      <div class="keyline">不是换了模型，是换了<b>训练信号</b>。</div>
+    </div>
+    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 44</span></div>
+  </section>
+
+  <!-- ============ S13 · Pretrain ============ -->
+  <section class="slide" data-notes="预训练只有一个目标：最小化交叉熵。数据是万亿 token，算力是千到万卡、月级。产出是一个 base model：会续写，但不会回答问题。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>Pretrain：把互联网读一遍</h2>
+    <div class="content">
+      <div class="two">
+        <div style="align-self:center">
+          <div class="mathblock">
+            <math>
+              <mi>L</mi><mo>(</mo><mi>θ</mi><mo>)</mo><mo>=</mo><mo>−</mo>
+              <munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover>
+              <mi>log</mi>
+              <msub><mi>p</mi><mi>θ</mi></msub>
+              <mo>(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>∣</mo><msub><mi>x</mi><mrow><mo>&lt;</mo><mi>t</mi></mrow></msub><mo>)</mo>
+            </math>
+          </div>
+          <p class="micro" style="margin-top:12px">给定前文，预测下一个 token</p>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">数据</div><div class="big">万亿 token</div><p>网页、代码、论文、书</p></div>
+          <div class="card"><div class="k">算力</div><div class="big">千–万卡</div><p>月级训练</p></div>
+          <div class="card"><div class="k">产出</div><div class="big">base model</div><p>会续写，不会回答问题</p></div>
+        </div>
+      </div>
+      <div class="keyline">它学会的是世界的<b>统计结构</b>，不是任务。</div>
+    </div>
+    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 44</span></div>
+  </section>
+
+  <!-- ============ S14 · 前 20 个 token ============ -->
+  <section class="slide" data-notes="这是《天体力学基础》的简介。先看全文，再只看前 20 个 token：本、书、系统、地、介绍、了……。每个位置都用左边的全部 token 预测下一个，20 个 token 得到 19 个训练样本。训练时并行算完，推理时才一个接一个。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>前 20 个 token，19 个样本</h2>
+    <div class="content">
+      <div class="quote-full"><span class="quote-src">《天体力学基础》· 内容简介</span>本书系统地介绍了天体力学的基本概念和定理，以及一些比较有代表性的研究成果。全书共五章：第一章二体问题，第二章限制性三体问题，第三章受摄二体问题，第四章天体运动中的共振现象，第五章保守系统中的有序与混沌运动。本书论述严谨，深入浅出，具有天体力学、分析力学和现代数学基础的读者可以较流畅地阅读。<br>本书可作为高等学校天文学类专业的教材，也可供其他相关专业选用，还可作为天文学工作者的参考书。</div>
+
+      <p class="micro" style="margin:10px 0 7px">前 20 个 token</p>
+      <div class="chips2" style="margin-top:0;gap:5px">
+        <span class="chip2 chip-sm">本</span>
+        <span class="chip2 chip-sm">书</span>
+        <span class="chip2 chip-sm">系统</span>
+        <span class="chip2 chip-sm">地</span>
+        <span class="chip2 chip-sm">介绍</span>
+        <span class="chip2 chip-sm">了</span>
+        <span class="chip2 chip-sm">天</span>
+        <span class="chip2 chip-sm">体</span>
+        <span class="chip2 chip-sm">力</span>
+        <span class="chip2 chip-sm">学</span>
+        <span class="chip2 chip-sm">的</span>
+        <span class="chip2 chip-sm">基本</span>
+        <span class="chip2 chip-sm">概</span>
+        <span class="chip2 chip-sm">念</span>
+        <span class="chip2 chip-sm">和</span>
+        <span class="chip2 chip-sm">定</span>
+        <span class="chip2 chip-sm">理</span>
+        <span class="chip2 chip-sm">，以及</span>
+        <span class="chip2 chip-sm">一些</span>
+        <span class="chip2 chip-sm">比较</span>
+      </div>
+
+      <div class="two" style="margin-top:18px">
+        <table class="pairs">
+          <thead><tr><th>输入（前缀）</th><th>目标</th></tr></thead>
+          <tbody>
+            <tr><td>本</td><td>书</td></tr>
+            <tr><td>本 书</td><td>系统</td></tr>
+            <tr><td>本 书 系统</td><td>地</td></tr>
+            <tr><td>本 书 系统 地</td><td>介绍</td></tr>
+            <tr><td>本 书 系统 地 介绍</td><td>了</td></tr>
+            <tr><td>本 书 系统 … 一些</td><td>比较</td></tr>
+          </tbody>
+        </table>
+        <div style="align-self:center">
+          <div class="vocab-num">19</div>
+          <div class="vocab-cap">个训练样本</div>
+          <p class="micro" style="margin-top:8px">每个位置都预测下一个 token</p>
+        </div>
+      </div>
+
+      <div class="lossex">L = −[ log p(书|本) + log p(系统|本 书) + … + log p(比较|前 19 个) ]</div>
+      <div class="keyline" style="margin-top:10px">训练并行，推理串行。</div>
+    </div>
+    <div class="footer"><span>pretrain</span><span class="pnum">14 / 44</span></div>
+  </section>
+
+  <!-- ============ S15 · loss 是什么 ============ -->
+  <section class="slide" data-notes="这是负对数似然，也是交叉熵。单个位置：正确 token 的概率越高，−log p 越小；p=1 时 loss 为 0。它叫惊讶度，也叫编码长度。整句相加再平均、取 exp，才是困惑度。最小化它等于最大似然，也等于最优压缩。对 logits 求导，梯度是 p 减去 onehot。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>这个 loss 是什么</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro" style="margin:0 0 6px">负对数似然 · 交叉熵</p>
+          <table class="loss">
+            <thead><tr><th>p(正确 token)</th><th>−log p</th></tr></thead>
+            <tbody>
+              <tr><td>1.00</td><td>0</td></tr>
+              <tr><td>0.50</td><td>0.69</td></tr>
+              <tr><td>0.10</td><td>2.30</td></tr>
+              <tr><td>0.01</td><td>4.61</td></tr>
+            </tbody>
+          </table>
+          <p class="micro" style="margin-top:12px">单位：nats · ÷ ln 2 = bits</p>
+          <p class="micro" style="margin-top:6px">困惑度 PPL = exp(平均 −log p)</p>
+          <p class="micro" style="margin-top:6px">∂L/∂z = p − onehot(y)</p>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">单个位置</div><p>−log p = 惊讶度，也是编码这个 token 的长度</p></div>
+          <div class="card"><div class="k">整句</div><p>相加 = 编码整句的总长度；平均后取 exp，就是困惑度</p></div>
+          <div class="card accent"><div class="k">最小化</div><p>= 最大似然 = 最优压缩</p></div>
+        </div>
+      </div>
+      <div class="keyline">这不是随便选的 loss；它就是用模型给数据<b>编码的长度</b>。</div>
+    </div>
+    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 44</span></div>
+  </section>
+
+  <!-- ============ S16 · 压缩即智能 ============ -->
+  <section class="slide" data-notes="这是我信的一句话。预训练表面是预测下一个 token，本质是压缩。要压得好，必须发现语法、因果、物理结构。参数不是数据库，是压缩后的世界模型。但压缩只解释知识从哪来，不解释为什么会搜索——后者是 RL。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>压缩即智能</h2>
+    <div class="content">
+      <div class="bigquote">要预测得准，<br>就必须把世界<b>压进参数</b>里。</div>
+      <div class="three" style="margin-top:34px">
+        <div class="card"><div class="k">预测</div><div class="big" style="font-size:22px">解释每个 token</div><p>不能跳过任何细节</p></div>
+        <div class="card"><div class="k">压缩</div><div class="big" style="font-size:22px">挤掉冗余</div><p>留下可复用的结构</p></div>
+        <div class="card accent"><div class="k">结构</div><div class="big" style="font-size:22px">语法 · 因果 · 物理</div><p>迁移到没见过的题</p></div>
+      </div>
+      <p class="micro" style="margin-top:18px">压缩解释知识从哪来；搜索与纠错，靠后面的 RL。</p>
+      <div class="keyline">这也是我近几年最相信的一句话。</div>
+    </div>
+    <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 44</span></div>
+  </section>
+
+  <!-- ============ S17 · SFT ============ -->
+  <section class="slide" data-notes="SFT 还是预测下一个 token，但只对 assistant 的 answer token 算 loss；system 和 user 只是条件。它做的是行为克隆：把示范的答法压进条件分布，教格式、语气、工具调用、拒绝，不注入新知识。它不创造新能力，只是把 pretrain 里已有的能力以对话形式叫出来。结果是会回答了，但难题不一定做对。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>SFT：看标准答案学做事</h2>
+    <p class="micro" style="margin:8px 0 0">supervised fine-tuning · 监督微调 / 指令微调</p>
+    <div class="content">
+      <div class="two">
+        <div>
+          <div class="chat">
+            <div class="row"><span class="role">system</span><span class="txt">你是《天体力学基础》的助教。</span><span class="tag">输入</span></div>
+            <div class="row"><span class="role">user</span><span class="txt">这本书讲什么？</span><span class="tag">输入</span></div>
+            <div class="row target"><span class="role">assistant</span><span class="txt">系统介绍天体力学的基本概念和定理，以及一些有代表性的研究成果。</span><span class="tag">目标</span></div>
+            <div class="row"><span class="role">user</span><span class="txt">全书共几章？</span><span class="tag">输入</span></div>
+            <div class="row target"><span class="role">assistant</span><span class="txt">五章：二体、限制性三体、受摄二体、共振、有序与混沌。</span><span class="tag">目标</span></div>
+          </div>
+          <div class="rolelegend">
+            <span><b>system</b>开发者规则</span>
+            <span><b>user</b>用户任务</span>
+            <span><b>assistant</b>模型回答（目标）</span>
+          </div>
+          <p class="micro" style="margin-top:7px">白 = 输入（条件） &nbsp;·&nbsp; 橙 = 学习目标（算 loss）</p>
+          <div class="sftloss">
+            <div class="fl"><span class="fl-k">pretrain</span><span class="fl-eq">−Σ<sub>t∈text</sub> log p(x<sub>t</sub> | x<sub>&lt;t</sub>)</span></div>
+            <div class="fl on"><span class="fl-k">SFT</span><span class="fl-eq">−Σ<sub>t∈answer</sub> log p(y<sub>t</sub> | prompt, y<sub>&lt;t</sub>)</span></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">数据</div><p>（指令, 标准答案）对；只对橙色算 loss</p></div>
+          <div class="card"><div class="k">目标</div><p>还是下一个 token；条件换成 system + user + 已答部分</p></div>
+          <div class="card"><div class="k">本质</div><p>行为克隆：模仿示范，不探索</p></div>
+          <div class="card accent"><div class="k">边界</div><p>不注入新知识；难题不一定做对</p></div>
+        </div>
+      </div>
+      <div class="keyline">同一套 loss，换了一个<b>求和范围</b>。</div>
+    </div>
+    <div class="footer"><span>《天体力学基础》· SFT</span><span class="pnum">17 / 44</span></div>
+  </section>
+
+  <!-- ============ S18 · 三种角色 ============ -->
+  <section class="slide" data-notes="对话不是一个字符串，而是一组带角色的消息。system 定身份和规则，user 给任务，assistant 是模型的回答。SFT 训练时只对 assistant 的 token 算 loss，system 和 user 只是条件。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>一条消息，三种角色</h2>
+    <div class="content">
+      <div class="two">
+        <div class="msgstack">
+          <div class="msg sys"><div class="role">system</div><p>你是《天体力学基础》的助教，只回答本书内容。</p></div>
+          <div class="msg usr"><div class="role">user</div><p>第四章讲什么？</p></div>
+          <div class="msg ast"><div class="role">assistant</div><p>天体运动中的共振现象。</p></div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">system</div><p>身份、规则、边界；由开发者写</p></div>
+          <div class="card"><div class="k">user</div><p>任务与材料；由用户写</p></div>
+          <div class="card accent"><div class="k">assistant</div><p>模型的回答；训练时只对它算 loss</p></div>
+        </div>
+      </div>
+      <p class="micro" style="margin-top:16px">system / user = 条件 &nbsp;·&nbsp; assistant = 监督目标（只算这些 token 的 loss）</p>
+      <div class="keyline">system 定规则，user 给任务，assistant 是学习目标。</div>
+    </div>
+    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 44</span></div>
+  </section>
+
+  <!-- ============ S19 · 怎么预测 ============ -->
+  <section class="slide" data-notes="把刚才的问答拆开看：模型一次只生成一个 token。给定已生成的全部内容，算下一个 token 的概率，按概率取一个，接回输入，再算下一个。所谓回答，就是这个循环走 21 步。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>它到底怎么预测</h2>
+    <div class="content">
+      <div class="two">
+        <table class="pred">
+          <thead><tr><th>已生成</th><th>候选（概率）</th><th>采样</th></tr></thead>
+          <tbody>
+            <tr><td>（空）</td><td>系统 .62 · 本书 .11 · 天体 .08</td><td>系统</td></tr>
+            <tr><td>系统</td><td>介绍 .48 · 是 .12 · 主要 .09</td><td>介绍</td></tr>
+            <tr><td>系统介绍</td><td>天 .71 · 本 .06 · 了 .05</td><td>天</td></tr>
+            <tr><td>系统介绍天</td><td>体 .66 · 文 .12 · 气 .08</td><td>体</td></tr>
+            <tr><td>系统介绍天体</td><td>力 .58 · 学 .21 · 的 .07</td><td>力</td></tr>
+            <tr><td>系统介绍天体力学</td><td>的 .44 · 学 .18 · 是 .09</td><td>的</td></tr>
+          </tbody>
+        </table>
+        <div class="stack">
+          <div class="card" style="padding:14px 16px"><div class="k">01 算概率</div><p>给定已生成的全部 token</p></div>
+          <div class="card" style="padding:14px 16px"><div class="k">02 采样</div><p>按概率取一个</p></div>
+          <div class="card accent" style="padding:14px 16px"><div class="k">03 接回</div><p>拼到输入末尾，重复</p></div>
+        </div>
+      </div>
+      <p class="micro" style="margin-top:14px">概率为示意，用于说明机制 · 真实输出以模型为准</p>
+      <div class="keyline">一次只走一步；把结果接回输入，再走下一步。</div>
+    </div>
+    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 44</span></div>
+  </section>
+
+  <!-- ============ S20 · 什么是强化学习 ============ -->
+  <section class="slide" data-notes="强化学习是另一套范式：没有标准答案，只有一个奖励信号。智能体在环境里动作，得到奖励和新状态，目标是最大化累积奖励。最早用在控制、运筹、机器人和游戏。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>什么是强化学习</h2>
+    <p class="sub" style="margin-top:10px">在环境里试错，用奖励信号调整策略，让长期回报最大。</p>
+    <div class="content">
+      <div class="loop">
+        <span class="step">状态 s<sub>t</sub></span><span class="arr">→</span>
+        <span class="step hl">智能体</span><span class="arr">→</span>
+        <span class="step">动作 a<sub>t</sub></span><span class="arr">→</span>
+        <span class="step">环境</span><span class="arr">→</span>
+        <span class="step">奖励 r<sub>t</sub> · s<sub>t+1</sub></span><span class="arr">↺</span>
+      </div>
+      <div class="three" style="margin-top:28px">
+        <div class="card"><div class="k">没有标准答案</div><div class="big" style="font-size:22px">只有奖励</div><p>不告诉你该做什么，只告诉你结果好不好</p></div>
+        <div class="card"><div class="k">试错</div><div class="big" style="font-size:22px">动作 → 反馈</div><p>好就强化，坏就改</p></div>
+        <div class="card accent"><div class="k">目标</div><div class="big" style="font-size:22px">累积奖励</div><p>不是眼前一步，是长期回报</p></div>
+      </div>
+      <div class="mathblock" style="margin-top:24px;font-size:24px">
+        <math>
+          <munder><mtext>max</mtext><mi>π</mi></munder>
+          <mspace width="0.25em"></mspace>
+          <mi>E</mi><mo>[</mo>
+          <munder><mo>∑</mo><mi>t</mi></munder>
+          <msup><mi>γ</mi><mi>t</mi></msup>
+          <msub><mi>r</mi><mi>t</mi></msub>
+          <mo>]</mo>
+        </math>
+      </div>
+      <p class="micro" style="margin-top:10px">最早：最优控制 · 机器人 · 运筹优化 · 游戏</p>
+      <div class="keyline">RL 学的不是答案，是<b>策略</b>。</div>
+    </div>
+    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 44</span></div>
+  </section>
+
+  <!-- ============ S21 · RL 的游戏前史 ============ -->
+  <section class="slide" data-notes="RL 不是新东西。Atari、AlphaGo、Dota、StarCraft，都是在 simulator 里试错，用明确奖励改策略。共同点是：有环境、有奖励、可以无限重来。注意：AlphaFold 不是 RL，它是监督学习，用已知结构做标签，没有奖励也没有试错；2024 诺贝尔化学奖表彰的是蛋白质结构预测，不是 RL。真实问题没有 simulator，数学和代码是例外。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>RL 的老战场：先打赢游戏</h2>
+    <div class="content">
+      <div class="timeline">
+        <div class="tl"><div class="year">2013</div><h4>Atari · DQN</h4><p>从像素学会打游戏</p></div>
+        <div class="tl"><div class="year">2016</div><h4>AlphaGo</h4><p>自我对弈 + 树搜索</p></div>
+        <div class="tl"><div class="year">2018</div><h4>Dota 2 · OpenAI Five</h4><p>长时程、团队协作</p></div>
+        <div class="tl"><div class="year">2019</div><h4>StarCraft II · AlphaStar</h4><p>不完全信息、大动作空间</p></div>
+      </div>
+      <div class="tl-facts">
+        <span class="pill"><i></i>有 simulator</span>
+        <span class="pill"><i></i>有 reward</span>
+        <span class="pill"><i></i>可无限试错</span>
+      </div>
+      <p class="micro" style="margin-top:16px">DeepMind：Atari · AlphaGo · AlphaStar（RL） &nbsp;|&nbsp; AlphaFold → 2024 诺贝尔化学奖（Hassabis &amp; Jumper）</p>
+      <div class="sidenote"><b>但 AlphaFold 不是 RL。</b> 它是监督学习：用已知结构做标签；没有奖励，也没有试错。</div>
+      <div class="keyline">真实问题没有 simulator；<b>数学和代码是例外</b>。</div>
+    </div>
+    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 44</span></div>
+  </section>
+
+  <!-- ============ S22 · RL ============ -->
+  <section class="slide" data-notes="环境从游戏 simulator 换成了验证器。奖励还是 0/1，只是判分的从游戏引擎变成了答案、测试和编译器。经典例子：strawberry 里有几个 r？GPT-4o 常答 2；o1/R1 会先把字母拆开再数，答 3。验证器只看最后答案，但模型自己学出中间步骤。时间点：2024.09 o1，2025.01 R1（DeepSeek moment）。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>RL 的新战场：做题，对答案</h2>
+    <div class="content">
+      <div class="two">
+        <div style="align-self:center">
+          <div class="mathblock" style="font-size:26px">
+            <math>
+              <munder><mtext>max</mtext><mi>θ</mi></munder>
+              <mspace width="0.25em"></mspace>
+              <msub><mi>E</mi><mrow><mi>y</mi><mo>∼</mo><msub><mi>p</mi><mi>θ</mi></msub></mrow></msub>
+              <mo>[</mo><mi>r</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>]</mo>
+              <mo>−</mo><mi>β</mi><mtext>KL</mtext>
+              <mo>(</mo><msub><mi>p</mi><mi>θ</mi></msub><mo>‖</mo><msub><mi>p</mi><mtext>ref</mtext></msub><mo>)</mo>
+            </math>
+          </div>
+          <p class="micro" style="margin-top:12px">奖励来自程序：答案匹配、单元测试、Lean 编译</p>
+        </div>
+        <div class="rlex">
+          <div class="q">Q：第四章讲什么？</div>
+          <div class="a bad"><span>受摄二体问题</span><b>0</b></div>
+          <div class="a good"><span>天体运动中的共振现象</span><b>1</b></div>
+          <div class="a bad"><span>有序与混沌运动</span><b>0</b></div>
+          <div class="foot">采样 3 条 → 验证器判分 → 更新策略</div>
+        </div>
+      </div>
+      <div class="straw">
+        <div class="sq">“strawberry” 里有几个 r？</div>
+        <div class="letters"><span>s</span><span>t</span><span class="r">r</span><span>a</span><span>w</span><span>b</span><span>e</span><span class="r">r</span><span class="r">r</span><span>y</span></div>
+        <div class="sa"><span class="bad">GPT-4o 常答 2</span><span class="ar">→</span><span class="good">o1 / R1 答 3</span></div>
+        <div class="note">先拆字母，再数</div>
+      </div>
+      <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · DeepSeek moment</p>
+      <div class="keyline">同一段文字，从“预测下一个词”变成“答对才给分”。</div>
+    </div>
+    <div class="footer"><span>《天体力学基础》· RLVR</span><span class="pnum">22 / 44</span></div>
+  </section>
+
+  <!-- ============ S23 · RL 算法 ============ -->
+  <section class="slide" data-notes="RL 的算法不止一个。PPO 是策略梯度加 critic，RLHF 的经典选择；GRPO 用同一题的一组样本做相对比较，省掉 critic，数学和代码常用；RLOO 用留一法做基线；DPO 直接学偏好对，不走 RL 循环。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>RL 的常见算法</h2>
+    <div class="content">
+      <div class="four">
+        <div class="card"><div class="k">PPO</div><div class="big" style="font-size:20px">策略梯度 + critic</div><p>RLHF 的经典选择</p></div>
+        <div class="card"><div class="k">GRPO</div><div class="big" style="font-size:20px">组内相对优势</div><p>省掉 critic；数学/代码常用</p></div>
+        <div class="card"><div class="k">RLOO</div><div class="big" style="font-size:20px">留一法基线</div><p>轻量，方差更小</p></div>
+        <div class="card"><div class="k">DPO</div><div class="big" style="font-size:20px">直接学偏好</div><p>不走 RL 循环</p></div>
+      </div>
+      <div class="loop">
+        <span class="step">采样</span><span class="arr">→</span>
+        <span class="step">奖励</span><span class="arr">→</span>
+        <span class="step hl">更新</span>
+      </div>
+      <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO 是 RL；DPO 是偏好优化，常被归到 RLHF 谱系。</p>
+      <div class="keyline">算法不同，循环相同：采样 → 打分 → 更新。</div>
+    </div>
+    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 44</span></div>
+  </section>
+
+  <!-- ============ S24 · 天然优势 ============ -->
+  <section class="slide" data-notes="一般任务的奖励要靠人打分或奖励模型，贵、慢、有噪声；数学和代码的奖励由程序判定，几乎免费、即时、可无限生成。反馈还更具体：代码直接告诉你错在哪一行。">
+    <p class="eyebrow"><b>03</b> / training</p>
+    <h2>数学和代码的天然优势</h2>
+    <div class="content">
+      <table class="compare">
+        <thead><tr><th></th><th>一般任务</th><th>数学 / 代码</th></tr></thead>
+        <tbody>
+          <tr><td>奖励</td><td>人打分 / 奖励模型</td><td>程序判定</td></tr>
+          <tr><td>成本</td><td>贵、慢、有噪声</td><td>几乎为零</td></tr>
+          <tr><td>供给</td><td>有限</td><td>可无限生成</td></tr>
+          <tr><td>反馈</td><td>一个分数</td><td>具体错误位置</td></tr>
+        </tbody>
+      </table>
+      <div class="four" style="margin-top:20px">
+        <div class="card"><div class="k">01 分解</div><p>函数、模块 → 子目标</p></div>
+        <div class="card"><div class="k">02 验证</div><p>测试 → 自己检查</p></div>
+        <div class="card"><div class="k">03 调试</div><p>报错 → 定位 → 修正</p></div>
+        <div class="card"><div class="k">04 长程约束</div><p>类型、变量、控制流 → 不丢状态</p></div>
+      </div>
+      <div class="keyline">反馈越明确，试错越便宜，RL 越有效。</div>
+    </div>
+    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 44</span></div>
+  </section>
+
+  <!-- ============ S25 · 从会说话到会干活 ============ -->
+  <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>从会说话到会干活</h2>
+    <div class="content">
+      <div class="three">
+        <div class="card"><div class="k">会说话 · 2023</div><div class="big" style="font-size:24px">ChatGPT</div><p>指令微调 + RLHF<br>prompt / system</p></div>
+        <div class="card"><div class="k">会思考</div><div class="big" style="font-size:24px">CoT</div><p>写出中间步骤<br>context engineering · pruning</p></div>
+        <div class="card accent"><div class="k">会干活</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>memory</p></div>
+      </div>
+      <div class="keyline">每一步都在解决前一步留下的问题。</div>
+    </div>
+    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 44</span></div>
+  </section>
+
+  <!-- ============ S26 · ChatGPT ============ -->
+  <section class="slide" data-notes="2023 年的 ChatGPT 让 next-token 模型变成了对话产品。关键不是模型变大，而是指令微调 + RLHF 让它学会按格式回答、说人觉得有用的话。但它仍然不会用工具、不会记事。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>2023：从补全到对话</h2>
+    <div class="content">
+      <div class="two">
+        <div class="chat">
+          <div class="row"><span class="role">user</span><span class="txt">用一句话解释希尔区。</span><span class="tag"></span></div>
+          <div class="row target"><span class="role">assistant</span><span class="txt">给定能量下，天体可能出现的空间区域。</span><span class="tag"></span></div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">指令微调</div><p>学会对话格式：该回答，而不是续写</p></div>
+          <div class="card"><div class="k">RLHF</div><p>学会人觉得好的回答：有用、无害</p></div>
+          <div class="card accent"><div class="k">但仍然不会</div><p>不会用工具，不会记事，不会验证</p></div>
+        </div>
+      </div>
+      <div class="keyline">会说话，是训练出来的，不是涌现的。</div>
+    </div>
+    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 44</span></div>
+  </section>
+
+  <!-- ============ S27 · Prompt ============ -->
+  <section class="slide" data-notes="prompt 不是许愿，是改条件概率。左边是一条完整 prompt：system 给角色，约束规定写法，user 给任务，few-shot 给两个开普勒第三定律的例子。右边是同一个答案 token 的分布：原始提问下 16 只占 18%，加上角色、约束和例子后变成 71%。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Prompt：用内容改变分布</h2>
+    <div class="content">
+      <div class="two">
+        <div class="pstack">
+          <div class="pblock"><div class="role">system · 角色</div><p>你是天体力学助教。</p></div>
+          <div class="pblock"><div class="role">constraints · 约束</div><p>先写公式，再代入，最后给数值。</p></div>
+          <div class="pblock"><div class="role">user · 任务</div><p>周期 2 年，半长轴变为 4 倍，周期变成多少？</p></div>
+          <div class="pblock few"><div class="role">few-shot · 例子</div>
+            <div class="ex">a 变为 9 倍 → T 变为 27 倍</div>
+            <div class="ex">a 变为 16 倍 → T 变为 64 倍</div>
+          </div>
+        </div>
+        <div>
+          <p class="micro">答案 token 的分布</p>
+          <div class="dist2">
+            <div>
+              <div class="glabel">原始提问</div>
+              <div class="row"><span>8</span><div class="bar"><i style="width:52%"></i></div><span>52%</span></div>
+              <div class="row"><span>16</span><div class="bar"><i style="width:18%"></i></div><span>18%</span></div>
+              <div class="row"><span>32</span><div class="bar"><i style="width:12%"></i></div><span>12%</span></div>
+            </div>
+            <div>
+              <div class="glabel">加 system + 约束 + few-shot</div>
+              <div class="row"><span>8</span><div class="bar"><i style="width:8%"></i></div><span>8%</span></div>
+              <div class="row top"><span>16</span><div class="bar"><i style="width:71%"></i></div><span>71%</span></div>
+              <div class="row"><span>32</span><div class="bar"><i style="width:11%"></i></div><span>11%</span></div>
+            </div>
+          </div>
+          <p class="micro" style="margin-top:10px">概率为示意</p>
+        </div>
+      </div>
+      <div class="mathband" style="margin-top:16px">
+        <div class="eq">
+          <math>
+            <msub><mi>p</mi><mi>θ</mi></msub><mo>(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo>)</mo>
+            <mo>→</mo>
+            <msub><mi>p</mi><mi>θ</mi></msub><mo>(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>e</mi><mo>)</mo>
+          </math>
+        </div>
+        <div class="eqnote">p(16 | x) = 0.18<br>p(16 | x, c, e) = 0.71</div>
+      </div>
+      <div class="keyline">加内容，就是在改<b>条件概率</b>。</div>
+    </div>
+    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 44</span></div>
+  </section>
+
+  <!-- ============ S28 · CoT ============ -->
+  <section class="slide" data-notes="多步问题，直接给答案容易错。CoT 让模型把中间步骤写出来，每个 token 都是一次额外计算。代价是更慢、更贵，也可能绕圈。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>CoT：把思考写出来</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro">问题</p>
+          <p style="font-size:17px;margin:6px 0 12px">周期 2 年，半长轴变为 4 倍，周期变成多少？</p>
+          <div class="promptbox bad"><div class="tag">直接答</div><p>8 年 ✗</p></div>
+          <div class="promptbox good"><div class="tag">分步</div><p>T ∝ a<sup>3/2</sup>；4<sup>3/2</sup> = 8；T = 2 × 8 = 16 年 ✓</p></div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">为什么有效</div><p>每个 token 都是一次额外计算</p></div>
+          <div class="card"><div class="k">代价</div><p>更慢、更贵、可能绕圈</p></div>
+          <div class="card accent"><div class="k">本质</div><p>把隐式推理摊成显式步骤</p></div>
+        </div>
+      </div>
+      <div class="keyline">写出来，就是算出来。</div>
+    </div>
+    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 44</span></div>
+  </section>
+
+  <!-- ============ S29 · Context 膨胀 ============ -->
+  <section class="slide" data-notes="最早 GPT-3 只有 2k token，ChatGPT 是 4k；后来 32k、128k，再到 1M。窗口变长带来三个问题：贵、慢、稀释。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Context window 的膨胀</h2>
+    <div class="content">
+      <div class="ctxbars">
+        <div class="cb"><span class="y">2020</span><div class="track"><div class="fill" style="width:12%"></div></div><span class="n">2k</span></div>
+        <div class="cb"><span class="y">2022</span><div class="track"><div class="fill" style="width:20%"></div></div><span class="n">4k</span></div>
+        <div class="cb"><span class="y">2023–24</span><div class="track"><div class="fill" style="width:62%"></div></div><span class="n">128k</span></div>
+        <div class="cb"><span class="y">2024–25</span><div class="track"><div class="fill" style="width:88%"></div></div><span class="n">1M</span></div>
+        <div class="cb hl"><span class="y">2026</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="n">1M+</span></div>
+      </div>
+      <div class="three">
+        <div class="card"><div class="k">贵</div><p>按 token 计费；长上下文预填更慢</p></div>
+        <div class="card"><div class="k">慢</div><p>prefill 与注意力成本上升</p></div>
+        <div class="card accent"><div class="k">稀释</div><p>中间信息被忽略；信号被噪声淹没</p></div>
+      </div>
+      <div class="keyline">窗口变长，不等于信息变多。</div>
+    </div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 44</span></div>
+  </section>
+
+  <!-- ============ S30 · 大海捞针 ============ -->
+  <section class="slide" data-notes="上下文窗口是固定预算。大海捞针测试：在长文里藏一句话，问模型那句话是什么；换长度、换位置，重复很多次。结果是越长越难，中间位置最差。窗口大不等于找得到。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Context 是有限的</h2>
+    <div class="content">
+      <p class="micro">大海捞针：在长文里藏一句话</p>
+      <div class="needle">
+        <span class="pin" style="left:70%"></span>
+        <span class="lab" style="left:70%">针</span>
+      </div>
+      <div class="two" style="margin-top:24px">
+        <div>
+          <p class="micro">检索准确率（示意）</p>
+          <div class="heatwrap">
+            <div class="heaty"><span>4k</span><span>8k</span><span>32k</span><span>128k</span></div>
+            <div class="heat"><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.40"></i><i style="--a:0.40"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.30"></i><i style="--a:0.20"></i><i style="--a:0.20"></i><i style="--a:0.30"></i><i style="--a:0.50"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.35"></i><i style="--a:0.18"></i><i style="--a:0.10"></i><i style="--a:0.10"></i><i style="--a:0.18"></i><i style="--a:0.35"></i><i style="--a:0.50"></i></div>
+          </div>
+          <p class="micro" style="margin-top:8px">横轴：针的位置 0 → 100%</p>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">怎么做</div><p>藏一句话，换长度、换位置，问它是什么</p></div>
+          <div class="card"><div class="k">结果</div><p>越长越难；中间位置最差</p></div>
+          <div class="card accent"><div class="k">含义</div><p>窗口大 ≠ 找得到</p></div>
+        </div>
+      </div>
+      <div class="keyline">长上下文不等于找得到。</div>
+    </div>
+    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 44</span></div>
+  </section>
+
+  <!-- ============ S31 · Context ============ -->
+  <section class="slide" data-notes="上下文窗口是工作台，不是仓库。放什么、怎么放，比放多少更重要。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Context engineering：工作台，不是仓库</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro">窗口里装什么</p>
+          <div class="ctxwin">
+            <div class="blk">system：规则</div>
+            <div class="blk">历史：前几轮</div>
+            <div class="blk hl">检索：相关文档</div>
+            <div class="blk">工具：返回结果</div>
+            <div class="blk">当前：这次的问题</div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">太长</div><p>检索，只放相关的</p></div>
+          <div class="card"><div class="k">太散</div><p>结构化，分块标注</p></div>
+          <div class="card"><div class="k">中间丢失</div><p>关键信息放首尾</p></div>
+          <div class="card accent"><div class="k">超窗</div><p>压缩、摘要、子 agent</p></div>
+        </div>
+      </div>
+      <div class="keyline">上下文不是越长越好，是越相关越好。</div>
+    </div>
+    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 44</span></div>
+  </section>
+
+  <!-- ============ S32 · CoT pruning ============ -->
+  <section class="slide" data-notes="推理模型会写很长的思维链。不是所有步骤都值得保留：剪枝、摘要、蒸馏、预算，都是为了让思考更短、更便宜。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>CoT pruning：不是所有思考都值得写</h2>
+    <div class="content">
+      <p class="micro">一条长思维链</p>
+      <div class="chain">
+        <span class="c">读题</span><span class="arr">→</span>
+        <span class="c keep">设变量</span><span class="arr">→</span>
+        <span class="c">展开</span><span class="arr">→</span>
+        <span class="c cut">重复展开</span><span class="arr">→</span>
+        <span class="c">分类讨论</span><span class="arr">→</span>
+        <span class="c cut">无关分支</span><span class="arr">→</span>
+        <span class="c keep">回到主线</span><span class="arr">→</span>
+        <span class="c keep">代入</span><span class="arr">→</span>
+        <span class="c keep">验算</span><span class="arr">→</span>
+        <span class="c keep">答案</span>
+      </div>
+      <div class="two" style="margin-top:22px">
+        <div class="stack">
+          <div class="card"><div class="k">剪枝</div><p>去掉重复、无关的分支</p></div>
+          <div class="card"><div class="k">摘要</div><p>长链压成短链</p></div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">蒸馏</div><p>用长 CoT 教短 CoT</p></div>
+          <div class="card accent"><div class="k">预算</div><p>限制思考 token，早停</p></div>
+        </div>
+      </div>
+      <div class="keyline">思考也有预算。</div>
+    </div>
+    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 44</span></div>
+  </section>
+
+  <!-- ============ S33 · Tool calling ============ -->
+  <section class="slide" data-notes="模型自己算 4**1.5 可能错；它只需要写一行 Python，由运行时执行，结果回到上下文。工具不只是计算器，也是模型接触外部世界的接口。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Tool calling：算不准，就交给程序</h2>
+    <div class="content">
+      <div class="two">
+        <div class="panel">
+          <div class="sentence">工具：run_python(code: str) → str</div>
+          <div class="idrow" style="margin-top:10px;color:#cfd2d9">call&nbsp; run_python("print(2 * 4**1.5)")<br>obs&nbsp;&nbsp; 16.0</div>
+          <div class="idrow" style="margin-top:12px;color:#8b8f98">// T = 2 × 4**1.5 = 16</div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">01 定义</div><p>工具签名：名字、参数、返回</p></div>
+          <div class="card"><div class="k">02 调用</div><p>模型输出一段代码</p></div>
+          <div class="card"><div class="k">03 执行</div><p>沙箱里真的跑</p></div>
+          <div class="card accent"><div class="k">04 观察</div><p>结果回到上下文，继续</p></div>
+        </div>
+      </div>
+      <div class="keyline">模型负责提议，程序负责算对。</div>
+    </div>
+    <div class="footer"><span>function calling</span><span class="pnum">33 / 44</span></div>
+  </section>
+
+  <!-- ============ S34 · Agent 与客户端 ============ -->
+  <section class="slide" data-notes="这是真实的 agent 客户端截图。左边是循环：Thought → 工具调用 → 观察，重复。右上是上下文用量，底部是模型、模式和这次会话的成本。模型只负责提议，客户端负责执行、记录、计费和停手。">
+    <p class="eyebrow"><b>03</b> / agent</p>
+    <h2>Agent：模型被放进一个循环</h2>
+    <div class="content">
+      <div class="agent">
+        <img class="shot-wide" src="assets/figures/agent_client.png" alt="Agent 客户端：Thought、工具调用、上下文与成本">
+        <div class="anno">
+          <div class="item"><div class="n">01</div><h4>循环</h4><p>Thought → 工具调用 → 观察，重复</p></div>
+          <div class="item"><div class="n">02</div><h4>上下文</h4><p>234K tokens · 23% used · $0.22</p></div>
+          <div class="item"><div class="n">03</div><h4>客户端</h4><p>模型 + 工具 + 会话 + 账单</p></div>
+          <div class="item"><div class="n">04</div><h4>模型</h4><p>DeepSeek V4.1 Flash · high</p></div>
+        </div>
+      </div>
+      <div class="keyline">模型负责提议，客户端负责把提议变成<b>行动</b>。</div>
+    </div>
+    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 44</span></div>
+  </section>
+
+
+  <!-- ============ S35 · Memory ============ -->
+  <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Memory：信号与噪声</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro">窗口里的内容</p>
+          <div class="memgrid">
+            <div class="box sig"><b>信号</b><span>任务 · 约束 · 决定 · 已验证事实</span></div>
+            <div class="box noi"><b>噪声</b><span>闲聊 · 重复 · 过期 · 原始日志</span></div>
+          </div>
+          <div class="memacts">
+            <div><b>写入</b><span>只存决定与事实</span></div>
+            <div><b>检索</b><span>按当前任务取</span></div>
+            <div><b>压缩</b><span>摘要、合并</span></div>
+            <div><b>遗忘</b><span>过期即删</span></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">工作记忆</div><p>当前窗口；只放这次要用的</p></div>
+          <div class="card"><div class="k">情节记忆</div><p>历史摘要；决定与未决问题</p></div>
+          <div class="card"><div class="k">语义记忆</div><p>外部库 + 检索；按需取</p></div>
+          <div class="card accent"><div class="k">程序记忆</div><p>system + tools；规则与能力</p></div>
+        </div>
+      </div>
+      <div class="keyline">记忆不是存得多，是取得准。</div>
+    </div>
+    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 44</span></div>
+  </section>
+
+  <!-- ============ S36 · Harness ============ -->
+  <section class="slide" data-notes="LLM 是概率系统。0.1% 的失败率，在 100 万次请求里就是 1000 次失败——墨菲定律在规模上一定成立。harness 不是让模型不犯错，而是让错误可发现、可拦住、可回滚。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Harness：接住小概率事件</h2>
+    <div class="content">
+      <div class="scaleband">LLM 是概率的：0.1% 失败率 × 100 万次请求 = <b>1,000 次失败</b></div>
+      <div class="two" style="margin-top:22px">
+        <div>
+          <p class="micro">System · 规则</p>
+          <div class="stack" style="gap:10px">
+            <div class="card" style="padding:14px 16px"><div class="k">作用</div><p>角色、规则、输出格式</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">边界</div><p>不是安全沙箱，可被注入</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">原则</div><p>规则写死，权限放运行时</p></div>
+          </div>
+        </div>
+        <div>
+          <p class="micro">Harness · 运行框架（工程脚手架）</p>
+          <div class="stack" style="gap:10px">
+            <div class="card" style="padding:14px 16px"><div class="k">验证</div><p>测试、编译、Lean</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">重试</div><p>失败重跑、回退、换路</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">权限</div><p>沙箱、白名单、预算</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">观测</div><p>日志、回放、评测</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="keyline">模型负责概率，harness 负责必然。</div>
+    </div>
+    <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 44</span></div>
+  </section>
+
+  <!-- ============ S37 · 系统图 ============ -->
+  <section class="slide" data-notes="把前面几页收成一张图：LLM 在中心，prompt 和 context 是这一次的输入；memory 和 agent loop 跨多次调用；harness 在最外面，管工具、权限、验证和日志。模型是 CPU，外面全是运行时。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>把模型放回系统里</h2>
+    <div class="content">
+      <div class="sysmap">
+        <div class="ringmap">
+          <div class="ring rh"></div>
+          <div class="ring rl"></div>
+          <div class="ring rc"></div>
+          <div class="core"><b>LLM</b><span>next token</span></div>
+          <div class="tag h">Harness</div>
+          <div class="tag loop">Agent loop</div>
+          <div class="tag mem">Memory</div>
+          <div class="tag prompt">Prompt</div>
+          <div class="tag ctx">Context</div>
+        </div>
+        <div class="syslegend">
+          <p class="micro" style="margin:0 0 2px">内圈：一次调用 · 中圈：跨调用 · 外圈：工程边界</p>
+          <div class="row"><span class="n">01</span><b>LLM</b><p>概率生成器：输入 token，输出下一个 token 的分布</p></div>
+          <div class="row"><span class="n">02</span><b>Prompt</b><p>这次的条件：system / user / few-shot</p></div>
+          <div class="row"><span class="n">03</span><b>Context</b><p>这次能看到的全部 token；窗口有限</p></div>
+          <div class="row"><span class="n">04</span><b>Memory</b><p>窗口外的状态：写入 / 检索 / 压缩 / 遗忘</p></div>
+          <div class="row"><span class="n">05</span><b>Agent loop</b><p>观察 → 行动 → 观察；状态放到外部</p></div>
+          <div class="row"><span class="n">06</span><b>Harness</b><p>工具、沙箱、权限、验证、日志</p></div>
+        </div>
+      </div>
+      <div class="keyline">模型是 CPU；prompt、context、memory、loop、harness 是运行时。</div>
+    </div>
+    <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 44</span></div>
+  </section>
+
+  <!-- ============ S38 · 加速 ============ -->
+  <section class="slide" data-notes="2023 年之前，AI 在数学里主要是解释概念、查文献、写代码；简单计算经常错，复杂证明仍要人。2024 年 7 月 IMO 银牌 28/42；2025 年 7 月金牌级 35/42——12 个月，+7 分。2026 年 10 月，OpenAI 报告用内部模型解决 372 个开放问题、722 篇论文，平均约 3 小时/题；其中 3 个撤回，同行评议未完成；这是公司声称，不是已核实事实。不是平滑曲线，是台阶。">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>加速：从基本应用到金牌</h2>
+    <div class="content">
+      <div class="ba">
+        <div class="side">
+          <div class="yr">2023 · 之前</div>
+          <h3>基本应用</h3>
+          <ul>
+            <li>解释概念、查文献、写代码</li>
+            <li>做简单计算，经常算错</li>
+            <li>复杂证明仍要人</li>
+            <li>角色：助手</li>
+          </ul>
+        </div>
+        <div class="mid"><div class="ar">→</div><div class="lab">约 19 个月</div></div>
+        <div class="side now">
+          <div class="yr">2025 · 之后</div>
+          <h3>研究级</h3>
+          <ul>
+            <li>IMO 2025 金牌级 35/42</li>
+            <li>Lean 形式证明可验</li>
+            <li>OpenAI 2026：372 题，平均 3 小时/题（报告）</li>
+            <li>角色：候选生成器</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accel">
+        <div class="st"><span class="d">2024.07</span><b>28/42</b><span class="m">银牌</span></div>
+        <div class="ar">→</div>
+        <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">金牌级</span></div>
+        <div class="note">12 个月，+7 分</div>
+      </div>
+      <div class="keyline">不是一条平滑的线，是<b>三个台阶</b>。</div>
+    </div>
+    <div class="footer"><span>from basic apps to research-level</span><span class="pnum">38 / 44</span></div>
+  </section>
+
+  <!-- ============ S39 · AI math 时间线 ============ -->
+  <section class="slide" data-notes="两年时间线：2023 年底 FunSearch 把 LLM 放进进化搜索；2024 年初 AlphaGeometry 解几何；2024 年 7 月 AlphaProof 在 IMO 拿银牌；2024 年 9 月 o1 把 test-time compute 变成产品；2025 年初 R1 用可验证奖励做 RL；2025 年 5 月 AlphaEvolve 改进矩阵乘法；2025 年 7 月两家在 IMO 拿金牌级；2026 年 5 月 OpenAI 模型给出 Erdős 单位距离猜想的反例；9 月声称解决 Navier–Stokes（千禧年问题之一），争议很大；10 月报告 372 个开放问题、722 篇论文（其中含与黎曼猜想相关的声称，不是完整证明；3 个撤回，待同行评议）。这些是公开声称，不是已核实结论。">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>时间线：三个台阶</h2>
+    <div class="content">
+      <div class="mathline">
+        <div class="phase">
+          <div class="ph">2023–24</div>
+          <h3>工具：搜索 + 验证</h3>
+          <div class="ms"><div class="d">2023.12</div><b>FunSearch</b><span>LLM + evaluator + 进化搜索；cap set 新构造</span></div>
+          <div class="ms"><div class="d">2024.01</div><b>AlphaGeometry</b><span>神经符号；IMO 几何 25/30</span></div>
+          <div class="ms"><div class="d">2024.07</div><b>AlphaProof</b><span>Lean + RL；IMO 2024 银牌 28/42（+AG2）</span></div>
+        </div>
+        <div class="phase">
+          <div class="ph">2024–25</div>
+          <h3>推理：RL + 测试时计算</h3>
+          <div class="ms"><div class="d">2024.09</div><b>OpenAI o1</b><span>RL 学思考；test-time compute</span></div>
+          <div class="ms"><div class="d">2025.01</div><b>DeepSeek-R1</b><span>RLVR；推理行为涌现；开放权重</span></div>
+          <div class="ms"><div class="d">2025.05</div><b>AlphaEvolve</b><span>进化编码 agent；4×4 复矩阵乘法 48 次</span></div>
+        </div>
+        <div class="phase">
+          <div class="ph">2025–26</div>
+          <h3>规模：从 benchmark 到开放问题</h3>
+          <div class="ms"><div class="d">2025.07</div><b>IMO 2025</b><span>金牌级 35/42；自然语言、无工具</span></div>
+          <div class="ms"><div class="d">2025</div><b>形式化金牌（声称）</b><span>Aristotle 等；Lean 可验</span></div>
+          <div class="ms"><div class="d">2026.05–10</div><b>OpenAI</b><span>单位距离反例；NS / 黎曼相关（声称）；372 个问题（报告）</span></div>
+        </div>
+      </div>
+      <div class="keyline">每一次跃迁，都是<b>生成器 + 验证器 + 搜索</b>。</div>
+    </div>
+    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 44</span></div>
+  </section>
+
+  <!-- ============ S40 · 公开表述 ============ -->
+  <section class="slide" data-notes="这些是公开表述，不是内部细节。FunSearch 强调 evaluator 和进化；AlphaGeometry 强调 1 亿条合成证明；AlphaProof 强调自动形式化、Lean、RL 和 test-time RL；o1 强调多花时间思考；R1 强调直接在基座模型上做 RL、用规则奖励；AlphaEvolve 强调进化编码 agent；IMO 2025 强调自然语言、无工具、人工评分；OpenAI 2026.10 报告 372 个开放问题、722 篇论文，但 3 个撤回、同行评议未完成。">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>他们怎么说的</h2>
+    <div class="content">
+      <div class="caveat">公开材料只覆盖一部分，完整的训练配方仍不可见。下面只看论文、博客和赛后声明里的<strong>公开表述</strong>（节选 / 意译）。</div>
+      <table class="claims">
+        <thead><tr><th>时间</th><th>工作</th><th>公开表述</th><th>读法</th></tr></thead>
+        <tbody>
+          <tr><td>2023.12</td><td>FunSearch</td><td>"pairing a pre-trained LLM ... with an automated evaluator"</td><td>搜索</td></tr>
+          <tr><td>2024.01</td><td>AlphaGeometry</td><td>"100 million synthetic theorems and proofs"</td><td>合成数据</td></tr>
+          <tr><td>2024.07</td><td>AlphaProof</td><td>autoformalization → Lean; RL + test-time RL</td><td>形式化</td></tr>
+          <tr><td>2024.09</td><td>o1</td><td>"spend more time thinking through problems"</td><td>推理</td></tr>
+          <tr><td>2025.01</td><td>R1</td><td>"directly apply RL ... rule-based rewards"</td><td>RLVR</td></tr>
+          <tr><td>2025.05</td><td>AlphaEvolve</td><td>"evolutionary coding agent"</td><td>进化</td></tr>
+          <tr><td>2025.07</td><td>IMO 2025</td><td>"natural language ... no tools"</td><td>端到端</td></tr>
+          <tr><td>2026.10</td><td>OpenAI</td><td>"372 open problems ... 722 papers"</td><td>开放问题</td></tr>
+        </tbody>
+      </table>
+      <div class="keyline">关键词在变，底层动作没变：<b>提议、验证、再搜索</b>。</div>
+    </div>
+    <div class="footer"><span>public claims · not internals</span><span class="pnum">40 / 44</span></div>
+  </section>
+
+  <!-- ============ S41 · 共同模式 ============ -->
+  <section class="slide" data-notes="把公开工作抽象成一个循环：LLM 生成候选；验证器给对错；搜索或 RL 把信号变成下一步；再回到生成器。模型提供概率，验证器提供梯度——严格说，验证器给的是奖励或筛选信号，梯度由训练算法算。没有验证器，就没有可规模化的信号。">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>共同的模式：生成 → 验证 → 搜索</h2>
+    <div class="content">
+      <div class="flow">
+        <div class="fcard"><div class="k">生成</div><h4>LLM</h4><p>候选证明、程序、构造</p></div>
+        <div class="farrow">→</div>
+        <div class="fcard"><div class="k">验证</div><h4>Lean / 测试 / 数值</h4><p>给出对错、分数、反例</p></div>
+        <div class="farrow">→</div>
+        <div class="fcard accent"><div class="k">搜索 / 学习</div><h4>best-of-N · 树 · 进化 · RL</h4><p>把信号变成下一步策略</p></div>
+      </div>
+      <div class="loop">↺ 回到生成器：下一轮更强</div>
+      <div class="three tight" style="margin-top:32px">
+        <div class="card"><div class="k">没有验证器</div><p>只能靠人看；无法规模化</p></div>
+        <div class="card"><div class="k">没有搜索</div><p>一次生成；好答案靠运气</p></div>
+        <div class="card accent"><div class="k">两者都有</div><p>概率被筛成正确，再写回模型</p></div>
+      </div>
+      <div class="keyline">模型提供概率，<b>验证器提供梯度</b>。</div>
+    </div>
+    <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 44</span></div>
+  </section>
+
+  <!-- ============ S42 · 猜测 ============ -->
+  <section class="slide" data-notes="以下是从公开材料反推的猜测，不是内部信息。数据上，自动形式化、合成题、拒绝采样；训练上，RLVR + 长 CoT；推理上，test-time search；工程上，把搜索蒸馏回模型；再加上大规模并行和 eval harness。OpenAI 说 372 题平均约 3 小时/题；如果让我猜，这不是一次生成，而是大量并行采样 + 自动验证 + 搜索/agent 群 + 蒸馏；3 小时是墙钟时间，背后可能是大量并发算力。">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>一些猜测：大结果可能是怎么来的</h2>
+    <div class="content">
+      <div class="caveat">以下不是内部信息，只是从公开论文、博客和 benchmark 反推的<strong>猜测</strong>。</div>
+      <div class="four spec">
+        <div class="card"><div class="k">01 数据</div><p><b>自动形式化 + 合成</b>：非形式题转 Lean；拒绝采样留下可验证的。</p></div>
+        <div class="card"><div class="k">02 训练</div><p><b>RLVR + 长 CoT</b>：答案可验证，奖励才能规模化。</p></div>
+        <div class="card"><div class="k">03 推理</div><p><b>Test-time search</b>：best-of-N、树搜索、进化。</p></div>
+        <div class="card"><div class="k">04 蒸馏</div><p><b>把搜索写回模型</b>：下一次不用搜那么久。</p></div>
+        <div class="card"><div class="k">05 工程</div><p><b>Harness</b>：并行、缓存、评测、回放。</p></div>
+        <div class="card accent"><div class="k">06 赌注</div><p><b>验证</b>：谁有更硬的 verifier，谁就有更快的飞轮。</p></div>
+      </div>
+      <p class="micro" style="margin-top:10px">OpenAI：372 题，平均 3 小时/题（报告）</p>
+      <div class="keyline">3 小时/题，更像<b>并行采样 + 验证 + 搜索</b>。</div>
+    </div>
+    <div class="footer"><span>speculation · not internals</span><span class="pnum">42 / 44</span></div>
+  </section>
+
+  <!-- ============ S43 · 还没解决 ============ -->
+  <section class="slide" data-notes="已经发生：竞赛题、形式证明、构造搜索、部分开放问题（2026 OpenAI 报告 372 个）。还没：选题、定义、长程研究计划、品味。解题可以搜索；做数学需要方向。">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>还没解决的：从解题到做数学</h2>
+    <div class="content">
+      <div class="two even">
+        <div>
+          <p class="micro">已经发生</p>
+          <div class="stack" style="gap:10px">
+            <div class="card" style="padding:14px 16px"><div class="k">竞赛题</div><p>IMO 金牌级；自然语言、限时</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">形式证明</div><p>Lean 可验；不再依赖人眼</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">构造搜索</div><p>cap set、矩阵乘法、调度</p></div>
+            <div class="card" style="padding:14px 16px"><div class="k">开放问题</div><p>OpenAI 报告 372 个；筛选仍靠人</p></div>
+          </div>
+        </div>
+        <div>
+          <p class="micro">还没</p>
+          <div class="stack" style="gap:10px">
+            <div class="card accent" style="padding:14px 16px"><div class="k">选题</div><p>什么问题值得做</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">定义</div><p>新概念、新结构</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">长程</div><p>几个月的研究计划</p></div>
+            <div class="card accent" style="padding:14px 16px"><div class="k">品味</div><p>美、重要、可生长</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="keyline">解题可以搜索；<b>做数学需要方向</b>。</div>
+    </div>
+    <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 44</span></div>
+  </section>
+
+  <!-- ============ S44 · 结论 ============ -->
+  <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
+    <p class="eyebrow"><b>06</b> / 结论</p>
+    <h2>从下一个 token 到下一个定理</h2>
+    <div class="content">
+      <div class="chain">
+        <span class="chip2">token</span><span class="arr">→</span>
+        <span class="chip2">概率</span><span class="arr">→</span>
+        <span class="chip2">候选</span><span class="arr">→</span>
+        <span class="chip2">验证</span><span class="arr">→</span>
+        <span class="chip2 last">定理</span>
+      </div>
+      <div class="closing">
+        <div><p>概率负责广度</p></div>
+        <div><p>验证负责正确</p></div>
+        <div class="last"><p>人负责方向</p></div>
+      </div>
+      <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
+    </div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">44 / 44</span></div>
+  </section>
+
+</div>
+
+<div id="hint">← → 翻页 · N 讲稿 · F 全屏</div>
+<div id="notes"></div>
+
+<script>
+  const stage = document.getElementById('stage');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const notes = document.getElementById('notes');
+  let cur = 0;
+
+  function fit(){
+    const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.985;
+    stage.style.transform = `translate(-50%,-50%) scale(${s})`;
+  }
+  function show(n){
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((el, i) => el.classList.toggle('active', i === cur));
+    notes.textContent = slides[cur].dataset.notes || '';
+    notes.classList.remove('on');
+  }
+  function next(){ show(cur + 1); }
+  function prev(){ show(cur - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+    else if (e.key.toLowerCase() === 'n') { notes.classList.toggle('on'); }
+    else if (e.key.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  window.addEventListener('resize', fit);
+  fit();
+  const hint = document.getElementById('hint');
+  setTimeout(() => hint.classList.add('hide'), 4500);
+  const params = new URLSearchParams(location.search);
+  const start = parseInt(params.get('s') || '0', 10);
+  const printMode = params.get('print') === '1';
+  if (printMode) {
+    document.body.classList.add('print');
+    slides.forEach(el => el.classList.add('active'));
+  } else {
+    show(Number.isFinite(start) ? start : 0);
+  }
+</script>
+</body>
+</html>
