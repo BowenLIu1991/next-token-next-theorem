@@ -1,6 +1,6 @@
 # 图表与素材清单（v8）
 
-> 当前两版各 **47 页**：英文主站 `docs/index.html`，中文 `docs/zh.html`。绝大多数“图”是 HTML/CSS 或 MathML 自绘；外部图片只有 3 张截图。
+> 当前两版各 **48 页**：英文主站 `docs/index.html`，中文 `docs/zh.html`。绝大多数“图”是 HTML/CSS 或 MathML 自绘；外部图片只有 3 张截图。
 > HTML 是事实来源；本清单只记素材来源与待办。
 
 ---

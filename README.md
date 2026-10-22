@@ -34,7 +34,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **47 页**，16:9，1280 × 720。
+- **48 页**，16:9，1280 × 720。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
 - 键盘操作：
   - `←` `→` / `Space`：翻页
@@ -100,8 +100,8 @@ python3 -m pip install pillow pypdf
 │   ├── from-next-token-to-next-theorem-zh.pdf   # 中文
 │   └── .nojekyll
 ├── slides/
-│   ├── en.html                   # English source (47 pages)
-│   ├── index.html                # 中文源文件（47 页，自包含）
+│   ├── en.html                   # English source (48 pages)
+│   ├── index.html                # 中文源文件（48 页，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -172,8 +172,8 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 
 ## 状态
 
-- [x] 47 页 HTML 幻灯片（English + 中文）
-- [x] PDF 导出（两版各 47 页）
+- [x] 48 页 HTML 幻灯片（English + 中文）
+- [x] PDF 导出（两版各 48 页）
 - [x] GitHub Pages 目录（`docs/`，英文主站）
 - [x] 讲稿、提纲、文献、Q&A
 - [x] tokenizer 实测数据
