@@ -742,7 +742,7 @@
       <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
-    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 46</span></div>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 47</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
@@ -792,7 +792,7 @@
         <div class="q"><span class="n">03</span>我们怎么用它干活？</div>
       </div>
     </div>
-    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 46</span></div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 47</span></div>
   </section>
 
   <!-- ============ S3 · 切分 ============ -->
@@ -837,7 +837,7 @@
       <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
       <div class="keyline">子词不是语义单位，是<b>序列长度</b>与<b>词表大小</b>之间的工程折中。</div>
     </div>
-    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">03 / 46</span></div>
+    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">03 / 47</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
@@ -878,7 +878,7 @@
       </div>
       <div class="keyline">ID 是<b>行号</b>；换模型，就是换一张表。</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 46</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 47</span></div>
   </section>
 
   <!-- ============ S5 · 用量与换算 ============ -->
@@ -895,7 +895,7 @@
       <p class="micro" style="margin-top:12px">直观理解：一个词、一个数字、一个符号 ≈ 1 token；不同 tokenizer 不同，以返回的 usage 为准。</p>
       <div class="keyline">Token 既是模型的最小单位，也是账单的最小单位。</div>
     </div>
-    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 46</span></div>
+    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 47</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
@@ -920,7 +920,7 @@
       </div>
       <div class="keyline">同一段上下文，命中缓存与不命中，差一个<b>数量级</b>。</div>
     </div>
-    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 46</span></div>
+    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 47</span></div>
   </section>
 
   <!-- ============ S7 · 从 ID 到向量 ============ -->
@@ -950,7 +950,7 @@
       <div class="keyline">ID 是<b>地址</b>，向量是<b>内容</b>。</div>
       <p class="micro" style="margin-top:14px">这一步叫 embedding；每一维没有名字，但距离有意义。</p>
     </div>
-    <div class="footer"><span>embedding</span><span class="pnum">07 / 46</span></div>
+    <div class="footer"><span>embedding</span><span class="pnum">07 / 47</span></div>
   </section>
 
   <!-- ============ S8 · 输入到概率分布 ============ -->
@@ -1013,7 +1013,7 @@
       </div>
       <div class="keyline">它不查数据库，也不“理解”；它给词表里每个 token <b>打分</b>，再把分数变成<b>概率</b>。</div>
     </div>
-    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 46</span></div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 47</span></div>
   </section>
 
   <!-- ============ S9 · 采样 ============ -->
@@ -1056,7 +1056,7 @@
       </div>
       <div class="keyline">同一个 prompt，两次结果可能不同——这是<b>采样</b>，相当于<b>掷骰子</b>。</div>
     </div>
-    <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 46</span></div>
+    <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 47</span></div>
   </section>
 
   <!-- ============ S10 · 采样算法 ============ -->
@@ -1130,7 +1130,7 @@
 
       <div class="keyline">温度改形状，top-p 截尾巴，<b>u</b> 决定落在哪一段。</div>
     </div>
-    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 46</span></div>
+    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 47</span></div>
   </section>
 
   <!-- ============ S11 · 无状态 ============ -->
@@ -1157,7 +1157,7 @@
       <div class="keyline">模型无状态；所谓“对话”，是客户端把历史<b>重发</b>一遍。</div>
       <p class="micro" style="margin-top:14px">参数在推理时不更新；状态只存在于上下文里。</p>
     </div>
-    <div class="footer"><span>stateless</span><span class="pnum">11 / 46</span></div>
+    <div class="footer"><span>stateless</span><span class="pnum">11 / 47</span></div>
   </section>
 
 
@@ -1173,7 +1173,7 @@
       </div>
       <div class="keyline">换的是<b>训练信号</b>。</div>
     </div>
-    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 46</span></div>
+    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 47</span></div>
   </section>
 
   <!-- ============ S13 · Pretrain ============ -->
@@ -1202,7 +1202,7 @@
       </div>
       <div class="keyline">它学会的是世界的<b>统计结构</b>。</div>
     </div>
-    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 46</span></div>
+    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 47</span></div>
   </section>
 
   <!-- ============ S14 · 前 20 个 token ============ -->
@@ -1258,7 +1258,7 @@
       <div class="lossex">L = −[ log p(书|本) + log p(系统|本 书) + … + log p(比较|前 19 个) ]</div>
       <div class="keyline" style="margin-top:10px">训练并行，推理串行。</div>
     </div>
-    <div class="footer"><span>pretrain</span><span class="pnum">14 / 46</span></div>
+    <div class="footer"><span>pretrain</span><span class="pnum">14 / 47</span></div>
   </section>
 
   <!-- ============ S15 · loss 是什么 ============ -->
@@ -1290,7 +1290,7 @@
       </div>
       <div class="keyline">这个 loss 就是模型给数据<b>编码的长度</b>。</div>
     </div>
-    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 46</span></div>
+    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 47</span></div>
   </section>
 
   <!-- ============ S16 · 压缩即智能 ============ -->
@@ -1307,7 +1307,7 @@
       <p class="micro" style="margin-top:18px">压缩解释知识从哪来；搜索与纠错，靠后面的 RL。</p>
       <div class="keyline">这也是我近几年最相信的一句话。</div>
     </div>
-    <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 46</span></div>
+    <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 47</span></div>
   </section>
 
   <!-- ============ S17 · SFT ============ -->
@@ -1336,7 +1336,7 @@
       </div>
       <div class="keyline">同一套 loss，换了一个<b>求和范围</b>。</div>
     </div>
-    <div class="footer"><span>《天体力学基础》· SFT</span><span class="pnum">17 / 46</span></div>
+    <div class="footer"><span>《天体力学基础》· SFT</span><span class="pnum">17 / 47</span></div>
   </section>
 
   <!-- ============ S18 · 三种角色 ============ -->
@@ -1359,7 +1359,7 @@
       <p class="micro" style="margin-top:16px">system / user = 条件 &nbsp;·&nbsp; assistant = 监督目标（只算这些 token 的 loss）</p>
       <div class="keyline">system 定规则，user 给任务，assistant 是学习目标。</div>
     </div>
-    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 46</span></div>
+    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 47</span></div>
   </section>
 
   <!-- ============ S19 · 怎么预测 ============ -->
@@ -1388,7 +1388,7 @@
       <p class="micro" style="margin-top:14px">概率为示意，用于说明机制 · 真实输出以模型为准</p>
       <div class="keyline">一次只走一步；把结果接回输入，再走下一步。</div>
     </div>
-    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 46</span></div>
+    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 47</span></div>
   </section>
 
   <!-- ============ S20 · 什么是强化学习 ============ -->
@@ -1424,7 +1424,7 @@
       <p class="micro" style="margin-top:10px">π 策略 · γ 折扣 · r<sub>t</sub> 奖励 · E 期望</p>
       <div class="keyline">RL 学的是<b>策略</b>。</div>
     </div>
-    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 46</span></div>
+    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 47</span></div>
   </section>
 
   <!-- ============ S21 · RL 的游戏前史 ============ -->
@@ -1447,7 +1447,7 @@
       <div class="sidenote"><b>AlphaFold 是监督学习。</b> 它用已知结构做标签；没有奖励，也没有试错。</div>
       <div class="keyline">数学和代码自带 <b>simulator</b>。</div>
     </div>
-    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 46</span></div>
+    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 47</span></div>
   </section>
 
   <!-- ============ S22 · RL ============ -->
@@ -1486,7 +1486,7 @@
       <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · DeepSeek moment</p>
       <div class="keyline">同一段文字，从“预测下一个词”变成“答对才给分”。</div>
     </div>
-    <div class="footer"><span>《天体力学基础》· RLVR</span><span class="pnum">22 / 46</span></div>
+    <div class="footer"><span>《天体力学基础》· RLVR</span><span class="pnum">22 / 47</span></div>
   </section>
 
   <!-- ============ S23 · RL 算法 ============ -->
@@ -1508,7 +1508,7 @@
       <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO 是 RL；DPO 是偏好优化，常被归到 RLHF 谱系。</p>
       <div class="keyline">算法不同，循环相同：采样 → 打分 → 更新。</div>
     </div>
-    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 46</span></div>
+    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 47</span></div>
   </section>
 
   <!-- ============ S24 · 天然优势 ============ -->
@@ -1533,7 +1533,7 @@
       </div>
       <div class="keyline">反馈越明确，试错越便宜，RL 越有效。</div>
     </div>
-    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 46</span></div>
+    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 47</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
@@ -1548,7 +1548,7 @@
       </div>
       <div class="keyline">每一步都在解决前一步留下的问题。</div>
     </div>
-    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 46</span></div>
+    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 47</span></div>
   </section>
 
   <!-- ============ S26 · ChatGPT ============ -->
@@ -1569,7 +1569,7 @@
       </div>
       <div class="keyline">会说话，是训练出来的。</div>
     </div>
-    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 46</span></div>
+    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 47</span></div>
   </section>
 
   <!-- ============ S27 · Prompt ============ -->
@@ -1618,7 +1618,7 @@
       </div>
       <div class="keyline">加内容，就是在改<b>条件概率</b>。</div>
     </div>
-    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 46</span></div>
+    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 47</span></div>
   </section>
 
   <!-- ============ S28 · CoT ============ -->
@@ -1643,7 +1643,7 @@
       </div>
       <div class="keyline">CoT 负责写计划；程序负责算数。</div>
     </div>
-    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 46</span></div>
+    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 47</span></div>
   </section>
 
   <!-- ============ S29 · Context 膨胀 ============ -->
@@ -1665,7 +1665,7 @@
       </div>
       <div class="keyline">信息密度比窗口长度更重要。</div>
     </div>
-    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 46</span></div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 47</span></div>
   </section>
 
   <!-- ============ S30 · 大海捞针 ============ -->
@@ -1695,7 +1695,7 @@
       </div>
       <div class="keyline">检索准确率才是关键。</div>
     </div>
-    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 46</span></div>
+    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 47</span></div>
   </section>
 
   <!-- ============ S31 · Context ============ -->
@@ -1723,7 +1723,7 @@
       </div>
       <div class="keyline">上下文越相关越好。</div>
     </div>
-    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 46</span></div>
+    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 47</span></div>
   </section>
 
   <!-- ============ S32 · CoT pruning ============ -->
@@ -1756,7 +1756,7 @@
       </div>
       <div class="keyline">思考也有预算。</div>
     </div>
-    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 46</span></div>
+    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 47</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -1779,7 +1779,7 @@
       </div>
       <div class="keyline">模型负责提议，程序负责算对。</div>
     </div>
-    <div class="footer"><span>function calling</span><span class="pnum">33 / 46</span></div>
+    <div class="footer"><span>function calling</span><span class="pnum">33 / 47</span></div>
   </section>
 
   <!-- ============ S34 · Agent 与客户端 ============ -->
@@ -1798,7 +1798,7 @@
       </div>
       <div class="keyline">模型负责提议，客户端负责把提议变成<b>行动</b>。</div>
     </div>
-    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 46</span></div>
+    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 47</span></div>
   </section>
 
 
@@ -1830,7 +1830,7 @@
       </div>
       <div class="keyline">记忆的关键是取得准。</div>
     </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 46</span></div>
+    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 47</span></div>
   </section>
 
   <!-- ============ S36 · Harness ============ -->
@@ -1860,7 +1860,7 @@
       </div>
       <div class="keyline">模型负责概率，harness 负责必然。</div>
     </div>
-    <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 46</span></div>
+    <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 47</span></div>
   </section>
 
   <!-- ============ S37 · 系统图 ============ -->
@@ -1892,7 +1892,7 @@
       </div>
       <div class="keyline">模型是 CPU；prompt、context、memory、loop、harness 是运行时。</div>
     </div>
-    <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 46</span></div>
+    <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 47</span></div>
   </section>
 
   <!-- ============ S38 · 加速 ============ -->
@@ -1931,7 +1931,7 @@
       </div>
       <div class="keyline">这是一条阶梯：<b>三个台阶</b>。</div>
     </div>
-    <div class="footer"><span>from basic apps to research-level</span><span class="pnum">38 / 46</span></div>
+    <div class="footer"><span>from basic apps to research-level</span><span class="pnum">38 / 47</span></div>
   </section>
 
   <!-- ============ S39 · AI math 时间线 ============ -->
@@ -1964,7 +1964,7 @@
       </div>
       <div class="keyline">每一次跃迁，都是<b>生成器 + 验证器 + 搜索</b>。</div>
     </div>
-    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 46</span></div>
+    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 47</span></div>
   </section>
 
   <!-- ============ S40 · 公开表述 ============ -->
@@ -1988,7 +1988,7 @@
       </table>
       <div class="keyline">关键词在变，底层动作没变：<b>提议、验证、再搜索</b>。</div>
     </div>
-    <div class="footer"><span>public claims · public sources</span><span class="pnum">40 / 46</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">40 / 47</span></div>
   </section>
 
   <!-- ============ S41 · 共同模式 ============ -->
@@ -2011,7 +2011,7 @@
       </div>
       <div class="keyline">模型提供概率，<b>验证器提供梯度</b>。</div>
     </div>
-    <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 46</span></div>
+    <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 47</span></div>
   </section>
 
   <!-- ============ S42 · 猜测 ============ -->
@@ -2031,7 +2031,7 @@
       <p class="micro" style="margin-top:10px">OpenAI：372 题，平均 3 小时/题（报告）</p>
       <div class="keyline">3 小时/题，更像<b>并行采样 + 验证 + 搜索</b>。</div>
     </div>
-    <div class="footer"><span>speculation · public sources</span><span class="pnum">42 / 46</span></div>
+    <div class="footer"><span>speculation · public sources</span><span class="pnum">42 / 47</span></div>
   </section>
 
   <!-- ============ S43 · 还没解决 ============ -->
@@ -2061,10 +2061,28 @@
       </div>
       <div class="keyline">解题可以搜索；<b>做数学需要方向</b>。</div>
     </div>
-    <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 46</span></div>
+    <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 47</span></div>
   </section>
 
-  <!-- ============ S44 · 算法工程师的困境 ============ -->
+  <!-- ============ S44 · 电机与流水线 ============ -->
+  <section class="slide" data-notes="Eric Schmidt 讲过一个故事：电机刚发明时，工厂主把中央蒸汽机换成电机，其他不变，效率 +30%。几十年后，电机做小，每台机器一台电机，工厂围绕流程重新设计，流水线诞生，效率几十倍。技术没变，变的是工作方式。AI 今天一样：在旧流程里问一下 AI，只拿到 30%；把流程围绕 agent/harness 重新设计，才可能拿到几十倍。">
+    <p class="eyebrow"><b>06</b> / 结论</p>
+    <h2>电机与流水线</h2>
+    <p class="sub" style="margin-top:8px">Eric Schmidt 讲过一个故事；AI 正在经历同一件事。</p>
+    <div class="content">
+      <div class="four">
+        <div class="card"><div class="k">电气化 · 旧布局</div><div class="big" style="font-size:30px">+30%</div><p>电机放在蒸汽机的位置</p></div>
+        <div class="card accent"><div class="k">电气化 · 新布局</div><div class="big" style="font-size:30px">10×+</div><p>每台机器一台电机；工厂围绕流程重建</p></div>
+        <div class="card"><div class="k">AI · 旧流程</div><div class="big" style="font-size:30px">+30%</div><p>在旧步骤里问一下 AI：润色、PPT、补全</p></div>
+        <div class="card accent"><div class="k">AI · 新流程</div><div class="big" style="font-size:30px">10×+</div><p>agent、工具、context、验证、循环</p></div>
+      </div>
+      <div class="keyline">收益在<b>布局</b>。</div>
+      <p class="micro" style="margin-top:8px">大多数团队停在 +30%：AI 仍停在旧步骤里。</p>
+    </div>
+    <div class="footer"><span>电机 · 流水线 · 工作方式</span><span class="pnum">44 / 47</span></div>
+  </section>
+
+  <!-- ============ S45 · 算法工程师的困境 ============ -->
   <section class="slide" data-notes="算法工程师的困境一年前就出现了：模型会写代码之后，价值从实现转向定义问题、设计 harness、验证和对系统负责。数学正在经历同一件事。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>算法工程师的困境</h2>
@@ -2094,10 +2112,10 @@
       </div>
       <div class="keyline">工作从「产出答案」转向<b>「指挥搜索」</b>。</div>
     </div>
-    <div class="footer"><span>工程师 · agent · 方向</span><span class="pnum">44 / 46</span></div>
+    <div class="footer"><span>工程师 · agent · 方向</span><span class="pnum">45 / 47</span></div>
   </section>
 
-  <!-- ============ S45 · 网页到 CLI ============ -->
+  <!-- ============ S46 · 网页到 CLI ============ -->
   <section class="slide" data-notes="从网页对话框到工作目录：网页里你复制答案；IDE 里它补全代码；CLI/桌面 agent 里它能读写文件、跑命令和测试、用 git。同一个模型，换一个 harness，能力就不同。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>从网页对话框到工作目录</h2>
@@ -2133,10 +2151,10 @@
       <div class="keyline">同一个模型，换一个 <b>harness</b>。</div>
       <p class="micro" style="margin-top:8px">在科研仓库里，它可以真的跑实验，把数字带回来。</p>
     </div>
-    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">45 / 46</span></div>
+    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">46 / 47</span></div>
   </section>
 
-  <!-- ============ S46 · 结论 ============ -->
+  <!-- ============ S47 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>从下一个 token 到下一个定理</h2>
@@ -2155,7 +2173,7 @@
       </div>
       <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">46 / 46</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">47 / 47</span></div>
   </section>
 
 </div>

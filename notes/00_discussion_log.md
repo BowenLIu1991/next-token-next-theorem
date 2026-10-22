@@ -370,12 +370,20 @@ S27 的数学表达：p(y | x) → p(y | x, c, e)，示例 p(16)=0.18 → 0.71�
 
 ---
 
-## 第二十七轮：从网页到 CLI / 桌面 agent（当前）
+## 第二十七轮：从网页到 CLI / 桌面 agent
 
 - 新增 S45「从网页对话框到工作目录」：Web chat → IDE copilot → CLI / desktop agent；OpenCode / Claude Code / Codex CLI / Cursor / ChatGPT / Claude desktop。
 - 收尾：同一个模型，换一个 harness；在科研仓库里，它可以真的跑实验，把数字带回来。
 - 结论页顺延为 S46；两版各 46 页。
 - LinkedIn 素材和 post.md 同步为 46 页。
+
+---
+
+## 第二十八轮：电机与流水线（当前）
+
+- 新增 S44「电机与流水线」：Eric Schmidt 的故事；旧布局 +30%，新布局 10×+；AI 同样，旧流程 +30%，新流程 10×+。
+- 收尾：收益在布局；大多数团队停在 +30%。
+- 结论段顺序：电机 → 工程师困境 → 网页到 CLI → 结论；两版各 47 页。
 
 ---
 
