@@ -614,6 +614,22 @@
   .syslegend b{font-size:14px;line-height:1.3}
   .syslegend p{font-size:12px;color:var(--muted);line-height:1.45;margin:0}
 
+  /* ---------- motor / assembly line ---------- */
+  .factory{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .fcard2{border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:12px 14px}
+  .fcard2.accent{border-color:rgba(194,65,12,.45);background:#fff8f2}
+  .fh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+  .fh .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .fh .big{font-family:var(--mono);font-size:20px;letter-spacing:-.02em}
+  .fcard2.accent .fh .big{color:var(--accent)}
+  .fcard2 svg{display:block;width:100%;height:92px}
+  .fcard2 p{font-size:11.5px;line-height:1.4;color:var(--muted);margin:5px 0 0}
+  .ai-band{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+  .aicard{border-top:1px solid var(--line);padding-top:6px}
+  .aicard .fh .big{font-size:18px}
+  .aicard svg{display:block;width:100%;height:46px}
+  .aicard p{font-size:11.5px;color:var(--muted);margin:3px 0 0}
+
   /* ---------- AI × math ---------- */
   .ba{display:grid;grid-template-columns:1fr 64px 1fr;align-items:stretch}
   .ba .side{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fffdf8}
@@ -2072,11 +2088,65 @@
     <h2>The motor and the assembly line</h2>
     <p class="sub" style="margin-top:8px">A story Eric Schmidt tells — and the AI parallel.</p>
     <div class="content">
-      <div class="four">
-        <div class="card"><div class="k">Electrification · same layout</div><div class="big" style="font-size:30px">+30%</div><p>The motor takes the steam engine's place</p></div>
-        <div class="card accent"><div class="k">Electrification · new layout</div><div class="big" style="font-size:30px">10×+</div><p>Small motors per machine; the factory is rebuilt around flow</p></div>
-        <div class="card"><div class="k">AI · same workflow</div><div class="big" style="font-size:30px">+30%</div><p>Ask AI inside the old step: polish, slides, autocomplete</p></div>
-        <div class="card accent"><div class="k">AI · new workflow</div><div class="big" style="font-size:30px">10×+</div><p>Agents, tools, context, verification, loop</p></div>
+      <div class="factory">
+        <div class="fcard2">
+          <div class="fh"><span class="k">Electrification · same layout</span><span class="big">+30%</span></div>
+          <svg viewBox="0 0 480 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <line x1="190" y1="45" x2="100" y2="31" stroke="#b9b3a6" stroke-width="1.4"/>
+            <line x1="290" y1="45" x2="380" y2="31" stroke="#b9b3a6" stroke-width="1.4"/>
+            <line x1="190" y1="65" x2="100" y2="79" stroke="#b9b3a6" stroke-width="1.4"/>
+            <line x1="290" y1="65" x2="380" y2="79" stroke="#b9b3a6" stroke-width="1.4"/>
+            <rect x="190" y="27" width="100" height="56" rx="8" fill="#12151b"/>
+            <text x="240" y="59" text-anchor="middle" fill="#e9e6dc" font-size="10" font-family="monospace">STEAM</text>
+            <rect x="45" y="18" width="55" height="26" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+            <rect x="380" y="18" width="55" height="26" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+            <rect x="45" y="66" width="55" height="26" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+            <rect x="380" y="66" width="55" height="26" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+          </svg>
+          <p>The motor replaces the steam engine; everything else stays.</p>
+        </div>
+        <div class="fcard2 accent">
+          <div class="fh"><span class="k">Electrification · new layout</span><span class="big">10×+</span></div>
+          <svg viewBox="0 0 480 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <line x1="20" y1="92" x2="456" y2="92" stroke="#dcd7cb" stroke-width="2"/>
+            <path d="M456 92 l-9 -4 v8 z" fill="#9a9ea6"/>
+            <rect x="30" y="40" width="60" height="34" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+            <rect x="150" y="40" width="60" height="34" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+            <rect x="270" y="40" width="60" height="34" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+            <rect x="390" y="40" width="60" height="34" rx="4" fill="#fffdf8" stroke="#dcd7cb"/>
+            <circle cx="60" cy="27" r="7" fill="#c2410c"/><text x="60" y="30" text-anchor="middle" fill="#fff" font-size="7" font-family="monospace">M</text><line x1="60" y1="34" x2="60" y2="40" stroke="#c2410c"/>
+            <circle cx="180" cy="27" r="7" fill="#c2410c"/><text x="180" y="30" text-anchor="middle" fill="#fff" font-size="7" font-family="monospace">M</text><line x1="180" y1="34" x2="180" y2="40" stroke="#c2410c"/>
+            <circle cx="300" cy="27" r="7" fill="#c2410c"/><text x="300" y="30" text-anchor="middle" fill="#fff" font-size="7" font-family="monospace">M</text><line x1="300" y1="34" x2="300" y2="40" stroke="#c2410c"/>
+            <circle cx="420" cy="27" r="7" fill="#c2410c"/><text x="420" y="30" text-anchor="middle" fill="#fff" font-size="7" font-family="monospace">M</text><line x1="420" y1="34" x2="420" y2="40" stroke="#c2410c"/>
+          </svg>
+          <p>Small motors per machine; the factory is rebuilt around flow.</p>
+        </div>
+      </div>
+      <div class="ai-band">
+        <div class="aicard">
+          <div class="fh"><span class="k">AI · same workflow</span><span class="big">+30%</span></div>
+          <svg viewBox="0 0 480 60" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <rect x="55" y="14" width="90" height="30" rx="5" fill="#fffdf8" stroke="#dcd7cb"/><text x="100" y="33" text-anchor="middle" fill="#3f3b34" font-size="10" font-family="monospace">Work</text>
+            <text x="160" y="34" text-anchor="middle" fill="#9a9ea6" font-size="14">→</text>
+            <rect x="195" y="14" width="90" height="30" rx="5" fill="#fff8f2" stroke="#c2410c"/><text x="240" y="33" text-anchor="middle" fill="#c2410c" font-size="10" font-family="monospace">AI</text>
+            <text x="300" y="34" text-anchor="middle" fill="#9a9ea6" font-size="14">→</text>
+            <rect x="335" y="14" width="90" height="30" rx="5" fill="#fffdf8" stroke="#dcd7cb"/><text x="380" y="33" text-anchor="middle" fill="#3f3b34" font-size="10" font-family="monospace">Work</text>
+          </svg>
+          <p>Ask AI inside the old step: polish, slides, autocomplete.</p>
+        </div>
+        <div class="aicard">
+          <div class="fh"><span class="k">AI · new workflow</span><span class="big">10×+</span></div>
+          <svg viewBox="0 0 480 60" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <rect x="45" y="12" width="90" height="30" rx="5" fill="#fff8f2" stroke="#c2410c"/><text x="90" y="31" text-anchor="middle" fill="#c2410c" font-size="10" font-family="monospace">Agent</text>
+            <text x="150" y="32" text-anchor="middle" fill="#9a9ea6" font-size="14">→</text>
+            <rect x="180" y="12" width="90" height="30" rx="5" fill="#fffdf8" stroke="#dcd7cb"/><text x="225" y="31" text-anchor="middle" fill="#3f3b34" font-size="10" font-family="monospace">Tools</text>
+            <text x="285" y="32" text-anchor="middle" fill="#9a9ea6" font-size="14">→</text>
+            <rect x="315" y="12" width="90" height="30" rx="5" fill="#fffdf8" stroke="#dcd7cb"/><text x="360" y="31" text-anchor="middle" fill="#3f3b34" font-size="10" font-family="monospace">Verify</text>
+            <path d="M360 44 C360 55 90 55 90 44" fill="none" stroke="#c2410c" stroke-dasharray="3 3"/>
+            <path d="M90 44 l-4 6 h8 z" fill="#c2410c"/>
+          </svg>
+          <p>Agents, tools, context, verification, loop.</p>
+        </div>
       </div>
       <div class="keyline">The gain is in the <b>layout</b>.</div>
       <p class="micro" style="margin-top:8px">Most teams stop at +30%: AI sits inside the old step.</p>
