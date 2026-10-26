@@ -2,11 +2,11 @@
 
 ## English main post
 
-3 hours. 48 slides. Two languages.
+3 hours. 50 slides. Two languages.
 
 I built the slides for a 45-minute talk at the Chinese annual celestial mechanics meeting: a foundational introduction to LLMs and agents, “From the Next Token to the Next Theorem.”
 
-DeepSeek V4.1 Flash 1017 outperformed my expectations: it expanded the outline, wrote the English/Chinese copy, built the HTML/CSS and MathML, exported a 48-page PDF, and packaged it for GitHub Pages.
+DeepSeek V4.1 Flash 1017 outperformed my expectations: it expanded the outline, wrote the English/Chinese copy, built the HTML/CSS and MathML, exported a 50-page PDF, and packaged it for GitHub Pages.
 
 I handled the narrative, the fact-checking, the cuts, the ending.
 
@@ -48,9 +48,9 @@ A short thread on how it came together ↓
 
 ## 中文主帖
 
-3 小时，48 页，中英双语。
+3 小时，50 页，中英双语。
 
-我为中国天体力学年会做了一份 45 分钟的 LLM + agent 入门报告：《从下一个 token 到下一个定理》。DeepSeek V4.1 Flash 1017 超出预期：把提纲扩成 48 页，写了中英文文案、HTML/CSS、MathML，导出 48 页 PDF，打包成 GitHub Pages。我负责叙事、事实和取舍。
+我为中国天体力学年会做了一份 45 分钟的 LLM + agent 入门报告：《从下一个 token 到下一个定理》。DeepSeek V4.1 Flash 1017 超出预期：把提纲扩成 50 页，写了中英文文案、HTML/CSS、MathML，导出 50 页 PDF，打包成 GitHub Pages。我负责叙事、事实和取舍。
 
 生产便宜了，判断更贵了。还在优化，链接在评论。想深入聊，欢迎留言，我们一起探索。
 
