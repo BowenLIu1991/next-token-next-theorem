@@ -2107,7 +2107,7 @@
   </section>
 
   <!-- ============ S44 · Motor & assembly line ============ -->
-  <section class="slide" data-notes="Eric Schmidt 讲过一个故事：电机刚发明时，工厂主把中央蒸汽机换成电机，其他不变，效率 +30%。几十年后，电机做小，每台机器一台电机，工厂围绕流程重新设计，流水线诞生，效率几十倍。技术没变，变的是工作方式。AI 今天一样：在旧流程里问一下 AI，只拿到 30%；把流程围绕 agent/harness 重新设计，才可能拿到几十倍。">
+  <section class="slide" data-notes="Eric Schmidt tells a story: when motors were invented, factory owners merely replaced central steam engines with motors. Everything else stayed the same. Efficiency gained roughly 30%. Decades later, small motors powered individual machines; factories were rebuilt entirely around production flow. The assembly line emerged, raising output by orders of magnitude. Today's AI is identical: prompting harder inside a chat window resets to zero each session (the 30% trap). Building persistent context, code rules, and verification pipelines turns domain knowledge into compounding assets. Models are rented; context and systems are owned.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>The motor and the assembly line</h2>
     <p class="sub" style="margin-top:8px">A story Eric Schmidt tells — and the AI parallel.</p>
@@ -2119,13 +2119,13 @@
           <p>The assembly line was born. Efficiency rose by an order of magnitude.</p>
         </div>
         <div>
-          <div class="numrow"><span class="n">30%</span><span class="l">same layout<br>The motor takes the steam engine's place</span></div>
-          <div class="numrow accent"><span class="n">10×+</span><span class="l">new layout<br>Small motors per machine; the factory is rebuilt around flow</span></div>
-          <p class="pull">The gap is the <b>redesign of work</b>.</p>
+          <div class="numrow"><span class="n">30%</span><span class="l">Standalone · Prompting Harder<br>Resets each session · No compounding</span></div>
+          <div class="numrow accent"><span class="n">10×+</span><span class="l">Assembly line · Context Engineering<br>Persistent assets &amp; rules · Continuous compounding</span></div>
+          <p class="pull">The gap is <b>work designed to compound</b>.</p>
         </div>
       </div>
-      <div class="ai-note">AI today: “ask AI” inside the old step → 30%. Redesign the workflow around agents, tools, context, verification, and a loop → 10×+.</div>
-      <div class="keyline">The gain is in the <b>layout</b>.</div>
+      <div class="ai-note">Models are rented; context and systems are owned. Do not merely prompt in isolation; turn domain rules, tools, and evals into persistent assets.</div>
+      <div class="keyline">The gain is in <b>layout and compounding</b>.</div>
     </div>
     <div class="footer"><span>motor · assembly line · workflow</span><span class="pnum">44 / 50</span></div>
   </section>
@@ -2164,29 +2164,29 @@
   </section>
 
   <!-- ============ S46 · Web to CLI ============ -->
-  <section class="slide" data-notes="从网页对话框到工作目录：网页里你复制答案；IDE 里它补全代码；CLI/桌面 agent 里它能读写文件、跑命令和测试、用 git。同一个模型，换一个 harness，能力就不同。">
+  <section class="slide" data-notes="Serious research cannot remain in web chat (Level 1 wrappers): it neither accesses real tools nor accumulates local assets. Moving to CLI and repo agents (Level 3 Tools → Level 4 Workflow → Level 5 Loop) allows AI to run symplectic integrators in Python/Julia, expand perturbation series in Mathematica, and isolate derivation agents from referee agents. Files are interfaces; Markdown is protocol. Whichever model comes next, your local research skill files remain 100% portable and compounding.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>From the chat box to the working directory</h2>
-    <p class="sub" style="margin-top:8px">The model stays the same. The harness moves closer to the work.</p>
+    <p class="sub" style="margin-top:8px">Research cannot stay in thin wrappers. Files are interfaces; rules are portable.</p>
     <div class="content">
       <div class="mathline">
         <div class="phase">
-          <div class="ph">2022–23</div>
+          <div class="ph">L1 · Wrapper</div>
           <h3>Web chat</h3>
-          <div class="ms"><b>Ask and copy</b><span>One question, one answer</span></div>
-          <div class="ms"><b>Text only</b><span>The model describes; you execute</span></div>
+          <div class="ms"><b>Ask, read, manual copy</b><span>No local file access · Ephemeral context</span></div>
+          <div class="ms"><b>Zero real tools</b><span>The model suggests; the human executes</span></div>
         </div>
         <div class="phase">
-          <div class="ph">2023–24</div>
-          <h3>IDE copilot</h3>
-          <div class="ms"><b>Complete in the editor</b><span>Suggestions; the human runs the code</span></div>
-          <div class="ms"><b>Context = open files</b><span>A faster editor, same loop</span></div>
+          <div class="ph">L2–3 · Copilot</div>
+          <h3>IDE editor</h3>
+          <div class="ms"><b>In-file completions</b><span>Context limited to currently open files</span></div>
+          <div class="ms"><b>A faster typewriter</b><span>Same human loop, slightly higher cadence</span></div>
         </div>
         <div class="phase">
-          <div class="ph">2024–26</div>
-          <h3>CLI / desktop agent</h3>
-          <div class="ms"><b>Read, write, run</b><span>Files, shell, tests, git</span></div>
-          <div class="ms"><b>Observe → act → observe</b><span>Permissions and sandbox</span></div>
+          <div class="ph">L4–5 · Agent Loop</div>
+          <h3>Repo &amp; CLI Agent</h3>
+          <div class="ms"><b>Tools &amp; isolated agents</b><span>Symplectic integrators · Series expansion · Reviewers</span></div>
+          <div class="ms"><b>Autonomous verification</b><span>Hypothesis → Experiment → Conservation checks → git</span></div>
         </div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
@@ -2194,63 +2194,63 @@
         <span class="pill"><i></i>Claude Code</span>
         <span class="pill"><i></i>Codex CLI</span>
         <span class="pill"><i></i>Cursor</span>
-        <span class="pill"><i></i>ChatGPT / Claude desktop</span>
+        <span class="pill"><i></i>Markdown SOP Protocol</span>
       </div>
-      <div class="keyline">Same model. Different <b>harness</b>.</div>
-      <p class="micro" style="margin-top:8px">In a research repo, the agent can run the experiment and return the numbers.</p>
+      <div class="keyline">Files are interfaces. Build <b>portable research assets</b> in local workspaces.</div>
+      <p class="micro" style="margin-top:8px">Swap the foundation model via a single config line; your dynamical check suites remain permanently valid.</p>
     </div>
     <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">46 / 50</span></div>
   </section>
 
   <!-- ============ S47 · Two attempts ============ -->
-  <section class="slide" data-notes="第一次是 OpenClaw 刚出来时，我试着让它写论文；当时模型弱、错误多，我又退得太远，最后没有完成。第二次是博士后工作的继续 iStart：我没时间写、没时间深入想，就定好目标，让 Codex + GPT-5.3–5.5 完成主要内容。它犯过错，比如试图证明 Ax=b（b≠0）时 x=0；我纠正了。被拒 3 次后，9 月用 GPT-6.1 Sol 再扫一遍，又发现并修正了一些问题。差别在循环：人要在里面。">
+  <section class="slide" data-notes="The first attempt: when OpenClaw emerged, I treated a probabilistic model like a deterministic calculator and went fully hands-off without checks. It failed completely. The second attempt: continuing postdoc work in iStart, I shifted from fixer to coach. I defined the objective (WHAT) and pointed out counterexamples, letting Codex and GPT-5.3–5.5 execute (HOW). When it attempted to claim Ax=b with b≠0 had x=0, I intervened. After three rejections, GPT-6.1 Sol scanned the paper and caught subtle issues. The takeaway: verification is asymmetric (evals are easier than generation); humans must act as coaches providing constraints and direction.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>Two attempts</h2>
-    <p class="sub" style="margin-top:8px">Same intention. Different loop.</p>
+    <p class="sub" style="margin-top:8px">Same intention. Different governance: from abdication to coaching.</p>
     <div class="content">
       <div class="two even">
         <div class="card">
-          <div class="k">OpenClaw · early</div>
-          <div class="big" style="font-size:22px">Hands off</div>
+          <div class="k">OpenClaw · Early attempt</div>
+          <div class="big" style="font-size:22px">Mistaken for calculator · Hands-off</div>
           <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>I let the agent write a paper.</li>
-            <li>The model was weak; errors multiplied.</li>
-            <li>I stepped back too far.</li>
+            <li>Expected the agent to autonomously deliver an end-to-end paper.</li>
+            <li>Early model was brittle; hallucinations compounded without evals.</li>
+            <li>Complete human abdication, hoping for an unguided miracle.</li>
           </ul>
-          <p class="micro" style="margin-top:10px">Result: no paper.</p>
+          <p class="micro" style="margin-top:10px">Lesson: unguided execution collapses deterministically.</p>
         </div>
         <div class="card accent">
           <div class="k">Codex · GPT-5.3–5.5 · iStart</div>
-          <div class="big" style="font-size:22px">Human in the loop</div>
+          <div class="big" style="font-size:22px">Act as Coach · Verification loop</div>
           <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>A continuation of my postdoc work; no time to write or think deeply.</li>
-            <li>I set the goal; the model drafted the main content.</li>
-            <li>It made errors: e.g. claimed <span style="font-family:var(--mono);font-size:11.5px">Ax = b, b ≠ 0 → x = 0</span>. I corrected it.</li>
-            <li>After 3 rejections, GPT-6.1 Sol found more issues; I fixed them.</li>
+            <li>Postdoc extension; I framed clear goals (WHAT) while AI drafted (HOW).</li>
+            <li>Refused to be a line-by-line fixer; coached by flagging flawed steps.</li>
+            <li>Caught absurd derivation: <span style="font-family:var(--mono);font-size:11.5px">Ax = b, b ≠ 0 → x = 0</span> ✗</li>
+            <li>After 3 rejections, GPT-6.1 Sol scanned deeper issues for final fixes.</li>
           </ul>
-          <p class="micro" style="margin-top:10px">Result: progress, with checks.</p>
+          <p class="micro" style="margin-top:10px">Lesson: verification asymmetry — evaluating is easier than drafting.</p>
         </div>
       </div>
-      <div class="keyline">The difference was the <b>loop</b>.</div>
+      <div class="keyline">Do not act as a line-by-line fixer; act as a <b>coach defining standards and counterexamples</b>.</div>
     </div>
     <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">47 / 50</span></div>
   </section>
 
   <!-- ============ S48 · Low-hanging fruit ============ -->
-  <section class="slide" data-notes="两次尝试的教训：人要在循环里；好模型有增益，但仍会犯错、卡壳，要检查；写论文是低垂的果实，选题才是难的。OpenAI 开始批量产出开放问题结果后，我停止了写边际论文；以前的猜想是写给人的，机器是另一种读者。">
+  <section class="slide" data-notes="Core lessons: First, humans must define goals, bounds, and counterexamples (coach, not fixer). Second, stronger models demand robust deterministic evaluations (energy conservation, symplectic residuals). Third, generating a paper is low-hanging fruit; when compute clusters mass-solve open problems by brute search, marginal papers lose defensibility. Historical conjectures targeted human cognition; in the machine age, true compounding value lies in research taste (axioms), evaluation suites, and high-impact problem definition.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
-    <h2>Low-hanging fruit</h2>
-    <p class="sub" style="margin-top:8px">What the two attempts taught me.</p>
+    <h2>Low-hanging fruit &amp; compounding assets</h2>
+    <p class="sub" style="margin-top:8px">Drafting a paper is only the start; compounding assets are evals and taste.</p>
     <div class="content">
       <div class="three tight">
-        <div class="card"><div class="k">01 · Human</div><div class="big" style="font-size:20px">In the loop</div><p>Full hands-off fails. The human sets the goal, corrects errors, and decides when to stop.</p></div>
-        <div class="card"><div class="k">02 · Model</div><div class="big" style="font-size:20px">Quality + checks</div><p>A better model gives a real gain—and still makes mistakes and gets stuck. Check.</p></div>
-        <div class="card accent"><div class="k">03 · Problem</div><div class="big" style="font-size:20px">Choose well</div><p>Writing the paper is the easy part. Choosing the problem is the hard part.</p></div>
+        <div class="card"><div class="k">01 · Human as Coach</div><div class="big" style="font-size:20px">Frame WHAT &amp; bounds</div><p>Define clear objectives; let AI explore the HOW. Point out logical flaws rather than patching code by hand.</p></div>
+        <div class="card"><div class="k">02 · Systematic Evals</div><div class="big" style="font-size:20px">Dynamical checks</div><p>Models get stuck. Build invariant test suites: Hamiltonian conservation, symplectic symmetry, and residuals.</p></div>
+        <div class="card accent"><div class="k">03 · Compounding Assets</div><div class="big" style="font-size:20px">Taste &amp; eval suites</div><p>A single paper depreciates quickly. What compounds is your knowledge base, codebase SOPs, and formal scorers.</p></div>
       </div>
-      <p class="bigquote2">When OpenAI began mass-producing open-problem results, I stopped writing marginal papers. The old conjectures were written for humans; machines are a different audience.</p>
-      <div class="keyline">Which problem is <b>worth solving</b>?</div>
+      <p class="bigquote2">OpenAI can brute-force batches of open problems, but old conjectures were written for humans. As marginal output cost hits zero, only <b>eval systems and contrarian taste</b> compound.</p>
+      <div class="keyline">The central question: which problems are <b>worth tackling together with machines</b>?</div>
     </div>
-    <div class="footer"><span>human · model · problem</span><span class="pnum">48 / 50</span></div>
+    <div class="footer"><span>Coach · Eval · Compounding</span><span class="pnum">48 / 50</span></div>
   </section>
 
   <!-- ============ S49 · Young person's opportunity ============ -->

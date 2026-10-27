@@ -2105,7 +2105,7 @@
   </section>
 
   <!-- ============ S44 · 电机与流水线 ============ -->
-  <section class="slide" data-notes="Eric Schmidt 讲过一个故事：电机刚发明时，工厂主把中央蒸汽机换成电机，其他不变，效率 +30%。几十年后，电机做小，每台机器一台电机，工厂围绕流程重新设计，流水线诞生，效率几十倍。技术没变，变的是工作方式。AI 今天一样：在旧流程里问一下 AI，只拿到 30%；把流程围绕 agent/harness 重新设计，才可能拿到几十倍。">
+  <section class="slide" data-notes="Eric Schmidt 讲过一个故事：电机刚发明时，工厂主把中央蒸汽机拆掉换成电机，其他不变，效率只升 30%。几十年后，电机做小、每台机器自备动力，工厂彻底围绕生产流重新设计，流水线诞生，效率提高几十倍。AI 今天一样：在聊天框里反复调试 Prompt（Prompting Harder）是单机时代，换个窗口就归零；只有把天体力学知识、代码规范、推导准则沉淀为结构化上下文（Context Engineering），建立流水线，才能拿到复利。模型是租来的，上下文与资产库才是自己的。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>电机与流水线</h2>
     <p class="sub" style="margin-top:8px">Eric Schmidt 讲过一个故事；AI 正在经历同一件事。</p>
@@ -2117,13 +2117,13 @@
           <p>流水线诞生了。效率提高了几十倍。</p>
         </div>
         <div>
-          <div class="numrow"><span class="n">30%</span><span class="l">旧布局<br>电机放在蒸汽机的位置</span></div>
-          <div class="numrow accent"><span class="n">10×+</span><span class="l">新布局<br>每台机器一台电机；工厂围绕流程重建</span></div>
-          <p class="pull">30% 和几十倍之间的差距，是<b>工作方式的重设计</b>。</p>
+          <div class="numrow"><span class="n">30%</span><span class="l">单机模式 · Prompting Harder<br>换窗口即归零 · 无法积累</span></div>
+          <div class="numrow accent"><span class="n">10×+</span><span class="l">流水线 · Context Engineering<br>沉淀规则与模板 · 持续复利</span></div>
+          <p class="pull">30% 和几十倍的差距，是<b>可积累的工作方式</b>。</p>
         </div>
       </div>
-      <div class="ai-note">今天的 AI 是一样的局面：在旧步骤里「问一下 AI」→ 30%；把流程围绕 agent、工具、context、验证、循环重设计 → 10×+。</div>
-      <div class="keyline">收益在<b>布局</b>。</div>
+      <div class="ai-note">模型是租来的，上下文与系统才是自己的：别只在旧步骤里「问一下 AI」，把规则、工具与检验沉淀为长期资产。</div>
+      <div class="keyline">收益在<b>布局与复利</b>。</div>
     </div>
     <div class="footer"><span>电机 · 流水线 · 工作方式</span><span class="pnum">44 / 50</span></div>
   </section>
@@ -2162,29 +2162,29 @@
   </section>
 
   <!-- ============ S46 · 网页到 CLI ============ -->
-  <section class="slide" data-notes="从网页对话框到工作目录：网页里你复制答案；IDE 里它补全代码；CLI/桌面 agent 里它能读写文件、跑命令和测试、用 git。同一个模型，换一个 harness，能力就不同。">
+  <section class="slide" data-notes="严肃科研绝不能停留在网页对话（Level 1 薄包装）：网页既不能调真实工具，也无法沉淀本地文件。到了 CLI 与工作目录（Level 3 Tools → Level 4 Workflow → Level 5 Loop），AI 能调 Python/Julia 跑辛积分数值模拟、调 Mathematica 做摄动级数展开，并通过子 agent 进行隔离推导与文献校对。核心是：文件即接口，Markdown 即协议——无论换什么模型或客户端，你的科研技能库完全可移植、永久可复利。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>从网页对话框到工作目录</h2>
-    <p class="sub" style="margin-top:8px">模型是同一个，harness 离工作更近了。</p>
+    <p class="sub" style="margin-top:8px">严肃科研不能停留在薄外壳；文件即接口，规则可移植。</p>
     <div class="content">
       <div class="mathline">
         <div class="phase">
-          <div class="ph">2022–23</div>
+          <div class="ph">L1 · Wrapper</div>
           <h3>网页对话</h3>
-          <div class="ms"><b>提问、复制</b><span>一次一问，一次一答</span></div>
-          <div class="ms"><b>只有文字</b><span>模型描述，你执行</span></div>
+          <div class="ms"><b>一问一答，手工复制</b><span>无文件访问权 · 无法沉淀</span></div>
+          <div class="ms"><b>没有真实工具</b><span>模型口头描述，人类肉身执行</span></div>
         </div>
         <div class="phase">
-          <div class="ph">2023–24</div>
-          <h3>IDE copilot</h3>
-          <div class="ms"><b>在编辑器里补全</b><span>给建议；执行由人完成</span></div>
-          <div class="ms"><b>上下文 = 打开的文件</b><span>更快的编辑器，同一个循环</span></div>
+          <div class="ph">L2–3 · Copilot</div>
+          <h3>IDE 编辑器</h3>
+          <div class="ms"><b>单点补全与生成</b><span>上下文局限于当前打开文件</span></div>
+          <div class="ms"><b>更快的打字机</b><span>未跳出旧循环，依然人工驱动</span></div>
         </div>
         <div class="phase">
-          <div class="ph">2024–26</div>
-          <h3>CLI / 桌面 agent</h3>
-          <div class="ms"><b>读、写、跑</b><span>文件、shell、测试、git</span></div>
-          <div class="ms"><b>观察 → 行动 → 观察</b><span>权限与沙箱</span></div>
+          <div class="ph">L4–5 · Agent Loop</div>
+          <h3>工作目录 Agent</h3>
+          <div class="ms"><b>工具集成与子智能体</b><span>Python 辛积分 · 摄动展开 · 隔离审查</span></div>
+          <div class="ms"><b>自主闭环与版本可控</b><span>假说 → 实验 → 守恒校验 → git 归档</span></div>
         </div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
@@ -2192,63 +2192,63 @@
         <span class="pill"><i></i>Claude Code</span>
         <span class="pill"><i></i>Codex CLI</span>
         <span class="pill"><i></i>Cursor</span>
-        <span class="pill"><i></i>ChatGPT / Claude 桌面</span>
+        <span class="pill"><i></i>Markdown SOP 协议</span>
       </div>
-      <div class="keyline">同一个模型，换一个 <b>harness</b>。</div>
-      <p class="micro" style="margin-top:8px">在科研仓库里，它可以真的跑实验，把数字带回来。</p>
+      <div class="keyline">文件即接口；在 <b>本地工作目录</b> 沉淀可移植的科研资产。</div>
+      <p class="micro" style="margin-top:8px">换模型只需切一行配置；你积累的动力学检验器与 Skill 资产永久有效。</p>
     </div>
     <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">46 / 50</span></div>
   </section>
 
   <!-- ============ S47 · 两次尝试 ============ -->
-  <section class="slide" data-notes="第一次是 OpenClaw 刚出来时，我试着让它写论文；当时模型弱、错误多，我又退得太远，最后没有完成。第二次是博士后工作的继续 iStart：我没时间写、没时间深入想，就定好目标，让 Codex + GPT-5.3–5.5 完成主要内容。它犯过错，比如试图证明 Ax=b（b≠0）时 x=0；我纠正了。被拒 3 次后，9 月用 GPT-6.1 Sol 再扫一遍，又发现并修正了一些问题。差别在循环：人要在里面。">
+  <section class="slide" data-notes="第一次是 OpenClaw 刚出来时，试图让它端到端全包：把概率模型当成确定性计算器，人类完全放手，无检查无回路，直接崩溃。第二次是博士后工作的继续 iStart：转变角色做 Coach 而不做 Fixer。我定目标（WHAT）、提供约束、指出逻辑破绽，让 Codex 与 GPT-5.3–5.5 推进实现（HOW）。它犯过离谱错误，比如试图证明 Ax=b 在 b≠0 时 x=0，被我指出后修正。被拒 3 次后，9 月用 GPT-6.1 Sol 再次全面复扫并修正。经验在于：检验（Eval）比生成容易，人要当指出方向和反例的 Coach。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>两次尝试</h2>
-    <p class="sub" style="margin-top:8px">同样的目标，不同的循环。</p>
+    <p class="sub" style="margin-top:8px">同样的目标，不同的治理方式：从放任到做 Coach。</p>
     <div class="content">
       <div class="two even">
         <div class="card">
-          <div class="k">OpenClaw · 早期</div>
-          <div class="big" style="font-size:22px">完全放任</div>
+          <div class="k">OpenClaw · 早期尝试</div>
+          <div class="big" style="font-size:22px">误当计算器 · 完全放任</div>
           <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>我让 agent 自己写一篇论文。</li>
-            <li>当时模型很弱，错误很多。</li>
-            <li>我退得太远。</li>
+            <li>试图让 agent 端到端全包写完论文。</li>
+            <li>早期模型弱、幻觉多，且无任何外部检验回路。</li>
+            <li>人类彻底退场，期待自动化奇迹。</li>
           </ul>
-          <p class="micro" style="margin-top:10px">结果：没有论文。</p>
+          <p class="micro" style="margin-top:10px">教训：脱离验证与引导，单机必定崩溃。</p>
         </div>
         <div class="card accent">
           <div class="k">Codex · GPT-5.3–5.5 · iStart</div>
-          <div class="big" style="font-size:22px">人在循环里</div>
+          <div class="big" style="font-size:22px">做 Coach · 建立验证回路</div>
           <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>这是我博士后工作的继续；没有时间写，也没有时间深入思考。</li>
-            <li>我定目标；模型完成主要内容。</li>
-            <li>它犯过错：比如试图证明 <span style="font-family:var(--mono);font-size:11.5px">Ax = b, b ≠ 0 → x = 0</span>。我纠正了。</li>
-            <li>被拒 3 次后，9 月用 GPT-6.1 Sol 再扫一遍，又发现并修正了一些问题。</li>
+            <li>博后工作延伸；没时间手写，由我定义清晰目标（WHAT）。</li>
+            <li>不做逐句修改的 Fixer，做指出破绽的 Coach。</li>
+            <li>纠正荒谬推导：<span style="font-family:var(--mono);font-size:11.5px">Ax = b, b ≠ 0 → x = 0</span> ✗</li>
+            <li>拒稿 3 次后，用 GPT-6.1 Sol 扫出深层隐患并修正。</li>
           </ul>
-          <p class="micro" style="margin-top:10px">结果：有进展，但要检查。</p>
+          <p class="micro" style="margin-top:10px">成效：验证不对称性——Eval 比生成更容易。</p>
         </div>
       </div>
-      <div class="keyline">差别在<b>循环</b>。</div>
+      <div class="keyline">不做救火的 Fixer，做定标准与反例的 <b>Coach</b>。</div>
     </div>
     <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">47 / 50</span></div>
   </section>
 
   <!-- ============ S48 · 低垂的果实 ============ -->
-  <section class="slide" data-notes="两次尝试的教训：人要在循环里；好模型有增益，但仍会犯错、卡壳，要检查；写论文是低垂的果实，选题才是难的。OpenAI 开始批量产出开放问题结果后，我停止了写边际论文；以前的猜想是写给人的，机器是另一种读者。">
+  <section class="slide" data-notes="两次尝试的底层教训：第一，人类要定目标、给反例、把守边界（Coach 而非 Fixer）；第二，模型越强越需要坚固的客观评估（Eval），比如天体力学中的哈密顿量守恒、能量残差、辛对称性检验；第三，单篇论文生成只是低垂的果实，一旦算力能够批量抽卡爆破公开问题，边际论文就不再有壁垒。以前的数学猜想是写给人类大脑的，当机器加入竞赛，真正能够长期沉淀复利的，是你的科研品味（Axioms）、评估系统（Evals）与高价值问题定义。">
     <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>低垂的果实</h2>
-    <p class="sub" style="margin-top:8px">两次尝试教给我的事。</p>
+    <h2>低垂的果实与长期复利</h2>
+    <p class="sub" style="margin-top:8px">生成论文只是起点；可复利的资产是评估器与科研品味。</p>
     <div class="content">
       <div class="three tight">
-        <div class="card"><div class="k">01 · 人</div><div class="big" style="font-size:20px">在循环里</div><p>完全放任会失败；人定目标、纠错、决定何时停。</p></div>
-        <div class="card"><div class="k">02 · 模型</div><div class="big" style="font-size:20px">质量 + 检查</div><p>好模型带来明显增益；仍会犯错、卡壳。要检查。</p></div>
-        <div class="card accent"><div class="k">03 · 问题</div><div class="big" style="font-size:20px">选好</div><p>写论文是低垂的果实；选题才是难的部分。</p></div>
+        <div class="card"><div class="k">01 · 人类作为 Coach</div><div class="big" style="font-size:20px">定目标与反例</div><p>明确定义 WHAT，放手让 AI 探索 HOW；给出逻辑反例，拒绝人工逐行代修。</p></div>
+        <div class="card"><div class="k">02 · 系统化的 Eval</div><div class="big" style="font-size:20px">动力学守恒检验</div><p>好模型仍会卡壳。沉淀能量守恒、辛对称性校验集；机器负责计算，残差负责把关。</p></div>
+        <div class="card accent"><div class="k">03 · 可复利资产</div><div class="big" style="font-size:20px">品味与评估集</div><p>单篇论文是易贬值的果实；持久复利的是知识库、代码 SOP 与形式化评测器。</p></div>
       </div>
-      <p class="bigquote2">OpenAI 开始批量产出开放问题结果后，我停止了写边际论文。以前的数学猜想是写给人的；机器是另一种读者。</p>
-      <div class="keyline">哪个问题<b>值得做</b>？</div>
+      <p class="bigquote2">OpenAI 可以批量抽卡爆破开放问题，但以前的猜想是写给人的。当产出边际成本归零，唯有<b>评估系统与逆向品味</b>真正复利。</p>
+      <div class="keyline">下一个核心问题：哪个问题<b>值得机器与人类一起做</b>？</div>
     </div>
-    <div class="footer"><span>人 · 模型 · 问题</span><span class="pnum">48 / 50</span></div>
+    <div class="footer"><span>Coach · Eval · 长期复利</span><span class="pnum">48 / 50</span></div>
   </section>
 
   <!-- ============ S49 · 年轻人的机会 ============ -->
