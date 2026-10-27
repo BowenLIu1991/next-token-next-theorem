@@ -1057,7 +1057,7 @@
   </section>
 
   <!-- ============ S9 · 采样 ============ -->
-  <section class="slide" data-notes="有了分布，还要决定怎么取。贪心取最大，采样按概率抽。temperature 和 top-p 控制随机性。取出来的 token 接回输入，再算下一步，这就是自回归。">
+  <section class="slide" data-notes="有了分布还要决定怎么取：软件上，温度大于0是主动掷骰子（采样），温度为0是贪心取最大。但硬件上哪怕温度为0，GPU浮点加法不满足结合律、并行累加顺序不固定，加上服务端的动态批处理（continuous batching），在概率极其接近的临界点可能改变贪心选择。一步分叉，自回归便蝴蝶效应。大模型物理上就带有数值摄动。">
     <p class="eyebrow"><b>02</b> / model</p>
     <h2>采样：从分布里取一个</h2>
     <div class="content">
@@ -1082,21 +1082,21 @@
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">贪心</div><p style="margin:0">取最大 → <b>定理</b></p></div>
-          <div class="card accent"><div class="k">采样</div><p style="margin:0">按概率抽 → 这次可能是 <b>问题</b></p></div>
-          <div class="card"><div class="k">旋钮</div><p style="margin:0"><b>temperature</b> · <b>top-p</b> 控制随机性</p></div>
+          <div class="card"><div class="k">软件算法 · 随机性</div><p style="margin:0"><b>T &gt; 0</b> 主动采样（掷骰子）；<b>T = 0</b> 贪心取最高概率</p></div>
+          <div class="card accent"><div class="k">硬件物理 · 数值扰动</div><p style="margin:0"><b>GPU 浮点不满足结合律</b>：并行累加顺序随机 · 批处理调度抖动</p></div>
+          <div class="card"><div class="k">自回归放大</div><p style="margin:0">哪怕 T = 0，临界点微小扰动选错 token，后续轨迹全面分叉</p></div>
         </div>
       </div>
       <div class="loop">
         <span class="step">输入</span><span class="arr">→</span>
         <span class="step">Transformer</span><span class="arr">→</span>
         <span class="step">概率分布</span><span class="arr">→</span>
-        <span class="step hl">采样</span><span class="arr">→</span>
+        <span class="step hl">采样 / 临界决胜</span><span class="arr">→</span>
         <span class="step">接回输入</span><span class="arr">↺</span>
       </div>
-      <div class="keyline">同一个 prompt，两次结果可能不同——这是<b>采样</b>，相当于<b>掷骰子</b>。</div>
+      <div class="keyline">输出随机来自两层：<b>软件的主动采样（温度）</b>，与 <b>GPU 并行的浮点累加扰动</b>。</div>
     </div>
-    <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 50</span></div>
+    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 50</span></div>
   </section>
 
   <!-- ============ S10 · 采样算法 ============ -->

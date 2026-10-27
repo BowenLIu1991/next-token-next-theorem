@@ -1059,7 +1059,7 @@
   </section>
 
   <!-- ============ S9 · 采样 ============ -->
-  <section class="slide" data-notes="有了分布，还要决定怎么取。贪心取最大，采样按概率抽。temperature 和 top-p 控制随机性。取出来的 token 接回输入，再算下一步，这就是自回归。">
+  <section class="slide" data-notes="Given a distribution, how to draw: In software, T &gt; 0 rolls a dice (sampling), while T = 0 greedily picks the argmax. But in hardware, even at T = 0, floating-point addition is non-associative; GPU parallel reduction orders vary, and continuous batching shifts kernel execution tiles. When top candidate probabilities tie closely, micro-numerical perturbations flip the chosen token. Autoregression cascades this into a different trajectory. LLMs are physically non-deterministic.">
     <p class="eyebrow"><b>02</b> / model</p>
     <h2>Sampling: draw one token from the distribution</h2>
     <div class="content">
@@ -1084,21 +1084,21 @@
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">Greedy</div><p style="margin:0">Take the max → <b>theorem</b></p></div>
-          <div class="card accent"><div class="k">Sampling</div><p style="margin:0">Draw by probability → this time maybe <b>problem</b></p></div>
-          <div class="card"><div class="k">Knobs</div><p style="margin:0"><b>temperature</b> · <b>top-p</b> control randomness</p></div>
+          <div class="card"><div class="k">Software · Randomness</div><p style="margin:0"><b>T &gt; 0</b> samples probabilitistically; <b>T = 0</b> greedily picks the argmax</p></div>
+          <div class="card accent"><div class="k">Hardware · Numerical Drift</div><p style="margin:0"><b>GPU float non-associativity</b>: parallel reduction order drift · batching jitter</p></div>
+          <div class="card"><div class="k">Autoregressive Cascade</div><p style="margin:0">Even at T = 0, a micro-perturbation at a tie flips the token, branching the path</p></div>
         </div>
       </div>
       <div class="loop">
         <span class="step">Input</span><span class="arr">→</span>
         <span class="step">Transformer</span><span class="arr">→</span>
         <span class="step">Probability distribution</span><span class="arr">→</span>
-        <span class="step hl">Sampling</span><span class="arr">→</span>
+        <span class="step hl">Sampling / Tie-break</span><span class="arr">→</span>
         <span class="step">Append to input</span><span class="arr">↺</span>
       </div>
-      <div class="keyline">The same prompt can give two different results — that is <b>sampling</b>, a <b>dice roll</b> by design.</div>
+      <div class="keyline">Randomness stems from two layers: <b>software sampling (temperature)</b> and <b>GPU parallel float reduction drift</b>.</div>
     </div>
-    <div class="footer"><span>sampling · autoregressive</span><span class="pnum">09 / 50</span></div>
+    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 50</span></div>
   </section>
 
   <!-- ============ S10 · 采样算法 ============ -->
