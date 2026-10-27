@@ -403,7 +403,7 @@ S27 的数学表达：p(y | x) → p(y | x, c, e)，示例 p(16)=0.18 → 0.71�
 
 ---
 
-## 第三十一轮：注入长期复利、Coach机制与Eval系统（当前）
+## 第三十一轮：注入长期复利、Coach机制与Eval系统
 
 - 融合 AI Builder / Management 核心范式：强调**可复利（Compounding）**、**可积累资产（Asset Base）**与**跨模型可移植性（Portability）**。
 - **S44【电机与流水线】**：对比单机 Prompting Harder（换窗口归零）与流水线 Context Engineering（规则/模板复利），点出“模型是租来的，上下文与系统才是自己的”。
@@ -411,6 +411,14 @@ S27 的数学表达：p(y | x) → p(y | x, c, e)，示例 p(16)=0.18 → 0.71�
 - **S47【两次尝试】**：重塑治理认知——OpenClaw 的失败源于误把概率模型当计算器且完全放任；iStart 的成功在于做 Coach（定义 WHAT、指出反例）而非逐行修代码的 Fixer，验证 Eval 不对称性。
 - **S48【低垂的果实】**：升级为“低垂的果实与长期复利”——人类 Coach、系统化 Eval（动力学守恒检验集）与可复利资产（逆向品味与评测器）。
 - 两版依然保持严谨优雅的 50 页结构，PDF 与文档全量同步。
+
+---
+
+## 第三十二轮：副标题精炼修正（当前）
+
+- 将副标题由宏大说教式的“以及我们该如何使用它 / How a model works — and how we should use it”，修改为第一人称实战视角的“以及我如何使用它 / How a model works — and how I use it in practice”。
+- 姿态转为科研同行之间的诚恳实践分享与经验交流，精准呼应 S47-S48 的亲历科研尝试。
+- 同步全量更新中英文源文件、文档部署页、渲染 PDF 与 LinkedIn 封面资产。
 
 ---
 
