@@ -2,6 +2,7 @@
 
 > 状态：✅ 已确认 / ⚠️ 需核实 / ⬜ 待补
 > 报告前必须把 ⚠️ 全部处理掉。
+> 当前结构为 53 页：新案例 S36–S39，系统总图 S40，AI × math S41–S46，结论 S47–S53；其他旧行页码部分为历史记录，以 HTML 和当前大纲为准。
 
 ---
 
@@ -53,7 +54,7 @@
 | 长上下文失效 | Liu et al., *Lost in the Middle*, 2023 | S25 | ✅ |
 | Agent 设计 | Anthropic, *Building Effective Agents*, 2024 | S27–S28 | ✅ |
 | 代码 agent | Yang et al., *SWE-agent*, 2024 | S28 | ✅ |
-| 代码审查参考案例 | Addy Osmani, Morgan Westlee Lunt & Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), 2026-10-15 | S36：分层审查、风险分级、责任、事故评测与收敛控制 | ✅ 已读原文；团队自述工程实践，非独立效果验证 |
+| 代码审查参考案例 | Addy Osmani, Morgan Westlee Lunt & Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), 2026-10-15 | S36–S39：产出激增 → 人工瓶颈 → 系统检查 → 风险分工与评测积累 | ✅ 已读原文；monorepo 与 Claude Code 独立仓库数字分开；团队自述，非独立效果验证 |
 | Context rot | Chroma 技术报告, 2025 | S25 | ⚠️ 行业报告，非同行评审 |
 | prompt caching | 各供应商文档 | S8 | ⚠️ 价格随日期变 |
 
@@ -78,9 +79,9 @@
 | AlphaEvolve | DeepMind, *AlphaEvolve: A Gemini-powered coding agent for designing advanced algorithms*, 2025-05 | S39–S40 | ✅ |
 | IMO 2025 | OpenAI / Google DeepMind 赛后声明，2025-07 | S39–S40 | ✅ |
 | Erdős problems | 2025–26 公开讨论；Tao 的博客与问题页 | S39、S43 | ⚠️ 逐题核实 |
-| OpenAI 2026 数学进展 | OpenAI, *Sharing AI progress in mathematics*, 2026-10-06 | S38–S40 | ⚠️ 公司报告；3 个撤回，待同行评议 |
+| OpenAI 2026 数学进展 | OpenAI, [*Sharing AI progress in mathematics*](https://openai.com/index/sharing-ai-progress-in-mathematics/), 2026-10-06 | 当前 S41–S45 | ⚠️ 原文已重读；三小时指 ChatGPT Pro 等价算力，非墙钟时间；具体数学结果需逐项核实 |
 | Erdős 单位距离 | OpenAI, *An OpenAI model has disproved a central conjecture in discrete geometry*, 2026-05-20 | S39 | ✅ |
-| Navier–Stokes 声称 | OpenAI, 2026-09-08；数学界争议中 | S39 | ⚠️ 公司声称；未核实 |
+| Navier–Stokes 声称 | OpenAI, [*On the Navier–Stokes Millennium Prize Problem*](https://openai.com/index/navier-stokes-solution/), 2026-09-08 | 当前 S42–S43 | ⚠️ 已读公司原文；本轮未验证证明或形式化覆盖范围 |
 | 独立报道 | Science, *OpenAI just changed math forever...*, 2026-10-13；The Economist, 2026-10-07 | S38–S40 | ✅ |
 
 > S40 的英文是节选 / 意译；公开材料只覆盖一部分，完整的训练配方仍不可见。引用时不要把"公开表述"当成完整方法说明。

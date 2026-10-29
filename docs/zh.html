@@ -780,7 +780,7 @@
       <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
-    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 50</span></div>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 53</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
@@ -830,7 +830,7 @@
         <div class="q"><span class="n">03</span>我们怎么用它干活？</div>
       </div>
     </div>
-    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 50</span></div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 53</span></div>
   </section>
 
   <!-- ============ S3 · 切分 ============ -->
@@ -875,7 +875,7 @@
       <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
       <div class="keyline">子词不是语义单位，是<b>序列长度</b>与<b>词表大小</b>之间的工程折中。</div>
     </div>
-    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">03 / 50</span></div>
+    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">03 / 53</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
@@ -916,7 +916,7 @@
       </div>
       <div class="keyline">ID 是<b>行号</b>；换模型，就是换一张表。</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 50</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 53</span></div>
   </section>
 
   <!-- ============ S5 · 用量与换算 ============ -->
@@ -933,7 +933,7 @@
       <p class="micro" style="margin-top:12px">直观理解：一个词、一个数字、一个符号 ≈ 1 token；不同 tokenizer 不同，以返回的 usage 为准。</p>
       <div class="keyline">Token 既是模型的最小单位，也是账单的最小单位。</div>
     </div>
-    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 50</span></div>
+    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 53</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
@@ -958,7 +958,7 @@
       </div>
       <div class="keyline">同一段上下文，命中缓存与不命中，差一个<b>数量级</b>。</div>
     </div>
-    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 50</span></div>
+    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 53</span></div>
   </section>
 
   <!-- ============ S7 · 从 ID 到向量 ============ -->
@@ -988,7 +988,7 @@
       <div class="keyline">ID 是<b>地址</b>，向量是<b>内容</b>。</div>
       <p class="micro" style="margin-top:14px">这一步叫 embedding；每一维没有名字，但距离有意义。</p>
     </div>
-    <div class="footer"><span>embedding</span><span class="pnum">07 / 50</span></div>
+    <div class="footer"><span>embedding</span><span class="pnum">07 / 53</span></div>
   </section>
 
   <!-- ============ S8 · 输入到概率分布 ============ -->
@@ -1051,11 +1051,11 @@
       </div>
       <div class="keyline">它不查数据库，也不“理解”；它给词表里每个 token <b>打分</b>，再把分数变成<b>概率</b>。</div>
     </div>
-    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 50</span></div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 53</span></div>
   </section>
 
   <!-- ============ S9 · 采样 ============ -->
-  <section class="slide" data-notes="有了分布还要决定怎么取：软件上，温度大于0是主动掷骰子（采样），温度为0是贪心取最大。但硬件上哪怕温度为0，GPU浮点加法不满足结合律、并行累加顺序不固定，加上服务端的动态批处理（continuous batching），在概率极其接近的临界点可能改变贪心选择。一步分叉，自回归便蝴蝶效应。大模型物理上就带有数值摄动。">
+  <section class="slide" data-notes="软件采样按分布抽取；T=0 通常约定为贪心取 argmax。另一层是数值实现：浮点加法不满足结合律，内核、并行规约顺序或批形状变化可能改变结果；固定实现也可以是确定性的。当最高两个 logits 足够接近时，数值差异可能改变排序，选出不同 token，后续自回归输出可能分叉。若 logits 完全相同且决胜规则固定，贪心选择就相同。数值误差、逐次运行的非确定性和主动采样应分别解释。">
     <p class="eyebrow"><b>02</b> / model</p>
     <h2>采样：从分布里取一个</h2>
     <div class="content">
@@ -1081,8 +1081,8 @@
         </div>
         <div class="stack">
           <div class="card"><div class="k">软件算法 · 随机性</div><p style="margin:0"><b>T &gt; 0</b> 主动采样（掷骰子）；<b>T = 0</b> 贪心取最高概率</p></div>
-          <div class="card accent"><div class="k">硬件物理 · 数值扰动</div><p style="margin:0"><b>GPU 浮点不满足结合律</b>：并行累加顺序随机 · 批处理调度抖动</p></div>
-          <div class="card"><div class="k">自回归放大</div><p style="margin:0">哪怕 T = 0，临界点微小扰动选错 token，后续轨迹全面分叉</p></div>
+          <div class="card accent"><div class="k">数值实现 · 软硬件</div><p style="margin:0"><b>浮点加法不满足结合律</b>；内核、累加顺序或批形状变化可能改变 logits</p></div>
+          <div class="card"><div class="k">自回归放大</div><p style="margin:0">最高分候选接近时，排序可能翻转；不同 token 改变后续输入</p></div>
         </div>
       </div>
       <div class="loop">
@@ -1092,9 +1092,9 @@
         <span class="step hl">采样 / 临界决胜</span><span class="arr">→</span>
         <span class="step">接回输入</span><span class="arr">↺</span>
       </div>
-      <div class="keyline">输出随机来自两层：<b>软件的主动采样（温度）</b>，与 <b>GPU 并行的浮点累加扰动</b>。</div>
+      <div class="keyline">输出变化可来自<b>采样</b>与<b>数值实现</b>；T = 0 固定的是选择规则。</div>
     </div>
-    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 50</span></div>
+    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 53</span></div>
   </section>
 
   <!-- ============ S10 · 采样算法 ============ -->
@@ -1168,7 +1168,7 @@
 
       <div class="keyline">温度改形状，top-p 截尾巴，<b>u</b> 决定落在哪一段。</div>
     </div>
-    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 50</span></div>
+    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 53</span></div>
   </section>
 
   <!-- ============ S11 · 无状态 ============ -->
@@ -1195,7 +1195,7 @@
       <div class="keyline">模型无状态；所谓“对话”，是客户端把历史<b>重发</b>一遍。</div>
       <p class="micro" style="margin-top:14px">参数在推理时不更新；状态只存在于上下文里。</p>
     </div>
-    <div class="footer"><span>stateless</span><span class="pnum">11 / 50</span></div>
+    <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
   </section>
 
 
@@ -1211,7 +1211,7 @@
       </div>
       <div class="keyline">换的是<b>训练信号</b>。</div>
     </div>
-    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 50</span></div>
+    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 53</span></div>
   </section>
 
   <!-- ============ S13 · Pretrain ============ -->
@@ -1240,7 +1240,7 @@
       </div>
       <div class="keyline">它学会的是世界的<b>统计结构</b>。</div>
     </div>
-    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 50</span></div>
+    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 53</span></div>
   </section>
 
   <!-- ============ S14 · 前 20 个 token ============ -->
@@ -1296,7 +1296,7 @@
       <div class="lossex">L = −[ log p(书|本) + log p(系统|本 书) + … + log p(比较|前 19 个) ]</div>
       <div class="keyline" style="margin-top:10px">训练并行，推理串行。</div>
     </div>
-    <div class="footer"><span>pretrain</span><span class="pnum">14 / 50</span></div>
+    <div class="footer"><span>pretrain</span><span class="pnum">14 / 53</span></div>
   </section>
 
   <!-- ============ S15 · loss 是什么 ============ -->
@@ -1328,11 +1328,11 @@
       </div>
       <div class="keyline">这个 loss 就是模型给数据<b>编码的长度</b>。</div>
     </div>
-    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 50</span></div>
+    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 53</span></div>
   </section>
 
   <!-- ============ S16 · 压缩即智能 ============ -->
-  <section class="slide" data-notes="这是我信的一句话。预训练表面是预测下一个 token，本质是压缩。要压得好，必须发现语法、因果、物理结构。参数不是数据库，是压缩后的世界模型。但压缩只解释知识从哪来，不解释为什么会搜索——后者是 RL。">
+  <section class="slide" data-notes="压缩即智能是我的解释性表述，不是等价定理。交叉熵把预测与期望编码长度联系起来。预测训练可能推动模型学习可复用的规律，但迁移能力和因果理解需要另行评估。搜索与纠错也可以来自示范、强化学习和推理时的方法。">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>压缩即智能</h2>
     <div class="content">
@@ -1342,14 +1342,14 @@
         <div class="card"><div class="k">压缩</div><div class="big" style="font-size:22px">挤掉冗余</div><p>留下可复用的结构</p></div>
         <div class="card accent"><div class="k">结构</div><div class="big" style="font-size:22px">语法 · 因果 · 物理</div><p>迁移到没见过的题</p></div>
       </div>
-      <p class="micro" style="margin-top:18px">压缩解释知识从哪来；搜索与纠错，靠后面的 RL。</p>
-      <div class="keyline">这也是我近几年最相信的一句话。</div>
+      <p class="micro" style="margin-top:18px">这是理解预测训练的一种视角；搜索与纠错也依赖推理时的方法。</p>
+      <div class="keyline">我的工作视角：预测训练推动模型学习<b>可复用的结构</b>。</div>
     </div>
-    <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 50</span></div>
+    <div class="footer"><span>compression · learned structure</span><span class="pnum">16 / 53</span></div>
   </section>
 
   <!-- ============ S17 · SFT ============ -->
-  <section class="slide" data-notes="SFT 还是预测下一个 token，但只对 assistant 的 answer token 算 loss。数据是（指令, 标准答案）对；本质是行为克隆，知识仍来自 pretrain。">
+  <section class="slide" data-notes="这里采用一种常见 SFT 设置：只对 assistant 的答案 token 算 loss，具体 mask 随实现变化。SFT 强调模仿示范，也可能学习任务相关信息；广泛知识主要来自预训练。">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>SFT：看标准答案学做事</h2>
     <p class="micro" style="margin:8px 0 0">supervised fine-tuning · 监督微调 / 指令微调</p>
@@ -1369,12 +1369,12 @@
         <div class="stack">
           <div class="card"><div class="k">数据</div><p>（指令, 标准答案）对</p></div>
           <div class="card"><div class="k">目标</div><p>还是下一个 token；条件是 system + user + 已答部分</p></div>
-          <div class="card accent"><div class="k">边界</div><p>行为克隆：模仿示范；知识来自预训练；难题不一定做对</p></div>
+          <div class="card accent"><div class="k">作用</div><p>模仿标准示范，学习任务相关的行为与信息。</p></div>
         </div>
       </div>
       <div class="keyline">同一套 loss，换了一个<b>求和范围</b>。</div>
     </div>
-    <div class="footer"><span>《天体力学基础》· SFT</span><span class="pnum">17 / 50</span></div>
+    <div class="footer"><span>《天体力学基础》· SFT</span><span class="pnum">17 / 53</span></div>
   </section>
 
   <!-- ============ S18 · 三种角色 ============ -->
@@ -1397,7 +1397,7 @@
       <p class="micro" style="margin-top:16px">system / user = 条件 &nbsp;·&nbsp; assistant = 监督目标（只算这些 token 的 loss）</p>
       <div class="keyline">system 定规则，user 给任务，assistant 是学习目标。</div>
     </div>
-    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 50</span></div>
+    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 53</span></div>
   </section>
 
   <!-- ============ S19 · 怎么预测 ============ -->
@@ -1426,7 +1426,7 @@
       <p class="micro" style="margin-top:14px">概率为示意，用于说明机制 · 真实输出以模型为准</p>
       <div class="keyline">一次只走一步；把结果接回输入，再走下一步。</div>
     </div>
-    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 50</span></div>
+    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 53</span></div>
   </section>
 
   <!-- ============ S20 · 什么是强化学习 ============ -->
@@ -1462,7 +1462,7 @@
       <p class="micro" style="margin-top:10px">π 策略 · γ 折扣 · r<sub>t</sub> 奖励 · E 期望</p>
       <div class="keyline">RL 学的是<b>策略</b>。</div>
     </div>
-    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 50</span></div>
+    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 53</span></div>
   </section>
 
   <!-- ============ S21 · RL 的游戏前史 ============ -->
@@ -1485,7 +1485,7 @@
       <div class="sidenote"><b>AlphaFold 是监督学习。</b> 它用已知结构做标签；没有奖励，也没有试错。</div>
       <div class="keyline">数学和代码自带 <b>simulator</b>。</div>
     </div>
-    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 50</span></div>
+    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 53</span></div>
   </section>
 
   <!-- ============ S22 · RL ============ -->
@@ -1524,7 +1524,7 @@
       <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · DeepSeek moment</p>
       <div class="keyline">同一段文字，从“预测下一个词”变成“答对才给分”。</div>
     </div>
-    <div class="footer"><span>《天体力学基础》· RLVR</span><span class="pnum">22 / 50</span></div>
+    <div class="footer"><span>《天体力学基础》· RLVR</span><span class="pnum">22 / 53</span></div>
   </section>
 
   <!-- ============ S23 · RL 算法 ============ -->
@@ -1546,7 +1546,7 @@
       <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO 是 RL；DPO 是偏好优化，常被归到 RLHF 谱系。</p>
       <div class="keyline">算法不同，循环相同：采样 → 打分 → 更新。</div>
     </div>
-    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 50</span></div>
+    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 53</span></div>
   </section>
 
   <!-- ============ S24 · 天然优势 ============ -->
@@ -1571,7 +1571,7 @@
       </div>
       <div class="keyline">反馈越明确，试错越便宜，RL 越有效。</div>
     </div>
-    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 50</span></div>
+    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
@@ -1586,7 +1586,7 @@
       </div>
       <div class="keyline">每一步都在解决前一步留下的问题。</div>
     </div>
-    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 50</span></div>
+    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 53</span></div>
   </section>
 
   <!-- ============ S26 · ChatGPT ============ -->
@@ -1607,7 +1607,7 @@
       </div>
       <div class="keyline">会说话，是训练出来的。</div>
     </div>
-    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 50</span></div>
+    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 53</span></div>
   </section>
 
   <!-- ============ S27 · Prompt ============ -->
@@ -1656,7 +1656,7 @@
       </div>
       <div class="keyline">加内容，就是在改<b>条件概率</b>。</div>
     </div>
-    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 50</span></div>
+    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 53</span></div>
   </section>
 
   <!-- ============ S28 · CoT ============ -->
@@ -1681,7 +1681,7 @@
       </div>
       <div class="keyline">CoT 负责写计划；程序负责算数。</div>
     </div>
-    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 50</span></div>
+    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 53</span></div>
   </section>
 
   <!-- ============ S29 · Context 膨胀 ============ -->
@@ -1703,7 +1703,7 @@
       </div>
       <div class="keyline">信息密度比窗口长度更重要。</div>
     </div>
-    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 50</span></div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 53</span></div>
   </section>
 
   <!-- ============ S30 · 大海捞针 ============ -->
@@ -1727,13 +1727,14 @@
         </div>
         <div class="stack">
           <div class="card"><div class="k">怎么做</div><p>藏一句话，换长度、换位置，问它是什么</p></div>
-          <div class="card"><div class="k">结果</div><p>越长越难；中间位置最差</p></div>
+          <div class="card"><div class="k">已观察到的失效模式</div><p>长度与位置可能影响检索；具体表现随模型和任务变化</p></div>
           <div class="card accent"><div class="k">含义</div><p>窗口大 ≠ 找得到</p></div>
         </div>
       </div>
-      <div class="keyline">检索准确率才是关键。</div>
+      <p class="micro" style="margin:12px 0 0">示意图，非实测数据 · 参见 Liu et al., Lost in the Middle（2023）。</p>
+      <div class="keyline">窗口容量与<b>有效利用上下文</b>，是不同的指标。</div>
     </div>
-    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 50</span></div>
+    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 53</span></div>
   </section>
 
   <!-- ============ S31 · Context ============ -->
@@ -1761,7 +1762,7 @@
       </div>
       <div class="keyline">上下文越相关越好。</div>
     </div>
-    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 50</span></div>
+    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 53</span></div>
   </section>
 
   <!-- ============ S32 · CoT pruning ============ -->
@@ -1794,7 +1795,7 @@
       </div>
       <div class="keyline">思考也有预算。</div>
     </div>
-    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 50</span></div>
+    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 53</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -1817,7 +1818,7 @@
       </div>
       <div class="keyline">模型负责提议，程序负责算对。</div>
     </div>
-    <div class="footer"><span>function calling</span><span class="pnum">33 / 50</span></div>
+    <div class="footer"><span>function calling</span><span class="pnum">33 / 53</span></div>
   </section>
 
   <!-- ============ S34 · Agent 与客户端 ============ -->
@@ -1836,7 +1837,7 @@
       </div>
       <div class="keyline">模型负责提议，客户端负责把提议变成<b>行动</b>。</div>
     </div>
-    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 50</span></div>
+    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 53</span></div>
   </section>
 
 
@@ -1868,60 +1869,127 @@
       </div>
       <div class="keyline">记忆的关键是取得准。</div>
     </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 50</span></div>
+    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
   </section>
 
   <!-- ============ S36 · 参考案例：Claude Code 代码审查 ============ -->
-  <section class="slide" data-notes="参考案例，依据 Addy Osmani、Morgan Westlee Lunt、Qing Wang 的 How the Claude Code team does code review（2026-10-15）整理：https://claude.dev/blog/solving-code-review-at-anthropic/ 。这是团队自述的软件工程实践，供学术同行参考；迁移到具体研究任务后的适用性和效果需要另行评估。本页三栏归纳原文的六层审查与发布流程，以及故障发现和回滚。PR 指待合并的代码变更。提交前，要求模型提供实际测试、构建或界面检查的输出，再由新上下文的子 agent 审查变更。CLAUDE.md 保存精简的项目约定并指向其他资料；REVIEW.md 保存局部审查标准、失败模式，并要求文件与行号证据。提交后，多个 agent 审查并复核发现，安全审查与自动测试可以阻断合并。多 agent 一致用于过滤发现，不等于正确性证明。人工审批按变更风险分级；较轻流程仅对可信作者开放，需要人的审批位不能由 agent 替代。指挥 agent 的人承担责任。合并检查、分阶段发布与快速回滚控制漏检后的影响。历史事故和回滚由工程师确认后加入每日评测集，同时衡量误报与通过审查所需轮数。原文记录一次超过 50 轮的审查与修复循环；团队随后规定三轮后请作者重新考虑方案，后续聚焦新增变更并避免重复报告。这是停止与升级策略，不保证自动收敛。重复问题沉淀到规则文件、Skill 或可执行检查；长期积累的是上下文、审查标准和评测资产。本报告展示这个具体参考例子，具体科研问题如何解决由听众自行判断。
-">
+  <section class="slide" data-notes="案例第一幕：人的卡点。来源：Osmani、Lunt、Wang，How the Claude Code team does code review（2026-10-15）。先讲问题：Agent 产出增长，逐行人工审查来不及。约 2,500 到 30,000 多指 Anthropic monorepo 每日落地变更，时间为 2026 年 5 到 9 月，不等同于 git commit 数量。Claude Code 有独立仓库；后者 6 到 9 月合并 PR 超过翻倍，回滚占比下降超过 40%。两组数据对象不同，属于团队自述观察，不是受控因果实验。目标同时计算人的审查时间和故障修复时间，以免把工作从审查挪到修复。后三页展示系统怎样接住瓶颈：分层检查、按风险安排人工、事故进入评测回路。具体科研问题的解决方式不在本报告范围内。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Harness 实例：Claude Code 代码审查</h2>
-    <p class="sub" style="margin-top:8px">一个供学术同行参考的软件工程案例。</p>
+    <h2>代码产出激增，人工审查来不及了</h2>
+    <p class="sub" style="margin-top:8px">Claude Code 团队的卡点：代码增长得比人的注意力更快。</p>
     <div class="content" style="margin-top:22px">
-      <div class="scaleband">目标：<b>减少人工审查时间</b>，同时以回滚率与事故率把关。</div>
-      <div class="three" style="margin-top:18px;gap:18px">
-        <div class="card" style="padding:16px 20px;min-height:180px">
-          <div class="k">01 · 提交之前</div>
-          <div class="big" style="font-size:23px">给出运行证据</div>
-          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
-            <li>执行测试、构建与界面检查</li>
-            <li>新上下文的 Agent 独立审查</li>
-            <li>加载项目约定与审查标准</li>
-          </ul>
+      <div class="two even" style="gap:32px;align-items:center">
+        <div class="card" style="padding:18px 20px">
+          <div class="k">产出压力 · Anthropic monorepo</div>
+          <div style="font-family:var(--mono);font-size:46px;line-height:1.3;letter-spacing:-.04em">2,500 → <b style="color:var(--accent)">30,000+</b></div>
+          <p style="font-size:18px">每日落地变更 · 2026 年 5 月 → 9 月</p>
+          <p class="micro" style="font-size:13px">Claude Code 使用另一个独立仓库。</p>
         </div>
-        <div class="card" style="padding:16px 20px;min-height:180px">
-          <div class="k">02 · 分层检查</div>
-          <div class="big" style="font-size:23px">检查这次变更</div>
-          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
-            <li>AI 审查与问题复核</li>
-            <li>安全审查与自动测试</li>
-            <li>按变更风险安排人工审批</li>
-          </ul>
-        </div>
-        <div class="card accent" style="padding:16px 20px;min-height:180px">
-          <div class="k">03 · 发布与责任</div>
-          <div class="big" style="font-size:23px">控制失败影响</div>
-          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
-            <li>合并检查与分阶段发布</li>
-            <li>快速发现、快速回滚</li>
-            <li>每次变更由人承担责任</li>
-          </ul>
+        <div class="stack" style="gap:12px">
+          <div class="card" style="padding:14px 20px"><div class="k">生产端</div><p style="font-size:20px;margin:0">Agent 更快地产出更多代码。</p></div>
+          <div class="card accent" style="padding:14px 20px"><div class="k">人的卡点</div><p style="font-size:20px;margin:0">人的审查时间与注意力有限。</p></div>
+          <div class="card" style="padding:14px 20px"><div class="k">结果</div><p style="font-size:20px;margin:0">逐行人工审查跟不上产出。</p></div>
         </div>
       </div>
-      <div class="loop" style="margin-top:18px;gap:10px">
-        <span class="step">事故与回滚</span><span class="arr">→</span>
-        <span class="step hl">经确认的评测案例</span><span class="arr">→</span>
-        <span class="step">评估审查器改进</span><span class="arr">↺</span>
-      </div>
-      <p class="micro" style="margin:10px 0 0">上下文资产：CLAUDE.md + REVIEW.md · 三轮后重新审视方案；后续审查聚焦新增变更。</p>
-      <div class="keyline">把失败沉淀为<b>可复用的检查</b>，让审查经验持续<b>复利</b>。</div>
+      <div class="scaleband" style="margin-top:22px">目标：减少<b>审查 + 修复的总人时</b>，同时以回滚率与事故率把关。</div>
+      <div class="keyline">下一步收益，来自<b>重新组织审查流程</b>。</div>
       <p class="micro" style="margin:10px 0 0;font-size:11.5px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
     </div>
-    <div class="footer"><span>参考案例 · 分层审查 · 评测资产复利</span><span class="pnum">36 / 50</span></div>
+    <div class="footer"><span>参考案例 · 人的处理瓶颈 · 1 / 4</span><span class="pnum">36 / 53</span></div>
   </section>
 
-  <!-- ============ S37 · 系统图 ============ -->
-  <section class="slide" data-notes="把前面几页收成一张图：LLM 在中心，prompt 和 context 是这一次的输入；memory 和 agent loop 跨多次调用；harness 在最外面，管工具、权限、验证和日志。模型是 CPU，外面全是运行时。">
+  <!-- ============ S37 · 审查案例：上下文 ============ -->
+  <section class="slide" data-notes="案例第二页，来源为 Osmani、Lunt、Wang 的 How the Claude Code team does code review（2026-10-15）。CLAUDE.md 描述项目技术栈、约定、目标与非目标，保持简短并链接其他文档。REVIEW.md 由代码负责人编写，定义局部失败模式、跳过路径、低价值意见的限制，以及发现问题时应提供的证据；团队另外检查审查器是否真正遵守这些规则。提交代码变更前，由新上下文的子 Agent 审查；审查还需结合代码库和变更意图，而不只看作者解释。新上下文有助于减少沿袭作者叙述，但不保证错误独立。重复发现的问题前移到规则、Skill 或可执行的 lint 检查。这是文章中的具体上下文资产，供同行参考，具体科研流程由研究者自行判断。">
+    <p class="eyebrow"><b>04</b> / 参考案例 · 2 / 4</p>
+    <h2>用系统接住常规审查</h2>
+    <p class="sub" style="margin-top:8px">检查贯穿工作流程，人的注意力留给关键判断。</p>
+    <div class="content">
+      <div class="three" style="gap:18px">
+        <div class="card" style="padding:18px 20px;min-height:210px">
+          <div class="k">01 · 提交之前</div><div class="big" style="font-size:23px">先产出检查证据</div>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>测试、构建、检查界面</li><li>新上下文的 Agent 审查</li><li>提交审查前先修一轮</li></ul>
+        </div>
+        <div class="card" style="padding:18px 20px;min-height:210px">
+          <div class="k">02 · 审查之中</div><div class="big" style="font-size:23px">分层发现问题</div>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>AI 审查，复核发现</li><li>安全检查与自动测试</li><li>每项发现都要处理</li></ul>
+        </div>
+        <div class="card accent" style="padding:18px 20px;min-height:210px">
+          <div class="k">03 · 批准与发布</div><div class="big" style="font-size:23px">控制剩余风险</div>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>按风险安排人工批准</li><li>合并检查，分阶段发布</li><li>快速发现，快速回滚</li></ul>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:24px"><b>共享上下文：</b>CLAUDE.md 存项目约定；REVIEW.md 存局部失败标准与证据要求。</div>
+      <div class="keyline">常规检查持续运行，人聚焦<b>判断与风险</b>。</div>
+      <p class="micro" style="margin:12px 0 0;font-size:12px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
+    </div>
+    <div class="footer"><span>参考案例 · 上下文资产 · 审查标准</span><span class="pnum">37 / 53</span></div>
+  </section>
+
+  <!-- ============ S38 · 审查案例：风险与责任 ============ -->
+  <section class="slide" data-notes="案例第三页。这张表概括文章中的团队风险分级，不是通用审批政策。低风险包括文档、文案和仅内部功能；中风险包括常规产品变更和部分敏感模块变更；高风险包括最高风险代码和指定路径。变更本身决定风险等级。较轻审批流程仅对可信作者开放；其他作者需要第二人批准。额外分类器和指定敏感路径可能要求更多人工审批。Agent 批准不能占用需要人的审批位。指挥 Agent 进行变更的人计入审查者并承担责任。批准针对特定提交，后续无法被系统担保的提交需要重新批准。人还负责判断是否值得做、架构和高风险代码、阅读证据与承担结果。合并检查、分阶段发布和回滚是另外的保障。这里展示注意力如何分配，不宣称流程保证正确性。">
+    <p class="eyebrow"><b>04</b> / 参考案例 · 3 / 4</p>
+    <h2>人的注意力，按风险分配</h2>
+    <p class="sub" style="margin-top:8px">团队的审批策略，以及明确的责任归属。</p>
+    <div class="content">
+      <table class="compare" style="font-size:19px;margin:0">
+        <thead><tr><th>变更风险</th><th>例子</th><th>人工审批</th></tr></thead>
+        <tbody>
+          <tr><td>低</td><td>文档、文案、仅内部使用的功能</td><td>可免人工审批*</td></tr>
+          <tr><td>中</td><td>常规产品变更</td><td>1 人*</td></tr>
+          <tr><td>高</td><td>最高风险代码、指定路径</td><td>2 人</td></tr>
+        </tbody>
+      </table>
+      <p class="micro" style="margin:12px 0 0">* 较轻流程仅对可信作者开放，且须通过必要检查；敏感路径可能要求额外审批。</p>
+      <div class="three" style="margin-top:22px;gap:18px">
+        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">方向</div><p style="font-size:18px;margin:0">人判断这件事是否值得做。</p></div>
+        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">证据</div><p style="font-size:18px;margin:0">批准针对某个明确的提交。</p></div>
+        <div class="card accent" style="min-height:112px;padding:16px 20px"><div class="k">责任</div><p style="font-size:18px;margin:0">指挥 Agent 的人对变更负责。</p></div>
+      </div>
+      <div class="keyline">需要人的审批位由<b>人</b>担任，每次变更有<b>明确负责人</b>。</div>
+      <p class="micro" style="margin:12px 0 0;font-size:12px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
+    </div>
+    <div class="footer"><span>参考案例 · 风险分级 · 人的责任</span><span class="pnum">38 / 53</span></div>
+  </section>
+
+  <!-- ============ S39 · 审查案例：评测与停止 ============ -->
+  <section class="slide" data-notes="案例第四页。历史事故和回滚由熟悉代码的工程师确认，转成评测案例。审查器每天运行这些案例，提示词、工具或模型变化时重新评分。团队同时衡量真实错误检出、误报与审查轮数，用已知干净的变更检查有害误报。更多评论不代表更好的审查。文章记录一次变更在夜间经历超过 50 轮审查修复；反复被指出的代码约 59% 在第一轮时就已存在。后续策略是三轮后请作者重新考虑方案，之后聚焦新增变更、指出一类错误以一次修复全部实例、避免重复报告。三轮是升级处理规则，不是三轮保证正确。这个案例的复利来自已确认的失败评测集、可复用审查标准和可执行检查；具体科研领域的适用性由听众判断。">
+    <p class="eyebrow"><b>04</b> / 参考案例 · 4 / 4</p>
+    <h2>让审查持续改进，也能停下来</h2>
+    <p class="sub" style="margin-top:8px">失败进入评测集，审查循环设置升级处理条件。</p>
+    <div class="content">
+      <div class="loop" style="margin-top:0">
+        <span class="step">事故 / 回滚</span><span class="arr">→</span>
+        <span class="step hl">工程师确认的案例</span><span class="arr">→</span>
+        <span class="step">每日评测</span><span class="arr">→</span>
+        <span class="step">改进审查器</span><span class="arr">↺</span>
+      </div>
+      <div class="two even" style="margin-top:24px;gap:24px">
+        <div class="card" style="padding:18px 20px">
+          <div class="k">同时衡量质量与成本</div>
+          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
+            <li>发现了多少真实错误</li>
+            <li>对干净变更产生多少误报</li>
+            <li>经过几轮才能通过审查</li>
+          </ul>
+        </div>
+        <div class="card accent" style="padding:18px 20px">
+          <div class="k">给循环设置边界</div>
+          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
+            <li>三轮后重新审视方案</li>
+            <li>后续聚焦新增变更</li>
+            <li>按错误类别修复，避免重复</li>
+          </ul>
+        </div>
+      </div>
+      <p class="micro" style="margin:16px 0 0">原文记录的失败模式：一次变更在夜间经历了 50 多轮审查与修复。</p>
+      <div class="keyline">把失败沉淀为<b>可复用的检查</b>，让审查经验持续<b>复利</b>。</div>
+      <p class="micro" style="margin:12px 0 0;font-size:12px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
+    </div>
+    <div class="footer"><span>参考案例 · 评测集 · 有边界的审查循环</span><span class="pnum">39 / 53</span></div>
+  </section>
+
+  <!-- ============ S40 · 系统图 ============ -->
+  <section class="slide" data-notes="把前面几页收成一张功能示意图：模型根据当前输入生成文本或工具调用提议；prompt 是输入中的指令、问题和示例，context 是这次调用可见的全部输入内容；memory 是跨调用保存、按需取回的状态；loop 是组织多次调用、工具执行与反馈的控制流程；harness 是承载这些机制的执行框架，管理工具、权限、检查与日志。这些概念分属输入、状态、控制流程和执行框架，存在包含与交叠关系。图中同心环用于组织讲解，不代表严格的软件分层或计算机硬件结构。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>把模型放回系统里</h2>
     <div class="content">
@@ -1947,13 +2015,13 @@
           <div class="row"><span class="n">06</span><b>Harness</b><p>工具、沙箱、权限、验证、日志</p></div>
         </div>
       </div>
-      <div class="keyline">模型是 CPU；prompt、context、memory、loop、harness 是运行时。</div>
+      <div class="keyline">模型生成<b>提议</b>；系统管理上下文与状态，执行工具并<b>检查结果</b>。</div>
     </div>
-    <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 50</span></div>
+    <div class="footer"><span>model · state · execution framework</span><span class="pnum">40 / 53</span></div>
   </section>
 
-  <!-- ============ S38 · 加速 ============ -->
-  <section class="slide" data-notes="2023 年之前，AI 在数学里主要是解释概念、查文献、写代码；简单计算经常错，复杂证明仍要人。2024 年 7 月 IMO 银牌 28/42；2025 年 7 月金牌级 35/42——12 个月，+7 分。2026 年 10 月，OpenAI 报告用内部模型解决 372 个开放问题、722 篇论文，平均约 3 小时/题；其中 3 个撤回，同行评议未完成；这是公司声称，不是已核实事实。这是一条阶梯，三个台阶。">
+  <!-- ============ S41 · 加速 ============ -->
+  <section class="slide" data-notes="选取的里程碑包括 2024 年 IMO 银牌级 28/42 和 2025 年金牌级 35/42。2026 年 OpenAI 发布属于公司报告，不代表每项结果已独立确认。其 2026-10-06 原文描述的是每项结果平均使用约三小时 ChatGPT Pro 思考的等价算力，不是实际三小时解完。不同系统、测试设置与预算之间也不是受控的纵向比较。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>加速：从基本应用到金牌</h2>
     <div class="content">
@@ -1968,14 +2036,14 @@
             <li>角色：助手</li>
           </ul>
         </div>
-        <div class="mid"><div class="ar">→</div><div class="lab">约 19 个月</div></div>
+        <div class="mid"><div class="ar">→</div><div class="lab">2024–26</div></div>
         <div class="side now">
-          <div class="yr">2025 · 之后</div>
+          <div class="yr">2025–26 · 之后</div>
           <h3>研究级</h3>
           <ul>
             <li>IMO 2025 金牌级 35/42</li>
             <li>Lean 形式证明可验</li>
-            <li>OpenAI 2026：372 题，平均 3 小时/题（报告）</li>
+            <li>OpenAI 2026：每项结果约 3 Pro 小时算力*</li>
             <li>角色：候选生成器</li>
           </ul>
         </div>
@@ -1986,12 +2054,13 @@
         <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">金牌级</span></div>
         <div class="note">12 个月，+7 分</div>
       </div>
+      <p class="micro" style="margin:10px 0 0">* 算力等价值，非实际耗时 · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">OpenAI，2026-10-06</a> · 公司报告。</p>
       <div class="keyline">这是一条阶梯：<b>三个台阶</b>。</div>
     </div>
-    <div class="footer"><span>from basic apps to research-level</span><span class="pnum">38 / 50</span></div>
+    <div class="footer"><span>from basic apps to research-level</span><span class="pnum">41 / 53</span></div>
   </section>
 
-  <!-- ============ S39 · AI math 时间线 ============ -->
+  <!-- ============ S42 · AI math 时间线 ============ -->
   <section class="slide" data-notes="两年时间线：2023 年底 FunSearch 把 LLM 放进进化搜索；2024 年初 AlphaGeometry 解几何；2024 年 7 月 AlphaProof 在 IMO 拿银牌；2024 年 9 月 o1 把 test-time compute 变成产品；2025 年初 R1 用可验证奖励做 RL；2025 年 5 月 AlphaEvolve 改进矩阵乘法；2025 年 7 月两家在 IMO 拿金牌级；2026 年 5 月 OpenAI 模型给出 Erdős 单位距离猜想的反例；9 月声称解决 Navier–Stokes（千禧年问题之一），争议很大；10 月报告 372 个开放问题、722 篇论文（其中含与黎曼猜想相关的声称，不是完整证明；3 个撤回，待同行评议）。这些是公开声称，不是已核实结论。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>时间线：三个台阶</h2>
@@ -2021,10 +2090,10 @@
       </div>
       <div class="keyline">每一次跃迁，都是<b>生成器 + 验证器 + 搜索</b>。</div>
     </div>
-    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 50</span></div>
+    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">42 / 53</span></div>
   </section>
 
-  <!-- ============ S40 · 公开表述 ============ -->
+  <!-- ============ S43 · 公开表述 ============ -->
   <section class="slide" data-notes="这些是公开表述，来自论文、博客和赛后声明。FunSearch 强调 evaluator 和进化；AlphaGeometry 强调 1 亿条合成证明；AlphaProof 强调自动形式化、Lean、RL 和 test-time RL；o1 强调多花时间思考；R1 强调直接在基座模型上做 RL、用规则奖励；AlphaEvolve 强调进化编码 agent；IMO 2025 强调自然语言、无工具、人工评分；OpenAI 2026.10 报告 372 个开放问题、722 篇论文，但 3 个撤回、同行评议未完成。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>他们怎么说的</h2>
@@ -2045,10 +2114,10 @@
       </table>
       <div class="keyline">关键词在变，底层动作没变：<b>提议、验证、再搜索</b>。</div>
     </div>
-    <div class="footer"><span>public claims · public sources</span><span class="pnum">40 / 50</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">43 / 53</span></div>
   </section>
 
-  <!-- ============ S41 · 共同模式 ============ -->
+  <!-- ============ S44 · 共同模式 ============ -->
   <section class="slide" data-notes="把公开工作抽象成一个循环：LLM 生成候选；验证器给对错；搜索或 RL 把信号变成下一步；再回到生成器。模型提供概率，验证器提供梯度——严格说，验证器给的是奖励或筛选信号，梯度由训练算法算。没有验证器，就没有可规模化的信号。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>共同的模式：生成 → 验证 → 搜索</h2>
@@ -2068,11 +2137,11 @@
       </div>
       <div class="keyline">模型提供概率，<b>验证器提供梯度</b>。</div>
     </div>
-    <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 50</span></div>
+    <div class="footer"><span>generator · verifier · search</span><span class="pnum">44 / 53</span></div>
   </section>
 
-  <!-- ============ S42 · 猜测 ============ -->
-  <section class="slide" data-notes="以下机制假设来自公开论文、博客和 benchmark 的交叉印证，标注为猜测。数据上，自动形式化、合成题、拒绝采样；训练上，RLVR + 长 CoT；推理上，test-time search；工程上，把搜索蒸馏回模型；再加上大规模并行和 eval harness。OpenAI 说 372 题平均约 3 小时/题；我的判断是：372 题的速度来自大量并行采样、自动验证、搜索/agent 群和蒸馏的组合；3 小时是墙钟时间，背后是大量并发算力。">
+  <!-- ============ S45 · 猜测 ============ -->
+  <section class="slide" data-notes="本页是公开方法启发的机制假设，不是对私有系统的完整还原。OpenAI 2026-10-06 原文说，平均每项结果使用的算力相当于约三小时 ChatGPT Pro 思考。这是算力等价值，不是墙钟耗时，也不能据此判断并行度。自动形式化、RLVR、搜索、蒸馏和 Harness 是可能组件，单一成本统计不能识别实际采用了哪些方法。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>一些猜测：大结果可能是怎么来的</h2>
     <div class="content">
@@ -2085,13 +2154,13 @@
         <div class="card"><div class="k">05 工程</div><p><b>Harness</b>：并行、缓存、评测、回放。</p></div>
         <div class="card accent"><div class="k">06 赌注</div><p><b>验证</b>：谁有更硬的 verifier，谁就有更快的飞轮。</p></div>
       </div>
-      <p class="micro" style="margin-top:10px">OpenAI：372 题，平均 3 小时/题（报告）</p>
-      <div class="keyline">3 小时/题，更像<b>并行采样 + 验证 + 搜索</b>。</div>
+      <p class="micro" style="margin-top:10px">OpenAI 报告：每项结果约 3 小时 ChatGPT Pro 等价算力 · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">2026-10-06</a>。</p>
+      <div class="keyline">已知算力预算，<b>系统设计仍有多种可能</b>。</div>
     </div>
-    <div class="footer"><span>speculation · public sources</span><span class="pnum">42 / 50</span></div>
+    <div class="footer"><span>speculation · public sources</span><span class="pnum">45 / 53</span></div>
   </section>
 
-  <!-- ============ S43 · 还没解决 ============ -->
+  <!-- ============ S46 · 还没解决 ============ -->
   <section class="slide" data-notes="已经发生：竞赛题、形式证明、构造搜索、部分开放问题（2026 OpenAI 报告 372 个）。还没：选题、定义、长程研究计划、品味。解题可以搜索；做数学需要方向。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>还没解决的：从解题到做数学</h2>
@@ -2118,10 +2187,10 @@
       </div>
       <div class="keyline">解题可以搜索；<b>做数学需要方向</b>。</div>
     </div>
-    <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 50</span></div>
+    <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
   </section>
 
-  <!-- ============ S44 · 电机与流水线 ============ -->
+  <!-- ============ S47 · 电机与流水线 ============ -->
   <section class="slide" data-notes="Eric Schmidt 讲过一个故事：电机刚发明时，工厂主把中央蒸汽机拆掉换成电机，其他不变，效率只升 30%。几十年后，电机做小、每台机器自备动力，工厂彻底围绕生产流重新设计，流水线诞生，效率提高几十倍。AI 今天一样：在聊天框里反复调试 Prompt（Prompting Harder）是单机时代，换个窗口就归零；只有把天体力学知识、代码规范、推导准则沉淀为结构化上下文（Context Engineering），建立流水线，才能拿到复利。模型是租来的，上下文与资产库才是自己的。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>电机与流水线</h2>
@@ -2142,10 +2211,10 @@
       <div class="ai-note">模型是租来的，上下文与系统才是自己的：别只在旧步骤里「问一下 AI」，把规则、工具与检验沉淀为长期资产。</div>
       <div class="keyline">收益在<b>布局与复利</b>。</div>
     </div>
-    <div class="footer"><span>电机 · 流水线 · 工作方式</span><span class="pnum">44 / 50</span></div>
+    <div class="footer"><span>电机 · 流水线 · 工作方式</span><span class="pnum">47 / 53</span></div>
   </section>
 
-  <!-- ============ S45 · 算法工程师的困境 ============ -->
+  <!-- ============ S48 · 算法工程师的困境 ============ -->
   <section class="slide" data-notes="算法工程师的困境一年前就出现了：模型会写代码之后，价值从实现转向定义问题、设计 harness、验证和对系统负责。数学正在经历同一件事。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>算法工程师的困境</h2>
@@ -2175,30 +2244,30 @@
       </div>
       <div class="keyline">工作从「产出答案」转向<b>「指挥搜索」</b>。</div>
     </div>
-    <div class="footer"><span>工程师 · agent · 方向</span><span class="pnum">45 / 50</span></div>
+    <div class="footer"><span>工程师 · agent · 方向</span><span class="pnum">48 / 53</span></div>
   </section>
 
-  <!-- ============ S46 · 网页到 CLI ============ -->
-  <section class="slide" data-notes="严肃科研绝不能停留在网页对话（Level 1 薄包装）：网页既不能调真实工具，也无法沉淀本地文件。到了 CLI 与工作目录（Level 3 Tools → Level 4 Workflow → Level 5 Loop），AI 能调 Python/Julia 跑辛积分数值模拟、调 Mathematica 做摄动级数展开，并通过子 agent 进行隔离推导与文献校对。核心是：文件即接口，Markdown 即协议——无论换什么模型或客户端，你的科研技能库完全可移植、永久可复利。">
+  <!-- ============ S49 · 网页到 CLI ============ -->
+  <section class="slide" data-notes="这里展示工作模式，不是产品的通用等级。网页、IDE 和 CLI 都可能按配置提供工具、仓库访问或 Agent 循环。对我的长任务，工作目录让规则、结果与可执行检查持续复用。跨模型或客户端复用可能需要适配；模型、工具或环境变化后要重新评测。本地文件有助于可移植性与积累，但不保证永远有效。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>从网页对话框到工作目录</h2>
-    <p class="sub" style="margin-top:8px">严肃科研不能停留在薄外壳；文件即接口，规则可移植。</p>
+    <p class="sub" style="margin-top:8px">对我的长任务，工作目录让规则与结果可以持续复用。</p>
     <div class="content">
       <div class="mathline">
         <div class="phase">
-          <div class="ph">L1 · Wrapper</div>
+          <div class="ph">模式 A · 对话</div>
           <h3>网页对话</h3>
-          <div class="ms"><b>一问一答，手工复制</b><span>无文件访问权 · 无法沉淀</span></div>
-          <div class="ms"><b>没有真实工具</b><span>模型口头描述，人类肉身执行</span></div>
+          <div class="ms"><b>讨论与探索</b><span>提问、解释、上传资料</span></div>
+          <div class="ms"><b>工具能力取决于配置</b><span>网页也可以提供工具与记忆</span></div>
         </div>
         <div class="phase">
-          <div class="ph">L2–3 · Copilot</div>
+          <div class="ph">模式 B · 编辑器</div>
           <h3>IDE 编辑器</h3>
-          <div class="ms"><b>单点补全与生成</b><span>上下文局限于当前打开文件</span></div>
-          <div class="ms"><b>更快的打字机</b><span>未跳出旧循环，依然人工驱动</span></div>
+          <div class="ms"><b>紧贴代码进行编辑</b><span>文件、诊断、仓库上下文</span></div>
+          <div class="ms"><b>辅助编辑或运行 Agent</b><span>能力取决于工具与权限</span></div>
         </div>
         <div class="phase">
-          <div class="ph">L4–5 · Agent Loop</div>
+          <div class="ph">模式 C · 工具循环</div>
           <h3>工作目录 Agent</h3>
           <div class="ms"><b>工具集成与子智能体</b><span>Python 辛积分 · 摄动展开 · 隔离审查</span></div>
           <div class="ms"><b>自主闭环与版本可控</b><span>假说 → 实验 → 守恒校验 → git 归档</span></div>
@@ -2212,12 +2281,12 @@
         <span class="pill"><i></i>Markdown SOP 协议</span>
       </div>
       <div class="keyline">文件即接口；在 <b>本地工作目录</b> 沉淀可移植的科研资产。</div>
-      <p class="micro" style="margin-top:8px">换模型只需切一行配置；你积累的动力学检验器与 Skill 资产永久有效。</p>
+      <p class="micro" style="margin-top:8px">文件与检查可跨工具复用；模型或环境变化后，重新运行评测。</p>
     </div>
-    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">46 / 50</span></div>
+    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">49 / 53</span></div>
   </section>
 
-  <!-- ============ S47 · 两次尝试 ============ -->
+  <!-- ============ S50 · 两次尝试 ============ -->
   <section class="slide" data-notes="第一次是 OpenClaw 刚出来时，试图让它端到端全包：把概率模型当成确定性计算器，人类完全放手，无检查无回路，直接崩溃。第二次是博士后工作的继续 iStart：转变角色做 Coach 而不做 Fixer。我定目标（WHAT）、提供约束、指出逻辑破绽，让 Codex 与 GPT-5.3–5.5 推进实现（HOW）。它犯过离谱错误，比如试图证明 Ax=b 在 b≠0 时 x=0，被我指出后修正。被拒 3 次后，9 月用 GPT-6.1 Sol 再次全面复扫并修正。经验在于：检验（Eval）比生成容易，人要当指出方向和反例的 Coach。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>两次尝试</h2>
@@ -2232,7 +2301,7 @@
             <li>早期模型弱、幻觉多，且无任何外部检验回路。</li>
             <li>人类彻底退场，期待自动化奇迹。</li>
           </ul>
-          <p class="micro" style="margin-top:10px">教训：脱离验证与引导，单机必定崩溃。</p>
+          <p class="micro" style="margin-top:10px">我的结果：没有完成论文；引导与检查不足。</p>
         </div>
         <div class="card accent">
           <div class="k">Codex · GPT-5.3–5.5 · iStart</div>
@@ -2248,27 +2317,27 @@
       </div>
       <div class="keyline">不做救火的 Fixer，做定标准与反例的 <b>Coach</b>。</div>
     </div>
-    <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">47 / 50</span></div>
+    <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">50 / 53</span></div>
   </section>
 
-  <!-- ============ S48 · 低垂的果实 ============ -->
-  <section class="slide" data-notes="两次尝试的底层教训：第一，人类要定目标、给反例、把守边界（Coach 而非 Fixer）；第二，模型越强越需要坚固的客观评估（Eval），比如天体力学中的哈密顿量守恒、能量残差、辛对称性检验；第三，单篇论文生成只是低垂的果实，一旦算力能够批量抽卡爆破公开问题，边际论文就不再有壁垒。以前的数学猜想是写给人类大脑的，当机器加入竞赛，真正能够长期沉淀复利的，是你的科研品味（Axioms）、评估系统（Evals）与高价值问题定义。">
+  <!-- ============ S51 · 低垂的果实 ============ -->
+  <section class="slide" data-notes="这是我的实践体会：人定目标、给反例、阅读检查证据。动力学检查提供互补证据，包括能量误差行为、辛性残差 DΦᵀ J DΦ − J 和步长收敛。辛积分器一般不精确守恒原哈密顿量，能量误差小也不能单独说明轨道正确。起草变得更便宜后，我选择把更多时间投入选题、可复用知识与评估资产。这是个人的投入取舍，不表示其他成果没有价值。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>低垂的果实与长期复利</h2>
     <p class="sub" style="margin-top:8px">生成论文只是起点；可复利的资产是评估器与科研品味。</p>
     <div class="content">
       <div class="three tight">
         <div class="card"><div class="k">01 · 人类作为 Coach</div><div class="big" style="font-size:20px">定目标与反例</div><p>明确定义 WHAT，放手让 AI 探索 HOW；给出逻辑反例，拒绝人工逐行代修。</p></div>
-        <div class="card"><div class="k">02 · 系统化的 Eval</div><div class="big" style="font-size:20px">动力学守恒检验</div><p>好模型仍会卡壳。沉淀能量守恒、辛对称性校验集；机器负责计算，残差负责把关。</p></div>
+        <div class="card"><div class="k">02 · 系统化的 Eval</div><div class="big" style="font-size:20px">动力学检验</div><p>能量误差行为、辛性残差、步长收敛测试，提供互补的检查证据。</p></div>
         <div class="card accent"><div class="k">03 · 可复利资产</div><div class="big" style="font-size:20px">品味与评估集</div><p>单篇论文是易贬值的果实；持久复利的是知识库、代码 SOP 与形式化评测器。</p></div>
       </div>
-      <p class="bigquote2">OpenAI 可以批量抽卡爆破开放问题，但以前的猜想是写给人的。当产出边际成本归零，唯有<b>评估系统与逆向品味</b>真正复利。</p>
+      <p class="bigquote2">当起草变得更便宜，我更愿意投入<b>选题、可复用知识与评估系统</b>。这些资产可以跨项目积累，形成长期复利。</p>
       <div class="keyline">下一个核心问题：哪个问题<b>值得机器与人类一起做</b>？</div>
     </div>
-    <div class="footer"><span>Coach · Eval · 长期复利</span><span class="pnum">48 / 50</span></div>
+    <div class="footer"><span>Coach · Eval · 长期复利</span><span class="pnum">51 / 53</span></div>
   </section>
 
-  <!-- ============ S49 · 年轻人的机会 ============ -->
+  <!-- ============ S52 · 年轻人的机会 ============ -->
   <section class="slide" data-notes="天体力学正在变成数据领域：Gaia、卫星跟踪、巡天、N 体模拟。数据比手多。年轻人的机会在于：既懂领域，又会处理数据，能把噪声去掉、把信号找出来。工具是新的，问题是老的。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>年轻人的机会</h2>
@@ -2313,10 +2382,10 @@
       <p class="bigquote2">数据比手多，工具是新的，问题是老的。<b>这就是年轻人的机会。</b></p>
       <div class="keyline">瓶颈在<b>信号</b>。</div>
     </div>
-    <div class="footer"><span>数据 · 手艺 · 信号</span><span class="pnum">49 / 50</span></div>
+    <div class="footer"><span>数据 · 手艺 · 信号</span><span class="pnum">52 / 53</span></div>
   </section>
 
-  <!-- ============ S50 · 结论 ============ -->
+  <!-- ============ S53 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <p class="eyebrow"><b>06</b> / 结论</p>
     <h2>从下一个 token 到下一个定理</h2>
@@ -2335,7 +2404,7 @@
       </div>
       <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">50 / 50</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">53 / 53</span></div>
   </section>
 
 </div>

@@ -21,7 +21,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - **模型**：一个函数，输入 token 序列，输出下一个 token 的概率分布。
 - **训练**：pretrain 给知识，SFT 给行为，RL 给搜索与纠错的习惯。
 - **使用**：prompt、context、memory、agent loop、harness 如何组合成系统。
-- **工程参考案例**：S36 依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15）展示分层验证、人工责任与事故评测积累，供学术同行参考。
+- **工程参考案例**：S36–S39 依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。
 - **AI × math**：FunSearch、AlphaGeometry、AlphaProof、o1 / R1、AlphaEvolve、IMO 2025，以及 2026 年 OpenAI 的公开声称。
 - **结论**：概率负责广度，验证负责正确，人负责方向。
 
@@ -35,7 +35,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **50 页**，16:9，1280 × 720。
+- **53 页**，16:9，1280 × 720。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
 - 键盘操作：
   - `←` `→` / `Space`：翻页
@@ -79,7 +79,7 @@ python3 assets/demos/render_pdf.py --html docs/index.html --out docs/from-next-t
 python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-token-to-next-theorem-zh.pdf
 ```
 
-脚本会用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、44 页的满版 PDF。依赖：
+脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 53 页的满版 PDF。依赖：
 
 ```bash
 python3 -m pip install pillow pypdf
@@ -101,8 +101,8 @@ python3 -m pip install pillow pypdf
 │   ├── from-next-token-to-next-theorem-zh.pdf   # 中文
 │   └── .nojekyll
 ├── slides/
-│   ├── en.html                   # English source (50 pages)
-│   ├── index.html                # 中文源文件（50 页，自包含）
+│   ├── en.html                   # English source (53 pages)
+│   ├── index.html                # 中文源文件（53 页，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -120,6 +120,12 @@ python3 -m pip install pillow pypdf
 │   └── demos/                    # token 计数 + PDF 渲染
 └── README.md
 ```
+
+## 审核
+
+- 当前审核记录与待确认事项：[notes/10_review_audit.md](notes/10_review_audit.md)。
+- `assets/demos/audit_deck.py` 检查页码、浏览器文字几何与缺图；内容来源、叙事和视觉阅读仍需单独审核。
+- 示例：`python3 assets/demos/audit_deck.py --html docs/index.html --out /path/to/audit.json`。
 
 ---
 

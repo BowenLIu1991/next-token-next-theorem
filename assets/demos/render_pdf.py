@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the 44-slide deck to a full-bleed PDF.
+"""Render every slide in the selected HTML deck to a full-bleed PDF.
 
 The deck is designed for 1280x720 screens. Chrome's print-to-PDF leaves
 default margins, so this script screenshots each slide with ?clean=1 and
@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -30,7 +31,6 @@ CHROME = os.environ.get(
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 )
 W, H = 1280, 720
-PAGES = 50
 
 
 def screenshot(url: str, out: Path, profile: Path) -> None:
@@ -53,9 +53,13 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--html", default="docs/index.html", help="HTML file to render")
     ap.add_argument("--out", default="docs/from-next-token-to-next-theorem.pdf", help="PDF output")
+    ap.add_argument("--contact-sheet", help="Optional overview PNG for visual review")
     args = ap.parse_args()
     html_path = (ROOT / args.html).resolve()
     out_path = (ROOT / args.out).resolve()
+    pages = len(re.findall(r'<section\b[^>]*class="slide(?:\s[^"]*)?"', html_path.read_text()))
+    if not pages:
+        raise SystemExit(f"No slides found: {html_path}")
 
     if not Path(CHROME).exists():
         raise SystemExit(f"Chrome not found: {CHROME}")
@@ -64,7 +68,7 @@ def main() -> None:
     profile = tmp / "chrome-profile"
     try:
         images = []
-        for i in range(PAGES):
+        for i in range(pages):
             url = html_path.as_uri() + f"?s={i}&clean=1&v={time.time_ns()}"
             png = tmp / f"page-{i:02d}.png"
             screenshot(url, png, profile)
@@ -72,7 +76,14 @@ def main() -> None:
             if im.size != (W, H):
                 raise SystemExit(f"page {i + 1}: expected {W}x{H}, got {im.size}")
             images.append(im)
-            print(f"  {i + 1:02d}/{PAGES}")
+            print(f"  {i + 1:02d}/{pages}")
+
+        if args.contact_sheet:
+            columns = 5
+            sheet = Image.new("RGB", (columns * 256, ((pages + columns - 1) // columns) * 144), "white")
+            for i, image in enumerate(images):
+                sheet.paste(image.resize((256, 144)), ((i % columns) * 256, (i // columns) * 144))
+            sheet.save((ROOT / args.contact_sheet).resolve())
 
         images[0].save(
             out_path,

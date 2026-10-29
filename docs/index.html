@@ -780,7 +780,7 @@
       <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
-    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 50</span></div>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 53</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
@@ -831,7 +831,7 @@
         <div class="q"><span class="n">03</span>How do we put it to work?</div>
       </div>
     </div>
-    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 50</span></div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">02 / 53</span></div>
   </section>
 
   <!-- ============ S3 · 切分 ============ -->
@@ -876,7 +876,7 @@
       <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
       <div class="keyline">Subwords are an engineering compromise between <b>sequence length</b> and <b>vocabulary size</b>.</div>
     </div>
-    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">03 / 50</span></div>
+    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">03 / 53</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
@@ -917,7 +917,7 @@
       </div>
       <div class="keyline">An ID is a <b>row number</b>; changing models means changing the table.</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 50</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">04 / 53</span></div>
   </section>
 
   <!-- ============ S5 · 用量与换算 ============ -->
@@ -934,7 +934,7 @@
       <p class="micro" style="margin-top:12px">Rule of thumb: a word, a number or a symbol ≈ 1 token; tokenizers differ, so trust the usage the API returns.</p>
       <div class="keyline">Token is both the smallest unit of the model and the smallest unit of the bill.</div>
     </div>
-    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 50</span></div>
+    <div class="footer"><span>usage · billing</span><span class="pnum">05 / 53</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
@@ -959,7 +959,7 @@
       </div>
       <div class="keyline">The same context, cached or not, differs by an <b>order of magnitude</b>.</div>
     </div>
-    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 50</span></div>
+    <div class="footer"><span>pricing · caching</span><span class="pnum">06 / 53</span></div>
   </section>
 
   <!-- ============ S7 · 从 ID 到向量 ============ -->
@@ -989,7 +989,7 @@
       <div class="keyline">The ID is an <b>address</b>; the vector is the <b>content</b>.</div>
       <p class="micro" style="margin-top:14px">This step is called embedding; no dimension has a name, yet distance carries meaning.</p>
     </div>
-    <div class="footer"><span>embedding</span><span class="pnum">07 / 50</span></div>
+    <div class="footer"><span>embedding</span><span class="pnum">07 / 53</span></div>
   </section>
 
   <!-- ============ S8 · 输入到概率分布 ============ -->
@@ -1053,11 +1053,11 @@
       </div>
       <div class="keyline">A scorer: it gives every token in the vocabulary a <b>score</b>, then turns scores into <b>probabilities</b>.</div>
     </div>
-    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 50</span></div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 53</span></div>
   </section>
 
   <!-- ============ S9 · 采样 ============ -->
-  <section class="slide" data-notes="Given a distribution, how to draw: In software, T &gt; 0 rolls a dice (sampling), while T = 0 greedily picks the argmax. But in hardware, even at T = 0, floating-point addition is non-associative; GPU parallel reduction orders vary, and continuous batching shifts kernel execution tiles. When top candidate probabilities tie closely, micro-numerical perturbations flip the chosen token. Autoregression cascades this into a different trajectory. LLMs are physically non-deterministic.">
+  <section class="slide" data-notes="Software sampling draws from a distribution; T = 0 conventionally selects its argmax. Separately, floating-point addition is non-associative. Kernel choices, parallel reduction orders or batch shapes can change numerical results, but a fixed implementation can be deterministic. If the leading logits are sufficiently close, numerical differences can flip the greedy selection and subsequent autoregressive outputs can diverge. Identical logits with a fixed tie-breaking rule give the same greedy token. Numerical error, run-to-run nondeterminism and deliberate sampling are different concepts.">
     <p class="eyebrow"><b>02</b> / model</p>
     <h2>Sampling: draw one token from the distribution</h2>
     <div class="content">
@@ -1082,9 +1082,9 @@
           </div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">Software · Randomness</div><p style="margin:0"><b>T &gt; 0</b> samples probabilitistically; <b>T = 0</b> greedily picks the argmax</p></div>
-          <div class="card accent"><div class="k">Hardware · Numerical Drift</div><p style="margin:0"><b>GPU float non-associativity</b>: parallel reduction order drift · batching jitter</p></div>
-          <div class="card"><div class="k">Autoregressive Cascade</div><p style="margin:0">Even at T = 0, a micro-perturbation at a tie flips the token, branching the path</p></div>
+          <div class="card"><div class="k">Software · Sampling</div><p style="margin:0"><b>T &gt; 0</b>: draw from probabilities; <b>T = 0</b>: greedy argmax</p></div>
+          <div class="card accent"><div class="k">Numerical implementation</div><p style="margin:0"><b>Float addition is non-associative</b>; kernel, reduction or batch changes can alter logits</p></div>
+          <div class="card"><div class="k">Autoregressive Cascade</div><p style="margin:0">Close leading logits may swap order; a different token changes the next input</p></div>
         </div>
       </div>
       <div class="loop">
@@ -1094,9 +1094,9 @@
         <span class="step hl">Sampling / Tie-break</span><span class="arr">→</span>
         <span class="step">Append to input</span><span class="arr">↺</span>
       </div>
-      <div class="keyline">Randomness stems from two layers: <b>software sampling (temperature)</b> and <b>GPU parallel float reduction drift</b>.</div>
+      <div class="keyline">Output can vary through <b>sampling</b> or <b>numerical implementation</b>; T = 0 fixes the selection rule.</div>
     </div>
-    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 50</span></div>
+    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 53</span></div>
   </section>
 
   <!-- ============ S10 · 采样算法 ============ -->
@@ -1170,7 +1170,7 @@
 
       <div class="keyline">Temperature reshapes, top-p trims the tail, <b>u</b> decides where it lands.</div>
     </div>
-    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 50</span></div>
+    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 53</span></div>
   </section>
 
   <!-- ============ S11 · 无状态 ============ -->
@@ -1197,7 +1197,7 @@
       <div class="keyline">The model is stateless; a “conversation” is the client <b>resending</b> the history.</div>
       <p class="micro" style="margin-top:14px">Parameters stay fixed at inference time; state lives only in the context.</p>
     </div>
-    <div class="footer"><span>stateless</span><span class="pnum">11 / 50</span></div>
+    <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
   </section>
 
 
@@ -1213,7 +1213,7 @@
       </div>
       <div class="keyline">The model stays the same; the <b>training signal</b> changes.</div>
     </div>
-    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 50</span></div>
+    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 53</span></div>
   </section>
 
   <!-- ============ S13 · Pretrain ============ -->
@@ -1242,7 +1242,7 @@
       </div>
       <div class="keyline">It learns the world's <b>statistical structure</b>; tasks come later.</div>
     </div>
-    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 50</span></div>
+    <div class="footer"><span>next-token prediction</span><span class="pnum">13 / 53</span></div>
   </section>
 
   <!-- ============ S14 · 前 20 个 token ============ -->
@@ -1298,7 +1298,7 @@
       <div class="lossex">L = −[ log p(book | This) + log p(systematically | This book) + … + log p(of | first 19 tokens) ]</div>
       <div class="keyline" style="margin-top:10px">Training runs in parallel; inference runs one token at a time.</div>
     </div>
-    <div class="footer"><span>pretrain</span><span class="pnum">14 / 50</span></div>
+    <div class="footer"><span>pretrain</span><span class="pnum">14 / 53</span></div>
   </section>
 
   <!-- ============ S15 · loss 是什么 ============ -->
@@ -1330,11 +1330,11 @@
       </div>
       <div class="keyline">This loss carries meaning: it is the <b>code length</b> the model assigns to the data.</div>
     </div>
-    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 50</span></div>
+    <div class="footer"><span>NLL · cross-entropy</span><span class="pnum">15 / 53</span></div>
   </section>
 
   <!-- ============ S16 · 压缩即智能 ============ -->
-  <section class="slide" data-notes="这是我信的一句话。预训练表面是预测下一个 token，本质是压缩。要压得好，必须发现语法、因果、物理结构。参数不是数据库，是压缩后的世界模型。但压缩只解释知识从哪来，不解释为什么会搜索——后者是 RL。">
+  <section class="slide" data-notes="Compression is intelligence is my interpretive slogan, not an equivalence theorem. Cross-entropy relates prediction to expected code length. Prediction can reward learning reusable regularities; transfer and causal understanding need separate evaluation. Search and correction can arise from demonstrations, reinforcement learning and inference-time methods.">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>Compression is intelligence</h2>
     <div class="content">
@@ -1344,14 +1344,14 @@
         <div class="card"><div class="k">Compress</div><div class="big" style="font-size:22px">Squeeze out redundancy</div><p>Keep the reusable structure</p></div>
         <div class="card accent"><div class="k">Structure</div><div class="big" style="font-size:22px">Grammar · causality · physics</div><p>Transfer to unseen problems</p></div>
       </div>
-      <p class="micro" style="margin-top:18px">Compression explains where knowledge comes from; search and correction come from RL, later.</p>
-      <div class="keyline">This is the sentence I have believed most in recent years.</div>
+      <p class="micro" style="margin-top:18px">An interpretation of prediction training; search and correction also depend on inference-time methods.</p>
+      <div class="keyline">My working perspective: prediction rewards <b>reusable structure</b>.</div>
     </div>
-    <div class="footer"><span>compression is intelligence</span><span class="pnum">16 / 50</span></div>
+    <div class="footer"><span>compression · learned structure</span><span class="pnum">16 / 53</span></div>
   </section>
 
   <!-- ============ S17 · SFT ============ -->
-  <section class="slide" data-notes="SFT 还是预测下一个 token，但只对 assistant 的 answer token 算 loss。数据是（指令, 标准答案）对；本质是行为克隆，知识仍来自 pretrain。">
+  <section class="slide" data-notes="In this common SFT setup, loss is applied to assistant answer tokens; masks vary by implementation. SFT emphasizes demonstrated behavior and may also teach task-specific information. Much of the model's broad knowledge comes from pretraining.">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>SFT: learn the job from worked answers</h2>
     <p class="micro" style="margin:8px 0 0">supervised fine-tuning · instruction tuning</p>
@@ -1371,12 +1371,12 @@
         <div class="stack">
           <div class="card"><div class="k">Data</div><p>(instruction, answer) pairs</p></div>
           <div class="card"><div class="k">Objective</div><p>Still next-token prediction; the condition is system + user + partial answer</p></div>
-          <div class="card accent"><div class="k">Boundary</div><p>Behavior cloning: it imitates demonstrations. Knowledge comes from pretraining; hard problems can still fail.</p></div>
+          <div class="card accent"><div class="k">Effect</div><p>Imitate worked answers; learn task-specific behavior and information.</p></div>
         </div>
       </div>
       <div class="keyline">Same loss, different <b>summation range</b>.</div>
     </div>
-    <div class="footer"><span>Foundations of Celestial Mechanics · SFT</span><span class="pnum">17 / 50</span></div>
+    <div class="footer"><span>Foundations of Celestial Mechanics · SFT</span><span class="pnum">17 / 53</span></div>
   </section>
 
   <!-- ============ S18 · 三种角色 ============ -->
@@ -1399,7 +1399,7 @@
       <p class="micro" style="margin-top:16px">system / user = condition &nbsp;·&nbsp; assistant = supervision target (loss on these tokens only)</p>
       <div class="keyline">system sets the rules, user sets the task, assistant is the learning target.</div>
     </div>
-    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 50</span></div>
+    <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 53</span></div>
   </section>
 
   <!-- ============ S19 · 怎么预测 ============ -->
@@ -1428,7 +1428,7 @@
       <p class="micro" style="margin-top:14px">Probabilities are illustrative, to show the mechanism · real outputs follow the model</p>
       <div class="keyline">One step at a time: append the result, then take the next step.</div>
     </div>
-    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 50</span></div>
+    <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 53</span></div>
   </section>
 
   <!-- ============ S20 · 什么是强化学习 ============ -->
@@ -1464,7 +1464,7 @@
       <p class="micro" style="margin-top:10px">π policy · γ discount · r<sub>t</sub> reward · E expectation</p>
       <div class="keyline">What RL learns is a <b>policy</b>.</div>
     </div>
-    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 50</span></div>
+    <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 53</span></div>
   </section>
 
   <!-- ============ S21 · RL 的游戏前史 ============ -->
@@ -1487,7 +1487,7 @@
       <div class="sidenote"><b>AlphaFold is supervised learning:</b> labels are known structures; no reward, no trial and error.</div>
       <div class="keyline">Math and code bring their own <b>simulator</b>.</div>
     </div>
-    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 50</span></div>
+    <div class="footer"><span>games · self-play · reward</span><span class="pnum">21 / 53</span></div>
   </section>
 
   <!-- ============ S22 · RL ============ -->
@@ -1526,7 +1526,7 @@
       <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · the DeepSeek moment</p>
       <div class="keyline">Same text, new objective: the reward arrives only when the answer checks out.</div>
     </div>
-    <div class="footer"><span>Foundations of Celestial Mechanics · RLVR</span><span class="pnum">22 / 50</span></div>
+    <div class="footer"><span>Foundations of Celestial Mechanics · RLVR</span><span class="pnum">22 / 53</span></div>
   </section>
 
   <!-- ============ S23 · RL 算法 ============ -->
@@ -1548,7 +1548,7 @@
       <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO are RL; DPO is preference optimization, usually placed in the RLHF family.</p>
       <div class="keyline">Different algorithms, same loop: sample → score → update.</div>
     </div>
-    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 50</span></div>
+    <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 53</span></div>
   </section>
 
   <!-- ============ S24 · 天然优势 ============ -->
@@ -1573,7 +1573,7 @@
       </div>
       <div class="keyline">Clearer feedback makes trial and error cheaper — and RL more effective.</div>
     </div>
-    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 50</span></div>
+    <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
@@ -1588,7 +1588,7 @@
       </div>
       <div class="keyline">Each step solves the problem the previous step left open.</div>
     </div>
-    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 50</span></div>
+    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 53</span></div>
   </section>
 
   <!-- ============ S26 · ChatGPT ============ -->
@@ -1609,7 +1609,7 @@
       </div>
       <div class="keyline">Conversation is a trained behavior.</div>
     </div>
-    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 50</span></div>
+    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 53</span></div>
   </section>
 
   <!-- ============ S27 · Prompt ============ -->
@@ -1658,7 +1658,7 @@
       </div>
       <div class="keyline">Adding content is how you change the <b>conditional probability</b>.</div>
     </div>
-    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 50</span></div>
+    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 53</span></div>
   </section>
 
   <!-- ============ S28 · CoT ============ -->
@@ -1683,7 +1683,7 @@
       </div>
       <div class="keyline">CoT writes the plan; the tool computes the number.</div>
     </div>
-    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 50</span></div>
+    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 53</span></div>
   </section>
 
   <!-- ============ S29 · Context 膨胀 ============ -->
@@ -1705,7 +1705,7 @@
       </div>
       <div class="keyline">A longer window raises the ceiling; relevance decides what lands.</div>
     </div>
-    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 50</span></div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 53</span></div>
   </section>
 
   <!-- ============ S30 · 大海捞针 ============ -->
@@ -1729,13 +1729,14 @@
         </div>
         <div class="stack">
           <div class="card"><div class="k">Method</div><p>Hide a sentence, vary length and position, ask what it was</p></div>
-          <div class="card"><div class="k">Result</div><p>Harder as length grows; worst in the middle</p></div>
+          <div class="card"><div class="k">Observed failure mode</div><p>Length and position can affect retrieval; behavior varies by model and task</p></div>
           <div class="card accent"><div class="k">Implication</div><p>A big window is a budget; retrieval still matters</p></div>
         </div>
       </div>
-      <div class="keyline">Long context is a budget; retrieval decides the recall.</div>
+      <p class="micro" style="margin:12px 0 0">Schematic, not measured data · See Liu et al., Lost in the Middle (2023).</p>
+      <div class="keyline">Window capacity and <b>effective use of context</b> are different measures.</div>
     </div>
-    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 50</span></div>
+    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 53</span></div>
   </section>
 
   <!-- ============ S31 · Context ============ -->
@@ -1763,7 +1764,7 @@
       </div>
       <div class="keyline">Relevance beats length.</div>
     </div>
-    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 50</span></div>
+    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 53</span></div>
   </section>
 
   <!-- ============ S32 · CoT pruning ============ -->
@@ -1796,7 +1797,7 @@
       </div>
       <div class="keyline">Thinking has a budget too.</div>
     </div>
-    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 50</span></div>
+    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 53</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -1819,7 +1820,7 @@
       </div>
       <div class="keyline">The model proposes; the program computes.</div>
     </div>
-    <div class="footer"><span>function calling</span><span class="pnum">33 / 50</span></div>
+    <div class="footer"><span>function calling</span><span class="pnum">33 / 53</span></div>
   </section>
 
   <!-- ============ S34 · Agent 与客户端 ============ -->
@@ -1838,7 +1839,7 @@
       </div>
       <div class="keyline">The model proposes; the client turns proposals into <b>actions</b>.</div>
     </div>
-    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 50</span></div>
+    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 53</span></div>
   </section>
 
 
@@ -1870,59 +1871,127 @@
       </div>
       <div class="keyline">Memory works by selection: store little, retrieve precisely.</div>
     </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 50</span></div>
+    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
   </section>
 
   <!-- ============ S36 · Reference case: Claude Code review ============ -->
-  <section class="slide" data-notes="Reference case, adapted from Addy Osmani, Morgan Westlee Lunt and Qing Wang, How the Claude Code team does code review, 2026-10-15: https://claude.dev/blog/solving-code-review-at-anthropic/ . This is the team's account of software engineering practice, offered as a reference for academic audiences; its applicability and effectiveness in a research domain require separate assessment. The three columns group the article's six review/release layers plus detection and rollback. Before a pull request (a proposed code change), the author asks for executable evidence: tests, builds or screenshots; a fresh-context subagent reviews the diff. CLAUDE.md supplies short project conventions and links to further context; REVIEW.md supplies local failure criteria and asks for file-and-line evidence. At the pull request, agents review findings, security review can block, and CI runs automated checks. Agreement among agents filters findings; it is not proof of correctness. Human approval scales with change risk. Lighter paths apply only to trusted authors; required human approval cannot be replaced by an agent. The directing person remains accountable. Merge checks, gradual release and fast rollback contain remaining failures. Past incidents and reverts become engineer-confirmed eval cases, run daily; noise and rounds-to-pass are tracked too. The article reports a PR with over 50 review/fix rounds. After three rounds the reviewer now asks the author to reconsider; subsequent review focuses on the diff and avoids repeated findings. This is a stopping/escalation policy, not a guarantee of convergence. Repeated errors are moved into instructions, skills or executable checks. The reusable asset is the accumulated context, review criteria and eval suite. We present the engineering example without prescribing solutions to the audience's research problems.">
+  <section class="slide" data-notes="Case 1/4: the bottleneck. Source: Osmani, Lunt and Wang, How the Claude Code team does code review, 2026-10-15. Agents produce code faster than humans can review it line by line. The article reports about 2,500 changes landing per day in Anthropic's monorepo in May and over 30,000 in September 2026. These are landed changes, not necessarily git commit counts. Claude Code has its own separate repository: June to September merged pull requests more than doubled and the reverted share fell over 40 percent. Keep these populations and metrics distinct. These are team-reported observations, not controlled causal evidence. The objective counts both human review time and human time repairing failures. The next three pages show the system response: layered checks, risk-based human review and incidents becoming evals. This is a reference example for academic audiences; specific research workflows are outside our scope.">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Harness in practice: Claude Code review</h2>
-    <p class="sub" style="margin-top:8px">A software engineering reference case for academic audiences.</p>
+    <h2>When code outruns human review</h2>
+    <p class="sub" style="margin-top:8px">Claude Code's review problem: code scales faster than human attention.</p>
     <div class="content" style="margin-top:22px">
-      <div class="scaleband">Goal: <b>less human review time</b>, with reverts and incidents as guardrails.</div>
-      <div class="three" style="margin-top:18px;gap:18px">
-        <div class="card" style="padding:16px 20px;min-height:180px">
-          <div class="k">01 · Before review</div>
-          <div class="big" style="font-size:23px">Show the evidence</div>
-          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
-            <li>Run tests, builds, UI checks</li>
-            <li>Review with fresh context</li>
-            <li>Load project &amp; review rules</li>
-          </ul>
+      <div class="two even" style="gap:32px;align-items:center">
+        <div class="card" style="padding:18px 20px">
+          <div class="k">Scale pressure · Anthropic monorepo</div>
+          <div style="font-family:var(--mono);font-size:46px;line-height:1.3;letter-spacing:-.04em">2,500 → <b style="color:var(--accent)">30,000+</b></div>
+          <p style="font-size:18px">Changes landing per day · May → Sep 2026</p>
+          <p class="micro" style="font-size:13px">Claude Code has a separate repository.</p>
         </div>
-        <div class="card" style="padding:16px 20px;min-height:180px">
-          <div class="k">02 · Layered checks</div>
-          <div class="big" style="font-size:23px">Check the change</div>
-          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
-            <li>AI review &amp; finding verification</li>
-            <li>Security &amp; automated tests</li>
-            <li>Human approval by risk</li>
-          </ul>
-        </div>
-        <div class="card accent" style="padding:16px 20px;min-height:180px">
-          <div class="k">03 · Release &amp; responsibility</div>
-          <div class="big" style="font-size:23px">Contain failures</div>
-          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
-            <li>Merge checks &amp; staged release</li>
-            <li>Fast detection &amp; rollback</li>
-            <li>A person owns each change</li>
-          </ul>
+        <div class="stack" style="gap:12px">
+          <div class="card" style="padding:14px 20px"><div class="k">Production</div><p style="font-size:20px;margin:0">Agents write more code, faster.</p></div>
+          <div class="card accent" style="padding:14px 20px"><div class="k">Bottleneck</div><p style="font-size:20px;margin:0">Human review time stays limited.</p></div>
+          <div class="card" style="padding:14px 20px"><div class="k">Consequence</div><p style="font-size:20px;margin:0">Line-by-line review cannot keep up.</p></div>
         </div>
       </div>
-      <div class="loop" style="margin-top:18px;gap:10px">
-        <span class="step">Incidents &amp; reverts</span><span class="arr">→</span>
-        <span class="step hl">Confirmed eval cases</span><span class="arr">→</span>
-        <span class="step">Score reviewer changes</span><span class="arr">↺</span>
-      </div>
-      <p class="micro" style="margin:10px 0 0">Context assets: CLAUDE.md + REVIEW.md · After 3 rounds: reconsider; focus re-review on the diff.</p>
-      <div class="keyline">Failures become <b>reusable checks</b>; review knowledge <b>compounds</b>.</div>
+      <div class="scaleband" style="margin-top:22px">Goal: reduce <b>review + repair time</b>, with reverts and incidents as guardrails.</div>
+      <div class="keyline">The next gain comes from <b>redesigning review</b>.</div>
       <p class="micro" style="margin:10px 0 0;font-size:11.5px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
     </div>
-    <div class="footer"><span>reference case · layered review · compounding evals</span><span class="pnum">36 / 50</span></div>
+    <div class="footer"><span>reference case · the human bottleneck · 1 / 4</span><span class="pnum">36 / 53</span></div>
   </section>
 
-  <!-- ============ S37 · 系统图 ============ -->
-  <section class="slide" data-notes="把前面几页收成一张图：LLM 在中心，prompt 和 context 是这一次的输入；memory 和 agent loop 跨多次调用；harness 在最外面，管工具、权限、验证和日志。模型是 CPU，外面全是运行时。">
+  <!-- ============ S37 · Review case: context ============ -->
+  <section class="slide" data-notes="Part 2 of the reference case. Source: Osmani, Lunt and Wang, How the Claude Code team does code review, 2026-10-15. CLAUDE.md tells the reviewer the project's stack, conventions, goals and non-goals. Keep it short and link to further material. REVIEW.md is written by code owners and describes local failure modes, paths to skip, limits on low-value comments, and the evidence required for a finding. The team checks separately whether reviewers follow these instructions. Before a pull request, a subagent reviews the diff with fresh context; review should consider the repository and the stated intent, rather than only the author's explanation. Fresh context reduces inherited framing but does not guarantee independent errors. Repeat findings are moved upstream into instructions, skills or executable lint checks. These are concrete context assets from the software engineering example, not a prescribed research workflow.">
+    <p class="eyebrow"><b>04</b> / reference case · 2 / 4</p>
+    <h2>Move routine review into the system</h2>
+    <p class="sub" style="margin-top:8px">Checks throughout the workflow; human attention goes where it matters.</p>
+    <div class="content">
+      <div class="three" style="gap:18px">
+        <div class="card" style="padding:18px 20px;min-height:210px">
+          <div class="k">01 · Before submission</div><div class="big" style="font-size:23px">Produce evidence</div>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>Run tests, build, inspect UI</li><li>Fresh-context agent review</li><li>Fix before opening review</li></ul>
+        </div>
+        <div class="card" style="padding:18px 20px;min-height:210px">
+          <div class="k">02 · During review</div><div class="big" style="font-size:23px">Layer the checks</div>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>AI review; verify findings</li><li>Security &amp; automated tests</li><li>Resolve every finding</li></ul>
+        </div>
+        <div class="card accent" style="padding:18px 20px;min-height:210px">
+          <div class="k">03 · Approval &amp; release</div><div class="big" style="font-size:23px">Control the risk</div>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>Risk-based human approval</li><li>Merge checks; staged release</li><li>Detect fast; roll back fast</li></ul>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:24px"><b>Shared context:</b> CLAUDE.md = project conventions · REVIEW.md = local failure criteria + evidence.</div>
+      <div class="keyline">Routine checks run continuously; people focus on <b>judgment and risk</b>.</div>
+      <p class="micro" style="margin:12px 0 0;font-size:12px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
+    </div>
+    <div class="footer"><span>reference case · context assets · review criteria</span><span class="pnum">37 / 53</span></div>
+  </section>
+
+  <!-- ============ S38 · Review case: risk and responsibility ============ -->
+  <section class="slide" data-notes="Part 3 of the same reference case. This table summarizes the team's risk tiers, not a universal approval policy. Low-risk examples include documentation, copy and internal-only changes; medium includes ordinary product changes and some sensitive areas; high includes the highest-risk code and designated paths. The change, not the author's identity, determines the tier. Lighter paths are limited to trusted authors. Other authors require a second person. Additional classifiers and designated sensitive paths can require human review beyond a basic tier. An agent's approval cannot occupy a required human slot. The person who directed an agent-written change counts as a reviewer and is accountable. Approval applies to a specific commit; new commits the system cannot vouch for need renewed approval. Humans still decide whether the work should be done, assess architecture and risky code, read evidence and own the outcome. Merge checks, staged releases and rollback remain separate safeguards. These policies are examples of allocating attention, not guarantees of correctness.">
+    <p class="eyebrow"><b>04</b> / reference case · 3 / 4</p>
+    <h2>Human attention follows the risk</h2>
+    <p class="sub" style="margin-top:8px">The team's approval policy, with explicit ownership.</p>
+    <div class="content">
+      <table class="compare" style="font-size:19px;margin:0">
+        <thead><tr><th>Change risk</th><th>Examples</th><th>Human approvals</th></tr></thead>
+        <tbody>
+          <tr><td>Low</td><td>Docs, copy, internal-only features</td><td>0 required*</td></tr>
+          <tr><td>Medium</td><td>Ordinary product changes</td><td>1 person*</td></tr>
+          <tr><td>High</td><td>Highest-risk code; designated paths</td><td>2 people</td></tr>
+        </tbody>
+      </table>
+      <p class="micro" style="margin:12px 0 0">* Lighter paths: trusted authors only, after required checks. Sensitive paths may require extra approval.</p>
+      <div class="three" style="margin-top:22px;gap:18px">
+        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">Direction</div><p style="font-size:18px;margin:0">A person decides what to build.</p></div>
+        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">Evidence</div><p style="font-size:18px;margin:0">Approval covers a specific commit.</p></div>
+        <div class="card accent" style="min-height:112px;padding:16px 20px"><div class="k">Accountability</div><p style="font-size:18px;margin:0">The directing person owns the change.</p></div>
+      </div>
+      <div class="keyline">Required human approval stays <b>human</b>; responsibility stays <b>explicit</b>.</div>
+      <p class="micro" style="margin:12px 0 0;font-size:12px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
+    </div>
+    <div class="footer"><span>reference case · risk tiers · human ownership</span><span class="pnum">38 / 53</span></div>
+  </section>
+
+  <!-- ============ S39 · Review case: evals and stopping ============ -->
+  <section class="slide" data-notes="Part 4 of the reference case. Past incidents and reverts are confirmed by engineers familiar with the code and turned into eval cases. The reviewer runs on that set daily; changes to its prompts, tools or model should be rescored against it. The team measures real bug detection, false findings and review rounds; known-clean changes help detect harmful false positives. More comments do not automatically mean better review. The article reports one overnight PR with more than 50 review-and-fix rounds. About 59 percent of repeatedly flagged code had already been present at the first review. The revised policy asks the author to reconsider after three rounds, narrows later review to new diffs, flags bug classes instead of individual instances, and avoids reposting findings. A three-round escalation is an operational rule, not evidence that correctness is achieved in three rounds. This is the compounding loop: failures become confirmed eval cases, reusable review rules and executable checks. The case illustrates a method and its failure modes; it does not establish effectiveness in an academic domain.">
+    <p class="eyebrow"><b>04</b> / reference case · 4 / 4</p>
+    <h2>Make review improve — and stop</h2>
+    <p class="sub" style="margin-top:8px">Past failures become evals; review loops get escalation rules.</p>
+    <div class="content">
+      <div class="loop" style="margin-top:0">
+        <span class="step">Incident / revert</span><span class="arr">→</span>
+        <span class="step hl">Engineer-confirmed case</span><span class="arr">→</span>
+        <span class="step">Daily eval</span><span class="arr">→</span>
+        <span class="step">Reviewer update</span><span class="arr">↺</span>
+      </div>
+      <div class="two even" style="margin-top:24px;gap:24px">
+        <div class="card" style="padding:18px 20px">
+          <div class="k">Measure quality and cost</div>
+          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
+            <li>Real bugs found</li>
+            <li>False findings on clean changes</li>
+            <li>Rounds until review passes</li>
+          </ul>
+        </div>
+        <div class="card accent" style="padding:18px 20px">
+          <div class="k">Keep the loop bounded</div>
+          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
+            <li>After 3 rounds: reconsider</li>
+            <li>Later passes: new diff only</li>
+            <li>Fix bug classes; avoid repeats</li>
+          </ul>
+        </div>
+      </div>
+      <p class="micro" style="margin:16px 0 0">Reported failure mode: one change went through 50+ review/fix rounds overnight.</p>
+      <div class="keyline">Failures become <b>reusable checks</b>; review knowledge <b>compounds</b>.</div>
+      <p class="micro" style="margin:12px 0 0;font-size:12px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
+    </div>
+    <div class="footer"><span>reference case · evals · bounded review loops</span><span class="pnum">39 / 53</span></div>
+  </section>
+
+  <!-- ============ S40 · 系统图 ============ -->
+  <section class="slide" data-notes="This is a functional overview. The model generates text or proposes tool calls from its current input. Prompt refers to instructions, questions and examples within that input; context is all input content visible to the current call. Memory stores state across calls and supplies it when needed. The loop is the control flow coordinating model calls, tool execution and feedback. The harness is the execution framework that hosts these mechanisms and manages tools, permissions, checks and logs. These concepts describe input, state, control flow and an execution framework; they overlap rather than form peer components. The rings organize the explanation, not a strict software layering or a computer hardware architecture.">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Put the model back in the system</h2>
     <div class="content">
@@ -1948,13 +2017,13 @@
           <div class="row"><span class="n">06</span><b>Harness</b><p>Tools, sandbox, permissions, verification, logs</p></div>
         </div>
       </div>
-      <div class="keyline">The model is the CPU; prompt, context, memory, loop and harness are the runtime.</div>
+      <div class="keyline">The model <b>proposes</b>; the system manages context and state, runs tools, and <b>checks results</b>.</div>
     </div>
-    <div class="footer"><span>model · runtime · harness</span><span class="pnum">37 / 50</span></div>
+    <div class="footer"><span>model · state · execution framework</span><span class="pnum">40 / 53</span></div>
   </section>
 
-  <!-- ============ S38 · 加速 ============ -->
-  <section class="slide" data-notes="2023 年之前，AI 在数学里主要是解释概念、查文献、写代码；简单计算经常错，复杂证明仍要人。2024 年 7 月 IMO 银牌 28/42；2025 年 7 月金牌级 35/42——12 个月，+7 分。2026 年 10 月，OpenAI 报告用内部模型解决 372 个开放问题、722 篇论文，平均约 3 小时/题；其中 3 个撤回，同行评议未完成；这是公司声称，不是已核实事实。这是一条阶梯，三个台阶。">
+  <!-- ============ S41 · 加速 ============ -->
+  <section class="slide" data-notes="Selected milestones: 2024 IMO silver-level 28/42 and 2025 gold-level 35/42. The 2026 OpenAI release is a company report, not independent confirmation of every result. Its 2026-10-06 post describes average compute equivalent to roughly three hours of ChatGPT Pro thinking per result, not three hours of elapsed solving time. The different systems, test conditions and budgets are not a controlled longitudinal experiment.">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>Acceleration: from basic use to gold medals</h2>
     <div class="content">
@@ -1969,14 +2038,14 @@
             <li>Role: assistant</li>
           </ul>
         </div>
-        <div class="mid"><div class="ar">→</div><div class="lab">19 months</div></div>
+        <div class="mid"><div class="ar">→</div><div class="lab">2024–26</div></div>
         <div class="side now">
-          <div class="yr">2025 · after</div>
+          <div class="yr">2025–26 · after</div>
           <h3>Research level</h3>
           <ul>
             <li>IMO 2025 gold level 35/42</li>
             <li>Lean proofs, machine-checkable</li>
-            <li>OpenAI 2026: 372 problems, ≈3 h each (report)</li>
+            <li>OpenAI 2026: ≈3 Pro-hours of compute per result*</li>
             <li>Role: candidate generator</li>
           </ul>
         </div>
@@ -1987,12 +2056,13 @@
         <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">gold level</span></div>
         <div class="note">12 months, +7 points</div>
       </div>
+      <p class="micro" style="margin:10px 0 0">* Compute equivalent, not elapsed time · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">OpenAI, 6 Oct 2026</a> · Company report.</p>
       <div class="keyline">This is a staircase with <b>three steps</b>.</div>
     </div>
-    <div class="footer"><span>from basic apps to research level</span><span class="pnum">38 / 50</span></div>
+    <div class="footer"><span>from basic apps to research level</span><span class="pnum">41 / 53</span></div>
   </section>
 
-  <!-- ============ S39 · AI math 时间线 ============ -->
+  <!-- ============ S42 · AI math 时间线 ============ -->
   <section class="slide" data-notes="两年时间线：2023 年底 FunSearch 把 LLM 放进进化搜索；2024 年初 AlphaGeometry 解几何；2024 年 7 月 AlphaProof 在 IMO 拿银牌；2024 年 9 月 o1 把 test-time compute 变成产品；2025 年初 R1 用可验证奖励做 RL；2025 年 5 月 AlphaEvolve 改进矩阵乘法；2025 年 7 月两家在 IMO 拿金牌级；2026 年 5 月 OpenAI 模型给出 Erdős 单位距离猜想的反例；9 月声称解决 Navier–Stokes（千禧年问题之一），争议很大；10 月报告 372 个开放问题、722 篇论文（其中含与黎曼猜想相关的声称，不是完整证明；3 个撤回，待同行评议）。这些是公开声称，不是已核实结论。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>Timeline: three steps</h2>
@@ -2022,10 +2092,10 @@
       </div>
       <div class="keyline">Every leap combines a <b>generator, a verifier and search</b>.</div>
     </div>
-    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">39 / 50</span></div>
+    <div class="footer"><span>selected milestones · 2023–2026</span><span class="pnum">42 / 53</span></div>
   </section>
 
-  <!-- ============ S40 · 公开表述 ============ -->
+  <!-- ============ S43 · 公开表述 ============ -->
   <section class="slide" data-notes="这些是公开表述，来自论文、博客和赛后声明。FunSearch 强调 evaluator 和进化；AlphaGeometry 强调 1 亿条合成证明；AlphaProof 强调自动形式化、Lean、RL 和 test-time RL；o1 强调多花时间思考；R1 强调直接在基座模型上做 RL、用规则奖励；AlphaEvolve 强调进化编码 agent；IMO 2025 强调自然语言、无工具、人工评分；OpenAI 2026.10 报告 372 个开放问题、722 篇论文，但 3 个撤回、同行评议未完成。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>How they describe it</h2>
@@ -2046,10 +2116,10 @@
       </table>
       <div class="keyline">The keywords change; the underlying move stays: <b>propose, verify, search again</b>.</div>
     </div>
-    <div class="footer"><span>public claims · public sources</span><span class="pnum">40 / 50</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">43 / 53</span></div>
   </section>
 
-  <!-- ============ S41 · 共同模式 ============ -->
+  <!-- ============ S44 · 共同模式 ============ -->
   <section class="slide" data-notes="把公开工作抽象成一个循环：LLM 生成候选；验证器给对错；搜索或 RL 把信号变成下一步；再回到生成器。模型提供概率，验证器提供梯度——严格说，验证器给的是奖励或筛选信号，梯度由训练算法算。没有验证器，就没有可规模化的信号。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>The common pattern: generate → verify → search</h2>
@@ -2069,11 +2139,11 @@
       </div>
       <div class="keyline">The model supplies probability; <b>the verifier supplies the gradient</b>.</div>
     </div>
-    <div class="footer"><span>generator · verifier · search</span><span class="pnum">41 / 50</span></div>
+    <div class="footer"><span>generator · verifier · search</span><span class="pnum">44 / 53</span></div>
   </section>
 
-  <!-- ============ S42 · 猜测 ============ -->
-  <section class="slide" data-notes="以下机制假设来自公开论文、博客和 benchmark 的交叉印证，标注为猜测。数据上，自动形式化、合成题、拒绝采样；训练上，RLVR + 长 CoT；推理上，test-time search；工程上，把搜索蒸馏回模型；再加上大规模并行和 eval harness。OpenAI 说 372 题平均约 3 小时/题；我的判断是：372 题的速度来自大量并行采样、自动验证、搜索/agent 群和蒸馏的组合；3 小时是墙钟时间，背后是大量并发算力。">
+  <!-- ============ S45 · 猜测 ============ -->
+  <section class="slide" data-notes="These mechanisms are hypotheses from published methods, not a reconstruction of a private system. OpenAI's 2026-10-06 post says the average result used compute equivalent to roughly three hours of ChatGPT Pro thinking. This is not wall-clock elapsed time and does not identify parallelism. Autoformalization, RLVR, search, distillation and harness improvements are possible components; this cost statistic cannot identify which were used.">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>Some guesses: how the big results may have happened</h2>
     <div class="content">
@@ -2086,13 +2156,13 @@
         <div class="card"><div class="k">05 Engineering</div><p><b>Harness</b>: parallelism, caching, evals, replay.</p></div>
         <div class="card accent"><div class="k">06 The bet</div><p><b>Verification</b>: the harder your verifier, the faster your flywheel.</p></div>
       </div>
-      <p class="micro" style="margin-top:10px">OpenAI: 372 problems, ≈3 hours each (report)</p>
-      <div class="keyline">Three hours per problem looks more like <b>parallel sampling + verification + search</b>.</div>
+      <p class="micro" style="margin-top:10px">OpenAI reports ≈3 ChatGPT Pro-hours of compute per result · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">6 Oct 2026</a>.</p>
+      <div class="keyline">A reported compute budget leaves the <b>system design open</b>.</div>
     </div>
-    <div class="footer"><span>speculation · public sources</span><span class="pnum">42 / 50</span></div>
+    <div class="footer"><span>speculation · public sources</span><span class="pnum">45 / 53</span></div>
   </section>
 
-  <!-- ============ S43 · 还没解决 ============ -->
+  <!-- ============ S46 · 还没解决 ============ -->
   <section class="slide" data-notes="已经发生：竞赛题、形式证明、构造搜索、部分开放问题（2026 OpenAI 报告 372 个）。还没：选题、定义、长程研究计划、品味。解题可以搜索；做数学需要方向。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>What remains: from solving to doing mathematics</h2>
@@ -2119,10 +2189,10 @@
       </div>
       <div class="keyline">Solving can be searched; <b>doing mathematics needs direction</b>.</div>
     </div>
-    <div class="footer"><span>solved vs. open</span><span class="pnum">43 / 50</span></div>
+    <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
   </section>
 
-  <!-- ============ S44 · Motor & assembly line ============ -->
+  <!-- ============ S47 · Motor & assembly line ============ -->
   <section class="slide" data-notes="Eric Schmidt tells a story: when motors were invented, factory owners merely replaced central steam engines with motors. Everything else stayed the same. Efficiency gained roughly 30%. Decades later, small motors powered individual machines; factories were rebuilt entirely around production flow. The assembly line emerged, raising output by orders of magnitude. Today's AI is identical: prompting harder inside a chat window resets to zero each session (the 30% trap). Building persistent context, code rules, and verification pipelines turns domain knowledge into compounding assets. Models are rented; context and systems are owned.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>The motor and the assembly line</h2>
@@ -2143,10 +2213,10 @@
       <div class="ai-note">Models are rented; context and systems are owned. Do not merely prompt in isolation; turn domain rules, tools, and evals into persistent assets.</div>
       <div class="keyline">The gain is in <b>layout and compounding</b>.</div>
     </div>
-    <div class="footer"><span>motor · assembly line · workflow</span><span class="pnum">44 / 50</span></div>
+    <div class="footer"><span>motor · assembly line · workflow</span><span class="pnum">47 / 53</span></div>
   </section>
 
-  <!-- ============ S45 · Algorithm engineer ============ -->
+  <!-- ============ S48 · Algorithm engineer ============ -->
   <section class="slide" data-notes="算法工程师的困境一年前就出现了：模型会写代码之后，价值从实现转向定义问题、设计 harness、验证和对系统负责。数学正在经历同一件事。">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>The algorithm engineer's dilemma</h2>
@@ -2176,30 +2246,30 @@
       </div>
       <div class="keyline">The job moves from producing answers to <b>directing the search</b>.</div>
     </div>
-    <div class="footer"><span>engineer · agents · direction</span><span class="pnum">45 / 50</span></div>
+    <div class="footer"><span>engineer · agents · direction</span><span class="pnum">48 / 53</span></div>
   </section>
 
-  <!-- ============ S46 · Web to CLI ============ -->
-  <section class="slide" data-notes="Serious research cannot remain in web chat (Level 1 wrappers): it neither accesses real tools nor accumulates local assets. Moving to CLI and repo agents (Level 3 Tools → Level 4 Workflow → Level 5 Loop) allows AI to run symplectic integrators in Python/Julia, expand perturbation series in Mathematica, and isolate derivation agents from referee agents. Files are interfaces; Markdown is protocol. Whichever model comes next, your local research skill files remain 100% portable and compounding.">
+  <!-- ============ S49 · Web to CLI ============ -->
+  <section class="slide" data-notes="These are working modes, not a universal ranking of products. Web, IDE and CLI clients can each have tools, repository access or agent loops depending on configuration. In my longer tasks, a working directory makes rules, results and executable checks reusable. Reuse across models and clients may require adaptation; rerun evaluations after changing the model, tools or environment. Local files support portability and accumulation without guaranteeing permanent validity.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>From the chat box to the working directory</h2>
-    <p class="sub" style="margin-top:8px">Research cannot stay in thin wrappers. Files are interfaces; rules are portable.</p>
+    <p class="sub" style="margin-top:8px">For my longer tasks, a working directory makes rules and results reusable.</p>
     <div class="content">
       <div class="mathline">
         <div class="phase">
-          <div class="ph">L1 · Wrapper</div>
+          <div class="ph">Mode A · Conversation</div>
           <h3>Web chat</h3>
-          <div class="ms"><b>Ask, read, manual copy</b><span>No local file access · Ephemeral context</span></div>
-          <div class="ms"><b>Zero real tools</b><span>The model suggests; the human executes</span></div>
+          <div class="ms"><b>Discuss and explore</b><span>Questions, explanations, uploaded material</span></div>
+          <div class="ms"><b>Tools depend on configuration</b><span>Web interfaces can also offer tools and memory</span></div>
         </div>
         <div class="phase">
-          <div class="ph">L2–3 · Copilot</div>
+          <div class="ph">Mode B · In-editor</div>
           <h3>IDE editor</h3>
-          <div class="ms"><b>In-file completions</b><span>Context limited to currently open files</span></div>
-          <div class="ms"><b>A faster typewriter</b><span>Same human loop, slightly higher cadence</span></div>
+          <div class="ms"><b>Edit close to the code</b><span>Files, diagnostics and repository context</span></div>
+          <div class="ms"><b>Assist or run an agent</b><span>Capabilities depend on tools and permissions</span></div>
         </div>
         <div class="phase">
-          <div class="ph">L4–5 · Agent Loop</div>
+          <div class="ph">Mode C · Tool-enabled loop</div>
           <h3>Repo &amp; CLI Agent</h3>
           <div class="ms"><b>Tools &amp; isolated agents</b><span>Symplectic integrators · Series expansion · Reviewers</span></div>
           <div class="ms"><b>Autonomous verification</b><span>Hypothesis → Experiment → Conservation checks → git</span></div>
@@ -2213,12 +2283,12 @@
         <span class="pill"><i></i>Markdown SOP Protocol</span>
       </div>
       <div class="keyline">Files are interfaces. Build <b>portable research assets</b> in local workspaces.</div>
-      <p class="micro" style="margin-top:8px">Swap the foundation model via a single config line; your dynamical check suites remain permanently valid.</p>
+      <p class="micro" style="margin-top:8px">Files and checks are reusable across tools; rerun evaluations when the model or environment changes.</p>
     </div>
-    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">46 / 50</span></div>
+    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">49 / 53</span></div>
   </section>
 
-  <!-- ============ S47 · Two attempts ============ -->
+  <!-- ============ S50 · Two attempts ============ -->
   <section class="slide" data-notes="The first attempt: when OpenClaw emerged, I treated a probabilistic model like a deterministic calculator and went fully hands-off without checks. It failed completely. The second attempt: continuing postdoc work in iStart, I shifted from fixer to coach. I defined the objective (WHAT) and pointed out counterexamples, letting Codex and GPT-5.3–5.5 execute (HOW). When it attempted to claim Ax=b with b≠0 had x=0, I intervened. After three rejections, GPT-6.1 Sol scanned the paper and caught subtle issues. The takeaway: verification is asymmetric (evals are easier than generation); humans must act as coaches providing constraints and direction.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>Two attempts</h2>
@@ -2233,7 +2303,7 @@
             <li>Early model was brittle; hallucinations compounded without evals.</li>
             <li>Complete human abdication, hoping for an unguided miracle.</li>
           </ul>
-          <p class="micro" style="margin-top:10px">Lesson: unguided execution collapses deterministically.</p>
+          <p class="micro" style="margin-top:10px">My outcome: no completed paper; too little guidance and checking.</p>
         </div>
         <div class="card accent">
           <div class="k">Codex · GPT-5.3–5.5 · iStart</div>
@@ -2249,27 +2319,27 @@
       </div>
       <div class="keyline">Do not act as a line-by-line fixer; act as a <b>coach defining standards and counterexamples</b>.</div>
     </div>
-    <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">47 / 50</span></div>
+    <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">50 / 53</span></div>
   </section>
 
-  <!-- ============ S48 · Low-hanging fruit ============ -->
-  <section class="slide" data-notes="Core lessons: First, humans must define goals, bounds, and counterexamples (coach, not fixer). Second, stronger models demand robust deterministic evaluations (energy conservation, symplectic residuals). Third, generating a paper is low-hanging fruit; when compute clusters mass-solve open problems by brute search, marginal papers lose defensibility. Historical conjectures targeted human cognition; in the machine age, true compounding value lies in research taste (axioms), evaluation suites, and high-impact problem definition.">
+  <!-- ============ S51 · Low-hanging fruit ============ -->
+  <section class="slide" data-notes="These are lessons from my practice. Humans set goals, provide counterexamples and inspect evidence. Dynamical checks offer complementary evidence: energy-error behavior, symplecticity residual DΦᵀ J DΦ − J, and step-size convergence. A symplectic integrator generally does not exactly conserve the original Hamiltonian, and small energy error alone does not establish a correct trajectory. As drafting becomes cheaper, I choose to invest more in problem selection, reusable knowledge and evaluation assets. This is a personal allocation of effort, not a claim that only those assets have value.">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>Low-hanging fruit &amp; compounding assets</h2>
     <p class="sub" style="margin-top:8px">Drafting a paper is only the start; compounding assets are evals and taste.</p>
     <div class="content">
       <div class="three tight">
         <div class="card"><div class="k">01 · Human as Coach</div><div class="big" style="font-size:20px">Frame WHAT &amp; bounds</div><p>Define clear objectives; let AI explore the HOW. Point out logical flaws rather than patching code by hand.</p></div>
-        <div class="card"><div class="k">02 · Systematic Evals</div><div class="big" style="font-size:20px">Dynamical checks</div><p>Models get stuck. Build invariant test suites: Hamiltonian conservation, symplectic symmetry, and residuals.</p></div>
+        <div class="card"><div class="k">02 · Systematic Evals</div><div class="big" style="font-size:20px">Dynamical checks</div><p>Energy-error behavior, symplecticity residuals and convergence tests provide complementary evidence.</p></div>
         <div class="card accent"><div class="k">03 · Compounding Assets</div><div class="big" style="font-size:20px">Taste &amp; eval suites</div><p>A single paper depreciates quickly. What compounds is your knowledge base, codebase SOPs, and formal scorers.</p></div>
       </div>
-      <p class="bigquote2">OpenAI can brute-force batches of open problems, but old conjectures were written for humans. As marginal output cost hits zero, only <b>eval systems and contrarian taste</b> compound.</p>
+      <p class="bigquote2">As drafting becomes cheaper, I invest more in <b>problem selection, reusable knowledge and evaluation</b>. These assets can accumulate across projects.</p>
       <div class="keyline">The central question: which problems are <b>worth tackling together with machines</b>?</div>
     </div>
-    <div class="footer"><span>Coach · Eval · Compounding</span><span class="pnum">48 / 50</span></div>
+    <div class="footer"><span>Coach · Eval · Compounding</span><span class="pnum">51 / 53</span></div>
   </section>
 
-  <!-- ============ S49 · Young person's opportunity ============ -->
+  <!-- ============ S52 · Young person's opportunity ============ -->
   <section class="slide" data-notes="天体力学正在变成数据领域：Gaia、卫星跟踪、巡天、N 体模拟。数据比手多。年轻人的机会在于：既懂领域，又会处理数据，能把噪声去掉、把信号找出来。工具是新的，问题是老的。">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>A young person's opportunity</h2>
@@ -2314,10 +2384,10 @@
       <p class="bigquote2">More data than hands. New tools. Old questions. <b>That is a young person's advantage.</b></p>
       <div class="keyline">The bottleneck is <b>signal</b>.</div>
     </div>
-    <div class="footer"><span>data · craft · signal</span><span class="pnum">49 / 50</span></div>
+    <div class="footer"><span>data · craft · signal</span><span class="pnum">52 / 53</span></div>
   </section>
 
-  <!-- ============ S50 · 结论 ============ -->
+  <!-- ============ S53 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <p class="eyebrow"><b>06</b> / conclusion</p>
     <h2>From the next token to the next theorem</h2>
@@ -2336,7 +2406,7 @@
       </div>
       <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">50 / 50</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">53 / 53</span></div>
   </section>
 
 </div>

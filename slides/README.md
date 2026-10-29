@@ -15,7 +15,7 @@
 
 ## 当前范围
 
-已做：S1–S44（完整 deck：Token → 模型 → 训练 → 应用 → AI × math → 结论）。
+已做：S1–S53（完整 deck：Token → 模型 → 训练 → 应用 → AI × math → 结论）。S36–S39 为 Claude Code 代码审查参考案例。
 
 - `index.html`：中文源文件
 - `en.html`：English source
