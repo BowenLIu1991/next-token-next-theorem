@@ -21,6 +21,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - **模型**：一个函数，输入 token 序列，输出下一个 token 的概率分布。
 - **训练**：pretrain 给知识，SFT 给行为，RL 给搜索与纠错的习惯。
 - **使用**：prompt、context、memory、agent loop、harness 如何组合成系统。
+- **工程参考案例**：S36 依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15）展示分层验证、人工责任与事故评测积累，供学术同行参考。
 - **AI × math**：FunSearch、AlphaGeometry、AlphaProof、o1 / R1、AlphaEvolve、IMO 2025，以及 2026 年 OpenAI 的公开声称。
 - **结论**：概率负责广度，验证负责正确，人负责方向。
 

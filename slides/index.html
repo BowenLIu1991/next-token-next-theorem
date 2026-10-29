@@ -774,8 +774,6 @@
     <p class="sub">一个模型如何工作，以及我如何使用它</p>
     <div class="meta">
       <span>刘博文</span>
-      <span>报告草稿 v0.1</span>
-      <span>45 min</span>
     </div>
     <svg class="orbit" viewBox="0 0 760 760" aria-hidden="true">
       <ellipse cx="380" cy="380" rx="330" ry="150" transform="rotate(-18 380 380)"/>
@@ -1873,34 +1871,53 @@
     <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 50</span></div>
   </section>
 
-  <!-- ============ S36 · Harness ============ -->
-  <section class="slide" data-notes="LLM 是概率系统。0.1% 的失败率，在 100 万次请求里就是 1000 次失败——墨菲定律在规模上一定成立。harness 让错误可发现、可拦住、可回滚。">
+  <!-- ============ S36 · 参考案例：Claude Code 代码审查 ============ -->
+  <section class="slide" data-notes="参考案例，依据 Addy Osmani、Morgan Westlee Lunt、Qing Wang 的 How the Claude Code team does code review（2026-10-15）整理：https://claude.dev/blog/solving-code-review-at-anthropic/ 。这是团队自述的软件工程实践，供学术同行参考；迁移到具体研究任务后的适用性和效果需要另行评估。本页三栏归纳原文的六层审查与发布流程，以及故障发现和回滚。PR 指待合并的代码变更。提交前，要求模型提供实际测试、构建或界面检查的输出，再由新上下文的子 agent 审查变更。CLAUDE.md 保存精简的项目约定并指向其他资料；REVIEW.md 保存局部审查标准、失败模式，并要求文件与行号证据。提交后，多个 agent 审查并复核发现，安全审查与自动测试可以阻断合并。多 agent 一致用于过滤发现，不等于正确性证明。人工审批按变更风险分级；较轻流程仅对可信作者开放，需要人的审批位不能由 agent 替代。指挥 agent 的人承担责任。合并检查、分阶段发布与快速回滚控制漏检后的影响。历史事故和回滚由工程师确认后加入每日评测集，同时衡量误报与通过审查所需轮数。原文记录一次超过 50 轮的审查与修复循环；团队随后规定三轮后请作者重新考虑方案，后续聚焦新增变更并避免重复报告。这是停止与升级策略，不保证自动收敛。重复问题沉淀到规则文件、Skill 或可执行检查；长期积累的是上下文、审查标准和评测资产。本报告展示这个具体参考例子，具体科研问题如何解决由听众自行判断。
+">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Harness：接住小概率事件</h2>
-    <div class="content">
-      <div class="scaleband">LLM 是概率的：0.1% 失败率 × 100 万次请求 = <b>1,000 次失败</b></div>
-      <div class="two" style="margin-top:22px">
-        <div>
-          <p class="micro">System · 规则</p>
-          <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">作用</div><p>角色、规则、输出格式</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">边界</div><p>它是规则文本，可被注入</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">原则</div><p>规则写死，权限放运行时</p></div>
-          </div>
+    <h2>Harness 实例：Claude Code 代码审查</h2>
+    <p class="sub" style="margin-top:8px">一个供学术同行参考的软件工程案例。</p>
+    <div class="content" style="margin-top:22px">
+      <div class="scaleband">目标：<b>减少人工审查时间</b>，同时以回滚率与事故率把关。</div>
+      <div class="three" style="margin-top:18px;gap:18px">
+        <div class="card" style="padding:16px 20px;min-height:180px">
+          <div class="k">01 · 提交之前</div>
+          <div class="big" style="font-size:23px">给出运行证据</div>
+          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
+            <li>执行测试、构建与界面检查</li>
+            <li>新上下文的 Agent 独立审查</li>
+            <li>加载项目约定与审查标准</li>
+          </ul>
         </div>
-        <div>
-          <p class="micro">Harness · 运行框架（工程脚手架）</p>
-          <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">验证</div><p>测试、编译、Lean</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">重试</div><p>失败重跑、回退、换路</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">权限</div><p>沙箱、白名单、预算</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">观测</div><p>日志、回放、评测</p></div>
-          </div>
+        <div class="card" style="padding:16px 20px;min-height:180px">
+          <div class="k">02 · 分层检查</div>
+          <div class="big" style="font-size:23px">检查这次变更</div>
+          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
+            <li>AI 审查与问题复核</li>
+            <li>安全审查与自动测试</li>
+            <li>按变更风险安排人工审批</li>
+          </ul>
+        </div>
+        <div class="card accent" style="padding:16px 20px;min-height:180px">
+          <div class="k">03 · 发布与责任</div>
+          <div class="big" style="font-size:23px">控制失败影响</div>
+          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
+            <li>合并检查与分阶段发布</li>
+            <li>快速发现、快速回滚</li>
+            <li>每次变更由人承担责任</li>
+          </ul>
         </div>
       </div>
-      <div class="keyline">模型负责概率，harness 负责必然。</div>
+      <div class="loop" style="margin-top:18px;gap:10px">
+        <span class="step">事故与回滚</span><span class="arr">→</span>
+        <span class="step hl">经确认的评测案例</span><span class="arr">→</span>
+        <span class="step">评估审查器改进</span><span class="arr">↺</span>
+      </div>
+      <p class="micro" style="margin:10px 0 0">上下文资产：CLAUDE.md + REVIEW.md · 三轮后重新审视方案；后续审查聚焦新增变更。</p>
+      <div class="keyline">把失败沉淀为<b>可复用的检查</b>，让审查经验持续<b>复利</b>。</div>
+      <p class="micro" style="margin:10px 0 0;font-size:11.5px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
     </div>
-    <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 50</span></div>
+    <div class="footer"><span>参考案例 · 分层审查 · 评测资产复利</span><span class="pnum">36 / 50</span></div>
   </section>
 
   <!-- ============ S37 · 系统图 ============ -->

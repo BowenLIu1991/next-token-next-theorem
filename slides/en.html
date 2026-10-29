@@ -774,8 +774,6 @@
     <p class="sub">How a model works — and how I use it in practice</p>
     <div class="meta">
       <span>Bowen Liu</span>
-      <span>Draft v0.1</span>
-      <span>45 min</span>
     </div>
     <svg class="orbit" viewBox="0 0 760 760" aria-hidden="true">
       <ellipse cx="380" cy="380" rx="330" ry="150" transform="rotate(-18 380 380)"/>
@@ -1875,34 +1873,52 @@
     <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 50</span></div>
   </section>
 
-  <!-- ============ S36 · Harness ============ -->
-  <section class="slide" data-notes="LLM 是概率系统。0.1% 的失败率，在 100 万次请求里就是 1000 次失败——墨菲定律在规模上一定成立。harness 不是让模型不犯错，而是让错误可发现、可拦住、可回滚。">
+  <!-- ============ S36 · Reference case: Claude Code review ============ -->
+  <section class="slide" data-notes="Reference case, adapted from Addy Osmani, Morgan Westlee Lunt and Qing Wang, How the Claude Code team does code review, 2026-10-15: https://claude.dev/blog/solving-code-review-at-anthropic/ . This is the team's account of software engineering practice, offered as a reference for academic audiences; its applicability and effectiveness in a research domain require separate assessment. The three columns group the article's six review/release layers plus detection and rollback. Before a pull request (a proposed code change), the author asks for executable evidence: tests, builds or screenshots; a fresh-context subagent reviews the diff. CLAUDE.md supplies short project conventions and links to further context; REVIEW.md supplies local failure criteria and asks for file-and-line evidence. At the pull request, agents review findings, security review can block, and CI runs automated checks. Agreement among agents filters findings; it is not proof of correctness. Human approval scales with change risk. Lighter paths apply only to trusted authors; required human approval cannot be replaced by an agent. The directing person remains accountable. Merge checks, gradual release and fast rollback contain remaining failures. Past incidents and reverts become engineer-confirmed eval cases, run daily; noise and rounds-to-pass are tracked too. The article reports a PR with over 50 review/fix rounds. After three rounds the reviewer now asks the author to reconsider; subsequent review focuses on the diff and avoids repeated findings. This is a stopping/escalation policy, not a guarantee of convergence. Repeated errors are moved into instructions, skills or executable checks. The reusable asset is the accumulated context, review criteria and eval suite. We present the engineering example without prescribing solutions to the audience's research problems.">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Harness: catch the rare failure</h2>
-    <div class="content">
-      <div class="scaleband">LLMs are probabilistic: a 0.1% failure rate × 1M requests = <b>1,000 failures</b></div>
-      <div class="two" style="margin-top:22px">
-        <div>
-          <p class="micro">System · rules</p>
-          <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">Role</div><p>Identity, rules, output format</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">Limits</div><p>Prompts guide; the runtime enforces</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">Principle</div><p>Rules fixed in the prompt; permissions in the runtime</p></div>
-          </div>
+    <h2>Harness in practice: Claude Code review</h2>
+    <p class="sub" style="margin-top:8px">A software engineering reference case for academic audiences.</p>
+    <div class="content" style="margin-top:22px">
+      <div class="scaleband">Goal: <b>less human review time</b>, with reverts and incidents as guardrails.</div>
+      <div class="three" style="margin-top:18px;gap:18px">
+        <div class="card" style="padding:16px 20px;min-height:180px">
+          <div class="k">01 · Before review</div>
+          <div class="big" style="font-size:23px">Show the evidence</div>
+          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
+            <li>Run tests, builds, UI checks</li>
+            <li>Review with fresh context</li>
+            <li>Load project &amp; review rules</li>
+          </ul>
         </div>
-        <div>
-          <p class="micro">Harness · the runtime scaffold</p>
-          <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">Verify</div><p>Tests, compilation, Lean</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">Retry</div><p>Rerun, roll back, change route</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">Permissions</div><p>Sandbox, allowlist, budget</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">Observe</div><p>Logs, replay, evals</p></div>
-          </div>
+        <div class="card" style="padding:16px 20px;min-height:180px">
+          <div class="k">02 · Layered checks</div>
+          <div class="big" style="font-size:23px">Check the change</div>
+          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
+            <li>AI review &amp; finding verification</li>
+            <li>Security &amp; automated tests</li>
+            <li>Human approval by risk</li>
+          </ul>
+        </div>
+        <div class="card accent" style="padding:16px 20px;min-height:180px">
+          <div class="k">03 · Release &amp; responsibility</div>
+          <div class="big" style="font-size:23px">Contain failures</div>
+          <ul style="padding-left:18px;margin:12px 0 0;font-size:17px;line-height:1.65">
+            <li>Merge checks &amp; staged release</li>
+            <li>Fast detection &amp; rollback</li>
+            <li>A person owns each change</li>
+          </ul>
         </div>
       </div>
-      <div class="keyline">The model handles probability; the harness handles certainty.</div>
+      <div class="loop" style="margin-top:18px;gap:10px">
+        <span class="step">Incidents &amp; reverts</span><span class="arr">→</span>
+        <span class="step hl">Confirmed eval cases</span><span class="arr">→</span>
+        <span class="step">Score reviewer changes</span><span class="arr">↺</span>
+      </div>
+      <p class="micro" style="margin:10px 0 0">Context assets: CLAUDE.md + REVIEW.md · After 3 rounds: reconsider; focus re-review on the diff.</p>
+      <div class="keyline">Failures become <b>reusable checks</b>; review knowledge <b>compounds</b>.</div>
+      <p class="micro" style="margin:10px 0 0;font-size:11.5px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
     </div>
-    <div class="footer"><span>harness · reliability at scale</span><span class="pnum">36 / 50</span></div>
+    <div class="footer"><span>reference case · layered review · compounding evals</span><span class="pnum">36 / 50</span></div>
   </section>
 
   <!-- ============ S37 · 系统图 ============ -->

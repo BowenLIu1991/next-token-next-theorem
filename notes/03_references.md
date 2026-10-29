@@ -53,6 +53,7 @@
 | 长上下文失效 | Liu et al., *Lost in the Middle*, 2023 | S25 | ✅ |
 | Agent 设计 | Anthropic, *Building Effective Agents*, 2024 | S27–S28 | ✅ |
 | 代码 agent | Yang et al., *SWE-agent*, 2024 | S28 | ✅ |
+| 代码审查参考案例 | Addy Osmani, Morgan Westlee Lunt & Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), 2026-10-15 | S36：分层审查、风险分级、责任、事故评测与收敛控制 | ✅ 已读原文；团队自述工程实践，非独立效果验证 |
 | Context rot | Chroma 技术报告, 2025 | S25 | ⚠️ 行业报告，非同行评审 |
 | prompt caching | 各供应商文档 | S8 | ⚠️ 价格随日期变 |
 
