@@ -1093,18 +1093,38 @@
 
 
   <!-- ============ S12 · 从预测到解题 ============ -->
-  <section class="slide" data-notes="主讲中的训练机制只保留这一页概览。预训练从文本和代码学习规律；监督微调从示范学习；强化学习通过结果反馈改进策略。三者作用有交叠。接下来重点解释哪些任务提供有用反馈，不展开 loss 与优化算法。原来的训练细节保存在备份模式，使用 ?appendix=1 打开。">
+  <section class="slide" data-notes="训练先按两个阶段组织：预训练与后训练。预训练从大规模文本、代码等语料学习语言、知识和模式，形成基础模型。后训练进一步塑造任务行为；这里重点介绍其两个常见组成：SFT 从示范答案学习，RL 通过奖励改进策略。这是面向本报告的概览，具体后训练配方可以包含其他方法或反复迭代，不把三种方法放成同一层级。接下来重点解释 RL 怎样通过奖励学习，以及哪些任务能够提供有用的反馈。训练细节仍可通过 ?appendix=1 打开。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>训练机制，一页带过</h2>
+    <h2>训练：预训练与后训练</h2>
     <div class="content">
-      <div class="three">
-        <div class="card"><div class="k">Pretrain</div><div class="big" style="font-size:28px">知识</div><p>读遍语料，学会语言与世界</p></div>
-        <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">行为</div><p>看示范，学会按指令回答</p></div>
-        <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">策略</div><p>做题对答案，学会搜索与纠错</p></div>
+      <div class="flow" style="grid-template-columns:.85fr 38px 1.15fr">
+        <div class="card" style="padding:18px 20px;display:flex;flex-direction:column;justify-content:center">
+          <div class="k">阶段 01 · Pretraining</div>
+          <div class="big" style="font-size:30px">预训练</div>
+          <p style="font-size:20px;margin-top:16px">大规模文本、代码等语料<br>学习语言、知识与模式</p>
+          <p class="micro" style="font-size:16px;margin-top:18px">产出：基础模型 · base model</p>
+        </div>
+        <div class="farrow" aria-hidden="true">→</div>
+        <div class="card" style="padding:18px 20px">
+          <div class="k">阶段 02 · Post-training</div>
+          <div class="big" style="font-size:30px">后训练</div>
+          <div class="two even" style="gap:14px;margin-top:18px;align-items:stretch">
+            <div class="card" style="padding:14px 18px">
+              <div class="k">SFT · 监督微调</div>
+              <div class="big" style="font-size:22px">从示范学习</div>
+              <p style="font-size:18px">学习回答方式与任务行为。</p>
+            </div>
+            <div class="card accent" style="padding:14px 18px">
+              <div class="k">RL · 本节重点</div>
+              <div class="big" style="font-size:22px">通过奖励学习</div>
+              <p style="font-size:18px">尝试、评价、改进策略。</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="keyline">接下来关键的问题：哪些任务能提供<b>有用的反馈</b>？</div>
+      <div class="keyline">接下来重点讲 <b>RL</b>：如何通过<b>奖励</b>学习策略。</div>
     </div>
-    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 53</span></div>
+    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">12 / 53</span></div>
   </section>
 
   <template id="training-details">
@@ -1471,17 +1491,18 @@
   </template>
 
   <!-- ============ S13 · 通过奖励学习 ============ -->
-  <section class="slide" data-notes="强化学习通过与环境互动和奖励学习策略。策略决定动作，环境返回观察和奖励；训练推动策略取得更高的期望长期回报，并平衡探索与利用。奖励不必给出每一步的标准动作。RL 早于深度学习，根源包括控制、动态规划与学习理论；游戏让它的成功被广泛看见。主讲不展开优化公式。">
+  <section class="slide" data-notes="先用宏观循环解释 RL 做什么。智能体观察环境，根据策略选择 action；动作作用于环境，得到结果和新的观察；奖励把结果转成学习反馈。训练利用多次互动的经验改进策略，让后续动作选择取得更高的长期回报。日常语言可以说根据结果调整动作，更准确是学习选择动作的策略，不必每一次互动都立即更新参数。图是功能示意，环境返回结果和反馈，策略决定动作；训练时的策略学习与部署时根据新观察选择动作应区分。游戏、控制和任务完成都可以用这个框架描述。此处不展开优化算法。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>RL：尝试，得到奖励，再学习</h2>
+    <h2>RL：行动、结果与反馈</h2>
+    <p class="sub" style="margin-top:8px">在环境里行动，根据结果反馈，逐步改进动作选择。</p>
     <div class="content">
-      <div class="loop"><span class="step">观察</span><span class="arr">→</span><span class="step">行动</span><span class="arr">→</span><span class="step hl">奖励</span><span class="arr">→</span><span class="step">更新策略</span><span class="arr">↺</span></div>
+      <div class="loop"><span class="step">观察环境</span><span class="arr">→</span><span class="step">采取动作 · Action</span><span class="arr">→</span><span class="step">得到结果</span><span class="arr">→</span><span class="step hl">反馈 / 奖励</span><span class="arr">→</span><span class="step">改进策略</span><span class="arr">↺</span></div>
       <div class="three" style="margin-top:28px">
-        <div class="card"><div class="k">智能体</div><div class="big" style="font-size:24px">选择一个动作</div><p style="font-size:19px">探索不同策略。</p></div>
-        <div class="card"><div class="k">环境</div><div class="big" style="font-size:24px">返回一个结果</div><p style="font-size:19px">分数、胜负、任务完成情况。</p></div>
-        <div class="card accent"><div class="k">学习</div><div class="big" style="font-size:24px">改进选择策略</div><p style="font-size:19px">追求更高的长期回报。</p></div>
+        <div class="card"><div class="k">环境 · Environment</div><div class="big" style="font-size:24px">产生结果</div><p style="font-size:19px">动作改变环境，返回新的观察。</p></div>
+        <div class="card"><div class="k">反馈 · Feedback</div><div class="big" style="font-size:24px">评价结果</div><p style="font-size:19px">用奖励表达进展与成败。</p></div>
+        <div class="card accent"><div class="k">策略 · Policy</div><div class="big" style="font-size:24px">改进动作选择</div><p style="font-size:19px">根据经验调整，追求长期回报。</p></div>
       </div>
-      <div class="keyline">奖励评价结果，智能体探索<b>如何达到目标</b>。</div>
+      <div class="keyline">RL 根据<b>结果反馈</b>，学习<b>怎样选择动作</b>。</div>
       <p class="micro" style="margin-top:12px">参考：Sutton &amp; Barto, Reinforcement Learning: An Introduction。</p>
     </div>
     <div class="footer"><span>强化学习 · 奖励 · 策略</span><span class="pnum">13 / 53</span></div>

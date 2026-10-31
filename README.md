@@ -19,7 +19,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 - **Token**：模型看到的不是文字，是整数。
 - **模型**：一个函数，输入 token 序列，输出下一个 token 的概率分布。
-- **训练概览**：pretrain / SFT / RL 用一页带过；细节保留为单独打开的备份模式。
+- **训练概览**：预训练 → 后训练；后训练介绍 SFT 与 RL，重点解释 RL。细节保留为单独打开的备份模式。
 - **奖励与问题求解**：从 Atari、AlphaGo 等游戏案例，讲到数学与代码的共享技能、测试与反例，以及产品设计和交易的反馈边界。
 - **使用**：prompt、context、memory、agent loop、harness 如何组合成系统。
 - **工程参考案例**：第 34–37 页依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。

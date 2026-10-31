@@ -1095,18 +1095,38 @@
 
 
   <!-- ============ S12 · 从预测到解题 ============ -->
-  <section class="slide" data-notes="Training gets one overview slide in the main talk. Pretraining learns regularities from text and code; supervised fine-tuning learns from demonstrations; reinforcement learning uses outcome feedback to improve the policy. These effects overlap. We now focus on why some tasks supply useful feedback rather than on loss functions or optimization algorithms. The former detailed training slides are preserved in the appendix mode, opened with ?appendix=1.">
+  <section class="slide" data-notes="Organize training into two stages: pretraining and post-training. Pretraining learns language, knowledge and regularities from large-scale text, code and other data, producing a base model. Post-training further shapes task behavior. This talk introduces two common components of post-training: SFT learns from demonstrations; RL uses rewards to improve a policy. This is a teaching overview, not an exhaustive or mandatory recipe: post-training may include other methods or iterative stages. SFT and RL belong within post-training rather than being peers of pretraining. We now focus on RL: how reward guides learning and which tasks provide useful feedback. Detailed training material remains available at ?appendix=1.">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>Training, in one slide</h2>
+    <h2>Training: pretraining and post-training</h2>
     <div class="content">
-      <div class="three">
-        <div class="card"><div class="k">Pretrain</div><div class="big" style="font-size:28px">Knowledge</div><p>Reads the corpus, learns language and the world</p></div>
-        <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">Behavior</div><p>Sees demonstrations, learns to follow instructions</p></div>
-        <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">Policy</div><p>Solves problems, checks answers, learns to search and correct</p></div>
+      <div class="flow" style="grid-template-columns:.85fr 38px 1.15fr">
+        <div class="card" style="padding:18px 20px;display:flex;flex-direction:column;justify-content:center">
+          <div class="k">Stage 01</div>
+          <div class="big" style="font-size:30px">Pretraining</div>
+          <p style="font-size:20px;margin-top:16px">Large-scale text, code and other data<br>Learn language, knowledge and patterns</p>
+          <p class="micro" style="font-size:16px;margin-top:18px">Output: a base model</p>
+        </div>
+        <div class="farrow" aria-hidden="true">→</div>
+        <div class="card" style="padding:18px 20px">
+          <div class="k">Stage 02</div>
+          <div class="big" style="font-size:30px">Post-training</div>
+          <div class="two even" style="gap:14px;margin-top:18px;align-items:stretch">
+            <div class="card" style="padding:14px 18px">
+              <div class="k">SFT · Supervised fine-tuning</div>
+              <div class="big" style="font-size:22px">Learn by example</div>
+              <p style="font-size:18px">Shape responses and task behavior.</p>
+            </div>
+            <div class="card accent" style="padding:14px 18px">
+              <div class="k">RL · Our focus</div>
+              <div class="big" style="font-size:22px">Learn from reward</div>
+              <p style="font-size:18px">Try, evaluate, improve the policy.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="keyline">The key question now: which tasks provide <b>useful feedback</b>?</div>
+      <div class="keyline">Our focus is <b>RL</b>: how <b>reward</b> guides learning.</div>
     </div>
-    <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 53</span></div>
+    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">12 / 53</span></div>
   </section>
 
   <template id="training-details">
@@ -1473,17 +1493,18 @@
   </template>
 
   <!-- ============ S13 · Learn through reward ============ -->
-  <section class="slide" data-notes="Reinforcement learning learns a policy through interactions and reward. A policy chooses actions; the environment returns observations and rewards. Training shifts the policy toward higher expected long-run reward, balancing exploration and exploitation. A reward does not have to prescribe every intermediate action. RL predates deep learning and has roots in control, dynamic programming and learning theory; games made its successes widely visible. No optimization formulas are needed in this main talk.">
+  <section class="slide" data-notes="Explain RL through a high-level interaction loop. The agent observes the environment and chooses an action under its policy. The action acts on the environment, producing an outcome and a new observation. Reward turns outcomes into learning feedback. Training uses experience from many interactions to improve the policy so future action choices achieve higher long-run return. Adjusting actions is shorthand for learning a better action-selection policy; it need not mean a parameter update after every individual action. The diagram is a functional overview. Policy learning during training and choosing actions from new observations during deployment are distinct. Games, control and task completion can all use this framework. Optimization algorithms are outside this slide's scope.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>RL: try, receive a reward, learn</h2>
+    <h2>RL: actions, outcomes and feedback</h2>
+    <p class="sub" style="margin-top:8px">Act in an environment; use outcome feedback to improve action choices.</p>
     <div class="content">
-      <div class="loop"><span class="step">Observe</span><span class="arr">→</span><span class="step">Act</span><span class="arr">→</span><span class="step hl">Reward</span><span class="arr">→</span><span class="step">Update policy</span><span class="arr">↺</span></div>
+      <div class="loop"><span class="step">Observe environment</span><span class="arr">→</span><span class="step">Take action</span><span class="arr">→</span><span class="step">Outcome</span><span class="arr">→</span><span class="step hl">Feedback / reward</span><span class="arr">→</span><span class="step">Improve policy</span><span class="arr">↺</span></div>
       <div class="three" style="margin-top:28px">
-        <div class="card"><div class="k">Agent</div><div class="big" style="font-size:24px">Choose an action</div><p style="font-size:19px">Explore alternative strategies.</p></div>
-        <div class="card"><div class="k">Environment</div><div class="big" style="font-size:24px">Return an outcome</div><p style="font-size:19px">A score, a win, a completed task.</p></div>
-        <div class="card accent"><div class="k">Learning</div><div class="big" style="font-size:24px">Improve the policy</div><p style="font-size:19px">Seek higher long-run reward.</p></div>
+        <div class="card"><div class="k">Environment</div><div class="big" style="font-size:24px">Produce an outcome</div><p style="font-size:19px">Actions affect the environment; new observations return.</p></div>
+        <div class="card"><div class="k">Feedback</div><div class="big" style="font-size:24px">Evaluate the result</div><p style="font-size:19px">Reward expresses progress or success.</p></div>
+        <div class="card accent"><div class="k">Policy</div><div class="big" style="font-size:24px">Improve action choices</div><p style="font-size:19px">Use experience to seek higher long-run return.</p></div>
       </div>
-      <div class="keyline">Reward evaluates the result; the agent explores <b>how to achieve it</b>.</div>
+      <div class="keyline">RL uses <b>outcome feedback</b> to learn <b>how to choose actions</b>.</div>
       <p class="micro" style="margin-top:12px">Reference: Sutton &amp; Barto, Reinforcement Learning: An Introduction.</p>
     </div>
     <div class="footer"><span>reinforcement learning · reward · policy</span><span class="pnum">13 / 53</span></div>
