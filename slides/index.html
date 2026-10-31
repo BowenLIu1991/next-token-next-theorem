@@ -1122,7 +1122,7 @@
           </div>
         </div>
       </div>
-      <div class="keyline">接下来重点讲 <b>RL</b>：如何通过<b>奖励</b>学习策略。</div>
+      <div class="keyline">重点讲 <b>RL</b>：奖励如何推动<b>问题求解能力</b>提升。</div>
     </div>
     <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">12 / 53</span></div>
   </section>
@@ -1545,7 +1545,7 @@
   </section>
 
   <!-- ============ S16 · 数学与代码的共性 ============ -->
-  <section class="slide" data-notes="这里比较的是定义明确的代码或数学子任务，与开放式现实任务。编程竞赛有输入规范和可执行测试；形式定理有假设、目标陈述和证明检查器。不是所有软件需求或数学研究问题都具备这些条件。测试提供部分证据，证明检查器验证特定假设下的形式陈述。反馈较便宜是相对于昂贵的人工或现实评价，不等于零成本或无限供给。">
+  <section class="slide" data-notes="强调明确数学和代码子任务的优势：定义与规则清楚，环境可控，结果可以检查。这让策略学习、生成候选和并行验证都能形成有效搜索。严格的穷举结论需要三个条件：候选搜索空间有限，空间内存在满足规范的解，检查器对每个候选都会终止并正确判定。满足这些条件，枚举可以找到解，但时间和算力成本可能极高。随机抽样或并行生成并不等于覆盖所有候选的严格穷举。良好定义和规则封闭本身不保证有限搜索空间、解存在或问题可判定。RL 改进策略，推理时增加算力扩大候选搜索，两者可以结合。测试通常提供有限证据，形式检查只验证所陈述的命题；解的适用性仍取决于规范。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
     <h2>数学与代码，共享一类反馈优势</h2>
     <div class="content">
@@ -1554,8 +1554,9 @@
         <div class="card"><div class="k">02 · 目标很明确</div><div class="big" style="font-size:24px">可检查的目标</div><p style="font-size:19px">预期行为，或精确的命题。</p></div>
         <div class="card accent"><div class="k">03 · 反馈可获得</div><div class="big" style="font-size:24px">测试与反例</div><p style="font-size:19px">排除失败，比较候选。</p></div>
       </div>
-      <p class="micro" style="margin-top:20px">这些优势适用于明确的子任务；开放式研究与软件设计仍有更广的目标。</p>
-      <div class="keyline">目标明确，反馈可负担，<b>大量尝试才有价值</b>。</div>
+      <div class="scaleband" style="margin-top:20px">两条路线：学习更好的策略 + 用算力生成、验证更多候选。</div>
+      <div class="keyline"><b>RL 改进解题策略</b>，算力扩大<b>可验证的搜索</b>。</div>
+      <p class="micro" style="margin-top:12px">有限搜索空间 + 解存在 + 可靠判定 → 穷举能找到满足规范的解；成本可能很高。</p>
     </div>
     <div class="footer"><span>有边界的任务 · 清晰目标 · 可检查反馈</span><span class="pnum">16 / 53</span></div>
   </section>
@@ -1606,40 +1607,34 @@
     <div class="footer"><span>coding agents · 本地工具 · 快速反馈</span><span class="pnum">19 / 53</span></div>
   </section>
 
-  <!-- ============ S20 · 数学搜索环境 ============ -->
-  <section class="slide" data-notes="数学搜索结合候选生成、评估器和保留有希望路线的规则。候选可以是构造、程序、引理或证明。形式证明检查是一类评估器；有些任务提供可执行分数或易检查的反例，另一些研究问题没有便宜可靠的验证器。FunSearch（2023/2024）与 AlphaProof（2024）说明数学系统与代码系统并行发展，不是 Claude Code 之后才开始。训练时验证可以提供 RL 奖励并改变参数；推理时验证可以筛选或修订候选，不更新参数。大量尝试的价值取决于检查与预算。">
+  <!-- ============ S20 · 四类任务的反馈条件 ============ -->
+  <section class="slide" data-notes="四类任务放在同一页比较，不再用 Kepler 周期题的奖励示例。编程和数学的优势适用于明确子任务：编译、测试、报错、答案检查、证明检查或反例能提供反馈；测试有限，形式证明验证特定陈述。产品设计的用户价值和独特路线需要更慢、多元的现实反馈，非共识选择不保证价值。交易的盈亏、风险和成本可衡量，但信息不完备、市场变化，回测不保证未来收益。此页是反馈条件的分析对比，不是模型能力排名。RL 改进问题求解需要目标、环境与反馈相互配合。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>验证器，让数学搜索变得有用</h2>
-    <div class="content">
-      <div class="three"><div class="card"><div class="k">生成</div><div class="big" style="font-size:25px">很多候选</div><p style="font-size:19px">构造、引理、证明。</p></div><div class="card"><div class="k">评价</div><div class="big" style="font-size:25px">检查目标</div><p style="font-size:19px">证明检查、评分、反例。</p></div><div class="card accent"><div class="k">搜索</div><div class="big" style="font-size:25px">保留有用路线</div><p style="font-size:19px">细化、分支，或放弃。</p></div></div>
-      <div class="scaleband" style="margin-top:24px">训练时：检查可以成为奖励；推理时：检查可以指导搜索。</div>
-      <div class="keyline">更多尝试的价值，取决于<b>评价能否跟上</b>。</div>
-      <p class="micro" style="margin-top:12px">例子：FunSearch（2023/24）、AlphaProof（2024）；后文再看选取的数学进展。</p>
+    <h2>四类任务，不同的反馈条件</h2>
+    <p class="sub" style="margin-top:8px">编程、数学、产品设计、交易：目标、环境与反馈怎样配合？</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two even" style="gap:18px;align-items:stretch">
+        <div class="card" style="padding:16px 20px">
+          <div class="k">01 · 编程</div><div class="big" style="font-size:22px">可执行的检查</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>目标：满足指定功能与规范</li><li>反馈：编译、测试、报错</li><li>试验：本地反复运行与修订</li></ul>
+        </div>
+        <div class="card" style="padding:16px 20px">
+          <div class="k">02 · 数学</div><div class="big" style="font-size:22px">明确的假设与目标</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>目标：在给定假设下求解或证明</li><li>反馈：答案检查、证明检查、反例</li><li>试验：反复生成与验证候选</li></ul>
+        </div>
+        <div class="card accent" style="padding:16px 20px">
+          <div class="k">03 · 产品设计</div><div class="big" style="font-size:22px">长周期的现实反馈</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>目标：用户价值与差异化</li><li>反馈：更慢、多元，需现实证据</li><li>判断：独特路线可能来自非共识</li></ul>
+        </div>
+        <div class="card accent" style="padding:16px 20px">
+          <div class="k">04 · 交易</div><div class="big" style="font-size:22px">清晰奖励，变化的环境</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>目标：盈亏、风险与成本</li><li>环境：信息不完备，市场持续变化</li><li>验证：回测与未来收益有距离</li></ul>
+        </div>
+      </div>
+      <div class="keyline">可检查的目标，让更多算力能用于<b>系统搜索与候选筛选</b>。</div>
+      <p class="micro" style="margin-top:10px">对有限、有解且可可靠判定的任务，穷举能找到满足规范的解；计算成本仍需考虑。</p>
     </div>
-    <div class="footer"><span>生成 · 评价 · 搜索 · 可验证的任务</span><span class="pnum">20 / 53</span></div>
-  </section>
-
-  <!-- ============ S21 · 产品设计 ============ -->
-  <section class="slide" data-notes="这是分析性对比，不是 AI 无法设计产品的实测结论。实现子问题可以有可执行检查；产品价值需要用户、市场和替代方案的证据，反馈可能经过几周或几个月，还会被分发、定价和竞争混淆。独特道路可能涉及对非共识假设下注，但逆共识本身不保证价值。目标往往多元并会变化。AI 可以帮助原型、调研与分析，功能通过测试不等于用户需要它。人仍要选问题、判断需要什么证据。">
-    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>产品价值，需要更长的反馈回路</h2>
-    <div class="content">
-      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">把产品做出来</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>功能可以正确运行</li><li>原型可以被测试</li><li>AI 可以加速实现</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">决定做什么产品</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>用户价值需要时间观察</li><li>目标与偏好可能变化</li><li>独特道路可能来自非共识</li></ul></div></div>
-      <div class="keyline">实现有局部检查；产品方向需要<b>判断与现实证据</b>。</div>
-    </div>
-    <div class="footer"><span>产品设计 · 延迟反馈 · 问题选择</span><span class="pnum">21 / 53</span></div>
-  </section>
-
-  <!-- ============ S22 · 金融市场 ============ -->
-  <section class="slide" data-notes="这是分析性对比，不是投资建议或不可能性结论。盈亏可衡量，但交易目标还需考虑风险、费用和流动性。奖励可见不表示相关状态全部已知，也不表示策略能泛化。市场有不完备信息、竞争对手、非平稳变化、价格冲击和随机事件；历史回测可能泄漏或过拟合，不能保证未来收益。更多信息可以改善某些方法，但不创造完整、平稳的模拟器或收益保证。AI 可以帮助金融领域的有边界任务；这里强调一个清晰分数本身不够。">
-    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>炒股的奖励清晰，但条件还不够</h2>
-    <div class="content">
-      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">可以衡量的东西</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>盈亏</li><li>风险与交易成本</li><li>策略的历史表现</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">学习环境的复杂性</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>外部信息不完备</li><li>市场与竞争对手持续变化</li><li>回测结果与未来收益有距离</li></ul></div></div>
-      <div class="keyline">奖励可衡量，还需要考虑<b>信息与环境稳定性</b>。</div>
-      <p class="micro" style="margin-top:12px">历史表现是在特定设置下的证据，不保证未来收益。</p>
-    </div>
-    <div class="footer"><span>奖励可见 · 信息不完备 · 非平稳环境</span><span class="pnum">22 / 53</span></div>
+    <div class="footer"><span>编程 · 数学 · 产品设计 · 交易</span><span class="pnum">20 / 53</span></div>
   </section>
 
   <!-- ============ S23 · 正确与优秀 ============ -->

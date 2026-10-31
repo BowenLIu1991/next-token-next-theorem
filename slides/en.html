@@ -1124,7 +1124,7 @@
           </div>
         </div>
       </div>
-      <div class="keyline">Our focus is <b>RL</b>: how <b>reward</b> guides learning.</div>
+      <div class="keyline">Our focus is <b>RL</b>: improving <b>problem-solving</b> through reward.</div>
     </div>
     <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">12 / 53</span></div>
   </section>
@@ -1547,7 +1547,7 @@
   </section>
 
   <!-- ============ S16 · What math and code share ============ -->
-  <section class="slide" data-notes="The relevant comparison is between well-specified coding or mathematical subtasks and open-ended real-world tasks. A programming contest has an input specification and executable tests; a formal theorem has assumptions, a target statement and a proof checker. Not every software requirement or mathematical research question has these properties. Tests provide partial evidence; a proof checker verifies a formal statement under its assumptions. The lower cost of feedback is relative to expensive human or real-world evaluation, not zero or unlimited.">
+  <section class="slide" data-notes="Specified math and coding subtasks can have explicit definitions and rules, controlled environments and checkable outcomes. This supports policy learning, candidate generation and parallel verification. The exhaustive-search guarantee needs a finite candidate space, a valid solution within it, and a checker that terminates and decides correctly for each candidate. Under these conditions, enumeration finds a specification-satisfying solution, but time and compute costs can be enormous. Random sampling or parallel generation does not guarantee exhaustive coverage. Well-defined rules alone do not imply finiteness, solvability or decidability. RL improves policies; inference-time compute expands candidate search, and the two can work together. Tests are partial evidence and proof checking establishes the stated proposition, not every intended application.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
     <h2>Math and code share a feedback advantage</h2>
     <div class="content">
@@ -1556,8 +1556,9 @@
         <div class="card"><div class="k">02 · Explicit target</div><div class="big" style="font-size:24px">A checkable goal</div><p style="font-size:19px">Expected behavior or a precise claim.</p></div>
         <div class="card accent"><div class="k">03 · Useful feedback</div><div class="big" style="font-size:24px">Tests &amp; counterexamples</div><p style="font-size:19px">Reject failures and compare candidates.</p></div>
       </div>
-      <p class="micro" style="margin-top:20px">These advantages apply to specified subtasks; open-ended research and software design remain broader.</p>
-      <div class="keyline">A clear goal and affordable feedback make <b>many attempts useful</b>.</div>
+      <div class="scaleband" style="margin-top:20px">Two levers: better policies + more compute for candidate generation and verification.</div>
+      <div class="keyline"><b>RL improves problem-solving policies</b>; compute expands <b>verifiable search</b>.</div>
+      <p class="micro" style="margin-top:12px">Finite search space + a solution exists + reliable, decidable checks → exhaustive search can find it; cost may be high.</p>
     </div>
     <div class="footer"><span>bounded tasks · clear goals · checkable feedback</span><span class="pnum">16 / 53</span></div>
   </section>
@@ -1608,40 +1609,34 @@
     <div class="footer"><span>coding agents · local tools · fast feedback</span><span class="pnum">19 / 53</span></div>
   </section>
 
-  <!-- ============ S20 · Math as a search environment ============ -->
-  <section class="slide" data-notes="Mathematical search uses candidate generation, an evaluator and a rule for retaining promising paths. Candidates may be constructions, programs, lemmas or proofs. Formal proof checking is one evaluator; some problems instead offer executable scores or easily checked counterexamples. Other research problems have no cheap reliable verifier. FunSearch (2023/2024) and AlphaProof (2024) show that mathematical systems developed alongside coding systems, not only after Claude Code. In training, verification can supply an RL reward and change parameters. In inference-time search, it can select or revise candidates without weight updates. Large numbers of attempts are valuable only when checks and budgets support them.">
+  <!-- ============ S20 · Four tasks and feedback conditions ============ -->
+  <section class="slide" data-notes="Compare four domains on one slide, without the Kepler-period reward example. The advantages of code and mathematics apply to specified subtasks: compilation, tests, errors, answer checks, proof checking and counterexamples provide feedback under defined rules or assumptions. Tests are partial; formal checks establish the stated proposition. Product value has slower, plural real-world feedback; non-consensus choices do not inherently create value. Trading rewards include profit, risk and cost, while information is incomplete and markets change; backtests do not guarantee future returns. This is an analytical comparison, not an empirical capability ranking. RL needs compatible goals, environments and feedback to improve problem solving.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>A verifier makes mathematical search useful</h2>
-    <div class="content">
-      <div class="three"><div class="card"><div class="k">Generate</div><div class="big" style="font-size:25px">Many candidates</div><p style="font-size:19px">Constructions, lemmas, proofs.</p></div><div class="card"><div class="k">Evaluate</div><div class="big" style="font-size:25px">Check the target</div><p style="font-size:19px">Proof checks, scores, counterexamples.</p></div><div class="card accent"><div class="k">Search</div><div class="big" style="font-size:25px">Keep useful paths</div><p style="font-size:19px">Refine, branch or discard.</p></div></div>
-      <div class="scaleband" style="margin-top:24px">Training: checks can supply reward · Inference: checks can guide search.</div>
-      <div class="keyline">More attempts help when <b>evaluation can keep up</b>.</div>
-      <p class="micro" style="margin-top:12px">Examples: FunSearch (2023/24), AlphaProof (2024) · Selected progress appears later.</p>
+    <h2>Four tasks, different feedback conditions</h2>
+    <p class="sub" style="margin-top:8px">Code, math, product design, trading: how do goals, environments and feedback fit?</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two even" style="gap:18px;align-items:stretch">
+        <div class="card" style="padding:16px 20px">
+          <div class="k">01 · Code</div><div class="big" style="font-size:22px">Executable checks</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>Target: specified behavior</li><li>Feedback: compiler, tests, errors</li><li>Trials: run and revise locally</li></ul>
+        </div>
+        <div class="card" style="padding:16px 20px">
+          <div class="k">02 · Math</div><div class="big" style="font-size:22px">Explicit assumptions &amp; goals</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>Target: solve or prove under assumptions</li><li>Feedback: answers, proof checks, counterexamples</li><li>Trials: generate and verify candidates</li></ul>
+        </div>
+        <div class="card accent" style="padding:16px 20px">
+          <div class="k">03 · Product design</div><div class="big" style="font-size:22px">Long real-world feedback loops</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>Target: user value and differentiation</li><li>Feedback: slower, plural, empirical</li><li>Judgment: distinctive, sometimes non-consensus</li></ul>
+        </div>
+        <div class="card accent" style="padding:16px 20px">
+          <div class="k">04 · Trading</div><div class="big" style="font-size:22px">Clear reward, changing markets</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:18px;line-height:1.7"><li>Target: profit, risk and cost</li><li>Environment: incomplete info, shifting markets</li><li>Validation: backtests versus future returns</li></ul>
+        </div>
+      </div>
+      <div class="keyline">Checkable goals turn more compute into <b>systematic search and candidate filtering</b>.</div>
+      <p class="micro" style="margin-top:10px">For finite, solvable tasks with reliable, decidable checks, exhaustive search finds a valid solution; cost still matters.</p>
     </div>
-    <div class="footer"><span>generate · evaluate · search · verifiable tasks</span><span class="pnum">20 / 53</span></div>
-  </section>
-
-  <!-- ============ S21 · Product design ============ -->
-  <section class="slide" data-notes="This is an analytical comparison, not a benchmark claim that AI cannot design products. Implementation subproblems can have executable checks. Product value requires evidence about users, markets and alternatives; feedback may take weeks or months and can be confounded by distribution, pricing and competition. Distinctive product directions can involve non-consensus hypotheses, though contrarian choices are not inherently good. Product goals are often plural and evolve. AI can support prototypes, research and analysis; an implementation passing tests does not settle whether people want it. The human role includes selecting a problem and deciding which evidence is sufficient.">
-    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>Product value needs a longer feedback loop</h2>
-    <div class="content">
-      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">Building the product</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>A feature can run correctly</li><li>A prototype can be tested</li><li>AI can speed implementation</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">Choosing the product</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>User value takes time to observe</li><li>Goals and preferences can change</li><li>Distinctive paths may be non-consensus</li></ul></div></div>
-      <div class="keyline">Implementation has local checks; product direction needs <b>judgment and real-world evidence</b>.</div>
-    </div>
-    <div class="footer"><span>product design · delayed feedback · problem selection</span><span class="pnum">21 / 53</span></div>
-  </section>
-
-  <!-- ============ S22 · Financial markets ============ -->
-  <section class="slide" data-notes="An analytical comparison, not investment advice or a claim of impossibility. Profit and loss are measurable, but a useful trading objective also accounts for risk, fees and liquidity. Reward observability does not imply all relevant state is known or that a learned strategy generalizes. Markets include incomplete information, strategic competitors, nonstationarity, price impact and random shocks. Historical backtests can contain leakage or overfitting and cannot certify future returns. More information can help particular methods without creating a complete, stationary simulator or guaranteeing profits. AI can assist bounded financial tasks; the point is that a clear score alone is insufficient.">
-    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>A clear trading reward is only one condition</h2>
-    <div class="content">
-      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">What is measurable</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>Profit and loss</li><li>Risk and transaction costs</li><li>Historical strategy performance</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">What complicates learning</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>Incomplete external information</li><li>Changing markets and competitors</li><li>Backtests versus future outcomes</li></ul></div></div>
-      <div class="keyline">Measurable reward helps; <b>information and environmental stability</b> still matter.</div>
-      <p class="micro" style="margin-top:12px">Historical performance provides evidence under a setup, not a guarantee of future returns.</p>
-    </div>
-    <div class="footer"><span>observable reward · partial information · nonstationarity</span><span class="pnum">22 / 53</span></div>
+    <div class="footer"><span>code · math · product design · trading</span><span class="pnum">20 / 53</span></div>
   </section>
 
   <!-- ============ S23 · Correctness and quality ============ -->
