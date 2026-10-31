@@ -741,7 +741,7 @@
     .slide{position:relative!important;inset:auto!important;width:1280px;height:720px;
       opacity:1!important;pointer-events:auto;page-break-after:always;break-after:page}
     .slide:last-child{page-break-after:auto;break-after:auto}
-    #hint,#notes{display:none!important}
+    #hint,#notes,#fullscreen-toggle{display:none!important}
     *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
 
@@ -760,6 +760,16 @@
     transition:opacity .8s ease;
   }
   #hint.hide{opacity:0}
+  #fullscreen-toggle{
+    position:fixed;right:16px;top:16px;z-index:60;
+    border:1px solid var(--line);border-radius:8px;padding:10px 14px;
+    background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;
+    cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.12);
+  }
+  #fullscreen-toggle:hover{border-color:var(--accent);color:var(--accent)}
+  #fullscreen-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  #fullscreen-toggle:disabled{cursor:not-allowed;opacity:.65}
+  body.clean #fullscreen-toggle,body.print #fullscreen-toggle{display:none!important}
 
 </style>
 </head>
@@ -2588,6 +2598,7 @@
 </div>
 
 <div id="hint">← → 翻页 · N 讲稿 · F 全屏</div>
+<button id="fullscreen-toggle" type="button" aria-pressed="false" title="全屏显示（F）；Esc 退出">⛶ 全屏</button>
 <div id="notes"></div>
 
 <script>
@@ -2619,16 +2630,36 @@
   function next(){ show(cur + 1); }
   function prev(){ show(cur - 1); }
 
+  const fullscreenButton = document.getElementById('fullscreen-toggle');
+  function updateFullscreenButton(){
+    const active = Boolean(document.fullscreenElement);
+    fullscreenButton.textContent = active ? '退出全屏' : '⛶ 全屏';
+    fullscreenButton.setAttribute('aria-pressed', String(active));
+  }
+  async function toggleFullscreen(){
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await document.documentElement.requestFullscreen();
+    } catch {
+      fullscreenButton.textContent = '请用浏览器全屏';
+      fullscreenButton.title = '浏览器未允许全屏，请使用浏览器菜单中的全屏选项。';
+    }
+  }
+  fullscreenButton.disabled = !document.fullscreenEnabled;
+  if (fullscreenButton.disabled) fullscreenButton.title = '请使用浏览器菜单中的全屏选项。';
+  fullscreenButton.addEventListener('click', toggleFullscreen);
+  document.addEventListener('fullscreenchange', updateFullscreenButton);
+  updateFullscreenButton();
+
   document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target instanceof Element && e.target.closest('button') && [' ', 'Enter'].includes(e.key)) return;
     if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)) { e.preventDefault(); next(); }
     else if (['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
     else if (e.key === 'Home') { show(0); }
     else if (e.key === 'End') { show(slides.length - 1); }
     else if (e.key.toLowerCase() === 'n') { notes.classList.toggle('on'); }
-    else if (e.key.toLowerCase() === 'f') {
-      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-      else document.exitFullscreen();
-    }
+    else if (e.key.toLowerCase() === 'f') { e.preventDefault(); toggleFullscreen(); }
   });
 
   window.addEventListener('resize', fit);
