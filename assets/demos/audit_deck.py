@@ -79,8 +79,8 @@ def main() -> None:
         active = re.sub(r'<template\b[^>]*>.*?</template>', '', text, flags=re.S)
     count = len(re.findall(r'<section\b[^>]*class="slide(?:\s[^"]*)?"', active))
     labels = re.findall(r'<span class="pnum">(\d+) / (\d+)</span>', active)
-    if not args.appendix and labels != [(f"{i:02d}", str(count)) for i in range(1, count + 1)]:
-        raise SystemExit("Page labels do not match slide order/count")
+    if len(labels) != count:
+        raise SystemExit("Each source slide must have one page label; browser numbering is checked below")
     if re.search(r'<script\b[^>]*src=', text):
         raise SystemExit("External script found")
     def absolute_src(match: re.Match) -> str:

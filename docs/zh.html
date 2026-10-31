@@ -1064,123 +1064,6 @@
     <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 53</span></div>
   </section>
 
-  <!-- ============ S9 · 采样 ============ -->
-  <section class="slide" data-notes="软件采样按分布抽取；T=0 通常约定为贪心取 argmax。另一层是数值实现：浮点加法不满足结合律，内核、并行规约顺序或批形状变化可能改变结果；固定实现也可以是确定性的。当最高两个 logits 足够接近时，数值差异可能改变排序，选出不同 token，后续自回归输出可能分叉。若 logits 完全相同且决胜规则固定，贪心选择就相同。数值误差、逐次运行的非确定性和主动采样应分别解释。">
-    <p class="eyebrow"><b>02</b> / model</p>
-    <h2>采样：从分布里取一个</h2>
-    <div class="content">
-      <div class="two even">
-        <div style="align-self:center">
-          <p class="micro" style="margin:0">概率分布 · 前文</p>
-          <p class="ctxline">“一个重要的……”</p>
-          <p class="math-inline" style="margin:8px 0 10px">
-            <math>
-              <msub><mi>y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub>
-              <mo>∼</mo>
-              <msub><mi>p</mi><mi>θ</mi></msub>
-              <mo>(</mo><mo>·</mo><mo>∣</mo><msub><mi>x</mi><mrow><mn>1</mn><mo>:</mo><mi>t</mi></mrow></msub><mo>)</mo>
-            </math>
-          </p>
-          <div class="probs">
-            <div class="prob top"><span class="ptok">定理</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
-            <div class="prob"><span class="ptok">问题</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
-            <div class="prob"><span class="ptok">模型</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
-            <div class="prob"><span class="ptok">方法</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
-            <div class="prob"><span class="ptok">其他</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">软件算法 · 随机性</div><p style="margin:0"><b>T &gt; 0</b> 主动采样（掷骰子）；<b>T = 0</b> 贪心取最高概率</p></div>
-          <div class="card accent"><div class="k">数值实现 · 软硬件</div><p style="margin:0"><b>浮点加法不满足结合律</b>；内核、累加顺序或批形状变化可能改变 logits</p></div>
-          <div class="card"><div class="k">自回归放大</div><p style="margin:0">最高分候选接近时，排序可能翻转；不同 token 改变后续输入</p></div>
-        </div>
-      </div>
-      <div class="loop">
-        <span class="step">输入</span><span class="arr">→</span>
-        <span class="step">Transformer</span><span class="arr">→</span>
-        <span class="step">概率分布</span><span class="arr">→</span>
-        <span class="step hl">采样 / 临界决胜</span><span class="arr">→</span>
-        <span class="step">接回输入</span><span class="arr">↺</span>
-      </div>
-      <div class="keyline">输出变化可来自<b>采样</b>与<b>数值实现</b>；T = 0 固定的是选择规则。</div>
-    </div>
-    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 53</span></div>
-  </section>
-
-  <!-- ============ S10 · 采样算法 ============ -->
-  <section class="slide" data-notes="把分布变成 token，需要一个随机数。按概率排序、累加，得到累积分布 F。抽一个 u ~ U(0,1)，落在哪一段就取哪个 token。temperature 改变分布的陡峭程度，top-p 截掉长尾再归一化。">
-    <p class="eyebrow"><b>02</b> / model</p>
-    <h2>采样：在累积分布上扔一个随机数</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <table class="dist">
-            <thead><tr><th>token</th><th>p</th><th>F(y)</th></tr></thead>
-            <tbody>
-              <tr><td>定理</td><td>0.41</td><td>0.41</td></tr>
-              <tr class="hl"><td>问题</td><td>0.22</td><td>0.63</td></tr>
-              <tr><td>模型</td><td>0.12</td><td>0.75</td></tr>
-              <tr><td>的</td><td>0.08</td><td>0.83</td></tr>
-              <tr><td>其他</td><td>0.17</td><td>1.00</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div style="align-self:center">
-          <div class="cumbar">
-            <span class="seg b" style="width:41%"></span>
-            <span class="seg a" style="width:22%"></span>
-            <span class="seg b" style="width:12%"></span>
-            <span class="seg b" style="width:8%"></span>
-            <span class="seg c" style="width:17%"></span>
-            <span class="needle" style="left:57%"></span>
-          </div>
-          <div class="cumlabels">
-            <span style="left:0">0</span>
-            <span style="left:41%">0.41</span>
-            <span style="left:63%">0.63</span>
-            <span style="left:75%">0.75</span>
-            <span style="left:83%">0.83</span>
-            <span style="left:100%">1.00</span>
-          </div>
-          <p class="micro" style="margin-top:14px">u = 0.57 ∈ [0.41, 0.63) → 取「问题」</p>
-        </div>
-      </div>
-
-      <div class="two" style="margin-top:26px">
-        <div class="card">
-          <div class="k">temperature</div>
-          <div class="mathblock" style="font-size:20px;margin-top:4px">
-            <math>
-              <msubsup><mi>p</mi><mi>i</mi><mrow><mo>(</mo><mi>T</mi><mo>)</mo></mrow></msubsup>
-              <mo>=</mo>
-              <mfrac>
-                <msubsup><mi>p</mi><mi>i</mi><mrow><mn>1</mn><mo>/</mo><mi>T</mi></mrow></msubsup>
-                <mrow><munder><mo>∑</mo><mi>j</mi></munder><msubsup><mi>p</mi><mi>j</mi><mrow><mn>1</mn><mo>/</mo><mi>T</mi></mrow></msubsup></mrow>
-              </mfrac>
-            </math>
-          </div>
-          <p style="margin:6px 0 0">T 小 → 更尖锐；T 大 → 更平坦</p>
-        </div>
-        <div class="card">
-          <div class="k">top-p</div>
-          <div class="mathblock" style="font-size:20px;margin-top:4px">
-            <math>
-              <mtext>min |S| s.t.</mtext>
-              <mspace width="0.3em"></mspace>
-              <munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder>
-              <msub><mi>p</mi><mi>i</mi></msub>
-              <mo>≥</mo><mn>0.9</mn>
-            </math>
-          </div>
-          <p style="margin:6px 0 0">截掉长尾，再归一化</p>
-        </div>
-      </div>
-
-      <div class="keyline">温度改形状，top-p 截尾巴，<b>u</b> 决定落在哪一段。</div>
-    </div>
-    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 53</span></div>
-  </section>
-
   <!-- ============ S11 · 无状态 ============ -->
   <section class="slide" data-notes="这是最关键的一页，后面 prompt、context、memory 全都从这里来。模型每次调用都是独立的，参数不变。所谓对话，是客户端把历史重新发一遍。">
     <p class="eyebrow"><b>02</b> / model</p>
@@ -2610,7 +2493,8 @@
     document.title += ' — 训练细节（备份）';
   }
   const slides = Array.from(document.querySelectorAll('.slide'));
-  if (appendixMode) slides.forEach((slide, i) => {
+  // Visible page numbers follow the current deck order, in either mode.
+  slides.forEach((slide, i) => {
     slide.querySelector('.pnum').textContent = `${String(i + 1).padStart(2, '0')} / ${slides.length}`;
   });
   const notes = document.getElementById('notes');

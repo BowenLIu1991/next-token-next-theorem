@@ -1066,123 +1066,6 @@
     <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 53</span></div>
   </section>
 
-  <!-- ============ S9 · 采样 ============ -->
-  <section class="slide" data-notes="Software sampling draws from a distribution; T = 0 conventionally selects its argmax. Separately, floating-point addition is non-associative. Kernel choices, parallel reduction orders or batch shapes can change numerical results, but a fixed implementation can be deterministic. If the leading logits are sufficiently close, numerical differences can flip the greedy selection and subsequent autoregressive outputs can diverge. Identical logits with a fixed tie-breaking rule give the same greedy token. Numerical error, run-to-run nondeterminism and deliberate sampling are different concepts.">
-    <p class="eyebrow"><b>02</b> / model</p>
-    <h2>Sampling: draw one token from the distribution</h2>
-    <div class="content">
-      <div class="two even">
-        <div style="align-self:center">
-          <p class="micro" style="margin:0">Probability distribution · prefix</p>
-          <p class="ctxline">“One important …”</p>
-          <p class="math-inline" style="margin:8px 0 10px">
-            <math>
-              <msub><mi>y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub>
-              <mo>∼</mo>
-              <msub><mi>p</mi><mi>θ</mi></msub>
-              <mo>(</mo><mo>·</mo><mo>∣</mo><msub><mi>x</mi><mrow><mn>1</mn><mo>:</mo><mi>t</mi></mrow></msub><mo>)</mo>
-            </math>
-          </p>
-          <div class="probs">
-            <div class="prob top"><span class="ptok">theorem</span><span class="bar"><i style="width:41%"></i></span><span class="pv">41%</span></div>
-            <div class="prob"><span class="ptok">problem</span><span class="bar"><i style="width:22%"></i></span><span class="pv">22%</span></div>
-            <div class="prob"><span class="ptok">model</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
-            <div class="prob"><span class="ptok">step</span><span class="bar"><i style="width:8%"></i></span><span class="pv">8%</span></div>
-            <div class="prob"><span class="ptok">other</span><span class="bar"><i style="width:17%;opacity:.35"></i></span><span class="pv">17%</span></div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">Software · Sampling</div><p style="margin:0"><b>T &gt; 0</b>: draw from probabilities; <b>T = 0</b>: greedy argmax</p></div>
-          <div class="card accent"><div class="k">Numerical implementation</div><p style="margin:0"><b>Float addition is non-associative</b>; kernel, reduction or batch changes can alter logits</p></div>
-          <div class="card"><div class="k">Autoregressive Cascade</div><p style="margin:0">Close leading logits may swap order; a different token changes the next input</p></div>
-        </div>
-      </div>
-      <div class="loop">
-        <span class="step">Input</span><span class="arr">→</span>
-        <span class="step">Transformer</span><span class="arr">→</span>
-        <span class="step">Probability distribution</span><span class="arr">→</span>
-        <span class="step hl">Sampling / Tie-break</span><span class="arr">→</span>
-        <span class="step">Append to input</span><span class="arr">↺</span>
-      </div>
-      <div class="keyline">Output can vary through <b>sampling</b> or <b>numerical implementation</b>; T = 0 fixes the selection rule.</div>
-    </div>
-    <div class="footer"><span>sampling · non-determinism</span><span class="pnum">09 / 53</span></div>
-  </section>
-
-  <!-- ============ S10 · 采样算法 ============ -->
-  <section class="slide" data-notes="把分布变成 token，需要一个随机数。按概率排序、累加，得到累积分布 F。抽一个 u ~ U(0,1)，落在哪一段就取哪个 token。temperature 改变分布的陡峭程度，top-p 截掉长尾再归一化。">
-    <p class="eyebrow"><b>02</b> / model</p>
-    <h2>Sampling: throw a random number onto the CDF</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <table class="dist">
-            <thead><tr><th>token</th><th>p</th><th>F(y)</th></tr></thead>
-            <tbody>
-              <tr><td>theorem</td><td>0.41</td><td>0.41</td></tr>
-              <tr class="hl"><td>problem</td><td>0.22</td><td>0.63</td></tr>
-              <tr><td>model</td><td>0.12</td><td>0.75</td></tr>
-              <tr><td>step</td><td>0.08</td><td>0.83</td></tr>
-              <tr><td>other</td><td>0.17</td><td>1.00</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div style="align-self:center">
-          <div class="cumbar">
-            <span class="seg b" style="width:41%"></span>
-            <span class="seg a" style="width:22%"></span>
-            <span class="seg b" style="width:12%"></span>
-            <span class="seg b" style="width:8%"></span>
-            <span class="seg c" style="width:17%"></span>
-            <span class="needle" style="left:57%"></span>
-          </div>
-          <div class="cumlabels">
-            <span style="left:0">0</span>
-            <span style="left:41%">0.41</span>
-            <span style="left:63%">0.63</span>
-            <span style="left:75%">0.75</span>
-            <span style="left:83%">0.83</span>
-            <span style="left:100%">1.00</span>
-          </div>
-          <p class="micro" style="margin-top:14px">u = 0.57 ∈ [0.41, 0.63) → pick “problem”</p>
-        </div>
-      </div>
-
-      <div class="two" style="margin-top:26px">
-        <div class="card">
-          <div class="k">temperature</div>
-          <div class="mathblock" style="font-size:20px;margin-top:4px">
-            <math>
-              <msubsup><mi>p</mi><mi>i</mi><mrow><mo>(</mo><mi>T</mi><mo>)</mo></mrow></msubsup>
-              <mo>=</mo>
-              <mfrac>
-                <msubsup><mi>p</mi><mi>i</mi><mrow><mn>1</mn><mo>/</mo><mi>T</mi></mrow></msubsup>
-                <mrow><munder><mo>∑</mo><mi>j</mi></munder><msubsup><mi>p</mi><mi>j</mi><mrow><mn>1</mn><mo>/</mo><mi>T</mi></mrow></msubsup></mrow>
-              </mfrac>
-            </math>
-          </div>
-          <p style="margin:6px 0 0">Small T → sharper; large T → flatter</p>
-        </div>
-        <div class="card">
-          <div class="k">top-p</div>
-          <div class="mathblock" style="font-size:20px;margin-top:4px">
-            <math>
-              <mtext>min |S| s.t.</mtext>
-              <mspace width="0.3em"></mspace>
-              <munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder>
-              <msub><mi>p</mi><mi>i</mi></msub>
-              <mo>≥</mo><mn>0.9</mn>
-            </math>
-          </div>
-          <p style="margin:6px 0 0">Trim the long tail, then renormalize</p>
-        </div>
-      </div>
-
-      <div class="keyline">Temperature reshapes, top-p trims the tail, <b>u</b> decides where it lands.</div>
-    </div>
-    <div class="footer"><span>inverse CDF · temperature · top-p</span><span class="pnum">10 / 53</span></div>
-  </section>
-
   <!-- ============ S11 · 无状态 ============ -->
   <section class="slide" data-notes="这是最关键的一页，后面 prompt、context、memory 全都从这里来。模型每次调用都是独立的，参数不变。所谓对话，是客户端把历史重新发一遍。">
     <p class="eyebrow"><b>02</b> / model</p>
@@ -2612,7 +2495,8 @@
     document.title += ' — training details (appendix)';
   }
   const slides = Array.from(document.querySelectorAll('.slide'));
-  if (appendixMode) slides.forEach((slide, i) => {
+  // Visible page numbers follow the current deck order, in either mode.
+  slides.forEach((slide, i) => {
     slide.querySelector('.pnum').textContent = `${String(i + 1).padStart(2, '0')} / ${slides.length}`;
   });
   const notes = document.getElementById('notes');

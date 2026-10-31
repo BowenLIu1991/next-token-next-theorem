@@ -1,6 +1,6 @@
 # LinkedIn post — From the Next Token to the Next Theorem
 
-> Production-history note: the initial build described below had 50 slides. The current deck has 53 slides after expanding the Claude Code review reference case to four pages. Keep the original three-hour production story distinct from later revisions.
+> Production-history note: the initial build described below had 50 slides. The current deck has 51 slides after expanding the Claude Code review case and removing two sampling slides. Keep the original three-hour production story distinct from later revisions.
 
 ## English main post
 

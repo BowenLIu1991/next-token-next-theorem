@@ -22,7 +22,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - **训练概览**：pretrain / SFT / RL 用一页带过；细节保留为单独打开的备份模式。
 - **奖励与问题求解**：从 Atari、AlphaGo 等游戏案例，讲到数学与代码的共享技能、测试与反例，以及产品设计和交易的反馈边界。
 - **使用**：prompt、context、memory、agent loop、harness 如何组合成系统。
-- **工程参考案例**：S36–S39 依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。
+- **工程参考案例**：第 34–37 页依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。
 - **AI × math**：FunSearch、AlphaGeometry、AlphaProof、o1 / R1、AlphaEvolve、IMO 2025，以及 2026 年 OpenAI 的公开声称。
 - **结论**：概率负责广度，验证负责正确，人负责方向。
 
@@ -36,8 +36,9 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **53 页**，16:9，1280 × 720。
-- 前 11 页 token / 模型介绍保留；主讲 S12 只讲训练概览，S13–S24 改为奖励驱动的问题求解。
+- **51 页**，16:9，1280 × 720。
+- 两页采样介绍已删除；训练概览在第 10 页，第 11–22 页讲奖励驱动的问题求解。
+- 主讲与备份模式分别按当前顺序自动生成页码。
 - 原训练细节保存为 **12 页备份**，不计入主讲或主讲 PDF；用 `?appendix=1` 打开，支持正常翻页与备注。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
 - 键盘操作：
@@ -88,7 +89,7 @@ python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-toke
 python3 assets/demos/render_pdf.py --html docs/index.html --appendix --out /path/to/training-appendix.pdf
 ```
 
-脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 53 页的满版 PDF。依赖：
+脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 51 页的满版 PDF。依赖：
 
 ```bash
 python3 -m pip install pillow pypdf
@@ -110,8 +111,8 @@ python3 -m pip install pillow pypdf
 │   ├── from-next-token-to-next-theorem-zh.pdf   # 中文
 │   └── .nojekyll
 ├── slides/
-│   ├── en.html                   # English source (53 pages)
-│   ├── index.html                # 中文源文件（53 页，自包含）
+│   ├── en.html                   # English source (51 main pages)
+│   ├── index.html                # 中文源文件（51 页主讲，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
