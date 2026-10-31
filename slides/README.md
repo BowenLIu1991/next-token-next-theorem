@@ -17,6 +17,8 @@
 
 已做：S1–S53（完整 deck：Token → 模型 → 训练 → 应用 → AI × math → 结论）。S36–S39 为 Claude Code 代码审查参考案例。
 
+2026-10-31 试讲调整：S1–S11 保留；S12 训练概览；S13–S24 奖励、游戏、数学与代码的共性及开放任务的边界。原训练细节保存于 `training-details` 模板中，默认不显示；用 `?appendix=1` 单独打开 12 页备份。浏览器翻页、审核与 PDF 页数统计均区分主讲与备份。
+
 - `index.html`：中文源文件
 - `en.html`：English source
 - `docs/index.html`：English deployment copy (primary)

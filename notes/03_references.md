@@ -30,6 +30,21 @@
 
 ## 训练
 
+### 2026-10-31 主讲：奖励、游戏与跨领域迁移
+
+| 主题 | 来源 | 主讲用途与边界 |
+|---|---|---|
+| RL 概念 | Sutton & Barto, *Reinforcement Learning: An Introduction* | S13；控制与序列决策的背景，奖励学习策略 |
+| Atari DQN | Mnih et al., [*Human-level control through deep reinforcement learning*](https://www.nature.com/articles/nature14236), Nature 2015 | S14–S15；像素、游戏分数与 Breakout 演示；已有更早预印本 |
+| AlphaGo | Silver et al., [*Mastering the game of Go with deep neural networks and tree search*](https://www.nature.com/articles/nature16961), Nature 2016 | S14；监督学习、自我对弈 RL 与搜索的组合 |
+| OpenAI Five | [*OpenAI Five defeats Dota 2 world champions*](https://openai.com/index/openai-five-defeats-dota-2-world-champions/), 2019-04-15 | S14；具体游戏配置下的团队比赛，不代表开放现实环境 |
+| AlphaStar | Vinyals et al., [*Grandmaster level in StarCraft II using multi-agent reinforcement learning*](https://www.nature.com/articles/s41586-019-1724-z), Nature 2019 | S14；部分可观测、多智能体环境 |
+| 数学 RL → 代码 | Chen et al., [*AceReason-Nemotron*](https://arxiv.org/abs/2505.16400), 2025 | S17；已读摘要与正文，数学专用 RL 对强蒸馏模型提高 LiveCodeBench 表现；不是任意数学训练必然改善代码 |
+| 代码 → 状态追踪 | Kim, Schuster & Toshniwal, [*Code Pretraining Improves Entity Tracking Abilities of Language Models*](https://arxiv.org/abs/2405.21068), 2024 | S17；已读摘要，具体推理子技能，不是全部逻辑能力 |
+| 跨领域收益与冲突 | Li et al., [*Can One Domain Help Others?*](https://arxiv.org/abs/2507.17512), 2025 | 讲者备注；基础模型、训练域和数据配比影响迁移，观察到收益也有冲突 |
+
+下表中的训练机制页码为旧稿；相关细节现位于备份模式，不在主讲 S13–S24 中展开。
+
 | 主题 | 文献 / 工具 | 用途 | 状态 |
 |---|---|---|---|
 | 指令微调 | Ouyang et al., *InstructGPT*, 2022 | S16 | ✅ |

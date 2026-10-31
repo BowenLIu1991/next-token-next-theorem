@@ -1200,20 +1200,21 @@
 
 
   <!-- ============ S12 · 从预测到解题 ============ -->
-  <section class="slide" data-notes="预测下一个词本身不会做题。真正发生变化的是训练信号：预训练给知识，SFT 给行为，RL 给策略。模型还是同一个，换的是数据和奖励。">
+  <section class="slide" data-notes="主讲中的训练机制只保留这一页概览。预训练从文本和代码学习规律；监督微调从示范学习；强化学习通过结果反馈改进策略。三者作用有交叠。接下来重点解释哪些任务提供有用反馈，不展开 loss 与优化算法。原来的训练细节保存在备份模式，使用 ?appendix=1 打开。">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>预测下一个词，怎么就变成了做题？</h2>
+    <h2>训练机制，一页带过</h2>
     <div class="content">
       <div class="three">
         <div class="card"><div class="k">Pretrain</div><div class="big" style="font-size:28px">知识</div><p>读遍语料，学会语言与世界</p></div>
         <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">行为</div><p>看示范，学会按指令回答</p></div>
         <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">策略</div><p>做题对答案，学会搜索与纠错</p></div>
       </div>
-      <div class="keyline">换的是<b>训练信号</b>。</div>
+      <div class="keyline">接下来关键的问题：哪些任务能提供<b>有用的反馈</b>？</div>
     </div>
     <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 53</span></div>
   </section>
 
+  <template id="training-details">
   <!-- ============ S13 · Pretrain ============ -->
   <section class="slide" data-notes="预训练只有一个目标：最小化交叉熵。数据是万亿 token，算力是千到万卡、月级。产出是一个 base model：会续写，但不会回答问题。">
     <p class="eyebrow"><b>03</b> / training</p>
@@ -1572,6 +1573,183 @@
       <div class="keyline">反馈越明确，试错越便宜，RL 越有效。</div>
     </div>
     <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 53</span></div>
+  </section>
+
+  </template>
+
+  <!-- ============ S13 · 通过奖励学习 ============ -->
+  <section class="slide" data-notes="强化学习通过与环境互动和奖励学习策略。策略决定动作，环境返回观察和奖励；训练推动策略取得更高的期望长期回报，并平衡探索与利用。奖励不必给出每一步的标准动作。RL 早于深度学习，根源包括控制、动态规划与学习理论；游戏让它的成功被广泛看见。主讲不展开优化公式。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>RL：尝试，得到奖励，再学习</h2>
+    <div class="content">
+      <div class="loop"><span class="step">观察</span><span class="arr">→</span><span class="step">行动</span><span class="arr">→</span><span class="step hl">奖励</span><span class="arr">→</span><span class="step">更新策略</span><span class="arr">↺</span></div>
+      <div class="three" style="margin-top:28px">
+        <div class="card"><div class="k">智能体</div><div class="big" style="font-size:24px">选择一个动作</div><p style="font-size:19px">探索不同策略。</p></div>
+        <div class="card"><div class="k">环境</div><div class="big" style="font-size:24px">返回一个结果</div><p style="font-size:19px">分数、胜负、任务完成情况。</p></div>
+        <div class="card accent"><div class="k">学习</div><div class="big" style="font-size:24px">改进选择策略</div><p style="font-size:19px">追求更高的长期回报。</p></div>
+      </div>
+      <div class="keyline">奖励评价结果，智能体探索<b>如何达到目标</b>。</div>
+      <p class="micro" style="margin-top:12px">参考：Sutton &amp; Barto, Reinforcement Learning: An Introduction。</p>
+    </div>
+    <div class="footer"><span>强化学习 · 奖励 · 策略</span><span class="pnum">13 / 53</span></div>
+  </section>
+
+  <!-- ============ S14 · 游戏让 RL 被看见 ============ -->
+  <section class="slide" data-notes="这里选取著名的深度 RL 案例，不把游戏当作 RL 的起点。Atari DQN 在 2013 年已有预印本，2015 年 Nature 论文展示从像素与分数学习，页面采用正式论文年份。AlphaGo 2016 年结合监督学习、自我对弈强化学习与搜索。OpenAI Five 在 2019 年以当时的评估配置战胜 Dota 2 世界冠军队；AlphaStar 同年达到 StarCraft II 大师级。游戏也有隐藏信息和其他玩家，优势是规则明确、环境可运行、可以重复尝试，不是全部状态都可见。AlphaFold 是另外的监督学习案例，为保持主线本页不展开。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>游戏，让强化学习的能力被看见</h2>
+    <div class="content">
+      <div class="timeline">
+        <div class="tl"><div class="year">2015</div><h4>Atari · DQN</h4><p>像素 → 动作<br>奖励：游戏分数</p></div>
+        <div class="tl"><div class="year">2016</div><h4>AlphaGo</h4><p>自我对弈 + 搜索<br>奖励：赢棋</p></div>
+        <div class="tl"><div class="year">2019</div><h4>OpenAI Five</h4><p>Dota 2 团队协作<br>奖励：比赛结果</p></div>
+        <div class="tl"><div class="year">2019</div><h4>AlphaStar</h4><p>StarCraft II 策略<br>奖励：比赛结果</p></div>
+      </div>
+      <div class="tl-facts"><span class="pill"><i></i>规则明确</span><span class="pill"><i></i>结果可衡量</span><span class="pill"><i></i>可反复尝试</span></div>
+      <div class="keyline">游戏引擎同时提供<b>环境与反馈</b>。</div>
+      <p class="micro" style="margin-top:14px">来源：<a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., 2015</a> · Silver et al., 2016 · <a style="color:inherit" href="https://openai.com/index/openai-five-defeats-dota-2-world-champions/">OpenAI Five, 2019</a> · Vinyals et al., 2019。</p>
+    </div>
+    <div class="footer"><span>著名案例 · 游戏 · 深度强化学习</span><span class="pnum">14 / 53</span></div>
+  </section>
+
+  <!-- ============ S15 · 游戏为何适合 ============ -->
+  <section class="slide" data-notes="用 Atari 打砖块把奖励学习讲具体。智能体移动挡板，环境推进球和砖块，分数奖励进展。重复经验可以发现有延迟收益的策略，例如打通通道，从砖墙后方清除砖块；2015 年 DQN 补充材料展示了这种行为。得分目标不规定每一步动作。模拟环境允许反复尝试，但时间和算力仍有成本，游戏也可以包含随机性与对手。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>一个分数，怎样教会一种策略？</h2>
+    <p class="sub" style="margin-top:8px">打砖块：移动挡板，接住球，清除砖块。</p>
+    <div class="content">
+      <div class="three">
+        <div class="card"><div class="k">尝试</div><div class="big" style="font-size:25px">不同动作</div><p style="font-size:19px">探索时机与方向。</p></div>
+        <div class="card"><div class="k">观察</div><div class="big" style="font-size:25px">结果得分</div><p style="font-size:19px">漏球，或清除更多砖块。</p></div>
+        <div class="card accent"><div class="k">学习</div><div class="big" style="font-size:25px">更好的策略</div><p style="font-size:19px">学会具有延迟收益的动作。</p></div>
+      </div>
+      <div class="scaleband" style="margin-top:24px">反复尝试 + 结果反馈 → 学习取得更高回报的策略。</div>
+      <div class="keyline">有用的环境，让智能体<b>尝试、评价、再尝试</b>。</div>
+      <p class="micro" style="margin-top:12px">例子：<a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., Nature（2015），Breakout 演示</a>。</p>
+    </div>
+    <div class="footer"><span>试错 · 延迟奖励 · 可重复运行的环境</span><span class="pnum">15 / 53</span></div>
+  </section>
+
+  <!-- ============ S16 · 数学与代码的共性 ============ -->
+  <section class="slide" data-notes="这里比较的是定义明确的代码或数学子任务，与开放式现实任务。编程竞赛有输入规范和可执行测试；形式定理有假设、目标陈述和证明检查器。不是所有软件需求或数学研究问题都具备这些条件。测试提供部分证据，证明检查器验证特定假设下的形式陈述。反馈较便宜是相对于昂贵的人工或现实评价，不等于零成本或无限供给。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>数学与代码，共享一类反馈优势</h2>
+    <div class="content">
+      <div class="three">
+        <div class="card"><div class="k">01 · 环境有边界</div><div class="big" style="font-size:24px">规则与假设</div><p style="font-size:19px">接口、规范、定理条件。</p></div>
+        <div class="card"><div class="k">02 · 目标很明确</div><div class="big" style="font-size:24px">可检查的目标</div><p style="font-size:19px">预期行为，或精确的命题。</p></div>
+        <div class="card accent"><div class="k">03 · 反馈可获得</div><div class="big" style="font-size:24px">测试与反例</div><p style="font-size:19px">排除失败，比较候选。</p></div>
+      </div>
+      <p class="micro" style="margin-top:20px">这些优势适用于明确的子任务；开放式研究与软件设计仍有更广的目标。</p>
+      <div class="keyline">目标明确，反馈可负担，<b>大量尝试才有价值</b>。</div>
+    </div>
+    <div class="footer"><span>有边界的任务 · 清晰目标 · 可检查反馈</span><span class="pnum">16 / 53</span></div>
+  </section>
+
+  <!-- ============ S17 · 共享推理技能 ============ -->
+  <section class="slide" data-notes="代码和数学涉及分解、符号约束、状态追踪与多步一致性等共享技能。相关迁移方向都有具体证据，但应限定任务。Chen et al., AceReason-Nemotron（2025）报告对强蒸馏的 7B/14B 模型只进行数学 RL，LiveCodeBench v5 分数分别提高 6.8/5.8 个百分点。Kim、Schuster、Toshniwal（2024）发现额外代码训练改善自然语言中的实体状态追踪，这是具体的推理子技能；额外数学训练对该任务没有一致增益。DeepSeekMath 还研究先进行代码训练对数学推理的帮助。其他多领域研究也观察到冲突，所以这不是普遍的双向提升定理；训练方法、课程顺序、数据配比和评估任务都很重要。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>代码与数学，训练共享的推理技能</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px">
+        <div class="card" style="padding:18px 20px"><div class="k">编程训练</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>追踪变量与状态</li><li>遵守类型与约束</li><li>分解问题，定位错误</li></ul></div>
+        <div class="card accent" style="padding:18px 20px"><div class="k">数学训练</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>明确写出假设</li><li>保持符号与逻辑一致</li><li>建立并检查多步论证</li></ul></div>
+      </div>
+      <div class="scaleband" style="margin-top:24px"><b>已有迁移证据：</b>数学 RL → 代码表现；代码训练 → 状态追踪。</div>
+      <div class="keyline">共享技能支持<b>能力迁移</b>，数据配比影响实际收益。</div>
+      <p class="micro" style="margin-top:12px">来源：<a style="color:inherit" href="https://arxiv.org/abs/2505.16400">Chen et al., AceReason（2025）</a> · <a style="color:inherit" href="https://arxiv.org/abs/2405.21068">Kim et al.（2024）</a> · <a style="color:inherit" href="https://arxiv.org/abs/2402.03300">Shao et al., DeepSeekMath（2024）</a>。</p>
+    </div>
+    <div class="footer"><span>共享技能 · 能力迁移 · 具体任务中的证据</span><span class="pnum">17 / 53</span></div>
+  </section>
+
+  <!-- ============ S18 · 测试与反例 ============ -->
+  <section class="slide" data-notes="联系《天体力学基础》的任务示意，不是模型实测输出。轨道程序可以测试圆轨道、高偏心率和缩小步长；这些检查指定行为，不证明所有输入下都正确。命题“所有 Kepler 轨道都有界”在吸引型二体问题中，可用正能量的双曲轨道反驳。一个反例能推翻全称命题，没有找到反例不等于证明。形式检查需要精确的陈述和假设。训练阶段检查结果可以作为奖励；推理阶段则可以指导修订或搜索，而不改变模型参数。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>一个测试或反例，改变下一步</h2>
+    <p class="sub" style="margin-top:8px">联系《天体力学基础》的两个任务示意。</p>
+    <div class="content">
+      <div class="two even" style="gap:24px">
+        <div class="card" style="padding:18px 20px"><div class="k">代码 · 一个轨道程序</div><ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8"><li>测试圆轨道</li><li>测试高偏心率</li><li>检查步长收敛性</li></ul></div>
+        <div class="card accent" style="padding:18px 20px"><div class="k">数学 · 一个待证命题</div><p style="font-size:21px">“所有 Kepler 轨道都有界。”</p><p style="font-size:21px">反例：双曲轨道。</p><p class="micro">这个命题需要更强的假设。</p></div>
+      </div>
+      <div class="loop" style="margin-top:24px"><span class="step">候选答案</span><span class="arr">→</span><span class="step hl">检查</span><span class="arr">→</span><span class="step">反馈</span><span class="arr">→</span><span class="step">下一次尝试</span></div>
+      <div class="keyline">检查，把提议转成<b>可行动的反馈</b>。</div>
+    </div>
+    <div class="footer"><span>测试提供证据 · 反例推翻命题</span><span class="pnum">18 / 53</span></div>
+  </section>
+
+  <!-- ============ S19 · Coding agent 为何兴起 ============ -->
+  <section class="slide" data-notes="代码适合 Agent 工作流，因为模型可以读取文件、编辑、运行代码并获得本地反馈。Claude Code 是著名例子，不是第一个 coding agent，也不是代码领域最早的 RL 应用。2022 年 AlphaCode 已展示编程竞赛中的大量生成与可执行筛选，不应说它与 Claude Code 使用同一 RL 训练方法。模型训练、推理时采样和 Harness 是不同因素。测试不能覆盖所有行为，也不能证明产品价值。后文用 Claude Code 的审查流程展示一个具体系统。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>编程，为 Agent 提供了行动场所</h2>
+    <div class="content">
+      <div class="loop"><span class="step">读文件</span><span class="arr">→</span><span class="step">修改</span><span class="arr">→</span><span class="step hl">跑测试</span><span class="arr">→</span><span class="step">观察与修订</span><span class="arr">↺</span></div>
+      <div class="three" style="margin-top:28px"><div class="card"><div class="k">工作目录</div><p style="font-size:20px">文件与规范定义任务。</p></div><div class="card"><div class="k">真实工具</div><p style="font-size:20px">修改可以立即执行。</p></div><div class="card accent"><div class="k">结果反馈</div><p style="font-size:20px">失败指导下一次修改。</p></div></div>
+      <p class="micro" style="margin-top:20px">例子：Claude Code、Codex、OpenCode，以及其他 coding agents。</p>
+      <div class="keyline">代码在同一工作目录连接<b>生成、行动与反馈</b>。</div>
+      <p class="micro" style="margin-top:12px">更早的生成与筛选案例：Li et al., AlphaCode, Science（2022）。</p>
+    </div>
+    <div class="footer"><span>coding agents · 本地工具 · 快速反馈</span><span class="pnum">19 / 53</span></div>
+  </section>
+
+  <!-- ============ S20 · 数学搜索环境 ============ -->
+  <section class="slide" data-notes="数学搜索结合候选生成、评估器和保留有希望路线的规则。候选可以是构造、程序、引理或证明。形式证明检查是一类评估器；有些任务提供可执行分数或易检查的反例，另一些研究问题没有便宜可靠的验证器。FunSearch（2023/2024）与 AlphaProof（2024）说明数学系统与代码系统并行发展，不是 Claude Code 之后才开始。训练时验证可以提供 RL 奖励并改变参数；推理时验证可以筛选或修订候选，不更新参数。大量尝试的价值取决于检查与预算。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>验证器，让数学搜索变得有用</h2>
+    <div class="content">
+      <div class="three"><div class="card"><div class="k">生成</div><div class="big" style="font-size:25px">很多候选</div><p style="font-size:19px">构造、引理、证明。</p></div><div class="card"><div class="k">评价</div><div class="big" style="font-size:25px">检查目标</div><p style="font-size:19px">证明检查、评分、反例。</p></div><div class="card accent"><div class="k">搜索</div><div class="big" style="font-size:25px">保留有用路线</div><p style="font-size:19px">细化、分支，或放弃。</p></div></div>
+      <div class="scaleband" style="margin-top:24px">训练时：检查可以成为奖励；推理时：检查可以指导搜索。</div>
+      <div class="keyline">更多尝试的价值，取决于<b>评价能否跟上</b>。</div>
+      <p class="micro" style="margin-top:12px">例子：FunSearch（2023/24）、AlphaProof（2024）；后文再看选取的数学进展。</p>
+    </div>
+    <div class="footer"><span>生成 · 评价 · 搜索 · 可验证的任务</span><span class="pnum">20 / 53</span></div>
+  </section>
+
+  <!-- ============ S21 · 产品设计 ============ -->
+  <section class="slide" data-notes="这是分析性对比，不是 AI 无法设计产品的实测结论。实现子问题可以有可执行检查；产品价值需要用户、市场和替代方案的证据，反馈可能经过几周或几个月，还会被分发、定价和竞争混淆。独特道路可能涉及对非共识假设下注，但逆共识本身不保证价值。目标往往多元并会变化。AI 可以帮助原型、调研与分析，功能通过测试不等于用户需要它。人仍要选问题、判断需要什么证据。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>产品价值，需要更长的反馈回路</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">把产品做出来</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>功能可以正确运行</li><li>原型可以被测试</li><li>AI 可以加速实现</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">决定做什么产品</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>用户价值需要时间观察</li><li>目标与偏好可能变化</li><li>独特道路可能来自非共识</li></ul></div></div>
+      <div class="keyline">实现有局部检查；产品方向需要<b>判断与现实证据</b>。</div>
+    </div>
+    <div class="footer"><span>产品设计 · 延迟反馈 · 问题选择</span><span class="pnum">21 / 53</span></div>
+  </section>
+
+  <!-- ============ S22 · 金融市场 ============ -->
+  <section class="slide" data-notes="这是分析性对比，不是投资建议或不可能性结论。盈亏可衡量，但交易目标还需考虑风险、费用和流动性。奖励可见不表示相关状态全部已知，也不表示策略能泛化。市场有不完备信息、竞争对手、非平稳变化、价格冲击和随机事件；历史回测可能泄漏或过拟合，不能保证未来收益。更多信息可以改善某些方法，但不创造完整、平稳的模拟器或收益保证。AI 可以帮助金融领域的有边界任务；这里强调一个清晰分数本身不够。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>炒股的奖励清晰，但条件还不够</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">可以衡量的东西</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>盈亏</li><li>风险与交易成本</li><li>策略的历史表现</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">学习环境的复杂性</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>外部信息不完备</li><li>市场与竞争对手持续变化</li><li>回测结果与未来收益有距离</li></ul></div></div>
+      <div class="keyline">奖励可衡量，还需要考虑<b>信息与环境稳定性</b>。</div>
+      <p class="micro" style="margin-top:12px">历史表现是在特定设置下的证据，不保证未来收益。</p>
+    </div>
+    <div class="footer"><span>奖励可见 · 信息不完备 · 非平稳环境</span><span class="pnum">22 / 53</span></div>
+  </section>
+
+  <!-- ============ S23 · 正确与优秀 ============ -->
+  <section class="slide" data-notes="数学和代码常有明确语法、定义与可检查产物，使部分数据和反馈更容易结构化，但语料不天然干净，标签、规范和证明都可能有错误或缺漏。正确与优秀是不同维度。代码通过测试仍可能难维护；证明有效仍可能晦涩。优雅、一般性、有用性和可维护性有学科传统，但没有一个通用标量定义。可以用规则或人工审查表达这些判断，同时理解所选奖励的边界。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>正确是底线，优秀是追求</h2>
+    <div class="content">
+      <table class="compare" style="font-size:20px"><thead><tr><th></th><th>代码</th><th>数学</th></tr></thead><tbody><tr><td>可检查结构</td><td>语法、类型、测试、规范</td><td>定义、假设、证明步骤</td></tr><tr><td>正确性</td><td>满足指定行为</td><td>命题从假设推出</td></tr><tr><td>优秀程度</td><td>清晰、可维护、高效</td><td>优雅、一般、有用</td></tr></tbody></table>
+      <p class="micro" style="margin-top:18px">结构化产物让检查更容易；数据质量仍需要筛选与整理。</p>
+      <div class="keyline">两个领域都追求<b>好作品</b>，超越一次通过或失败。</div>
+    </div>
+    <div class="footer"><span>结构化数据 · 正确性 · 学科品味</span><span class="pnum">23 / 53</span></div>
+  </section>
+
+  <!-- ============ S24 · 两种反馈循环 ============ -->
+  <section class="slide" data-notes="这节最后区分 RL 训练与 Agent 工作流。训练用奖励更新策略参数；部署后的 Agent 通常用反馈修订文件、候选或计划，模型参数保持固定。工具、测试、记忆和权限属于外层系统，coding agent 不等于强化学习本身。共同机会来自定义明确、反馈能够指导多次尝试的任务。接下来展示应用机制，并用四页 Claude Code 审查案例说明系统如何解决人的审查瓶颈。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>训练与工作，使用不同的循环</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">RL 训练</div><div class="big" style="font-size:25px">改进策略</div><p style="font-size:21px">尝试 → 奖励 → 更新参数</p></div><div class="card accent" style="padding:18px 20px"><div class="k">Agent 工作流</div><div class="big" style="font-size:25px">改进工作结果</div><p style="font-size:21px">尝试 → 反馈 → 修订产物</p></div></div>
+      <div class="scaleband" style="margin-top:24px">Coding agent 把模型与上下文、工具、检查、控制循环组合起来。</div>
+      <div class="keyline">接下来：我怎样组织<b>实际工作的循环</b>。</div>
+    </div>
+    <div class="footer"><span>训练更新参数 · 工作流修订产物</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
@@ -2414,7 +2592,16 @@
 
 <script>
   const stage = document.getElementById('stage');
+  const appendixMode = new URLSearchParams(location.search).get('appendix') === '1';
+  if (appendixMode) {
+    const details = document.getElementById('training-details');
+    stage.replaceChildren(details.content.cloneNode(true));
+    document.title += ' — 训练细节（备份）';
+  }
   const slides = Array.from(document.querySelectorAll('.slide'));
+  if (appendixMode) slides.forEach((slide, i) => {
+    slide.querySelector('.pnum').textContent = `${String(i + 1).padStart(2, '0')} / ${slides.length}`;
+  });
   const notes = document.getElementById('notes');
   let cur = 0;
 

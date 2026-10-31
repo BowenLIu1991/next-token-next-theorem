@@ -19,7 +19,8 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 - **Token**：模型看到的不是文字，是整数。
 - **模型**：一个函数，输入 token 序列，输出下一个 token 的概率分布。
-- **训练**：pretrain 给知识，SFT 给行为，RL 给搜索与纠错的习惯。
+- **训练概览**：pretrain / SFT / RL 用一页带过；细节保留为单独打开的备份模式。
+- **奖励与问题求解**：从 Atari、AlphaGo 等游戏案例，讲到数学与代码的共享技能、测试与反例，以及产品设计和交易的反馈边界。
 - **使用**：prompt、context、memory、agent loop、harness 如何组合成系统。
 - **工程参考案例**：S36–S39 依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。
 - **AI × math**：FunSearch、AlphaGeometry、AlphaProof、o1 / R1、AlphaEvolve、IMO 2025，以及 2026 年 OpenAI 的公开声称。
@@ -36,6 +37,8 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 ## 幻灯片
 
 - **53 页**，16:9，1280 × 720。
+- 前 11 页 token / 模型介绍保留；主讲 S12 只讲训练概览，S13–S24 改为奖励驱动的问题求解。
+- 原训练细节保存为 **12 页备份**，不计入主讲或主讲 PDF；用 `?appendix=1` 打开，支持正常翻页与备注。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
 - 键盘操作：
   - `←` `→` / `Space`：翻页
@@ -48,6 +51,8 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 > 英文：https://bowenliu1991.github.io/next-token-next-theorem/  
 > 中文：https://bowenliu1991.github.io/next-token-next-theorem/zh.html
+
+训练细节备份：[English](https://bowenliu1991.github.io/next-token-next-theorem/?appendix=1) · [中文](https://bowenliu1991.github.io/next-token-next-theorem/zh.html?appendix=1)。
 
 GitHub Pages 设置（一次性）：
 
@@ -77,6 +82,9 @@ python3 assets/demos/render_pdf.py --html docs/index.html --out docs/from-next-t
 
 # 中文 (docs/zh.html)
 python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-token-to-next-theorem-zh.pdf
+
+# Optional training appendix only (12 pages)
+python3 assets/demos/render_pdf.py --html docs/index.html --appendix --out /path/to/training-appendix.pdf
 ```
 
 脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 53 页的满版 PDF。依赖：

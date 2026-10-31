@@ -1202,20 +1202,21 @@
 
 
   <!-- ============ S12 · 从预测到解题 ============ -->
-  <section class="slide" data-notes="预测下一个词本身不会做题。真正发生变化的是训练信号：预训练给知识，SFT 给行为，RL 给策略。模型还是同一个，换的是数据和奖励。">
+  <section class="slide" data-notes="Training gets one overview slide in the main talk. Pretraining learns regularities from text and code; supervised fine-tuning learns from demonstrations; reinforcement learning uses outcome feedback to improve the policy. These effects overlap. We now focus on why some tasks supply useful feedback rather than on loss functions or optimization algorithms. The former detailed training slides are preserved in the appendix mode, opened with ?appendix=1.">
     <p class="eyebrow"><b>03</b> / training</p>
-    <h2>From next token to problem solving</h2>
+    <h2>Training, in one slide</h2>
     <div class="content">
       <div class="three">
         <div class="card"><div class="k">Pretrain</div><div class="big" style="font-size:28px">Knowledge</div><p>Reads the corpus, learns language and the world</p></div>
         <div class="card"><div class="k">SFT</div><div class="big" style="font-size:28px">Behavior</div><p>Sees demonstrations, learns to follow instructions</p></div>
         <div class="card accent"><div class="k">RL</div><div class="big" style="font-size:28px">Policy</div><p>Solves problems, checks answers, learns to search and correct</p></div>
       </div>
-      <div class="keyline">The model stays the same; the <b>training signal</b> changes.</div>
+      <div class="keyline">The key question now: which tasks provide <b>useful feedback</b>?</div>
     </div>
     <div class="footer"><span>knowledge → behavior → policy</span><span class="pnum">12 / 53</span></div>
   </section>
 
+  <template id="training-details">
   <!-- ============ S13 · Pretrain ============ -->
   <section class="slide" data-notes="预训练只有一个目标：最小化交叉熵。数据是万亿 token，算力是千到万卡、月级。产出是一个 base model：会续写，但不会回答问题。">
     <p class="eyebrow"><b>03</b> / training</p>
@@ -1574,6 +1575,183 @@
       <div class="keyline">Clearer feedback makes trial and error cheaper — and RL more effective.</div>
     </div>
     <div class="footer"><span>verifiable rewards</span><span class="pnum">24 / 53</span></div>
+  </section>
+
+  </template>
+
+  <!-- ============ S13 · Learn through reward ============ -->
+  <section class="slide" data-notes="Reinforcement learning learns a policy through interactions and reward. A policy chooses actions; the environment returns observations and rewards. Training shifts the policy toward higher expected long-run reward, balancing exploration and exploitation. A reward does not have to prescribe every intermediate action. RL predates deep learning and has roots in control, dynamic programming and learning theory; games made its successes widely visible. No optimization formulas are needed in this main talk.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>RL: try, receive a reward, learn</h2>
+    <div class="content">
+      <div class="loop"><span class="step">Observe</span><span class="arr">→</span><span class="step">Act</span><span class="arr">→</span><span class="step hl">Reward</span><span class="arr">→</span><span class="step">Update policy</span><span class="arr">↺</span></div>
+      <div class="three" style="margin-top:28px">
+        <div class="card"><div class="k">Agent</div><div class="big" style="font-size:24px">Choose an action</div><p style="font-size:19px">Explore alternative strategies.</p></div>
+        <div class="card"><div class="k">Environment</div><div class="big" style="font-size:24px">Return an outcome</div><p style="font-size:19px">A score, a win, a completed task.</p></div>
+        <div class="card accent"><div class="k">Learning</div><div class="big" style="font-size:24px">Improve the policy</div><p style="font-size:19px">Seek higher long-run reward.</p></div>
+      </div>
+      <div class="keyline">Reward evaluates the result; the agent explores <b>how to achieve it</b>.</div>
+      <p class="micro" style="margin-top:12px">Reference: Sutton &amp; Barto, Reinforcement Learning: An Introduction.</p>
+    </div>
+    <div class="footer"><span>reinforcement learning · reward · policy</span><span class="pnum">13 / 53</span></div>
+  </section>
+
+  <!-- ============ S14 · Games made RL visible ============ -->
+  <section class="slide" data-notes="Selected famous deep-RL milestones, not the origin of RL. Atari DQN: the 2013 preprint and the 2015 Nature paper showed learning from pixels and score; we label the landmark paper year. AlphaGo in 2016 combined supervised learning, self-play reinforcement learning and search. OpenAI Five defeated the Dota 2 world champion team in 2019 under its evaluated configuration. AlphaStar reached grandmaster level in StarCraft II in 2019. These games can include hidden information and other agents; their advantage is a specified executable environment with repeatable trials, not universal full observability. AlphaFold is a separate supervised-learning example, omitted here to keep this narrative focused.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>Games made reinforcement learning visible</h2>
+    <div class="content">
+      <div class="timeline">
+        <div class="tl"><div class="year">2015</div><h4>Atari · DQN</h4><p>Pixels → actions<br>Reward: game score</p></div>
+        <div class="tl"><div class="year">2016</div><h4>AlphaGo</h4><p>Self-play + search<br>Reward: winning</p></div>
+        <div class="tl"><div class="year">2019</div><h4>OpenAI Five</h4><p>Dota 2 team play<br>Reward: match outcome</p></div>
+        <div class="tl"><div class="year">2019</div><h4>AlphaStar</h4><p>StarCraft II strategy<br>Reward: match outcome</p></div>
+      </div>
+      <div class="tl-facts"><span class="pill"><i></i>Explicit rules</span><span class="pill"><i></i>Measurable outcomes</span><span class="pill"><i></i>Many repeatable trials</span></div>
+      <div class="keyline">The game engine supplies an <b>environment and feedback</b>.</div>
+      <p class="micro" style="margin-top:14px">Sources: <a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., 2015</a> · Silver et al., 2016 · <a style="color:inherit" href="https://openai.com/index/openai-five-defeats-dota-2-world-champions/">OpenAI Five, 2019</a> · Vinyals et al., 2019.</p>
+    </div>
+    <div class="footer"><span>selected milestones · games · deep RL</span><span class="pnum">14 / 53</span></div>
+  </section>
+
+  <!-- ============ S15 · Why games work ============ -->
+  <section class="slide" data-notes="Atari Breakout makes the feedback loop concrete. The agent moves a paddle, the environment advances the ball and bricks, and a score rewards progress. Repeated experience can reveal strategies with delayed benefit, such as creating a tunnel and clearing bricks from behind. The 2015 DQN supplementary material illustrates this behavior. Winning or scoring does not prescribe a move-by-move solution. Simulation allows many trials; time and compute still cost resources, and games can have randomness or opponents.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>A score can teach a strategy</h2>
+    <p class="sub" style="margin-top:8px">Breakout: move the paddle, hit the ball, clear the bricks.</p>
+    <div class="content">
+      <div class="three">
+        <div class="card"><div class="k">Try</div><div class="big" style="font-size:25px">Different moves</div><p style="font-size:19px">Explore timing and direction.</p></div>
+        <div class="card"><div class="k">Observe</div><div class="big" style="font-size:25px">Score the outcome</div><p style="font-size:19px">Miss the ball, or clear bricks.</p></div>
+        <div class="card accent"><div class="k">Learn</div><div class="big" style="font-size:25px">Better strategies</div><p style="font-size:19px">Learn actions with delayed benefits.</p></div>
+      </div>
+      <div class="scaleband" style="margin-top:24px">Repeated trials + outcome feedback → a policy that seeks higher reward.</div>
+      <div class="keyline">A useful environment lets the agent <b>try, evaluate and try again</b>.</div>
+      <p class="micro" style="margin-top:12px">Example: <a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., Nature (2015), Breakout demonstration</a>.</p>
+    </div>
+    <div class="footer"><span>trial and error · delayed reward · repeatable environment</span><span class="pnum">15 / 53</span></div>
+  </section>
+
+  <!-- ============ S16 · What math and code share ============ -->
+  <section class="slide" data-notes="The relevant comparison is between well-specified coding or mathematical subtasks and open-ended real-world tasks. A programming contest has an input specification and executable tests; a formal theorem has assumptions, a target statement and a proof checker. Not every software requirement or mathematical research question has these properties. Tests provide partial evidence; a proof checker verifies a formal statement under its assumptions. The lower cost of feedback is relative to expensive human or real-world evaluation, not zero or unlimited.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>Math and code share a feedback advantage</h2>
+    <div class="content">
+      <div class="three">
+        <div class="card"><div class="k">01 · Defined environment</div><div class="big" style="font-size:24px">Rules &amp; assumptions</div><p style="font-size:19px">An interface, a specification, a theorem.</p></div>
+        <div class="card"><div class="k">02 · Explicit target</div><div class="big" style="font-size:24px">A checkable goal</div><p style="font-size:19px">Expected behavior or a precise claim.</p></div>
+        <div class="card accent"><div class="k">03 · Useful feedback</div><div class="big" style="font-size:24px">Tests &amp; counterexamples</div><p style="font-size:19px">Reject failures and compare candidates.</p></div>
+      </div>
+      <p class="micro" style="margin-top:20px">These advantages apply to specified subtasks; open-ended research and software design remain broader.</p>
+      <div class="keyline">A clear goal and affordable feedback make <b>many attempts useful</b>.</div>
+    </div>
+    <div class="footer"><span>bounded tasks · clear goals · checkable feedback</span><span class="pnum">16 / 53</span></div>
+  </section>
+
+  <!-- ============ S17 · Shared reasoning skills ============ -->
+  <section class="slide" data-notes="Code and mathematical tasks exercise overlapping skills: decomposition, symbolic constraints, state tracking and multi-step consistency. There is evidence in both relevant directions, with task-specific limits. Chen et al., AceReason-Nemotron (2025), report that math-only RL from strong distilled 7B/14B models increased LiveCodeBench v5 scores by 6.8/5.8 percentage points. Kim, Schuster and Toshniwal (2024) find that additional code training improves natural-language entity-state tracking, a concrete reasoning subskill; they find no consistent benefit from additional math training on that task. DeepSeekMath also studies benefits of prior code training for mathematical reasoning. Other multi-domain studies find conflicts as well as transfer, so these findings do not establish a universal bidirectional improvement theorem. Training method, curriculum, data mixture and evaluation matter.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>Code and math exercise shared reasoning</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px">
+        <div class="card" style="padding:18px 20px"><div class="k">Code practice</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>Track variables and state</li><li>Respect types and constraints</li><li>Decompose and debug</li></ul></div>
+        <div class="card accent" style="padding:18px 20px"><div class="k">Math practice</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>State assumptions explicitly</li><li>Maintain symbolic consistency</li><li>Build and check multi-step arguments</li></ul></div>
+      </div>
+      <div class="scaleband" style="margin-top:24px"><b>Reported transfer:</b> math RL → coding scores · code training → state tracking.</div>
+      <div class="keyline">Shared skills support <b>transfer</b>; the data mixture determines the gain.</div>
+      <p class="micro" style="margin-top:12px">Sources: <a style="color:inherit" href="https://arxiv.org/abs/2505.16400">Chen et al., AceReason (2025)</a> · <a style="color:inherit" href="https://arxiv.org/abs/2405.21068">Kim et al. (2024)</a> · <a style="color:inherit" href="https://arxiv.org/abs/2402.03300">Shao et al., DeepSeekMath (2024)</a>.</p>
+    </div>
+    <div class="footer"><span>shared skills · transfer · task-dependent evidence</span><span class="pnum">17 / 53</span></div>
+  </section>
+
+  <!-- ============ S18 · Tests and counterexamples ============ -->
+  <section class="slide" data-notes="Illustrative tasks connected to Foundations of Celestial Mechanics, not measured model outputs. For an orbit routine, test a circular orbit, high eccentricity and a smaller time step; these check selected behaviors rather than prove correctness for all inputs. For a mathematical claim that every Kepler orbit is bounded, a positive-energy hyperbolic orbit is a counterexample in the attractive two-body setting. A counterexample refutes a universal claim, while failure to find one does not prove it. Formal proof checking requires a precise statement and assumptions. During RL training, a chosen checker can supply a reward; during inference, feedback can instead guide revision or search without updating model parameters.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>A test or counterexample changes the next step</h2>
+    <p class="sub" style="margin-top:8px">Illustrative tasks from Foundations of Celestial Mechanics.</p>
+    <div class="content">
+      <div class="two even" style="gap:24px">
+        <div class="card" style="padding:18px 20px"><div class="k">Code · An orbit routine</div><ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8"><li>Test a circular orbit</li><li>Test high eccentricity</li><li>Check step-size convergence</li></ul></div>
+        <div class="card accent" style="padding:18px 20px"><div class="k">Math · A proposed claim</div><p style="font-size:21px">“Every Kepler orbit is bounded.”</p><p style="font-size:21px">Counterexample: a hyperbolic orbit.</p><p class="micro">The claim needs stronger assumptions.</p></div>
+      </div>
+      <div class="loop" style="margin-top:24px"><span class="step">Candidate</span><span class="arr">→</span><span class="step hl">Check</span><span class="arr">→</span><span class="step">Feedback</span><span class="arr">→</span><span class="step">Next attempt</span></div>
+      <div class="keyline">Checks turn a proposed answer into <b>actionable feedback</b>.</div>
+    </div>
+    <div class="footer"><span>tests give evidence · counterexamples refute claims</span><span class="pnum">18 / 53</span></div>
+  </section>
+
+  <!-- ============ S19 · Why coding agents took off ============ -->
+  <section class="slide" data-notes="Coding is a productive setting for agent workflows because the model can read files, edit them, execute code and obtain local feedback. Claude Code is a prominent example, not the first coding agent or the first use of RL in code. AlphaCode in 2022 already illustrated large-scale candidate generation and executable filtering in competitive programming; it should not be described as a Claude Code precursor trained by the same RL method. Model training, inference-time sampling and the agent harness are distinct contributors. Tests do not establish product value or cover all software behavior. Later slides show Claude Code's concrete review process.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>Coding gives an agent a place to act</h2>
+    <div class="content">
+      <div class="loop"><span class="step">Read files</span><span class="arr">→</span><span class="step">Edit</span><span class="arr">→</span><span class="step hl">Run tests</span><span class="arr">→</span><span class="step">Inspect &amp; revise</span><span class="arr">↺</span></div>
+      <div class="three" style="margin-top:28px"><div class="card"><div class="k">Workspace</div><p style="font-size:20px">Files and specifications define the task.</p></div><div class="card"><div class="k">Tools</div><p style="font-size:20px">Changes can be executed immediately.</p></div><div class="card accent"><div class="k">Feedback</div><p style="font-size:20px">Failures guide the next edit.</p></div></div>
+      <p class="micro" style="margin-top:20px">Examples: Claude Code, Codex, OpenCode and other coding agents.</p>
+      <div class="keyline">Code connects <b>generation, action and feedback</b> in one workspace.</div>
+      <p class="micro" style="margin-top:12px">Earlier generate-and-filter example: Li et al., AlphaCode, Science (2022).</p>
+    </div>
+    <div class="footer"><span>coding agents · local tools · fast feedback</span><span class="pnum">19 / 53</span></div>
+  </section>
+
+  <!-- ============ S20 · Math as a search environment ============ -->
+  <section class="slide" data-notes="Mathematical search uses candidate generation, an evaluator and a rule for retaining promising paths. Candidates may be constructions, programs, lemmas or proofs. Formal proof checking is one evaluator; some problems instead offer executable scores or easily checked counterexamples. Other research problems have no cheap reliable verifier. FunSearch (2023/2024) and AlphaProof (2024) show that mathematical systems developed alongside coding systems, not only after Claude Code. In training, verification can supply an RL reward and change parameters. In inference-time search, it can select or revise candidates without weight updates. Large numbers of attempts are valuable only when checks and budgets support them.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>A verifier makes mathematical search useful</h2>
+    <div class="content">
+      <div class="three"><div class="card"><div class="k">Generate</div><div class="big" style="font-size:25px">Many candidates</div><p style="font-size:19px">Constructions, lemmas, proofs.</p></div><div class="card"><div class="k">Evaluate</div><div class="big" style="font-size:25px">Check the target</div><p style="font-size:19px">Proof checks, scores, counterexamples.</p></div><div class="card accent"><div class="k">Search</div><div class="big" style="font-size:25px">Keep useful paths</div><p style="font-size:19px">Refine, branch or discard.</p></div></div>
+      <div class="scaleband" style="margin-top:24px">Training: checks can supply reward · Inference: checks can guide search.</div>
+      <div class="keyline">More attempts help when <b>evaluation can keep up</b>.</div>
+      <p class="micro" style="margin-top:12px">Examples: FunSearch (2023/24), AlphaProof (2024) · Selected progress appears later.</p>
+    </div>
+    <div class="footer"><span>generate · evaluate · search · verifiable tasks</span><span class="pnum">20 / 53</span></div>
+  </section>
+
+  <!-- ============ S21 · Product design ============ -->
+  <section class="slide" data-notes="This is an analytical comparison, not a benchmark claim that AI cannot design products. Implementation subproblems can have executable checks. Product value requires evidence about users, markets and alternatives; feedback may take weeks or months and can be confounded by distribution, pricing and competition. Distinctive product directions can involve non-consensus hypotheses, though contrarian choices are not inherently good. Product goals are often plural and evolve. AI can support prototypes, research and analysis; an implementation passing tests does not settle whether people want it. The human role includes selecting a problem and deciding which evidence is sufficient.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>Product value needs a longer feedback loop</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">Building the product</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>A feature can run correctly</li><li>A prototype can be tested</li><li>AI can speed implementation</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">Choosing the product</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>User value takes time to observe</li><li>Goals and preferences can change</li><li>Distinctive paths may be non-consensus</li></ul></div></div>
+      <div class="keyline">Implementation has local checks; product direction needs <b>judgment and real-world evidence</b>.</div>
+    </div>
+    <div class="footer"><span>product design · delayed feedback · problem selection</span><span class="pnum">21 / 53</span></div>
+  </section>
+
+  <!-- ============ S22 · Financial markets ============ -->
+  <section class="slide" data-notes="An analytical comparison, not investment advice or a claim of impossibility. Profit and loss are measurable, but a useful trading objective also accounts for risk, fees and liquidity. Reward observability does not imply all relevant state is known or that a learned strategy generalizes. Markets include incomplete information, strategic competitors, nonstationarity, price impact and random shocks. Historical backtests can contain leakage or overfitting and cannot certify future returns. More information can help particular methods without creating a complete, stationary simulator or guaranteeing profits. AI can assist bounded financial tasks; the point is that a clear score alone is insufficient.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>A clear trading reward is only one condition</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">What is measurable</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>Profit and loss</li><li>Risk and transaction costs</li><li>Historical strategy performance</li></ul></div><div class="card accent" style="padding:18px 20px"><div class="k">What complicates learning</div><ul style="padding-left:20px;margin:8px 0 0;font-size:21px;line-height:1.8"><li>Incomplete external information</li><li>Changing markets and competitors</li><li>Backtests versus future outcomes</li></ul></div></div>
+      <div class="keyline">Measurable reward helps; <b>information and environmental stability</b> still matter.</div>
+      <p class="micro" style="margin-top:12px">Historical performance provides evidence under a setup, not a guarantee of future returns.</p>
+    </div>
+    <div class="footer"><span>observable reward · partial information · nonstationarity</span><span class="pnum">22 / 53</span></div>
+  </section>
+
+  <!-- ============ S23 · Correctness and quality ============ -->
+  <section class="slide" data-notes="Math and code often offer explicit syntax, definitions and checkable artifacts. This makes parts of data and feedback easier to structure than diffuse real-world outcomes, but neither corpus is inherently clean: labels, specifications and proofs can be wrong or incomplete. Correctness and quality are separate dimensions. A code routine can pass tests yet be hard to maintain; a valid proof can be unnecessarily opaque. Elegance, generality, usefulness and maintainability have informed disciplinary standards but not one universal scalar definition. Such judgments can be represented by rubrics or human review, while recognizing the limits of the chosen reward.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>Correctness is a floor; quality is an ambition</h2>
+    <div class="content">
+      <table class="compare" style="font-size:20px"><thead><tr><th></th><th>Code</th><th>Mathematics</th></tr></thead><tbody><tr><td>Checkable structure</td><td>Syntax, types, tests, specifications</td><td>Definitions, assumptions, proof steps</td></tr><tr><td>Correctness</td><td>Specified behavior is satisfied</td><td>A claim follows from its assumptions</td></tr><tr><td>Quality</td><td>Clarity, maintainability, efficiency</td><td>Elegance, generality, usefulness</td></tr></tbody></table>
+      <p class="micro" style="margin-top:18px">Structured artifacts make checks easier; data quality still requires curation.</p>
+      <div class="keyline">Both communities pursue <b>good work</b> beyond a pass/fail result.</div>
+    </div>
+    <div class="footer"><span>structured data · correctness · disciplinary taste</span><span class="pnum">23 / 53</span></div>
+  </section>
+
+  <!-- ============ S24 · Two feedback loops ============ -->
+  <section class="slide" data-notes="Conclude the section by distinguishing RL training from an agent workflow. Training uses reward to update a policy's parameters. A deployed agent typically uses feedback to revise files, candidates or plans while its model parameters remain fixed. Tool execution, tests, memory and permissions belong to the surrounding system. A coding agent is therefore not itself synonymous with reinforcement learning. The shared opportunity is a specified task whose feedback can guide repeated attempts. We now show the application mechanisms and then the four-page Claude Code review case that addresses a human review bottleneck.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>Learning and working use different loops</h2>
+    <div class="content">
+      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">RL training</div><div class="big" style="font-size:25px">Improve the policy</div><p style="font-size:21px">Try → reward → update parameters</p></div><div class="card accent" style="padding:18px 20px"><div class="k">Agent workflow</div><div class="big" style="font-size:25px">Improve the result</div><p style="font-size:21px">Try → feedback → revise the work</p></div></div>
+      <div class="scaleband" style="margin-top:24px">A coding agent combines a model with context, tools, checks and a control loop.</div>
+      <div class="keyline">Now: how I organize the <b>working loop</b>.</div>
+    </div>
+    <div class="footer"><span>training changes parameters · workflows change artifacts</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
@@ -2416,7 +2594,16 @@
 
 <script>
   const stage = document.getElementById('stage');
+  const appendixMode = new URLSearchParams(location.search).get('appendix') === '1';
+  if (appendixMode) {
+    const details = document.getElementById('training-details');
+    stage.replaceChildren(details.content.cloneNode(true));
+    document.title += ' — training details (appendix)';
+  }
   const slides = Array.from(document.querySelectorAll('.slide'));
+  if (appendixMode) slides.forEach((slide, i) => {
+    slide.querySelector('.pnum').textContent = `${String(i + 1).padStart(2, '0')} / ${slides.length}`;
+  });
   const notes = document.getElementById('notes');
   let cur = 0;
 

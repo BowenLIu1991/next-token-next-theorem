@@ -54,10 +54,19 @@ def main() -> None:
     ap.add_argument("--html", default="docs/index.html", help="HTML file to render")
     ap.add_argument("--out", default="docs/from-next-token-to-next-theorem.pdf", help="PDF output")
     ap.add_argument("--contact-sheet", help="Optional overview PNG for visual review")
+    ap.add_argument("--appendix", action="store_true", help="Render the preserved training-detail appendix")
     args = ap.parse_args()
     html_path = (ROOT / args.html).resolve()
     out_path = (ROOT / args.out).resolve()
-    pages = len(re.findall(r'<section\b[^>]*class="slide(?:\s[^"]*)?"', html_path.read_text()))
+    text = html_path.read_text()
+    if args.appendix:
+        details = re.search(r'<template\b[^>]*id="training-details"[^>]*>(.*?)</template>', text, re.S)
+        if not details:
+            raise SystemExit(f"Training appendix not found: {html_path}")
+        text = details[1]
+    else:
+        text = re.sub(r'<template\b[^>]*>.*?</template>', '', text, flags=re.S)
+    pages = len(re.findall(r'<section\b[^>]*class="slide(?:\s[^"]*)?"', text))
     if not pages:
         raise SystemExit(f"No slides found: {html_path}")
 
@@ -70,6 +79,8 @@ def main() -> None:
         images = []
         for i in range(pages):
             url = html_path.as_uri() + f"?s={i}&clean=1&v={time.time_ns()}"
+            if args.appendix:
+                url += "&appendix=1"
             png = tmp / f"page-{i:02d}.png"
             screenshot(url, png, profile)
             im = Image.open(png).convert("RGB")

@@ -22,10 +22,13 @@ window.addEventListener('load', async () => {
   // --dump-dom has a different viewport height from --screenshot on some Chrome versions.
   // Give absolute slides an explicit 1280x720 containing block for consistent checks.
   document.getElementById('stage').style.position = 'relative';
-  const report = [...document.querySelectorAll('section.slide')].map((slide, i) => {
+  const slides = [...document.querySelectorAll('section.slide')];
+  const report = slides.map((slide, i) => {
     const title = slide.querySelector('h2,h1')?.textContent.trim();
     const footer = slide.querySelector('.footer').getBoundingClientRect();
     const problems = [];
+    const expected = `${String(i + 1).padStart(2, '0')} / ${slides.length}`;
+    if (slide.querySelector('.pnum')?.textContent !== expected) problems.push({type:'page_label',expected});
     for (const el of slide.querySelectorAll('h1,h2,.sub,.content p,.content li,.content .big,.content .k,.content .keyline')) {
       const r = el.getBoundingClientRect();
       if (!r.width || !r.height) continue;
@@ -63,12 +66,20 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--html", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--appendix", action="store_true")
     args = ap.parse_args()
     source = (ROOT / args.html).resolve()
     text = source.read_text()
-    count = len(re.findall(r'<section\b[^>]*class="slide(?:\s[^"]*)?"', text))
-    labels = re.findall(r'<span class="pnum">(\d+) / (\d+)</span>', text)
-    if labels != [(f"{i:02d}", str(count)) for i in range(1, count + 1)]:
+    if args.appendix:
+        details = re.search(r'<template\b[^>]*id="training-details"[^>]*>(.*?)</template>', text, re.S)
+        if not details:
+            raise SystemExit("Training appendix not found")
+        active = details[1]
+    else:
+        active = re.sub(r'<template\b[^>]*>.*?</template>', '', text, flags=re.S)
+    count = len(re.findall(r'<section\b[^>]*class="slide(?:\s[^"]*)?"', active))
+    labels = re.findall(r'<span class="pnum">(\d+) / (\d+)</span>', active)
+    if not args.appendix and labels != [(f"{i:02d}", str(count)) for i in range(1, count + 1)]:
         raise SystemExit("Page labels do not match slide order/count")
     if re.search(r'<script\b[^>]*src=', text):
         raise SystemExit("External script found")
@@ -87,12 +98,14 @@ def main() -> None:
             CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars",
             "--window-size=1280,720", "--virtual-time-budget=5000",
             f"--user-data-dir={temp / 'profile'}", "--dump-dom",
-            audit.as_uri() + "?clean=1",
+            audit.as_uri() + "?clean=1" + ("&appendix=1" if args.appendix else ""),
         ], check=True, capture_output=True, text=True)
         match = re.search(r'<pre id="deck-audit">(.*?)</pre>', result.stdout, re.S)
         if not match:
             raise SystemExit("Browser audit did not finish")
         report = json.loads(html.unescape(match[1]))
+        if len(report) != count:
+            raise SystemExit(f"Expected {count} browser slides, found {len(report)}")
     out = (ROOT / args.out).resolve()
     out.write_text(json.dumps({"source": str(source), "slides": count, "pages": report}, ensure_ascii=False, indent=2))
     findings = [(p["page"], p["problems"]) for p in report if p["problems"]]
