@@ -1545,20 +1545,20 @@
   </section>
 
   <!-- ============ S16 · 数学与代码的共性 ============ -->
-  <section class="slide" data-notes="强调明确数学和代码子任务的优势：定义与规则清楚，环境可控，结果可以检查。这让策略学习、生成候选和并行验证都能形成有效搜索。严格的穷举结论需要三个条件：候选搜索空间有限，空间内存在满足规范的解，检查器对每个候选都会终止并正确判定。满足这些条件，枚举可以找到解，但时间和算力成本可能极高。随机抽样或并行生成并不等于覆盖所有候选的严格穷举。良好定义和规则封闭本身不保证有限搜索空间、解存在或问题可判定。RL 改进策略，推理时增加算力扩大候选搜索，两者可以结合。测试通常提供有限证据，形式检查只验证所陈述的命题；解的适用性仍取决于规范。">
+  <section class="slide" data-notes="这里把数学和代码的共同优势收成三点。第一，外部环境相对封闭：数学在公理化系统中工作，由定义、公理和推理规则构成；代码在语言规范与运行环境中工作，语法、类型、库和执行语义给出边界。求解时不需要不断询问外部世界，问题一旦形式化，系统内部就能给出判定或行为。第二，错误可追溯：证明可以逐步检查，定位失效的推理步骤；代码可以借测试、异常栈和行号定位到具体位置。第三，数据结构清晰：形式化对象与代码可解析、可筛选，适合批量生成和验证。封闭是相对任务而言，程序可能依赖输入、外部库和运行时，数学建模仍需先把现实问题形式化；语料仍需筛选，证明和测试也可能不完整。严格穷举还需有限搜索空间、解存在和可靠终止的判定，成本可能极高。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
     <h2>数学与代码，共享一类反馈优势</h2>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">01 · 环境有边界</div><div class="big" style="font-size:24px">规则与假设</div><p style="font-size:19px">接口、规范、定理条件。</p></div>
-        <div class="card"><div class="k">02 · 目标很明确</div><div class="big" style="font-size:24px">可检查的目标</div><p style="font-size:19px">预期行为，或精确的命题。</p></div>
-        <div class="card accent"><div class="k">03 · 反馈可获得</div><div class="big" style="font-size:24px">测试与反例</div><p style="font-size:19px">排除失败，比较候选。</p></div>
+        <div class="card"><div class="k">01 · 外部环境封闭</div><div class="big" style="font-size:26px">公理系统 · 运行环境</div><p style="font-size:19px">数学靠定义、公理与推理规则；代码靠语言规范与运行时。系统自足，不需要外部信息。</p></div>
+        <div class="card"><div class="k">02 · 错误可追溯</div><div class="big" style="font-size:26px">定位到具体步骤</div><p style="font-size:19px">证明逐步检查，找到失效步骤；测试、异常栈与行号定位代码错误。</p></div>
+        <div class="card accent"><div class="k">03 · 数据干净</div><div class="big" style="font-size:26px">可解析、可筛选</div><p style="font-size:19px">形式化对象与代码结构清晰，便于批量生成、过滤与验证。</p></div>
       </div>
       <div class="scaleband" style="margin-top:20px">两条路线：学习更好的策略 + 用算力生成、验证更多候选。</div>
-      <div class="keyline"><b>RL 改进解题策略</b>，算力扩大<b>可验证的搜索</b>。</div>
-      <p class="micro" style="margin-top:12px">有限搜索空间 + 解存在 + 可靠判定 → 穷举能找到满足规范的解；成本可能很高。</p>
+      <div class="keyline">封闭环境 + 可定位错误 + 干净数据 → <b>反馈便宜，可大规模试错</b>。</div>
+      <p class="micro" style="margin-top:12px">“封闭”是相对任务而言：代码仍依赖输入与库，数学建模仍需形式化；数据也仍需筛选。</p>
     </div>
-    <div class="footer"><span>有边界的任务 · 清晰目标 · 可检查反馈</span><span class="pnum">16 / 53</span></div>
+    <div class="footer"><span>封闭环境 · 可追溯错误 · 干净数据</span><span class="pnum">16 / 53</span></div>
   </section>
 
   <!-- ============ S17 · 共享推理技能 ============ -->

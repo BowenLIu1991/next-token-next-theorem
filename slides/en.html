@@ -1547,20 +1547,20 @@
   </section>
 
   <!-- ============ S16 · What math and code share ============ -->
-  <section class="slide" data-notes="Specified math and coding subtasks can have explicit definitions and rules, controlled environments and checkable outcomes. This supports policy learning, candidate generation and parallel verification. The exhaustive-search guarantee needs a finite candidate space, a valid solution within it, and a checker that terminates and decides correctly for each candidate. Under these conditions, enumeration finds a specification-satisfying solution, but time and compute costs can be enormous. Random sampling or parallel generation does not guarantee exhaustive coverage. Well-defined rules alone do not imply finiteness, solvability or decidability. RL improves policies; inference-time compute expands candidate search, and the two can work together. Tests are partial evidence and proof checking establishes the stated proposition, not every intended application.">
+  <section class="slide" data-notes="Three shared advantages. First, a relatively closed external environment: mathematics works inside an axiomatic system of definitions, axioms and inference rules; code works inside a language specification and runtime, with syntax, types, libraries and execution semantics. Once the problem is formalized, solving need not keep querying the external world. Second, errors are traceable: a proof can be checked step by step to locate the failing inference; tests, exception traces and line numbers locate a code error. Third, data is structured: formal objects and code are parseable and filterable, supporting bulk generation and verification. Closure is relative to the task: programs may depend on inputs, external libraries and runtimes; modeling still requires formalizing the real problem. Data still needs curation, and proofs or tests can be incomplete. Exhaustive search additionally needs finiteness, an existing solution and reliable termination.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
     <h2>Math and code share a feedback advantage</h2>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">01 · Defined environment</div><div class="big" style="font-size:24px">Rules &amp; assumptions</div><p style="font-size:19px">An interface, a specification, a theorem.</p></div>
-        <div class="card"><div class="k">02 · Explicit target</div><div class="big" style="font-size:24px">A checkable goal</div><p style="font-size:19px">Expected behavior or a precise claim.</p></div>
-        <div class="card accent"><div class="k">03 · Useful feedback</div><div class="big" style="font-size:24px">Tests &amp; counterexamples</div><p style="font-size:19px">Reject failures and compare candidates.</p></div>
+        <div class="card"><div class="k">01 · Closed environment</div><div class="big" style="font-size:26px">Axioms · Runtime</div><p style="font-size:19px">Math uses definitions, axioms and inference rules; code uses a language spec and runtime. The system is self-contained.</p></div>
+        <div class="card"><div class="k">02 · Traceable errors</div><div class="big" style="font-size:26px">Locate the step</div><p style="font-size:19px">Proofs check inference step by step; tests, traces and line numbers locate code errors.</p></div>
+        <div class="card accent"><div class="k">03 · Clean data</div><div class="big" style="font-size:26px">Parse and filter</div><p style="font-size:19px">Formal objects and code are structured, enabling bulk generation and verification.</p></div>
       </div>
       <div class="scaleband" style="margin-top:20px">Two levers: better policies + more compute for candidate generation and verification.</div>
-      <div class="keyline"><b>RL improves problem-solving policies</b>; compute expands <b>verifiable search</b>.</div>
-      <p class="micro" style="margin-top:12px">Finite search space + a solution exists + reliable, decidable checks → exhaustive search can find it; cost may be high.</p>
+      <div class="keyline">Closed environment + localizable errors + clean data → <b>cheap feedback, large-scale trial and error</b>.</div>
+      <p class="micro" style="margin-top:12px">Closure is relative: code still depends on inputs and libraries; modeling still needs formalization; data still needs curation.</p>
     </div>
-    <div class="footer"><span>bounded tasks · clear goals · checkable feedback</span><span class="pnum">16 / 53</span></div>
+    <div class="footer"><span>closed environment · traceable errors · clean data</span><span class="pnum">16 / 53</span></div>
   </section>
 
   <!-- ============ S17 · Shared reasoning skills ============ -->
