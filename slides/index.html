@@ -1577,22 +1577,6 @@
     <div class="footer"><span>共享技能 · 能力迁移 · 具体任务中的证据</span><span class="pnum">17 / 53</span></div>
   </section>
 
-  <!-- ============ S18 · 测试与反例 ============ -->
-  <section class="slide" data-notes="联系《天体力学基础》的任务示意，不是模型实测输出。轨道程序可以测试圆轨道、高偏心率和缩小步长；这些检查指定行为，不证明所有输入下都正确。命题“所有 Kepler 轨道都有界”在吸引型二体问题中，可用正能量的双曲轨道反驳。一个反例能推翻全称命题，没有找到反例不等于证明。形式检查需要精确的陈述和假设。训练阶段检查结果可以作为奖励；推理阶段则可以指导修订或搜索，而不改变模型参数。">
-    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>一个测试或反例，改变下一步</h2>
-    <p class="sub" style="margin-top:8px">联系《天体力学基础》的两个任务示意。</p>
-    <div class="content">
-      <div class="two even" style="gap:24px">
-        <div class="card" style="padding:18px 20px"><div class="k">代码 · 一个轨道程序</div><ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8"><li>测试圆轨道</li><li>测试高偏心率</li><li>检查步长收敛性</li></ul></div>
-        <div class="card accent" style="padding:18px 20px"><div class="k">数学 · 一个待证命题</div><p style="font-size:21px">“所有 Kepler 轨道都有界。”</p><p style="font-size:21px">反例：双曲轨道。</p><p class="micro">这个命题需要更强的假设。</p></div>
-      </div>
-      <div class="loop" style="margin-top:24px"><span class="step">候选答案</span><span class="arr">→</span><span class="step hl">检查</span><span class="arr">→</span><span class="step">反馈</span><span class="arr">→</span><span class="step">下一次尝试</span></div>
-      <div class="keyline">检查，把提议转成<b>可行动的反馈</b>。</div>
-    </div>
-    <div class="footer"><span>测试提供证据 · 反例推翻命题</span><span class="pnum">18 / 53</span></div>
-  </section>
-
   <!-- ============ S19 · Coding agent 为何兴起 ============ -->
   <section class="slide" data-notes="代码适合 Agent 工作流，因为模型可以读取文件、编辑、运行代码并获得本地反馈。Claude Code 是著名例子，不是第一个 coding agent，也不是代码领域最早的 RL 应用。2022 年 AlphaCode 已展示编程竞赛中的大量生成与可执行筛选，不应说它与 Claude Code 使用同一 RL 训练方法。模型训练、推理时采样和 Harness 是不同因素。测试不能覆盖所有行为，也不能证明产品价值。后文用 Claude Code 的审查流程展示一个具体系统。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
@@ -1649,16 +1633,27 @@
     <div class="footer"><span>结构化数据 · 正确性 · 学科品味</span><span class="pnum">23 / 53</span></div>
   </section>
 
-  <!-- ============ S24 · 两种反馈循环 ============ -->
-  <section class="slide" data-notes="这节最后区分 RL 训练与 Agent 工作流。训练用奖励更新策略参数；部署后的 Agent 通常用反馈修订文件、候选或计划，模型参数保持固定。工具、测试、记忆和权限属于外层系统，coding agent 不等于强化学习本身。共同机会来自定义明确、反馈能够指导多次尝试的任务。接下来展示应用机制，并用四页 Claude Code 审查案例说明系统如何解决人的审查瓶颈。">
+  <!-- ============ S24 · 总结：环境、反馈与参数更新 ============ -->
+  <section class="slide" data-notes="这是奖励章节的总结。数学和编程中的许多任务定义良好：规则、假设和目标明确，输出可以检查。把这些任务放进可执行的环境，让模型不断做 next-token 预测并产生候选答案，环境就能对输出进行评判，错误也能沿步骤追溯。把这种反馈写成可优化的 loss 或目标，便可通过反向传播和参数迭代改进模型。监督学习通常直接对交叉熵等损失反向传播；强化学习则把奖励转成策略梯度的目标，环境本身并不可微，但参数更新仍沿可计算的目标进行。反馈可能是部分的，loss 设计会塑造行为，训练后仍需独立评估。能力提升来自环境、反馈与优化目标形成闭环。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>训练与工作，使用不同的循环</h2>
+    <h2>总结：环境、反馈与参数更新</h2>
+    <p class="sub" style="margin-top:8px">良好定义的问题，让模型可以在环境中反复预测、接受检查并迭代。</p>
     <div class="content">
-      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">RL 训练</div><div class="big" style="font-size:25px">改进策略</div><p style="font-size:21px">尝试 → 奖励 → 更新参数</p></div><div class="card accent" style="padding:18px 20px"><div class="k">Agent 工作流</div><div class="big" style="font-size:25px">改进工作结果</div><p style="font-size:21px">尝试 → 反馈 → 修订产物</p></div></div>
-      <div class="scaleband" style="margin-top:24px">Coding agent 把模型与上下文、工具、检查、控制循环组合起来。</div>
-      <div class="keyline">接下来：我怎样组织<b>实际工作的循环</b>。</div>
+      <div class="loop" style="gap:10px">
+        <span class="step">问题与环境</span><span class="arr">→</span>
+        <span class="step">next-token 预测</span><span class="arr">→</span>
+        <span class="step">检查与追溯</span><span class="arr">→</span>
+        <span class="step hl">定义 loss</span><span class="arr">→</span>
+        <span class="step">反向传播</span><span class="arr">↺</span>
+      </div>
+      <div class="three" style="margin-top:28px">
+        <div class="card"><div class="k">01 · 环境</div><div class="big" style="font-size:24px">规则与目标明确</div><p style="font-size:19px">模型可以执行、尝试并产生输出。</p></div>
+        <div class="card"><div class="k">02 · 反馈</div><div class="big" style="font-size:24px">评判与追溯</div><p style="font-size:19px">检查结果，定位出错步骤。</p></div>
+        <div class="card accent"><div class="k">03 · 更新</div><div class="big" style="font-size:24px">loss 驱动迭代</div><p style="font-size:19px">反向传播，更新参数，提升能力。</p></div>
+      </div>
+      <div class="keyline">环境提供反馈，<b>loss 把它变成参数更新</b>。</div>
     </div>
-    <div class="footer"><span>训练更新参数 · 工作流修订产物</span><span class="pnum">24 / 53</span></div>
+    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->

@@ -1579,22 +1579,6 @@
     <div class="footer"><span>shared skills · transfer · task-dependent evidence</span><span class="pnum">17 / 53</span></div>
   </section>
 
-  <!-- ============ S18 · Tests and counterexamples ============ -->
-  <section class="slide" data-notes="Illustrative tasks connected to Foundations of Celestial Mechanics, not measured model outputs. For an orbit routine, test a circular orbit, high eccentricity and a smaller time step; these check selected behaviors rather than prove correctness for all inputs. For a mathematical claim that every Kepler orbit is bounded, a positive-energy hyperbolic orbit is a counterexample in the attractive two-body setting. A counterexample refutes a universal claim, while failure to find one does not prove it. Formal proof checking requires a precise statement and assumptions. During RL training, a chosen checker can supply a reward; during inference, feedback can instead guide revision or search without updating model parameters.">
-    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>A test or counterexample changes the next step</h2>
-    <p class="sub" style="margin-top:8px">Illustrative tasks from Foundations of Celestial Mechanics.</p>
-    <div class="content">
-      <div class="two even" style="gap:24px">
-        <div class="card" style="padding:18px 20px"><div class="k">Code · An orbit routine</div><ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8"><li>Test a circular orbit</li><li>Test high eccentricity</li><li>Check step-size convergence</li></ul></div>
-        <div class="card accent" style="padding:18px 20px"><div class="k">Math · A proposed claim</div><p style="font-size:21px">“Every Kepler orbit is bounded.”</p><p style="font-size:21px">Counterexample: a hyperbolic orbit.</p><p class="micro">The claim needs stronger assumptions.</p></div>
-      </div>
-      <div class="loop" style="margin-top:24px"><span class="step">Candidate</span><span class="arr">→</span><span class="step hl">Check</span><span class="arr">→</span><span class="step">Feedback</span><span class="arr">→</span><span class="step">Next attempt</span></div>
-      <div class="keyline">Checks turn a proposed answer into <b>actionable feedback</b>.</div>
-    </div>
-    <div class="footer"><span>tests give evidence · counterexamples refute claims</span><span class="pnum">18 / 53</span></div>
-  </section>
-
   <!-- ============ S19 · Why coding agents took off ============ -->
   <section class="slide" data-notes="Coding is a productive setting for agent workflows because the model can read files, edit them, execute code and obtain local feedback. Claude Code is a prominent example, not the first coding agent or the first use of RL in code. AlphaCode in 2022 already illustrated large-scale candidate generation and executable filtering in competitive programming; it should not be described as a Claude Code precursor trained by the same RL method. Model training, inference-time sampling and the agent harness are distinct contributors. Tests do not establish product value or cover all software behavior. Later slides show Claude Code's concrete review process.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
@@ -1651,16 +1635,27 @@
     <div class="footer"><span>structured data · correctness · disciplinary taste</span><span class="pnum">23 / 53</span></div>
   </section>
 
-  <!-- ============ S24 · Two feedback loops ============ -->
-  <section class="slide" data-notes="Conclude the section by distinguishing RL training from an agent workflow. Training uses reward to update a policy's parameters. A deployed agent typically uses feedback to revise files, candidates or plans while its model parameters remain fixed. Tool execution, tests, memory and permissions belong to the surrounding system. A coding agent is therefore not itself synonymous with reinforcement learning. The shared opportunity is a specified task whose feedback can guide repeated attempts. We now show the application mechanisms and then the four-page Claude Code review case that addresses a human review bottleneck.">
+  <!-- ============ S24 · Summary: environment, feedback, parameter update ============ -->
+  <section class="slide" data-notes="This summarizes the reward section. Many mathematical and coding tasks are well defined: rules, assumptions and goals are explicit, and outputs can be checked. Put such a task into an executable environment; the model repeatedly makes next-token predictions and produces candidates. The environment evaluates outputs, and errors can be traced through the steps. Write this feedback as an optimizable loss or objective, then improve the model through backpropagation and parameter updates. Supervised learning usually backpropagates through a loss such as cross-entropy. Reinforcement learning turns reward into a policy-gradient objective; the environment itself is not differentiated, but parameter updates still follow a computable objective. Feedback may be partial, loss design shapes behavior, and independent evaluation is still required after training. Capability improves when environment, feedback and objective form a loop.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>Learning and working use different loops</h2>
+    <h2>Summary: environment, feedback, updates</h2>
+    <p class="sub" style="margin-top:8px">Well-defined tasks let a model predict, receive checks and iterate in an environment.</p>
     <div class="content">
-      <div class="two even" style="gap:24px"><div class="card" style="padding:18px 20px"><div class="k">RL training</div><div class="big" style="font-size:25px">Improve the policy</div><p style="font-size:21px">Try → reward → update parameters</p></div><div class="card accent" style="padding:18px 20px"><div class="k">Agent workflow</div><div class="big" style="font-size:25px">Improve the result</div><p style="font-size:21px">Try → feedback → revise the work</p></div></div>
-      <div class="scaleband" style="margin-top:24px">A coding agent combines a model with context, tools, checks and a control loop.</div>
-      <div class="keyline">Now: how I organize the <b>working loop</b>.</div>
+      <div class="loop" style="gap:10px">
+        <span class="step">Problem + environment</span><span class="arr">→</span>
+        <span class="step">Next-token prediction</span><span class="arr">→</span>
+        <span class="step">Check + trace</span><span class="arr">→</span>
+        <span class="step hl">Define loss</span><span class="arr">→</span>
+        <span class="step">Backpropagate</span><span class="arr">↺</span>
+      </div>
+      <div class="three" style="margin-top:28px">
+        <div class="card"><div class="k">01 · Environment</div><div class="big" style="font-size:24px">Clear rules &amp; goal</div><p style="font-size:19px">The model can act, try and produce outputs.</p></div>
+        <div class="card"><div class="k">02 · Feedback</div><div class="big" style="font-size:24px">Evaluate &amp; trace</div><p style="font-size:19px">Check outcomes and locate failing steps.</p></div>
+        <div class="card accent"><div class="k">03 · Update</div><div class="big" style="font-size:24px">Loss-driven iteration</div><p style="font-size:19px">Backpropagate, update parameters, improve.</p></div>
+      </div>
+      <div class="keyline">The environment supplies feedback; <b>loss turns it into parameter updates</b>.</div>
     </div>
-    <div class="footer"><span>training changes parameters · workflows change artifacts</span><span class="pnum">24 / 53</span></div>
+    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
