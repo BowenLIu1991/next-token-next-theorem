@@ -1865,38 +1865,61 @@
   </section>
 
   <!-- ============ S24d · 模型的两个短板 ============ -->
-  <section class="slide" data-notes="这是从模型章节进入系统章节的过渡。RL 之后，LLM 的核心能力仍是 next-token prediction。它没有跨调用的记忆：每次调用独立，所谓对话是客户端把历史重新发一遍；没有前文，代词“它”就失去指代。它的算术也不是执行程序，而是按数据分布生成 token，可能给出看起来合理但错误的答案。于是需要两个外部补足：Context 管理把历史、资料、约束带回窗口，记忆与检索是外部机制；Harness 与工具调用把精确计算、代码执行和外部行动交给程序与环境，再检查结果。模型负责预测，系统负责状态、执行与验证。">
+  <section class="slide" data-notes="训练结束后，模型的核心能力是 next-token prediction，但还有四类短板。记忆：参数推理时不更新，知识在权重与概率分布里；所谓对话是客户端重发历史。Context：从 4k 到 1M，但长文仍会大海捞针，中间信息被稀释。计算：算术按分布生成，不执行程序。概率输出：同一输入可能不同，错误可能看起来合理。对应三类系统能力：Context 管理与 Memory；Function calling；Harness（验证、权限、重试、评测）。">
     <p class="eyebrow"><b>03</b> / 从模型到系统</p>
-    <h2>模型会预测，但还有两个短板</h2>
-    <p class="sub" style="margin-top:8px">RL 之后，能力仍在模型内部；记忆、计算与验证要由系统补上。</p>
+    <h2>训练之后：四个短板，三类系统能力</h2>
+    <p class="sub" style="margin-top:8px">模型会预测；状态、计算与可靠性还在模型之外。</p>
     <div class="content">
-      <div class="two even" style="gap:20px">
-        <div class="card" style="padding:16px 20px"><div class="k">短板 01 · 没有记忆</div><div class="big" style="font-size:24px">每次调用独立</div><p style="font-size:18px">“对话”是客户端把历史重发一遍；没有前文，“它”就失去指代。</p></div>
-        <div class="card" style="padding:16px 20px"><div class="k">短板 02 · 运算不可靠</div><div class="big" style="font-size:24px">按分布生成，不执行程序</div><p style="font-size:18px">算术看起来合理，也可能算错；精确计算要交给程序。</p></div>
+      <div class="three" style="gap:18px;align-items:stretch">
+        <div class="card" style="padding:15px 18px">
+          <div class="k">01 · 记忆与上下文</div>
+          <div class="big" style="font-size:22px">没有记忆，窗口有限</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+            <li>参数推理时不更新；知识在权重里</li>
+            <li>“对话”是客户端重发历史</li>
+            <li>4k → 1M，但长文仍会“大海捞针”</li>
+          </ul>
+          <p class="micro" style="margin-top:10px">→ Context 管理 · 检索 · Memory</p>
+        </div>
+        <div class="card" style="padding:15px 18px">
+          <div class="k">02 · 精确计算</div>
+          <div class="big" style="font-size:22px">按分布生成，不执行程序</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+            <li>算术是 token 预测，不是计算</li>
+            <li>看起来合理，也可能算错</li>
+            <li>长程任务会累积误差</li>
+          </ul>
+          <p class="micro" style="margin-top:10px">→ Function calling · 把计算交给程序</p>
+        </div>
+        <div class="card accent" style="padding:15px 18px">
+          <div class="k">03 · 概率输出</div>
+          <div class="big" style="font-size:22px">同一输入，也可能不同</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+            <li>输出是分布采样，不是确定函数</li>
+            <li>错误可能自信而合理</li>
+            <li>长时运行需要停止与回滚</li>
+          </ul>
+          <p class="micro" style="margin-top:10px">→ Harness · 验证 · 权限 · 评测</p>
+        </div>
       </div>
-      <div class="scaleband" style="margin-top:18px">两个补足方向：把状态与执行放到模型外部。</div>
-      <div class="two even" style="gap:20px;margin-top:14px">
-        <div class="card accent" style="padding:14px 20px"><div class="k">Context 管理</div><p style="font-size:18px;margin:0">把历史、资料与约束带回窗口；记忆与检索是外部机制。</p></div>
-        <div class="card accent" style="padding:14px 20px"><div class="k">Harness · 工具调用</div><p style="font-size:18px;margin:0">把精确计算与行动交给程序和环境，并检查结果。</p></div>
-      </div>
-      <div class="keyline">模型负责预测；<b>记忆、计算与验证</b>由系统补上。</div>
+      <div class="keyline">四个短板，三类系统能力：<b>状态、计算、可靠性</b>。</div>
     </div>
-    <div class="footer"><span>stateless · unreliable arithmetic · context &amp; tools</span><span class="pnum">24 / 53</span></div>
+    <div class="footer"><span>four limits · three system capabilities</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
   <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>从会说话到会干活</h2>
-    <p class="sub" style="margin-top:8px">两条补足线：Context 管理状态与历史；Harness 管理计算与执行。</p>
+    <p class="sub" style="margin-top:8px">三条补足线：Context 管状态与历史，Function calling 管计算，Harness 管可靠性。</p>
     <div class="content">
       <div class="three">
         <div class="card"><div class="k">会说话 · 2023 · Context</div><div class="big" style="font-size:24px">ChatGPT</div><p>指令微调 + RLHF<br>prompt / system</p></div>
         <div class="card"><div class="k">会思考 · CoT · Context</div><div class="big" style="font-size:24px">CoT</div><p>把中间步骤写进上下文<br>context engineering · pruning</p></div>
         <div class="card accent"><div class="k">会干活 · Agent · Harness</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>外部状态与验证</p></div>
       </div>
-      <div class="scaleband" style="margin-top:22px">A · 状态线：Prompt → Context → Memory　　B · 执行线：Tools → Agent → Harness</div>
-      <div class="keyline">两条线，补两个短板。</div>
+      <div class="scaleband" style="margin-top:22px">A · 状态：Prompt → Context → Memory　　B · 计算：Function calling → Agent　　C · 可靠性：Harness → 验证</div>
+      <div class="keyline">三条线，补四个短板。</div>
     </div>
     <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 53</span></div>
   </section>

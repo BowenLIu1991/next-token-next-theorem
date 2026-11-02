@@ -1867,38 +1867,61 @@
   </section>
 
   <!-- ============ S24d · Two limits of the model ============ -->
-  <section class="slide" data-notes="This is the bridge from the model section into systems. After RL, the core capability is still next-token prediction. The model has no memory across calls: each call is independent, and a conversation is the client resending the history; without prior text, the pronoun “it” has no referent. Its arithmetic is not program execution either: tokens are generated from a data distribution, so a plausible-looking answer can be wrong. Two external complements follow. Context management brings history, references and constraints back into the window; memory and retrieval are external mechanisms. The harness and tool calls delegate exact computation, code execution and external actions to programs and environments, then check results. The model predicts; the system owns state, execution and verification.">
+  <section class="slide" data-notes="After training, the core capability is next-token prediction, but four limits remain. Memory: parameters do not update at inference; knowledge lives in the weights and the probability distribution; a conversation resends history. Context: 4k to 1M, but long inputs still lose the middle—the needle-in-a-haystack problem. Computation: arithmetic is generated from a distribution, not executed. Probabilistic output: the same input can yield different outputs, and errors can sound plausible. Three system capabilities follow: context management and memory; function calling; and a harness for verification, permissions, retries and evals.">
     <p class="eyebrow"><b>03</b> / from model to system</p>
-    <h2>The model predicts, but has two limits</h2>
-    <p class="sub" style="margin-top:8px">After RL, capability stays inside the model; memory, computation and checks need a system.</p>
+    <h2>After training: four limits, three system capabilities</h2>
+    <p class="sub" style="margin-top:8px">The model predicts; state, computation and reliability live outside it.</p>
     <div class="content">
-      <div class="two even" style="gap:20px">
-        <div class="card" style="padding:16px 20px"><div class="k">Limit 01 · No memory</div><div class="big" style="font-size:24px">Each call is independent</div><p style="font-size:18px">A “conversation” resends history; without it, “it” has no referent.</p></div>
-        <div class="card" style="padding:16px 20px"><div class="k">Limit 02 · Unreliable arithmetic</div><div class="big" style="font-size:24px">Generated, not executed</div><p style="font-size:18px">A plausible calculation can still be wrong; exact work belongs in programs.</p></div>
+      <div class="three" style="gap:18px;align-items:stretch">
+        <div class="card" style="padding:15px 18px">
+          <div class="k">01 · Memory &amp; context</div>
+          <div class="big" style="font-size:22px">No memory, limited window</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+            <li>Parameters fixed at inference; knowledge in weights</li>
+            <li>A “conversation” resends history</li>
+            <li>4k → 1M, but long inputs still lose the middle</li>
+          </ul>
+          <p class="micro" style="margin-top:10px">→ Context management · retrieval · memory</p>
+        </div>
+        <div class="card" style="padding:15px 18px">
+          <div class="k">02 · Exact computation</div>
+          <div class="big" style="font-size:22px">Generated, not executed</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+            <li>Arithmetic is token prediction, not calculation</li>
+            <li>Plausible answers can still be wrong</li>
+            <li>Errors compound over long tasks</li>
+          </ul>
+          <p class="micro" style="margin-top:10px">→ Function calling · delegate computation</p>
+        </div>
+        <div class="card accent" style="padding:15px 18px">
+          <div class="k">03 · Probabilistic output</div>
+          <div class="big" style="font-size:22px">Same input, different output</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+            <li>Output is sampled, not a deterministic function</li>
+            <li>Errors can sound confident and plausible</li>
+            <li>Long runs need stopping and rollback</li>
+          </ul>
+          <p class="micro" style="margin-top:10px">→ Harness · verification · permissions · evals</p>
+        </div>
       </div>
-      <div class="scaleband" style="margin-top:18px">Two complements: move state and execution outside the model.</div>
-      <div class="two even" style="gap:20px;margin-top:14px">
-        <div class="card accent" style="padding:14px 20px"><div class="k">Context management</div><p style="font-size:18px;margin:0">Bring history, references and constraints into the window; memory and retrieval stay external.</p></div>
-        <div class="card accent" style="padding:14px 20px"><div class="k">Harness · tool calls</div><p style="font-size:18px;margin:0">Delegate exact computation and actions to programs and environments; check results.</p></div>
-      </div>
-      <div class="keyline">The model predicts; <b>memory, computation and checks</b> come from the system.</div>
+      <div class="keyline">Four limits, three system capabilities: <b>state, computation, reliability</b>.</div>
     </div>
-    <div class="footer"><span>stateless · unreliable arithmetic · context &amp; tools</span><span class="pnum">24 / 53</span></div>
+    <div class="footer"><span>four limits · three system capabilities</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
   <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>From talking to working</h2>
-    <p class="sub" style="margin-top:8px">Two complements: Context manages state and history; Harness manages computation and execution.</p>
+    <p class="sub" style="margin-top:8px">Three complements: Context manages state and history; function calling manages computation; Harness manages reliability.</p>
     <div class="content">
       <div class="three">
         <div class="card"><div class="k">Talking · 2023 · Context</div><div class="big" style="font-size:24px">ChatGPT</div><p>Instruction tuning + RLHF<br>prompt / system</p></div>
         <div class="card"><div class="k">Thinking · CoT · Context</div><div class="big" style="font-size:24px">CoT</div><p>Write intermediate steps into context<br>context engineering · pruning</p></div>
         <div class="card accent"><div class="k">Working · Agent · Harness</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>external state and checks</p></div>
       </div>
-      <div class="scaleband" style="margin-top:22px">A · state: Prompt → Context → Memory　　B · execution: Tools → Agent → Harness</div>
-      <div class="keyline">Two tracks cover the two limits.</div>
+      <div class="scaleband" style="margin-top:22px">A · state: Prompt → Context → Memory　　B · computation: Function calling → Agent　　C · reliability: Harness → checks</div>
+      <div class="keyline">Three tracks cover four limits.</div>
     </div>
     <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 53</span></div>
   </section>

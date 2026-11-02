@@ -35,15 +35,15 @@
 
 ## 最新第 24 页：从模型到系统
 
-- 两个短板：没有跨调用记忆；算术按分布生成，不执行程序。
-- 两个补足：Context 管理把历史、资料与约束带回窗口；Harness / 工具调用把精确计算与行动交给程序和环境，并检查结果。
-- 收束：模型负责预测；记忆、计算与验证由系统补上。
+- 四个短板：没有记忆（知识在权重里）；Context 有限（4k→1M 仍有大海捞针）；算术按分布生成、不执行程序；输出是概率采样。
+- 三类系统能力：Context 管理与 Memory；Function calling；Harness（验证、权限、重试、评测）。
+- 收束：模型负责预测；状态、计算与可靠性由系统补上。
 
-## 最新第 25–40 页：应用部分的两条线
+## 最新第 25–40 页：应用部分的三条线
 
 - A · 状态线（25–33）：会说话/2023 → Prompt → Context window → Context 有限 → Context engineering → CoT → CoT pruning → Memory。核心是让历史、资料、约束与中间状态保持在可见窗口，并在外部存取。
 - B · 执行线（34–40）：Tool calling → Agent loop → Claude Code 审查案例（36–39）→ 系统总图（40）。核心是把精确计算、行动与验证交给程序和运行时。
-- 第 25 页用两条 scaleband 明确这两条线；CoT 归入“把中间步骤写进上下文”，Memory 归入状态线。
+- 第 25 页用三条 scaleband 明确补足线：A 状态（Prompt → Context → Memory）、B 计算（Function calling → Agent）、C 可靠性（Harness → 验证）；CoT 归入“把中间步骤写进上下文”，Memory 归入状态线。
 
 ---
 
