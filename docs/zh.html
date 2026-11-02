@@ -118,6 +118,23 @@
   .three .card{min-height:172px;display:flex;flex-direction:column;justify-content:center}
   .stack{display:flex;flex-direction:column;gap:14px}
 
+  /* ---------- overview map ---------- */
+  .mapgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .mapcard{
+    display:flex;flex-direction:column;align-items:flex-start;text-align:left;width:100%;
+    padding:14px 16px;cursor:pointer;transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease;
+  }
+  .mapcard:hover{border-color:var(--accent);box-shadow:0 8px 22px rgba(20,20,20,.08);transform:translateY(-1px)}
+  .mapcard:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .mapcard .k{margin-bottom:4px}
+  .mapcard h3{font-size:19px;margin:0 0 4px;font-weight:640;letter-spacing:-.01em}
+  .mapcard p{font-size:13px;line-height:1.45;margin:0;color:var(--muted)}
+  .mapcard .range{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-top:8px;letter-spacing:.06em}
+  .maplinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .maplink{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);border-radius:999px;
+    padding:3px 8px;color:#3f3b34;background:#fffdf8;cursor:pointer}
+  .maplink:hover{border-color:var(--accent);color:var(--accent)}
+
   .card{
     background:#fffdf8;border:1px solid var(--line);border-radius:14px;
     padding:18px 20px;
@@ -791,6 +808,61 @@
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
     <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 53</span></div>
+  </section>
+
+  <!-- ============ S1b · 全景导航 ============ -->
+  <section class="slide" data-notes="全景导航页。点击章节卡片跳到该章开头，点击小标签跳到关键页。页码按当前 52 页顺序显示。此页只用于导航，不进入论证；如果时间紧，可直接从 Token 开始。">
+    <p class="eyebrow"><b>00</b> / 全景</p>
+    <h2>全景：从 token 到定理</h2>
+    <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
+    <div class="content" style="margin-top:18px">
+      <div class="mapgrid">
+        <div class="card mapcard" data-goto="2" role="button" tabindex="0">
+          <div class="k">00 · 开场与 Token</div>
+          <h3>Token</h3>
+          <p>十个整数 · 词表 · 计费</p>
+          <div class="range">p. 3–8</div>
+          <div class="maplinks"><span class="maplink" data-goto="2">10 个整数</span><span class="maplink" data-goto="4">词表</span></div>
+        </div>
+        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
+          <div class="k">01 · 模型</div>
+          <h3>一个函数</h3>
+          <p>概率分布 · 无状态</p>
+          <div class="range">p. 9–10</div>
+          <div class="maplinks"><span class="maplink" data-goto="8">概率分布</span><span class="maplink" data-goto="9">无状态</span></div>
+        </div>
+        <div class="card mapcard" data-goto="10" role="button" tabindex="0">
+          <div class="k">02 · 训练与问题求解</div>
+          <h3>从奖励中学习</h3>
+          <p>RL 循环 · 数学与代码 · GRPO</p>
+          <div class="range">p. 11–23</div>
+          <div class="maplinks"><span class="maplink" data-goto="11">RL 循环</span><span class="maplink" data-goto="20">GRPO 公式</span><span class="maplink" data-goto="22">REFLEX</span></div>
+        </div>
+        <div class="card mapcard" data-goto="23" role="button" tabindex="0">
+          <div class="k">03 · 系统与工程</div>
+          <h3>把模型放进系统</h3>
+          <p>上下文 · Agent · 代码审查</p>
+          <div class="range">p. 24–39</div>
+          <div class="maplinks"><span class="maplink" data-goto="34">Claude Code</span><span class="maplink" data-goto="38">系统总图</span></div>
+        </div>
+        <div class="card mapcard" data-goto="39" role="button" tabindex="0">
+          <div class="k">04 · AI × 数学</div>
+          <h3>从工具到搜索</h3>
+          <p>加速 · 时间线 · 共同模式</p>
+          <div class="range">p. 40–45</div>
+          <div class="maplinks"><span class="maplink" data-goto="40">时间线</span><span class="maplink" data-goto="42">共同模式</span></div>
+        </div>
+        <div class="card mapcard" data-goto="45" role="button" tabindex="0">
+          <div class="k">05 · 结论</div>
+          <h3>回到我的实践</h3>
+          <p>工作方式 · 复利 · 收束</p>
+          <div class="range">p. 46–52</div>
+          <div class="maplinks"><span class="maplink" data-goto="48">两次尝试</span><span class="maplink" data-goto="51">结尾</span></div>
+        </div>
+      </div>
+      <p class="micro" style="margin-top:14px">6 个章节 · 52 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
+    </div>
+    <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
@@ -2661,6 +2733,16 @@
   }
   function next(){ show(cur + 1); }
   function prev(){ show(cur - 1); }
+  function jumpTo(n){
+    if (Number.isFinite(n)) show(n);
+  }
+  document.addEventListener('click', e => {
+    if (!(e.target instanceof Element)) return;
+    const target = e.target.closest('[data-goto]');
+    if (!target) return;
+    e.preventDefault();
+    jumpTo(Number(target.dataset.goto));
+  });
 
   const fullscreenButton = document.getElementById('fullscreen-toggle');
   function updateFullscreenButton(){
@@ -2685,6 +2767,11 @@
 
   document.addEventListener('keydown', e => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target instanceof Element && e.target.closest('[data-goto]') && [' ', 'Enter'].includes(e.key)) {
+      e.preventDefault();
+      jumpTo(Number(e.target.closest('[data-goto]').dataset.goto));
+      return;
+    }
     if (e.target instanceof Element && e.target.closest('button') && [' ', 'Enter'].includes(e.key)) return;
     if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)) { e.preventDefault(); next(); }
     else if (['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }

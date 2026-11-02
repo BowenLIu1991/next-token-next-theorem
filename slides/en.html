@@ -118,6 +118,23 @@
   .three .card{min-height:172px;display:flex;flex-direction:column;justify-content:center}
   .stack{display:flex;flex-direction:column;gap:14px}
 
+  /* ---------- overview map ---------- */
+  .mapgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .mapcard{
+    display:flex;flex-direction:column;align-items:flex-start;text-align:left;width:100%;
+    padding:14px 16px;cursor:pointer;transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease;
+  }
+  .mapcard:hover{border-color:var(--accent);box-shadow:0 8px 22px rgba(20,20,20,.08);transform:translateY(-1px)}
+  .mapcard:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .mapcard .k{margin-bottom:4px}
+  .mapcard h3{font-size:19px;margin:0 0 4px;font-weight:640;letter-spacing:-.01em}
+  .mapcard p{font-size:13px;line-height:1.45;margin:0;color:var(--muted)}
+  .mapcard .range{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-top:8px;letter-spacing:.06em}
+  .maplinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .maplink{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);border-radius:999px;
+    padding:3px 8px;color:#3f3b34;background:#fffdf8;cursor:pointer}
+  .maplink:hover{border-color:var(--accent);color:var(--accent)}
+
   .card{
     background:#fffdf8;border:1px solid var(--line);border-radius:14px;
     padding:18px 20px;
@@ -791,6 +808,61 @@
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
     <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 53</span></div>
+  </section>
+
+  <!-- ============ S1b · Overview map ============ -->
+  <section class="slide" data-notes="Overview map. Click a section card to jump to its first page; click a small tag to jump to a key page. Page numbers follow the current 52-page order. This slide is navigation only and carries no argument; if time is short, start directly at Token.">
+    <p class="eyebrow"><b>00</b> / overview</p>
+    <h2>Overview: from token to theorem</h2>
+    <p class="sub" style="margin-top:8px">Click a section card to jump; click a tag for a key page.</p>
+    <div class="content" style="margin-top:18px">
+      <div class="mapgrid">
+        <div class="card mapcard" data-goto="2" role="button" tabindex="0">
+          <div class="k">00 · Opening + Token</div>
+          <h3>Token</h3>
+          <p>Ten integers · vocabulary · billing</p>
+          <div class="range">p. 3–8</div>
+          <div class="maplinks"><span class="maplink" data-goto="2">Ten integers</span><span class="maplink" data-goto="4">Vocabulary</span></div>
+        </div>
+        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
+          <div class="k">01 · Model</div>
+          <h3>One function</h3>
+          <p>Distribution · stateless</p>
+          <div class="range">p. 9–10</div>
+          <div class="maplinks"><span class="maplink" data-goto="8">Distribution</span><span class="maplink" data-goto="9">Stateless</span></div>
+        </div>
+        <div class="card mapcard" data-goto="10" role="button" tabindex="0">
+          <div class="k">02 · Training &amp; problem solving</div>
+          <h3>Learning from reward</h3>
+          <p>RL loop · math and code · GRPO</p>
+          <div class="range">p. 11–23</div>
+          <div class="maplinks"><span class="maplink" data-goto="11">RL loop</span><span class="maplink" data-goto="20">GRPO formula</span><span class="maplink" data-goto="22">REFLEX</span></div>
+        </div>
+        <div class="card mapcard" data-goto="23" role="button" tabindex="0">
+          <div class="k">03 · Systems &amp; engineering</div>
+          <h3>Put the model in a system</h3>
+          <p>Context · agents · code review</p>
+          <div class="range">p. 24–39</div>
+          <div class="maplinks"><span class="maplink" data-goto="34">Claude Code</span><span class="maplink" data-goto="38">System map</span></div>
+        </div>
+        <div class="card mapcard" data-goto="39" role="button" tabindex="0">
+          <div class="k">04 · AI × math</div>
+          <h3>From tools to search</h3>
+          <p>Acceleration · timeline · pattern</p>
+          <div class="range">p. 40–45</div>
+          <div class="maplinks"><span class="maplink" data-goto="40">Timeline</span><span class="maplink" data-goto="42">Pattern</span></div>
+        </div>
+        <div class="card mapcard" data-goto="45" role="button" tabindex="0">
+          <div class="k">05 · Conclusion</div>
+          <h3>Back to practice</h3>
+          <p>Workflow · compounding · close</p>
+          <div class="range">p. 46–52</div>
+          <div class="maplinks"><span class="maplink" data-goto="48">Two attempts</span><span class="maplink" data-goto="51">Close</span></div>
+        </div>
+      </div>
+      <p class="micro" style="margin-top:14px">6 sections · 52 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
+    </div>
+    <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
@@ -2663,6 +2735,16 @@
   }
   function next(){ show(cur + 1); }
   function prev(){ show(cur - 1); }
+  function jumpTo(n){
+    if (Number.isFinite(n)) show(n);
+  }
+  document.addEventListener('click', e => {
+    if (!(e.target instanceof Element)) return;
+    const target = e.target.closest('[data-goto]');
+    if (!target) return;
+    e.preventDefault();
+    jumpTo(Number(target.dataset.goto));
+  });
 
   const fullscreenButton = document.getElementById('fullscreen-toggle');
   function updateFullscreenButton(){
@@ -2687,6 +2769,11 @@
 
   document.addEventListener('keydown', e => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target instanceof Element && e.target.closest('[data-goto]') && [' ', 'Enter'].includes(e.key)) {
+      e.preventDefault();
+      jumpTo(Number(e.target.closest('[data-goto]').dataset.goto));
+      return;
+    }
     if (e.target instanceof Element && e.target.closest('button') && [' ', 'Enter'].includes(e.key)) return;
     if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)) { e.preventDefault(); next(); }
     else if (['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
