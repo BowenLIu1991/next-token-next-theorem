@@ -2,7 +2,7 @@
 
 > 状态：✅ 已确认 / ⚠️ 需核实 / ⬜ 待补
 > 报告前必须把 ⚠️ 全部处理掉。
-> 当前主讲 53 页：第 2 页全景导航；四类任务对比第 21 页，章节总结第 23 页，GRPO 目标函数第 15 页、机制第 16 页，REFLEX 第 17 页；模型短板第 24 页，代码审查案例第 36–39 页，系统总图第 40 页，AI × math 第 41–46 页，结论第 47–53 页。下表的 S 引用保留历史素材标识，当前显示页码以浏览器和最新大纲为准。
+> 当前主讲 48 页：第 2 页全景导航；四类任务对比第 20 页，章节总结第 22 页，GRPO 目标函数第 14 页、机制第 15 页，REFLEX 第 16 页；模型没有记忆第 23 页，四短板第 24 页，Context 与 Memory 第 25–28 页，代码审查案例第 31–34 页，系统总图第 35 页，AI × math 第 36–41 页，结论第 42–48 页。下表的 S 引用保留历史素材标识，当前显示页码以浏览器和最新大纲为准。
 
 ---
 
@@ -42,7 +42,7 @@
 | 数学 RL → 代码 | Chen et al., [*AceReason-Nemotron*](https://arxiv.org/abs/2505.16400), 2025 | S17；已读摘要与正文，数学专用 RL 对强蒸馏模型提高 LiveCodeBench 表现；不是任意数学训练必然改善代码 |
 | 代码 → 状态追踪 | Kim, Schuster & Toshniwal, [*Code Pretraining Improves Entity Tracking Abilities of Language Models*](https://arxiv.org/abs/2405.21068), 2024 | S17；已读摘要，具体推理子技能，不是全部逻辑能力 |
 | 跨领域收益与冲突 | Li et al., [*Can One Domain Help Others?*](https://arxiv.org/abs/2507.17512), 2025 | 讲者备注；基础模型、训练域和数据配比影响迁移，观察到收益也有冲突 |
-| REFLEX | Y. Zhang, **B. Liu**, X. Zhang, A. Mandal, C. Xu, Z. Wu, *REFLEX: Reinforcement Feedback Learning with LLMs for E-commerce Query Expansion*, WSDM 2026, 1288–1292 | 第 17 页 GRPO 实例：搜索引擎在环、无人工标注奖励、SFT 预热 + GRPO、消融结果 | ✅ 依据论文与作者材料；结果限于该数据集与 3B 骨干 |
+| REFLEX | Y. Zhang, **B. Liu**, X. Zhang, A. Mandal, C. Xu, Z. Wu, *REFLEX: Reinforcement Feedback Learning with LLMs for E-commerce Query Expansion*, WSDM 2026, 1288–1292 | 第 16 页 GRPO 实例：搜索引擎在环、无人工标注奖励、SFT 预热 + GRPO、消融结果 | ✅ 依据论文与作者材料；结果限于该数据集与 3B 骨干 |
 
 下表中的训练机制 S 页码为旧稿；相关细节现位于备份模式，不在主讲中展开。GRPO 与 REFLEX 的主讲页码按当前顺序（第 20–21 页）。
 
@@ -52,7 +52,7 @@
 | RLHF | Christiano et al., 2017 | S17 | ✅ |
 | DPO | Rafailov et al., 2023 | S17 | ✅ |
 | RLVR 术语 | Lambert et al., *Tulu 3*, 2024 | S18 | ⚠️ 术语出处待确认 |
-| GRPO | Shao et al., [*DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models*](https://arxiv.org/abs/2402.03300), arXiv:2402.03300, 2024 | 第 15 页目标函数、第 16 页机制 / 备份 B10 | ✅ 公式按论文 GRPO 目标整理 |
+| GRPO | Shao et al., [*DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models*](https://arxiv.org/abs/2402.03300), arXiv:2402.03300, 2024 | 第 14 页目标函数、第 15 页机制 / 备份 B10 | ✅ 公式按论文 GRPO 目标整理 |
 | 推理模型 | DeepSeek-R1, 2025 | S21 | ✅ |
 | 过程奖励 | Lightman et al., *Let's Verify Step by Step*, 2023 | 备份 | ✅ |
 | 代码 RL | Le et al., *CodeRL*, 2022 | S20 | ✅ |

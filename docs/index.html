@@ -827,40 +827,40 @@
         <div class="card mapcard" data-goto="8" role="button" tabindex="0">
           <div class="k">01 · Model</div>
           <h3>One function</h3>
-          <p>Distribution · stateless</p>
-          <div class="range">p. 9–10</div>
-          <div class="maplinks"><span class="maplink" data-goto="8">Distribution</span><span class="maplink" data-goto="9">Stateless</span></div>
+          <p>Distribution</p>
+          <div class="range">p. 9</div>
+          <div class="maplinks"><span class="maplink" data-goto="8">Distribution</span></div>
         </div>
-        <div class="card mapcard" data-goto="10" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="9" role="button" tabindex="0">
           <div class="k">02 · Training &amp; problem solving</div>
           <h3>Learning from reward</h3>
           <p>RL loop · math and code · GRPO</p>
-          <div class="range">p. 11–23</div>
-          <div class="maplinks"><span class="maplink" data-goto="11">RL loop</span><span class="maplink" data-goto="14">GRPO formula</span><span class="maplink" data-goto="16">REFLEX</span></div>
+          <div class="range">p. 10–23</div>
+          <div class="maplinks"><span class="maplink" data-goto="10">RL loop</span><span class="maplink" data-goto="13">GRPO formula</span><span class="maplink" data-goto="15">REFLEX</span><span class="maplink" data-goto="22">Stateless</span></div>
         </div>
         <div class="card mapcard" data-goto="23" role="button" tabindex="0">
           <div class="k">03 · Systems &amp; engineering</div>
           <h3>Put the model in a system</h3>
           <p>Context · agents · code review</p>
-          <div class="range">p. 24–40</div>
-          <div class="maplinks"><span class="maplink" data-goto="35">Claude Code</span><span class="maplink" data-goto="39">System map</span></div>
+          <div class="range">p. 24–35</div>
+          <div class="maplinks"><span class="maplink" data-goto="30">Claude Code</span><span class="maplink" data-goto="34">System map</span></div>
         </div>
-        <div class="card mapcard" data-goto="40" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="35" role="button" tabindex="0">
           <div class="k">04 · AI × math</div>
           <h3>From tools to search</h3>
           <p>Acceleration · timeline · pattern</p>
-          <div class="range">p. 41–46</div>
-          <div class="maplinks"><span class="maplink" data-goto="41">Timeline</span><span class="maplink" data-goto="43">Pattern</span></div>
+          <div class="range">p. 36–41</div>
+          <div class="maplinks"><span class="maplink" data-goto="36">Timeline</span><span class="maplink" data-goto="38">Pattern</span></div>
         </div>
-        <div class="card mapcard" data-goto="46" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="41" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>Back to practice</h3>
           <p>Workflow · compounding · close</p>
-          <div class="range">p. 47–53</div>
-          <div class="maplinks"><span class="maplink" data-goto="49">Two attempts</span><span class="maplink" data-goto="52">Close</span></div>
+          <div class="range">p. 42–48</div>
+          <div class="maplinks"><span class="maplink" data-goto="44">Two attempts</span><span class="maplink" data-goto="47">Close</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 sections · 52 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
+      <p class="micro" style="margin-top:14px">6 sections · 48 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -1137,34 +1137,6 @@
     </div>
     <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 53</span></div>
   </section>
-
-  <!-- ============ S11 · 无状态 ============ -->
-  <section class="slide" data-notes="这是最关键的一页，后面 prompt、context、memory 全都从这里来。模型每次调用都是独立的，参数不变。所谓对话，是客户端把历史重新发一遍。">
-    <p class="eyebrow"><b>02</b> / model</p>
-    <h2>The model is stateless</h2>
-    <div class="content">
-      <div class="two even">
-        <div class="term">
-          <div class="tcap">Call A</div>
-          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">What is the Hill region?</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">The Hill region is …</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">Because it defines …</span></div>
-        </div>
-        <div class="term">
-          <div class="tcap">Call B · a fresh call</div>
-          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt empty">(“it” has no referent here)</span></div>
-        </div>
-      </div>
-      <div class="keyline">The model is stateless; a “conversation” is the client <b>resending</b> the history.</div>
-      <p class="micro" style="margin-top:14px">Parameters stay fixed at inference time; state lives only in the context.</p>
-    </div>
-    <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
-  </section>
-
 
   <!-- ============ S12 · 从预测到解题 ============ -->
   <section class="slide" data-notes="Organize training into two stages: pretraining and post-training. Pretraining learns language, knowledge and regularities from large-scale text, code and other data, producing a base model. Post-training further shapes task behavior. This talk introduces two common components of post-training: SFT learns from demonstrations; RL uses rewards to improve a policy. This is a teaching overview, not an exhaustive or mandatory recipe: post-training may include other methods or iterative stages. SFT and RL belong within post-training rather than being peers of pretraining. We now focus on RL: how reward guides learning and which tasks provide useful feedback. Detailed training material remains available at ?appendix=1.">
@@ -1677,7 +1649,7 @@
         </div>
       </div>
       <div class="keyline">Raise high-advantage responses while <b>clip and KL</b> limit policy drift.</div>
-      <p class="micro" style="margin-top:10px">Source: Shao et al., <i>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</i>, arXiv:2402.03300, 2024 · GRPO objective; implementation details vary.</p>
+      <p class="micro" style="margin-top:10px">Source: Shao et al., <i>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</i>, arXiv:2402.03300, 2024.</p>
     </div>
     <div class="footer"><span>GRPO objective · advantage · clip · KL</span><span class="pnum">25 / 53</span></div>
   </section>
@@ -1866,6 +1838,34 @@
     <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
+  <!-- ============ S11 · 无状态 ============ -->
+  <section class="slide" data-notes="This page moves from the model section to the problem section: after training, the model still has no memory across calls; each call is independent and parameters stay fixed. A conversation is the client resending the history. Without prior text, “it” has no referent.">
+    <p class="eyebrow"><b>03</b> / LLM problems</p>
+    <h2>The model is stateless</h2>
+    <div class="content">
+      <div class="two even">
+        <div class="term">
+          <div class="tcap">Call A</div>
+          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">What is the Hill region?</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt">The Hill region is …</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt">Because it defines …</span></div>
+        </div>
+        <div class="term">
+          <div class="tcap">Call B · a fresh call</div>
+          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
+          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
+          <div class="row"><span class="role">assistant</span><span class="txt empty">(“it” has no referent here)</span></div>
+        </div>
+      </div>
+      <div class="keyline">The model is stateless; a “conversation” is the client <b>resending</b> the history.</div>
+      <p class="micro" style="margin-top:14px">Parameters stay fixed at inference time; state lives only in the context.</p>
+    </div>
+    <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
+  </section>
+
+
   <!-- ============ S24d · Two limits of the model ============ -->
   <section class="slide" data-notes="After training, the core capability is next-token prediction, but four limits remain. Memory: parameters do not update at inference; knowledge lives in the weights and the probability distribution; a conversation resends history. Context: 4k to 1M, but long inputs still lose the middle—the needle-in-a-haystack problem. Computation: arithmetic is generated from a distribution, not executed. Probabilistic output: the same input can yield different outputs, and errors can sound plausible. Three system capabilities follow: context management and memory; function calling; and a harness for verification, permissions, retries and evals.">
     <p class="eyebrow"><b>03</b> / from model to system</p>
@@ -1891,9 +1891,9 @@
             <li>Plausible answers can still be wrong</li>
             <li>Errors compound over long tasks</li>
           </ul>
-          <p class="micro" style="margin-top:10px">→ Function calling · delegate computation</p>
+          <p class="micro" style="margin-top:10px">→ Function calling · call a program</p>
         </div>
-        <div class="card accent" style="padding:15px 18px">
+        <div class="card" style="padding:15px 18px">
           <div class="k">03 · Probabilistic output</div>
           <div class="big" style="font-size:22px">Same input, different output</div>
           <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
@@ -1907,93 +1907,6 @@
       <div class="keyline">Four limits, three system capabilities: <b>state, computation, reliability</b>.</div>
     </div>
     <div class="footer"><span>four limits · three system capabilities</span><span class="pnum">24 / 53</span></div>
-  </section>
-
-  <!-- ============ S25 · 从会说话到会干活 ============ -->
-  <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>From talking to working</h2>
-    <p class="sub" style="margin-top:8px">Three complements: Context manages state and history; function calling manages computation; Harness manages reliability.</p>
-    <div class="content">
-      <div class="three">
-        <div class="card"><div class="k">Talking · 2023 · Context</div><div class="big" style="font-size:24px">ChatGPT</div><p>Instruction tuning + RLHF<br>prompt / system</p></div>
-        <div class="card"><div class="k">Thinking · CoT · Context</div><div class="big" style="font-size:24px">CoT</div><p>Write intermediate steps into context<br>context engineering · pruning</p></div>
-        <div class="card accent"><div class="k">Working · Agent · Harness</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>external state and checks</p></div>
-      </div>
-      <div class="scaleband" style="margin-top:22px">A · state: Prompt → Context → Memory　　B · computation: Function calling → Agent　　C · reliability: Harness → checks</div>
-      <div class="keyline">Three tracks cover four limits.</div>
-    </div>
-    <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 53</span></div>
-  </section>
-
-  <!-- ============ S26 · ChatGPT ============ -->
-  <section class="slide" data-notes="2023 年的 ChatGPT 让 next-token 模型变成了对话产品。关键不是模型变大，而是指令微调 + RLHF 让它学会按格式回答、说人觉得有用的话。但它仍然不会用工具、不会记事。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>2023: from completion to conversation</h2>
-    <div class="content">
-      <div class="two">
-        <div class="chat">
-          <div class="row"><span class="role">user</span><span class="txt">Explain the Hill region in one sentence.</span><span class="tag"></span></div>
-          <div class="row target"><span class="role">assistant</span><span class="txt">The region of space a body can reach at a given energy.</span><span class="tag"></span></div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">Instruction tuning</div><p>Learns the dialogue format: respond to the request</p></div>
-          <div class="card"><div class="k">RLHF</div><p>Learns answers people prefer: helpful, harmless</p></div>
-          <div class="card accent"><div class="k">Scope</div><p>Text only: no tools, no memory, no verification</p></div>
-        </div>
-      </div>
-      <div class="keyline">Conversation is a trained behavior.</div>
-    </div>
-    <div class="footer"><span>ChatGPT · 2023</span><span class="pnum">26 / 53</span></div>
-  </section>
-
-  <!-- ============ S27 · Prompt ============ -->
-  <section class="slide" data-notes="prompt 不是许愿，是改条件概率。左边是一条完整 prompt：system 给角色，约束规定写法，user 给任务，few-shot 给两个开普勒第三定律的例子。右边是同一个答案 token 的分布：原始提问下 16 只占 18%，加上角色、约束和例子后变成 71%。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Prompt: change the distribution with content</h2>
-    <div class="content">
-      <div class="two">
-        <div class="pstack">
-          <div class="pblock"><div class="role">system · role</div><p>You are a celestial mechanics teaching assistant.</p></div>
-          <div class="pblock"><div class="role">constraints</div><p>Write the formula first, then substitute, then give the number.</p></div>
-          <div class="pblock"><div class="role">user · task</div><p>A period of 2 years; the semi-major axis grows 4×. What is the new period?</p></div>
-          <div class="pblock few"><div class="role">few-shot · examples</div>
-            <div class="ex">a × 9 → T × 27</div>
-            <div class="ex">a × 16 → T × 64</div>
-          </div>
-        </div>
-        <div>
-          <p class="micro">Distribution of the answer token</p>
-          <div class="dist2">
-            <div>
-              <div class="glabel">Original question</div>
-              <div class="row"><span>8</span><div class="bar"><i style="width:52%"></i></div><span>52%</span></div>
-              <div class="row"><span>16</span><div class="bar"><i style="width:18%"></i></div><span>18%</span></div>
-              <div class="row"><span>32</span><div class="bar"><i style="width:12%"></i></div><span>12%</span></div>
-            </div>
-            <div>
-              <div class="glabel">With system + constraints + few-shot</div>
-              <div class="row"><span>8</span><div class="bar"><i style="width:8%"></i></div><span>8%</span></div>
-              <div class="row top"><span>16</span><div class="bar"><i style="width:71%"></i></div><span>71%</span></div>
-              <div class="row"><span>32</span><div class="bar"><i style="width:11%"></i></div><span>11%</span></div>
-            </div>
-          </div>
-          <p class="micro" style="margin-top:10px">Probabilities are illustrative</p>
-        </div>
-      </div>
-      <div class="mathband" style="margin-top:16px">
-        <div class="eq">
-          <math>
-            <msub><mi>p</mi><mi>θ</mi></msub><mo>(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo>)</mo>
-            <mo>→</mo>
-            <msub><mi>p</mi><mi>θ</mi></msub><mo>(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>e</mi><mo>)</mo>
-          </math>
-        </div>
-        <div class="eqnote">p(16 | x) = 0.18<br>p(16 | x, c, e) = 0.71</div>
-      </div>
-      <div class="keyline">Adding content is how you change the <b>conditional probability</b>.</div>
-    </div>
-    <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 53</span></div>
   </section>
 
   <!-- ============ S29 · Context 膨胀 ============ -->
@@ -2077,65 +1990,6 @@
     <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 53</span></div>
   </section>
 
-  <!-- ============ S28 · CoT ============ -->
-  <section class="slide" data-notes="CoT 擅长把文字题拆成逻辑步骤：识别定律、设关系、定运算；它不保证算术正确。算术交给程序。范围是言语与逻辑推理，不是精确计算。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>CoT: write the thinking down</h2>
-    <p class="micro" style="margin:8px 0 0">Scope: verbal and logical reasoning; arithmetic is a separate step.</p>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">Question</p>
-          <p style="font-size:17px;margin:6px 0 12px">A period of 2 years; the semi-major axis grows 4×. What is the new period?</p>
-          <div class="promptbox bad"><div class="tag">Direct answer</div><p>8 years ✗ <span class="micro">— a number without a plan</span></p></div>
-          <div class="promptbox"><div class="tag">CoT · plan</div><p>T ∝ a<sup>3/2</sup>; T = 2 × 4<sup>3/2</sup></p><p class="micro">plan ✓ · arithmetic next</p></div>
-          <div class="promptbox good"><div class="tag">Tool · compute</div><p><span style="font-family:var(--mono);font-size:13px">run_python("2 * 4**1.5") → 16.0</span> ✓</p></div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">What CoT does</div><p>Turns words into a plan: parse, recall, set up the relation</p></div>
-          <div class="card"><div class="k">What remains</div><p>Arithmetic: a separate, tool-friendly step</p></div>
-          <div class="card accent"><div class="k">Essence</div><p>Explicit steps; exact numbers are a separate skill</p></div>
-        </div>
-      </div>
-      <div class="keyline">CoT writes the plan; the tool computes the number.</div>
-    </div>
-    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 53</span></div>
-  </section>
-
-  <!-- ============ S32 · CoT pruning ============ -->
-  <section class="slide" data-notes="推理模型会写很长的思维链。不是所有步骤都值得保留：剪枝、摘要、蒸馏、预算，都是为了让思考更短、更便宜。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>CoT pruning: keep the thoughts that matter</h2>
-    <div class="content">
-      <p class="micro">A long chain of thought</p>
-      <div class="chain">
-        <span class="c">Read problem</span><span class="arr">→</span>
-        <span class="c keep">Name variables</span><span class="arr">→</span>
-        <span class="c">Expand</span><span class="arr">→</span>
-        <span class="c cut">Repeat</span><span class="arr">→</span>
-        <span class="c">Case split</span><span class="arr">→</span>
-        <span class="c cut">Side branch</span><span class="arr">→</span>
-        <span class="c keep">Main line</span><span class="arr">→</span>
-        <span class="c keep">Substitute</span><span class="arr">→</span>
-        <span class="c keep">Check</span><span class="arr">→</span>
-        <span class="c keep">Answer</span>
-      </div>
-      <div class="two" style="margin-top:22px">
-        <div class="stack">
-          <div class="card"><div class="k">Prune</div><p>Drop repeated and irrelevant branches</p></div>
-          <div class="card"><div class="k">Summarize</div><p>Compress a long chain into a short one</p></div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">Distill</div><p>Teach a short CoT from a long one</p></div>
-          <div class="card accent"><div class="k">Budget</div><p>Cap thinking tokens; stop early</p></div>
-        </div>
-      </div>
-      <div class="keyline">Thinking has a budget too.</div>
-    </div>
-    <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 53</span></div>
-  </section>
-
-  <!-- ============ S35 · Memory ============ -->
   <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Memory: signal and noise</h2>
