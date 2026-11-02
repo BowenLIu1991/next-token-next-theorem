@@ -1890,13 +1890,15 @@
   <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>From talking to working</h2>
+    <p class="sub" style="margin-top:8px">Two complements: Context manages state and history; Harness manages computation and execution.</p>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">Talking · 2023</div><div class="big" style="font-size:24px">ChatGPT</div><p>Instruction tuning + RLHF<br>prompt / system</p></div>
-        <div class="card"><div class="k">Thinking</div><div class="big" style="font-size:24px">CoT</div><p>Write the intermediate steps<br>context engineering · pruning</p></div>
-        <div class="card accent"><div class="k">Working</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>memory</p></div>
+        <div class="card"><div class="k">Talking · 2023 · Context</div><div class="big" style="font-size:24px">ChatGPT</div><p>Instruction tuning + RLHF<br>prompt / system</p></div>
+        <div class="card"><div class="k">Thinking · CoT · Context</div><div class="big" style="font-size:24px">CoT</div><p>Write intermediate steps into context<br>context engineering · pruning</p></div>
+        <div class="card accent"><div class="k">Working · Agent · Harness</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>external state and checks</p></div>
       </div>
-      <div class="keyline">Each step solves the problem the previous step left open.</div>
+      <div class="scaleband" style="margin-top:22px">A · state: Prompt → Context → Memory　　B · execution: Tools → Agent → Harness</div>
+      <div class="keyline">Two tracks cover the two limits.</div>
     </div>
     <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 53</span></div>
   </section>
@@ -1969,31 +1971,6 @@
       <div class="keyline">Adding content is how you change the <b>conditional probability</b>.</div>
     </div>
     <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 53</span></div>
-  </section>
-
-  <!-- ============ S28 · CoT ============ -->
-  <section class="slide" data-notes="CoT 擅长把文字题拆成逻辑步骤：识别定律、设关系、定运算；它不保证算术正确。算术交给程序。范围是言语与逻辑推理，不是精确计算。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>CoT: write the thinking down</h2>
-    <p class="micro" style="margin:8px 0 0">Scope: verbal and logical reasoning; arithmetic is a separate step.</p>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">Question</p>
-          <p style="font-size:17px;margin:6px 0 12px">A period of 2 years; the semi-major axis grows 4×. What is the new period?</p>
-          <div class="promptbox bad"><div class="tag">Direct answer</div><p>8 years ✗ <span class="micro">— a number without a plan</span></p></div>
-          <div class="promptbox"><div class="tag">CoT · plan</div><p>T ∝ a<sup>3/2</sup>; T = 2 × 4<sup>3/2</sup></p><p class="micro">plan ✓ · arithmetic next</p></div>
-          <div class="promptbox good"><div class="tag">Tool · compute</div><p><span style="font-family:var(--mono);font-size:13px">run_python("2 * 4**1.5") → 16.0</span> ✓</p></div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">What CoT does</div><p>Turns words into a plan: parse, recall, set up the relation</p></div>
-          <div class="card"><div class="k">What remains</div><p>Arithmetic: a separate, tool-friendly step</p></div>
-          <div class="card accent"><div class="k">Essence</div><p>Explicit steps; exact numbers are a separate skill</p></div>
-        </div>
-      </div>
-      <div class="keyline">CoT writes the plan; the tool computes the number.</div>
-    </div>
-    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 53</span></div>
   </section>
 
   <!-- ============ S29 · Context 膨胀 ============ -->
@@ -2077,6 +2054,31 @@
     <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 53</span></div>
   </section>
 
+  <!-- ============ S28 · CoT ============ -->
+  <section class="slide" data-notes="CoT 擅长把文字题拆成逻辑步骤：识别定律、设关系、定运算；它不保证算术正确。算术交给程序。范围是言语与逻辑推理，不是精确计算。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>CoT: write the thinking down</h2>
+    <p class="micro" style="margin:8px 0 0">Scope: verbal and logical reasoning; arithmetic is a separate step.</p>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro">Question</p>
+          <p style="font-size:17px;margin:6px 0 12px">A period of 2 years; the semi-major axis grows 4×. What is the new period?</p>
+          <div class="promptbox bad"><div class="tag">Direct answer</div><p>8 years ✗ <span class="micro">— a number without a plan</span></p></div>
+          <div class="promptbox"><div class="tag">CoT · plan</div><p>T ∝ a<sup>3/2</sup>; T = 2 × 4<sup>3/2</sup></p><p class="micro">plan ✓ · arithmetic next</p></div>
+          <div class="promptbox good"><div class="tag">Tool · compute</div><p><span style="font-family:var(--mono);font-size:13px">run_python("2 * 4**1.5") → 16.0</span> ✓</p></div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">What CoT does</div><p>Turns words into a plan: parse, recall, set up the relation</p></div>
+          <div class="card"><div class="k">What remains</div><p>Arithmetic: a separate, tool-friendly step</p></div>
+          <div class="card accent"><div class="k">Essence</div><p>Explicit steps; exact numbers are a separate skill</p></div>
+        </div>
+      </div>
+      <div class="keyline">CoT writes the plan; the tool computes the number.</div>
+    </div>
+    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 53</span></div>
+  </section>
+
   <!-- ============ S32 · CoT pruning ============ -->
   <section class="slide" data-notes="推理模型会写很长的思维链。不是所有步骤都值得保留：剪枝、摘要、蒸馏、预算，都是为了让思考更短、更便宜。">
     <p class="eyebrow"><b>04</b> / application</p>
@@ -2108,6 +2110,37 @@
       <div class="keyline">Thinking has a budget too.</div>
     </div>
     <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 53</span></div>
+  </section>
+
+  <!-- ============ S35 · Memory ============ -->
+  <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Memory: signal and noise</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro">What is in the window</p>
+          <div class="memgrid">
+            <div class="box sig"><b>Signal</b><span>Task · constraints · decisions · verified facts</span></div>
+            <div class="box noi"><b>Noise</b><span>Chat · repetition · stale info · raw logs</span></div>
+          </div>
+          <div class="memacts">
+            <div><b>Write</b><span>Store decisions and facts only</span></div>
+            <div><b>Retrieve</b><span>Fetch for the current task</span></div>
+            <div><b>Compress</b><span>Summarize, merge</span></div>
+            <div><b>Forget</b><span>Delete when stale</span></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">Working memory</div><p>The current window; only what this step needs</p></div>
+          <div class="card"><div class="k">Episodic memory</div><p>Past summaries; decisions and open questions</p></div>
+          <div class="card"><div class="k">Semantic memory</div><p>External store + retrieval; fetch on demand</p></div>
+          <div class="card accent"><div class="k">Procedural memory</div><p>system + tools; rules and capabilities</p></div>
+        </div>
+      </div>
+      <div class="keyline">Memory works by selection: store little, retrieve precisely.</div>
+    </div>
+    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -2152,37 +2185,6 @@
     <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 53</span></div>
   </section>
 
-
-  <!-- ============ S35 · Memory ============ -->
-  <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Memory: signal and noise</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">What is in the window</p>
-          <div class="memgrid">
-            <div class="box sig"><b>Signal</b><span>Task · constraints · decisions · verified facts</span></div>
-            <div class="box noi"><b>Noise</b><span>Chat · repetition · stale info · raw logs</span></div>
-          </div>
-          <div class="memacts">
-            <div><b>Write</b><span>Store decisions and facts only</span></div>
-            <div><b>Retrieve</b><span>Fetch for the current task</span></div>
-            <div><b>Compress</b><span>Summarize, merge</span></div>
-            <div><b>Forget</b><span>Delete when stale</span></div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">Working memory</div><p>The current window; only what this step needs</p></div>
-          <div class="card"><div class="k">Episodic memory</div><p>Past summaries; decisions and open questions</p></div>
-          <div class="card"><div class="k">Semantic memory</div><p>External store + retrieval; fetch on demand</p></div>
-          <div class="card accent"><div class="k">Procedural memory</div><p>system + tools; rules and capabilities</p></div>
-        </div>
-      </div>
-      <div class="keyline">Memory works by selection: store little, retrieve precisely.</div>
-    </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
-  </section>
 
   <!-- ============ S36 · Reference case: Claude Code review ============ -->
   <section class="slide" data-notes="Case 1/4: the bottleneck. Source: Osmani, Lunt and Wang, How the Claude Code team does code review, 2026-10-15. Agents produce code faster than humans can review it line by line. The article reports about 2,500 changes landing per day in Anthropic's monorepo in May and over 30,000 in September 2026. These are landed changes, not necessarily git commit counts. Claude Code has its own separate repository: June to September merged pull requests more than doubled and the reverted share fell over 40 percent. Keep these populations and metrics distinct. These are team-reported observations, not controlled causal evidence. The objective counts both human review time and human time repairing failures. The next three pages show the system response: layered checks, risk-based human review and incidents becoming evals. This is a reference example for academic audiences; specific research workflows are outside our scope.">

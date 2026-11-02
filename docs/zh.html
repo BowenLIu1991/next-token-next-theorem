@@ -1888,13 +1888,15 @@
   <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>从会说话到会干活</h2>
+    <p class="sub" style="margin-top:8px">两条补足线：Context 管理状态与历史；Harness 管理计算与执行。</p>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">会说话 · 2023</div><div class="big" style="font-size:24px">ChatGPT</div><p>指令微调 + RLHF<br>prompt / system</p></div>
-        <div class="card"><div class="k">会思考</div><div class="big" style="font-size:24px">CoT</div><p>写出中间步骤<br>context engineering · pruning</p></div>
-        <div class="card accent"><div class="k">会干活</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>memory</p></div>
+        <div class="card"><div class="k">会说话 · 2023 · Context</div><div class="big" style="font-size:24px">ChatGPT</div><p>指令微调 + RLHF<br>prompt / system</p></div>
+        <div class="card"><div class="k">会思考 · CoT · Context</div><div class="big" style="font-size:24px">CoT</div><p>把中间步骤写进上下文<br>context engineering · pruning</p></div>
+        <div class="card accent"><div class="k">会干活 · Agent · Harness</div><div class="big" style="font-size:24px">Agent</div><p>tool calling · loop<br>外部状态与验证</p></div>
       </div>
-      <div class="keyline">每一步都在解决前一步留下的问题。</div>
+      <div class="scaleband" style="margin-top:22px">A · 状态线：Prompt → Context → Memory　　B · 执行线：Tools → Agent → Harness</div>
+      <div class="keyline">两条线，补两个短板。</div>
     </div>
     <div class="footer"><span>chat → reason → act</span><span class="pnum">25 / 53</span></div>
   </section>
@@ -1967,31 +1969,6 @@
       <div class="keyline">加内容，就是在改<b>条件概率</b>。</div>
     </div>
     <div class="footer"><span>prompt engineering</span><span class="pnum">27 / 53</span></div>
-  </section>
-
-  <!-- ============ S28 · CoT ============ -->
-  <section class="slide" data-notes="多步问题，直接给答案容易错。CoT 让模型把中间步骤写出来，每个 token 都是一次额外计算。代价是更慢、更贵，也可能绕圈。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>CoT：把思考写出来</h2>
-    <p class="micro" style="margin:8px 0 0">范围：言语与逻辑推理；算术是另一件事。</p>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">问题</p>
-          <p style="font-size:17px;margin:6px 0 12px">周期 2 年，半长轴变为 4 倍，周期变成多少？</p>
-          <div class="promptbox bad"><div class="tag">直接答</div><p>8 年 ✗ <span class="micro">—— 一个没有计划的数字</span></p></div>
-          <div class="promptbox"><div class="tag">CoT · 计划</div><p>T ∝ a<sup>3/2</sup>；T = 2 × 4<sup>3/2</sup></p><p class="micro">计划 ✓ · 算术下一步</p></div>
-          <div class="promptbox good"><div class="tag">工具 · 计算</div><p><span style="font-family:var(--mono);font-size:13px">run_python("2 * 4**1.5") → 16.0</span> ✓</p></div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">CoT 做什么</div><p>把文字题拆成计划：识别、回忆、设关系</p></div>
-          <div class="card"><div class="k">剩下什么</div><p>算术：另一件适合工具的事</p></div>
-          <div class="card accent"><div class="k">本质</div><p>显式步骤；精确数字是另一项能力</p></div>
-        </div>
-      </div>
-      <div class="keyline">CoT 负责写计划；程序负责算数。</div>
-    </div>
-    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 53</span></div>
   </section>
 
   <!-- ============ S29 · Context 膨胀 ============ -->
@@ -2075,6 +2052,31 @@
     <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 53</span></div>
   </section>
 
+  <!-- ============ S28 · CoT ============ -->
+  <section class="slide" data-notes="多步问题，直接给答案容易错。CoT 让模型把中间步骤写出来，每个 token 都是一次额外计算。代价是更慢、更贵，也可能绕圈。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>CoT：把思考写出来</h2>
+    <p class="micro" style="margin:8px 0 0">范围：言语与逻辑推理；算术是另一件事。</p>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro">问题</p>
+          <p style="font-size:17px;margin:6px 0 12px">周期 2 年，半长轴变为 4 倍，周期变成多少？</p>
+          <div class="promptbox bad"><div class="tag">直接答</div><p>8 年 ✗ <span class="micro">—— 一个没有计划的数字</span></p></div>
+          <div class="promptbox"><div class="tag">CoT · 计划</div><p>T ∝ a<sup>3/2</sup>；T = 2 × 4<sup>3/2</sup></p><p class="micro">计划 ✓ · 算术下一步</p></div>
+          <div class="promptbox good"><div class="tag">工具 · 计算</div><p><span style="font-family:var(--mono);font-size:13px">run_python("2 * 4**1.5") → 16.0</span> ✓</p></div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">CoT 做什么</div><p>把文字题拆成计划：识别、回忆、设关系</p></div>
+          <div class="card"><div class="k">剩下什么</div><p>算术：另一件适合工具的事</p></div>
+          <div class="card accent"><div class="k">本质</div><p>显式步骤；精确数字是另一项能力</p></div>
+        </div>
+      </div>
+      <div class="keyline">CoT 负责写计划；程序负责算数。</div>
+    </div>
+    <div class="footer"><span>chain of thought</span><span class="pnum">28 / 53</span></div>
+  </section>
+
   <!-- ============ S32 · CoT pruning ============ -->
   <section class="slide" data-notes="推理模型会写很长的思维链。不是所有步骤都值得保留：剪枝、摘要、蒸馏、预算，都是为了让思考更短、更便宜。">
     <p class="eyebrow"><b>04</b> / application</p>
@@ -2106,6 +2108,37 @@
       <div class="keyline">思考也有预算。</div>
     </div>
     <div class="footer"><span>pruning · distillation · budget</span><span class="pnum">32 / 53</span></div>
+  </section>
+
+  <!-- ============ S35 · Memory ============ -->
+  <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Memory：信号与噪声</h2>
+    <div class="content">
+      <div class="two">
+        <div>
+          <p class="micro">窗口里的内容</p>
+          <div class="memgrid">
+            <div class="box sig"><b>信号</b><span>任务 · 约束 · 决定 · 已验证事实</span></div>
+            <div class="box noi"><b>噪声</b><span>闲聊 · 重复 · 过期 · 原始日志</span></div>
+          </div>
+          <div class="memacts">
+            <div><b>写入</b><span>只存决定与事实</span></div>
+            <div><b>检索</b><span>按当前任务取</span></div>
+            <div><b>压缩</b><span>摘要、合并</span></div>
+            <div><b>遗忘</b><span>过期即删</span></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">工作记忆</div><p>当前窗口；只放这次要用的</p></div>
+          <div class="card"><div class="k">情节记忆</div><p>历史摘要；决定与未决问题</p></div>
+          <div class="card"><div class="k">语义记忆</div><p>外部库 + 检索；按需取</p></div>
+          <div class="card accent"><div class="k">程序记忆</div><p>system + tools；规则与能力</p></div>
+        </div>
+      </div>
+      <div class="keyline">记忆的关键是取得准。</div>
+    </div>
+    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -2150,37 +2183,6 @@
     <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 53</span></div>
   </section>
 
-
-  <!-- ============ S35 · Memory ============ -->
-  <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Memory：信号与噪声</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">窗口里的内容</p>
-          <div class="memgrid">
-            <div class="box sig"><b>信号</b><span>任务 · 约束 · 决定 · 已验证事实</span></div>
-            <div class="box noi"><b>噪声</b><span>闲聊 · 重复 · 过期 · 原始日志</span></div>
-          </div>
-          <div class="memacts">
-            <div><b>写入</b><span>只存决定与事实</span></div>
-            <div><b>检索</b><span>按当前任务取</span></div>
-            <div><b>压缩</b><span>摘要、合并</span></div>
-            <div><b>遗忘</b><span>过期即删</span></div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">工作记忆</div><p>当前窗口；只放这次要用的</p></div>
-          <div class="card"><div class="k">情节记忆</div><p>历史摘要；决定与未决问题</p></div>
-          <div class="card"><div class="k">语义记忆</div><p>外部库 + 检索；按需取</p></div>
-          <div class="card accent"><div class="k">程序记忆</div><p>system + tools；规则与能力</p></div>
-        </div>
-      </div>
-      <div class="keyline">记忆的关键是取得准。</div>
-    </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
-  </section>
 
   <!-- ============ S36 · 参考案例：Claude Code 代码审查 ============ -->
   <section class="slide" data-notes="案例第一幕：人的卡点。来源：Osmani、Lunt、Wang，How the Claude Code team does code review（2026-10-15）。先讲问题：Agent 产出增长，逐行人工审查来不及。约 2,500 到 30,000 多指 Anthropic monorepo 每日落地变更，时间为 2026 年 5 到 9 月，不等同于 git commit 数量。Claude Code 有独立仓库；后者 6 到 9 月合并 PR 超过翻倍，回滚占比下降超过 40%。两组数据对象不同，属于团队自述观察，不是受控因果实验。目标同时计算人的审查时间和故障修复时间，以免把工作从审查挪到修复。后三页展示系统怎样接住瓶颈：分层检查、按风险安排人工、事故进入评测回路。具体科研问题的解决方式不在本报告范围内。">
