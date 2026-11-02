@@ -842,22 +842,22 @@
           <div class="k">03 · Systems &amp; engineering</div>
           <h3>Put the model in a system</h3>
           <p>Context · agents · code review</p>
-          <div class="range">p. 24–39</div>
-          <div class="maplinks"><span class="maplink" data-goto="34">Claude Code</span><span class="maplink" data-goto="38">System map</span></div>
+          <div class="range">p. 24–40</div>
+          <div class="maplinks"><span class="maplink" data-goto="35">Claude Code</span><span class="maplink" data-goto="39">System map</span></div>
         </div>
-        <div class="card mapcard" data-goto="39" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="40" role="button" tabindex="0">
           <div class="k">04 · AI × math</div>
           <h3>From tools to search</h3>
           <p>Acceleration · timeline · pattern</p>
-          <div class="range">p. 40–45</div>
-          <div class="maplinks"><span class="maplink" data-goto="40">Timeline</span><span class="maplink" data-goto="42">Pattern</span></div>
+          <div class="range">p. 41–46</div>
+          <div class="maplinks"><span class="maplink" data-goto="41">Timeline</span><span class="maplink" data-goto="43">Pattern</span></div>
         </div>
-        <div class="card mapcard" data-goto="45" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="46" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>Back to practice</h3>
           <p>Workflow · compounding · close</p>
-          <div class="range">p. 46–52</div>
-          <div class="maplinks"><span class="maplink" data-goto="48">Two attempts</span><span class="maplink" data-goto="51">Close</span></div>
+          <div class="range">p. 47–53</div>
+          <div class="maplinks"><span class="maplink" data-goto="49">Two attempts</span><span class="maplink" data-goto="52">Close</span></div>
         </div>
       </div>
       <p class="micro" style="margin-top:14px">6 sections · 52 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
@@ -1864,6 +1864,26 @@
       <div class="keyline">The environment supplies feedback; <b>loss turns it into parameter updates</b>.</div>
     </div>
     <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
+  </section>
+
+  <!-- ============ S24d · Two limits of the model ============ -->
+  <section class="slide" data-notes="This is the bridge from the model section into systems. After RL, the core capability is still next-token prediction. The model has no memory across calls: each call is independent, and a conversation is the client resending the history; without prior text, the pronoun “it” has no referent. Its arithmetic is not program execution either: tokens are generated from a data distribution, so a plausible-looking answer can be wrong. Two external complements follow. Context management brings history, references and constraints back into the window; memory and retrieval are external mechanisms. The harness and tool calls delegate exact computation, code execution and external actions to programs and environments, then check results. The model predicts; the system owns state, execution and verification.">
+    <p class="eyebrow"><b>03</b> / from model to system</p>
+    <h2>The model predicts, but has two limits</h2>
+    <p class="sub" style="margin-top:8px">After RL, capability stays inside the model; memory, computation and checks need a system.</p>
+    <div class="content">
+      <div class="two even" style="gap:20px">
+        <div class="card" style="padding:16px 20px"><div class="k">Limit 01 · No memory</div><div class="big" style="font-size:24px">Each call is independent</div><p style="font-size:18px">A “conversation” resends history; without it, “it” has no referent.</p></div>
+        <div class="card" style="padding:16px 20px"><div class="k">Limit 02 · Unreliable arithmetic</div><div class="big" style="font-size:24px">Generated, not executed</div><p style="font-size:18px">A plausible calculation can still be wrong; exact work belongs in programs.</p></div>
+      </div>
+      <div class="scaleband" style="margin-top:18px">Two complements: move state and execution outside the model.</div>
+      <div class="two even" style="gap:20px;margin-top:14px">
+        <div class="card accent" style="padding:14px 20px"><div class="k">Context management</div><p style="font-size:18px;margin:0">Bring history, references and constraints into the window; memory and retrieval stay external.</p></div>
+        <div class="card accent" style="padding:14px 20px"><div class="k">Harness · tool calls</div><p style="font-size:18px;margin:0">Delegate exact computation and actions to programs and environments; check results.</p></div>
+      </div>
+      <div class="keyline">The model predicts; <b>memory, computation and checks</b> come from the system.</div>
+    </div>
+    <div class="footer"><span>stateless · unreliable arithmetic · context &amp; tools</span><span class="pnum">24 / 53</span></div>
   </section>
 
   <!-- ============ S25 · 从会说话到会干活 ============ -->
