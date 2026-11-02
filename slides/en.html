@@ -841,26 +841,26 @@
         <div class="card mapcard" data-goto="23" role="button" tabindex="0">
           <div class="k">03 · Systems &amp; engineering</div>
           <h3>Put the model in a system</h3>
-          <p>Context · agents · code review</p>
-          <div class="range">p. 24–35</div>
-          <div class="maplinks"><span class="maplink" data-goto="30">Claude Code</span><span class="maplink" data-goto="34">System map</span></div>
+          <p>Context · harness · skills</p>
+          <div class="range">p. 24–30</div>
+          <div class="maplinks"><span class="maplink" data-goto="27">Harness</span><span class="maplink" data-goto="28">System map</span><span class="maplink" data-goto="29">Skill</span></div>
         </div>
-        <div class="card mapcard" data-goto="35" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="30" role="button" tabindex="0">
           <div class="k">04 · AI × math</div>
           <h3>From tools to search</h3>
           <p>Acceleration · timeline · pattern</p>
-          <div class="range">p. 36–41</div>
-          <div class="maplinks"><span class="maplink" data-goto="36">Timeline</span><span class="maplink" data-goto="38">Pattern</span></div>
+          <div class="range">p. 31–36</div>
+          <div class="maplinks"><span class="maplink" data-goto="31">Timeline</span><span class="maplink" data-goto="33">Pattern</span></div>
         </div>
-        <div class="card mapcard" data-goto="41" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="36" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>Back to practice</h3>
           <p>Workflow · compounding · close</p>
-          <div class="range">p. 42–48</div>
-          <div class="maplinks"><span class="maplink" data-goto="44">Two attempts</span><span class="maplink" data-goto="47">Close</span></div>
+          <div class="range">p. 37–38</div>
+          <div class="maplinks"><span class="maplink" data-goto="37">Close</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 sections · 48 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
+      <p class="micro" style="margin-top:14px">6 sections · 38 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -1931,252 +1931,123 @@
     <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 53</span></div>
   </section>
 
-  <!-- ============ S30 · 大海捞针 ============ -->
-  <section class="slide" data-notes="上下文窗口是固定预算。大海捞针测试：在长文里藏一句话，问模型那句话是什么；换长度、换位置，重复很多次。结果是越长越难，中间位置最差。窗口大不等于找得到。">
+  <!-- ============ S30 · Context and memory ============ -->
+  <section class="slide" data-notes="This merges three pages: finite context, context engineering, and memory. The window grew from 4k to 1M, but long documents still suffer from the needle-in-a-haystack problem, and the middle is diluted first. Capacity is not effective use. Treat the window as a workbench: system, history, retrieved documents, tool results, and the current question each get a layer. Too long: retrieve. Too scattered: structure. Overflow: summarize or use sub-agents. Memory keeps signal—tasks, constraints, decisions, verified facts—and drops noise such as chat, repetition, stale information, and raw logs. Write, retrieve, compress, forget; working, episodic, semantic, procedural.">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context is finite</h2>
+    <h2>Context and memory: a finite window, used well</h2>
+    <p class="sub" style="margin-top:8px">The window is a budget, not a warehouse: place the right things, then decide what stays.</p>
     <div class="content">
-      <p class="micro">Needle in a haystack: hide one sentence in a long document</p>
-      <div class="needle">
-        <span class="pin" style="left:70%"></span>
-        <span class="lab" style="left:70%">needle</span>
-      </div>
-      <div class="two" style="margin-top:24px">
-        <div>
-          <p class="micro">Retrieval accuracy (illustrative)</p>
-          <div class="heatwrap">
+      <div class="three" style="gap:16px;align-items:stretch">
+        <div class="card" style="padding:14px 16px;justify-content:flex-start">
+          <div class="k">01 · Finite window</div>
+          <div class="big" style="font-size:21px">4k → 1M, still lossy</div>
+          <p style="font-size:14px;line-height:1.5;margin-top:6px">Needle in a haystack: the middle is diluted first.</p>
+          <div class="heatwrap" style="margin-top:8px;grid-template-columns:30px 1fr">
             <div class="heaty"><span>4k</span><span>8k</span><span>32k</span><span>128k</span></div>
             <div class="heat"><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.40"></i><i style="--a:0.40"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.30"></i><i style="--a:0.20"></i><i style="--a:0.20"></i><i style="--a:0.30"></i><i style="--a:0.50"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.35"></i><i style="--a:0.18"></i><i style="--a:0.10"></i><i style="--a:0.10"></i><i style="--a:0.18"></i><i style="--a:0.35"></i><i style="--a:0.50"></i></div>
           </div>
-          <p class="micro" style="margin-top:8px">Horizontal axis: needle position 0 → 100%</p>
+          <p class="micro" style="margin-top:6px">Illustrative · Liu et al., 2023</p>
+          <p style="font-size:13px;margin-top:6px">Capacity ≠ effective use.</p>
         </div>
-        <div class="stack">
-          <div class="card"><div class="k">Method</div><p>Hide a sentence, vary length and position, ask what it was</p></div>
-          <div class="card"><div class="k">Observed failure mode</div><p>Length and position can affect retrieval; behavior varies by model and task</p></div>
-          <div class="card accent"><div class="k">Implication</div><p>A big window is a budget; retrieval still matters</p></div>
+        <div class="card" style="padding:14px 16px;justify-content:flex-start">
+          <div class="k">02 · Placement</div>
+          <div class="big" style="font-size:21px">Workbench, not warehouse</div>
+          <div class="ctxwin" style="margin-top:8px;padding:7px;gap:4px">
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">system · rules</div>
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">history · recent turns</div>
+            <div class="blk hl" style="padding:5px 8px;font-size:10.5px">retrieval · relevant docs</div>
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">tools · returned results</div>
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">current · this question</div>
+          </div>
+          <p style="font-size:13px;line-height:1.5;margin-top:8px">Too long→retrieve; too scattered→structure; overflow→summarize or sub-agents.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;justify-content:flex-start">
+          <div class="k">03 · Retention</div>
+          <div class="big" style="font-size:21px">Signal, not logs</div>
+          <div class="memgrid" style="margin-top:8px;gap:6px">
+            <div class="box sig" style="padding:7px"><b style="font-size:11.5px">Signal</b><span style="font-size:10px">tasks · constraints · decisions · facts</span></div>
+            <div class="box noi" style="padding:7px"><b style="font-size:11.5px">Noise</b><span style="font-size:10px">chat · repetition · stale · raw logs</span></div>
+          </div>
+          <div class="memacts" style="margin-top:8px;gap:4px 12px">
+            <div style="padding-top:4px"><b>WRITE</b><span>decisions and facts only</span></div>
+            <div style="padding-top:4px"><b>RETRIEVE</b><span>for this task</span></div>
+            <div style="padding-top:4px"><b>COMPRESS</b><span>summarize, merge</span></div>
+            <div style="padding-top:4px"><b>FORGET</b><span>delete stale</span></div>
+          </div>
+          <p class="micro" style="margin-top:6px">working · episodic · semantic · procedural</p>
         </div>
       </div>
-      <p class="micro" style="margin:12px 0 0">Schematic, not measured data · See Liu et al., Lost in the Middle (2023).</p>
-      <div class="keyline">Window capacity and <b>effective use of context</b> are different measures.</div>
+      <div class="keyline">Capacity ≠ effective use; Context decides <b>what goes in</b>, Memory decides <b>what stays</b>.</div>
     </div>
-    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 53</span></div>
-  </section>
-
-  <!-- ============ S31 · Context ============ -->
-  <section class="slide" data-notes="上下文窗口是工作台，不是仓库。放什么、怎么放，比放多少更重要。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context engineering: the window is a workbench</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">What goes in the window</p>
-          <div class="ctxwin">
-            <div class="blk">system: rules</div>
-            <div class="blk">history: recent turns</div>
-            <div class="blk hl">retrieval: relevant documents</div>
-            <div class="blk">tools: returned results</div>
-            <div class="blk">current: this question</div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">Too long</div><p>Retrieve; keep only what is relevant</p></div>
-          <div class="card"><div class="k">Too scattered</div><p>Structure it; label the blocks</p></div>
-          <div class="card"><div class="k">Lost in the middle</div><p>Put key facts at the start and end</p></div>
-          <div class="card accent"><div class="k">Overflow</div><p>Compress, summarize, sub-agents</p></div>
-        </div>
-      </div>
-      <div class="keyline">Relevance beats length.</div>
-    </div>
-    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 53</span></div>
-  </section>
-
-  <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Memory: signal and noise</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">What is in the window</p>
-          <div class="memgrid">
-            <div class="box sig"><b>Signal</b><span>Task · constraints · decisions · verified facts</span></div>
-            <div class="box noi"><b>Noise</b><span>Chat · repetition · stale info · raw logs</span></div>
-          </div>
-          <div class="memacts">
-            <div><b>Write</b><span>Store decisions and facts only</span></div>
-            <div><b>Retrieve</b><span>Fetch for the current task</span></div>
-            <div><b>Compress</b><span>Summarize, merge</span></div>
-            <div><b>Forget</b><span>Delete when stale</span></div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">Working memory</div><p>The current window; only what this step needs</p></div>
-          <div class="card"><div class="k">Episodic memory</div><p>Past summaries; decisions and open questions</p></div>
-          <div class="card"><div class="k">Semantic memory</div><p>External store + retrieval; fetch on demand</p></div>
-          <div class="card accent"><div class="k">Procedural memory</div><p>system + tools; rules and capabilities</p></div>
-        </div>
-      </div>
-      <div class="keyline">Memory works by selection: store little, retrieve precisely.</div>
-    </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
+    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">26 / 53</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
-  <section class="slide" data-notes="模型自己算 4**1.5 可能错；它只需要写一行 Python，由运行时执行，结果回到上下文。工具不只是计算器，也是模型接触外部世界的接口。">
+  <section class="slide" data-notes="Tool calling is a protocol, not the model executing code. First define the signature: name, arguments, return. The model sees the tool description, emits a tool_call, the runtime validates arguments, executes in a sandbox, and returns stdout / stderr as an observation in the context. In the example, Python computes 4**1.5; the model only has to write the right call. Tool output is still untrusted input: limit permissions, set timeouts, keep logs. The tool description is itself context; clear names and arguments change call quality.">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Tool calling: let a program do the arithmetic</h2>
     <div class="content">
-      <div class="two">
-        <div class="panel">
-          <div class="sentence">Tool: run_python(code: str) → str</div>
-          <div class="idrow" style="margin-top:10px;color:#cfd2d9">call&nbsp; run_python("print(2 * 4**1.5)")<br>obs&nbsp;&nbsp; 16.0</div>
-          <div class="idrow" style="margin-top:12px;color:#8b8f98">// T = 2 × 4**1.5 = 16</div>
+      <div class="two" style="gap:34px">
+        <div class="panel" style="padding:18px 20px">
+          <div class="sentence" style="font-size:12px;margin-bottom:7px;color:#8b8f98">tool schema</div>
+          <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.65;color:#cfd2d9;white-space:pre-wrap">{
+  "name": "run_python",
+  "args": {"code": "str"},
+  "returns": "str",
+  "limits": ["sandbox", "timeout"]
+}</pre>
+          <div class="sentence" style="font-size:12px;margin:14px 0 7px;color:#8b8f98">one call</div>
+          <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.65;color:#cfd2d9;white-space:pre-wrap">call  run_python("print(2 * 4**1.5)")
+obs   "16.0"</pre>
+          <div class="idrow" style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);color:#8b8f98;font-size:11px">// T = 2 × 4**1.5 = 16</div>
+          <div class="micro" style="margin-top:10px;color:#8b8f98">calc · code · search · database · files · APIs</div>
+        </div>
+        <div class="stack" style="gap:10px">
+          <div class="card" style="padding:12px 14px"><div class="k">01 Define</div><p style="font-size:14.5px">Name, arguments, return, boundary; the description is context too.</p></div>
+          <div class="card" style="padding:12px 14px"><div class="k">02 Call</div><p style="font-size:14.5px">The model emits a tool_call; it proposes, does not execute.</p></div>
+          <div class="card" style="padding:12px 14px"><div class="k">03 Execute</div><p style="font-size:14.5px">The runtime validates arguments and runs in a sandbox; timeouts and permissions are system concerns.</p></div>
+          <div class="card accent" style="padding:12px 14px"><div class="k">04 Observe</div><p style="font-size:14.5px">stdout / stderr return to the context; the model decides to continue or stop.</p></div>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:18px">Tool output is still <b>untrusted input</b>: validate arguments, limit permissions, set timeouts, keep logs.</div>
+      <div class="keyline">The model proposes, the program executes, <b>the system owns the boundary</b>.</div>
+    </div>
+    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">27 / 53</span></div>
+  </section>
+
+  <!-- ============ S34b · Harness ============ -->
+  <section class="slide" data-notes="Harness handles what the model cannot guarantee: whether a call is legal, whether it can run, whether the result is correct, and whether a failure can be stopped. It does not make the model smarter; it puts proposals inside a boundary that can be checked, stopped, and reproduced: tool registration and argument validation, sandbox and permissions, timeouts and retries, result verification, rollback and stopping, and logs. The controlled loop is propose → validate → execute → observe → verify → continue or stop.">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Harness: turn probabilistic output into a runnable system</h2>
+    <p class="sub" style="margin-top:8px">The model proposes; the harness makes the proposal legal, executable, checkable, and stoppable.</p>
+    <div class="content">
+      <div class="two" style="grid-template-columns:1.05fr .95fr;gap:32px">
+        <div>
+          <p class="micro">A controlled loop</p>
+          <div class="loop" style="margin-top:10px;padding-top:0;border-top:0;flex-wrap:wrap;justify-content:flex-start;gap:6px">
+            <span class="step" style="padding:7px 9px;font-size:12px">Propose</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 9px;font-size:12px">Validate</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 9px;font-size:12px">Execute</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 9px;font-size:12px">Observe</span><span class="arr">→</span>
+            <span class="step hl" style="padding:7px 9px;font-size:12px">Verify</span><span class="arr">→</span>
+            <span class="step hl" style="padding:7px 9px;font-size:12px">Decide</span>
+          </div>
+          <div class="card" style="margin-top:16px;padding:14px 16px">
+            <div class="k">What the harness owns</div>
+            <p style="font-size:15px">Tool registry and argument validation · sandbox and permissions · timeouts and retries · result verification · rollback and stop · logs and replay</p>
+          </div>
+          <div class="scaleband" style="margin-top:16px">It does not add intelligence; it makes errors <b>visible, stoppable, reproducible</b>.</div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">01 Define</div><p>Tool signature: name, arguments, return</p></div>
-          <div class="card"><div class="k">02 Call</div><p>The model emits a snippet</p></div>
-          <div class="card"><div class="k">03 Execute</div><p>It really runs, in a sandbox</p></div>
-          <div class="card accent"><div class="k">04 Observe</div><p>The result returns to the context; continue</p></div>
+          <div class="card"><div class="k">01 Permissions &amp; sandbox</div><p>What may run, what may not; constrain before execution</p></div>
+          <div class="card"><div class="k">02 Timeouts &amp; retries</div><p>Failure must not loop forever; retries have a limit</p></div>
+          <div class="card"><div class="k">03 Verification &amp; rollback</div><p>Is the result right? Can a bad change be undone?</p></div>
+          <div class="card accent"><div class="k">04 Logs &amp; stopping</div><p>Can it be reproduced? When must it stop?</p></div>
         </div>
       </div>
-      <div class="keyline">The model proposes; the program computes.</div>
+      <div class="keyline">The model provides probability; the harness provides the <b>boundary</b>.</div>
     </div>
-    <div class="footer"><span>function calling</span><span class="pnum">33 / 53</span></div>
-  </section>
-
-  <!-- ============ S34 · Agent 与客户端 ============ -->
-  <section class="slide" data-notes="这是真实的 agent 客户端截图。左边是循环：Thought → 工具调用 → 观察，重复。右上是上下文用量，底部是模型、模式和这次会话的成本。模型只负责提议，客户端负责执行、记录、计费和停手。">
-    <p class="eyebrow"><b>03</b> / agent</p>
-    <h2>Agent: the model inside a loop</h2>
-    <div class="content">
-      <div class="agent">
-        <img class="shot-wide" src="../assets/figures/agent_client.png" alt="Agent client: thoughts, tool calls, context and cost">
-        <div class="anno">
-          <div class="item"><div class="n">01</div><h4>Loop</h4><p>Thought → tool call → observation, repeat</p></div>
-          <div class="item"><div class="n">02</div><h4>Context</h4><p>234K tokens · 23% used · $0.22</p></div>
-          <div class="item"><div class="n">03</div><h4>Client</h4><p>Model + tools + session + billing</p></div>
-          <div class="item"><div class="n">04</div><h4>Model</h4><p>DeepSeek V4.1 Flash · high</p></div>
-        </div>
-      </div>
-      <div class="keyline">The model proposes; the client turns proposals into <b>actions</b>.</div>
-    </div>
-    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 53</span></div>
-  </section>
-
-
-  <!-- ============ S36 · Reference case: Claude Code review ============ -->
-  <section class="slide" data-notes="Case 1/4: the bottleneck. Source: Osmani, Lunt and Wang, How the Claude Code team does code review, 2026-10-15. Agents produce code faster than humans can review it line by line. The article reports about 2,500 changes landing per day in Anthropic's monorepo in May and over 30,000 in September 2026. These are landed changes, not necessarily git commit counts. Claude Code has its own separate repository: June to September merged pull requests more than doubled and the reverted share fell over 40 percent. Keep these populations and metrics distinct. These are team-reported observations, not controlled causal evidence. The objective counts both human review time and human time repairing failures. The next three pages show the system response: layered checks, risk-based human review and incidents becoming evals. This is a reference example for academic audiences; specific research workflows are outside our scope.">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>When code outruns human review</h2>
-    <p class="sub" style="margin-top:8px">Claude Code's review problem: code scales faster than human attention.</p>
-    <div class="content" style="margin-top:22px">
-      <div class="two even" style="gap:32px;align-items:center">
-        <div class="card" style="padding:18px 20px">
-          <div class="k">Scale pressure · Anthropic monorepo</div>
-          <div style="font-family:var(--mono);font-size:46px;line-height:1.3;letter-spacing:-.04em">2,500 → <b style="color:var(--accent)">30,000+</b></div>
-          <p style="font-size:18px">Changes landing per day · May → Sep 2026</p>
-          <p class="micro" style="font-size:13px">Claude Code has a separate repository.</p>
-        </div>
-        <div class="stack" style="gap:12px">
-          <div class="card" style="padding:14px 20px"><div class="k">Production</div><p style="font-size:20px;margin:0">Agents write more code, faster.</p></div>
-          <div class="card accent" style="padding:14px 20px"><div class="k">Bottleneck</div><p style="font-size:20px;margin:0">Human review time stays limited.</p></div>
-          <div class="card" style="padding:14px 20px"><div class="k">Consequence</div><p style="font-size:20px;margin:0">Line-by-line review cannot keep up.</p></div>
-        </div>
-      </div>
-      <div class="scaleband" style="margin-top:22px">Goal: reduce <b>review + repair time</b>, with reverts and incidents as guardrails.</div>
-      <div class="keyline">The next gain comes from <b>redesigning review</b>.</div>
-      <p class="micro" style="margin:10px 0 0;font-size:11.5px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
-    </div>
-    <div class="footer"><span>reference case · the human bottleneck · 1 / 4</span><span class="pnum">36 / 53</span></div>
-  </section>
-
-  <!-- ============ S37 · Review case: context ============ -->
-  <section class="slide" data-notes="Part 2 of the reference case. Source: Osmani, Lunt and Wang, How the Claude Code team does code review, 2026-10-15. CLAUDE.md tells the reviewer the project's stack, conventions, goals and non-goals. Keep it short and link to further material. REVIEW.md is written by code owners and describes local failure modes, paths to skip, limits on low-value comments, and the evidence required for a finding. The team checks separately whether reviewers follow these instructions. Before a pull request, a subagent reviews the diff with fresh context; review should consider the repository and the stated intent, rather than only the author's explanation. Fresh context reduces inherited framing but does not guarantee independent errors. Repeat findings are moved upstream into instructions, skills or executable lint checks. These are concrete context assets from the software engineering example, not a prescribed research workflow.">
-    <p class="eyebrow"><b>04</b> / reference case · 2 / 4</p>
-    <h2>Move routine review into the system</h2>
-    <p class="sub" style="margin-top:8px">Checks throughout the workflow; human attention goes where it matters.</p>
-    <div class="content">
-      <div class="three" style="gap:18px">
-        <div class="card" style="padding:18px 20px;min-height:210px">
-          <div class="k">01 · Before submission</div><div class="big" style="font-size:23px">Produce evidence</div>
-          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>Run tests, build, inspect UI</li><li>Fresh-context agent review</li><li>Fix before opening review</li></ul>
-        </div>
-        <div class="card" style="padding:18px 20px;min-height:210px">
-          <div class="k">02 · During review</div><div class="big" style="font-size:23px">Layer the checks</div>
-          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>AI review; verify findings</li><li>Security &amp; automated tests</li><li>Resolve every finding</li></ul>
-        </div>
-        <div class="card accent" style="padding:18px 20px;min-height:210px">
-          <div class="k">03 · Approval &amp; release</div><div class="big" style="font-size:23px">Control the risk</div>
-          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>Risk-based human approval</li><li>Merge checks; staged release</li><li>Detect fast; roll back fast</li></ul>
-        </div>
-      </div>
-      <div class="scaleband" style="margin-top:24px"><b>Shared context:</b> CLAUDE.md = project conventions · REVIEW.md = local failure criteria + evidence.</div>
-      <div class="keyline">Routine checks run continuously; people focus on <b>judgment and risk</b>.</div>
-      <p class="micro" style="margin:12px 0 0;font-size:12px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
-    </div>
-    <div class="footer"><span>reference case · context assets · review criteria</span><span class="pnum">37 / 53</span></div>
-  </section>
-
-  <!-- ============ S38 · Review case: risk and responsibility ============ -->
-  <section class="slide" data-notes="Part 3 of the same reference case. This table summarizes the team's risk tiers, not a universal approval policy. Low-risk examples include documentation, copy and internal-only changes; medium includes ordinary product changes and some sensitive areas; high includes the highest-risk code and designated paths. The change, not the author's identity, determines the tier. Lighter paths are limited to trusted authors. Other authors require a second person. Additional classifiers and designated sensitive paths can require human review beyond a basic tier. An agent's approval cannot occupy a required human slot. The person who directed an agent-written change counts as a reviewer and is accountable. Approval applies to a specific commit; new commits the system cannot vouch for need renewed approval. Humans still decide whether the work should be done, assess architecture and risky code, read evidence and own the outcome. Merge checks, staged releases and rollback remain separate safeguards. These policies are examples of allocating attention, not guarantees of correctness.">
-    <p class="eyebrow"><b>04</b> / reference case · 3 / 4</p>
-    <h2>Human attention follows the risk</h2>
-    <p class="sub" style="margin-top:8px">The team's approval policy, with explicit ownership.</p>
-    <div class="content">
-      <table class="compare" style="font-size:19px;margin:0">
-        <thead><tr><th>Change risk</th><th>Examples</th><th>Human approvals</th></tr></thead>
-        <tbody>
-          <tr><td>Low</td><td>Docs, copy, internal-only features</td><td>0 required*</td></tr>
-          <tr><td>Medium</td><td>Ordinary product changes</td><td>1 person*</td></tr>
-          <tr><td>High</td><td>Highest-risk code; designated paths</td><td>2 people</td></tr>
-        </tbody>
-      </table>
-      <p class="micro" style="margin:12px 0 0">* Lighter paths: trusted authors only, after required checks. Sensitive paths may require extra approval.</p>
-      <div class="three" style="margin-top:22px;gap:18px">
-        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">Direction</div><p style="font-size:18px;margin:0">A person decides what to build.</p></div>
-        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">Evidence</div><p style="font-size:18px;margin:0">Approval covers a specific commit.</p></div>
-        <div class="card accent" style="min-height:112px;padding:16px 20px"><div class="k">Accountability</div><p style="font-size:18px;margin:0">The directing person owns the change.</p></div>
-      </div>
-      <div class="keyline">Required human approval stays <b>human</b>; responsibility stays <b>explicit</b>.</div>
-      <p class="micro" style="margin:12px 0 0;font-size:12px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
-    </div>
-    <div class="footer"><span>reference case · risk tiers · human ownership</span><span class="pnum">38 / 53</span></div>
-  </section>
-
-  <!-- ============ S39 · Review case: evals and stopping ============ -->
-  <section class="slide" data-notes="Part 4 of the reference case. Past incidents and reverts are confirmed by engineers familiar with the code and turned into eval cases. The reviewer runs on that set daily; changes to its prompts, tools or model should be rescored against it. The team measures real bug detection, false findings and review rounds; known-clean changes help detect harmful false positives. More comments do not automatically mean better review. The article reports one overnight PR with more than 50 review-and-fix rounds. About 59 percent of repeatedly flagged code had already been present at the first review. The revised policy asks the author to reconsider after three rounds, narrows later review to new diffs, flags bug classes instead of individual instances, and avoids reposting findings. A three-round escalation is an operational rule, not evidence that correctness is achieved in three rounds. This is the compounding loop: failures become confirmed eval cases, reusable review rules and executable checks. The case illustrates a method and its failure modes; it does not establish effectiveness in an academic domain.">
-    <p class="eyebrow"><b>04</b> / reference case · 4 / 4</p>
-    <h2>Make review improve — and stop</h2>
-    <p class="sub" style="margin-top:8px">Past failures become evals; review loops get escalation rules.</p>
-    <div class="content">
-      <div class="loop" style="margin-top:0">
-        <span class="step">Incident / revert</span><span class="arr">→</span>
-        <span class="step hl">Engineer-confirmed case</span><span class="arr">→</span>
-        <span class="step">Daily eval</span><span class="arr">→</span>
-        <span class="step">Reviewer update</span><span class="arr">↺</span>
-      </div>
-      <div class="two even" style="margin-top:24px;gap:24px">
-        <div class="card" style="padding:18px 20px">
-          <div class="k">Measure quality and cost</div>
-          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
-            <li>Real bugs found</li>
-            <li>False findings on clean changes</li>
-            <li>Rounds until review passes</li>
-          </ul>
-        </div>
-        <div class="card accent" style="padding:18px 20px">
-          <div class="k">Keep the loop bounded</div>
-          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
-            <li>After 3 rounds: reconsider</li>
-            <li>Later passes: new diff only</li>
-            <li>Fix bug classes; avoid repeats</li>
-          </ul>
-        </div>
-      </div>
-      <p class="micro" style="margin:16px 0 0">Reported failure mode: one change went through 50+ review/fix rounds overnight.</p>
-      <div class="keyline">Failures become <b>reusable checks</b>; review knowledge <b>compounds</b>.</div>
-      <p class="micro" style="margin:12px 0 0;font-size:12px">Source: Osmani, Lunt &amp; Wang · 15 Oct 2026 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · Team-reported practice.</p>
-    </div>
-    <div class="footer"><span>reference case · evals · bounded review loops</span><span class="pnum">39 / 53</span></div>
+    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">28 / 53</span></div>
   </section>
 
   <!-- ============ S40 · 系统图 ============ -->
@@ -2206,9 +2077,43 @@
           <div class="row"><span class="n">06</span><b>Harness</b><p>Tools, sandbox, permissions, verification, logs</p></div>
         </div>
       </div>
-      <div class="keyline">The model <b>proposes</b>; the system manages context and state, runs tools, and <b>checks results</b>.</div>
+      <div class="keyline">Memory owns state, tool calls compute, harness verifies: together they form an <b>agent system</b>.</div>
     </div>
     <div class="footer"><span>model · state · execution framework</span><span class="pnum">40 / 53</span></div>
+  </section>
+
+  <!-- ============ S36b · Skill ============ -->
+  <section class="slide" data-notes="A skill packages a way of working into a reusable capability: SKILL.md says when to use it, which steps to follow, and where the checks are; scripts/ holds deterministic operations; references/ holds domain material; assets/ holds templates. It is loaded on demand, so it does not occupy the standing context; it can be versioned, reused, and reviewed. It does not change model weights; it is still context plus tools. Example: write this deck's production loop as a skill: outline → generate → screenshot → audit → export.">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Skill: package a procedure into a reusable capability</h2>
+    <p class="sub" style="margin-top:8px">Not a bigger model; a load-on-demand bundle of steps, scripts, and references.</p>
+    <div class="content" style="margin-top:18px">
+      <div class="two" style="grid-template-columns:1fr 1fr;gap:34px">
+        <div>
+          <div class="panel" style="padding:18px 20px">
+            <div class="sentence" style="font-size:12px;margin-bottom:8px;color:#8b8f98">skill package</div>
+            <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.7;color:#cfd2d9;white-space:pre-wrap">skill/
+  SKILL.md        when · steps · checks
+  scripts/        deterministic ops
+  references/     domain docs
+  assets/         templates</pre>
+          </div>
+          <div class="chain" style="margin-top:14px">
+            <span class="c">Outline</span><span class="arr">→</span><span class="c">Generate</span><span class="arr">→</span><span class="c">Screenshot</span><span class="arr">→</span><span class="c keep">Audit</span><span class="arr">→</span><span class="c">Export</span>
+          </div>
+          <p class="micro" style="margin-top:8px">Example: this deck's production loop as a skill</p>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">01 Trigger</div><p>Name and description: when to use it, when not to</p></div>
+          <div class="card"><div class="k">02 Steps</div><p>SKILL.md: what comes first, what follows, where the checks are</p></div>
+          <div class="card"><div class="k">03 Tools</div><p>scripts/: freeze deterministic operations; stop rewriting them</p></div>
+          <div class="card accent"><div class="k">04 Assets</div><p>references/ and assets/: domain knowledge, templates, examples</p></div>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:10px">A skill is loaded on demand, versioned, and reusable; context budget and tool permissions still apply.</div>
+      <div class="keyline" style="margin-top:12px">Turn a one-off prompt into a <b>versioned procedure</b>.</div>
+    </div>
+    <div class="footer"><span>skill package · procedure · scripts · references</span><span class="pnum">30 / 53</span></div>
   </section>
 
   <!-- ============ S41 · 加速 ============ -->
@@ -2379,153 +2284,6 @@
       <div class="keyline">Solving can be searched; <b>doing mathematics needs direction</b>.</div>
     </div>
     <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
-  </section>
-
-  <!-- ============ S47 · Motor & assembly line ============ -->
-  <section class="slide" data-notes="Eric Schmidt tells a story: when motors were invented, factory owners merely replaced central steam engines with motors. Everything else stayed the same. Efficiency gained roughly 30%. Decades later, small motors powered individual machines; factories were rebuilt entirely around production flow. The assembly line emerged, raising output by orders of magnitude. Today's AI is identical: prompting harder inside a chat window resets to zero each session (the 30% trap). Building persistent context, code rules, and verification pipelines turns domain knowledge into compounding assets. Models are rented; context and systems are owned.">
-    <p class="eyebrow"><b>06</b> / conclusion</p>
-    <h2>The motor and the assembly line</h2>
-    <p class="sub" style="margin-top:8px">A story Eric Schmidt tells — and the AI parallel.</p>
-    <div class="content">
-      <div class="two" style="grid-template-columns:1.2fr .8fr;gap:40px">
-        <div class="story">
-          <p>When the electric motor was invented, factory owners did the obvious thing: remove the central steam engine, put a motor in its place, and change nothing else. Efficiency rose by about 30%.</p>
-          <p>Decades later, someone realized the motor could be small. Every machine could have its own. The factory could be designed around the flow of production itself; the power source no longer dictated the layout.</p>
-          <p>The assembly line was born. Efficiency rose by an order of magnitude.</p>
-        </div>
-        <div>
-          <div class="numrow"><span class="n">30%</span><span class="l">Standalone · Prompting Harder<br>Resets each session · No compounding</span></div>
-          <div class="numrow accent"><span class="n">10×+</span><span class="l">Assembly line · Context Engineering<br>Persistent assets &amp; rules · Continuous compounding</span></div>
-          <p class="pull">The gap is <b>work designed to compound</b>.</p>
-        </div>
-      </div>
-      <div class="ai-note">Models are rented; context and systems are owned. Do not merely prompt in isolation; turn domain rules, tools, and evals into persistent assets.</div>
-      <div class="keyline">The gain is in <b>layout and compounding</b>.</div>
-    </div>
-    <div class="footer"><span>motor · assembly line · workflow</span><span class="pnum">47 / 53</span></div>
-  </section>
-
-  <!-- ============ S48 · Algorithm engineer ============ -->
-  <section class="slide" data-notes="算法工程师的困境一年前就出现了：模型会写代码之后，价值从实现转向定义问题、设计 harness、验证和对系统负责。数学正在经历同一件事。">
-    <p class="eyebrow"><b>06</b> / conclusion</p>
-    <h2>The algorithm engineer's dilemma</h2>
-    <p class="sub" style="margin-top:8px">It arrived about a year ago. Mathematics is next.</p>
-    <div class="content">
-      <p style="font-size:21px;line-height:1.45;color:#2f2b25;margin:0 0 18px">“If the model can write the code, what is my job?”</p>
-      <div class="ba">
-        <div class="side">
-          <div class="yr">Before agents</div>
-          <h3>Write the algorithm</h3>
-          <ul>
-            <li>Implement, debug, optimize</li>
-            <li>Own the code</li>
-            <li>Value = code shipped</li>
-          </ul>
-        </div>
-        <div class="mid"><div class="ar">→</div><div class="lab">~1 year</div></div>
-        <div class="side now">
-          <div class="yr">With agents</div>
-          <h3>Direct the search</h3>
-          <ul>
-            <li>Frame the problem</li>
-            <li>Design the harness</li>
-            <li>Verify and own the system</li>
-          </ul>
-        </div>
-      </div>
-      <div class="keyline">The job moves from producing answers to <b>directing the search</b>.</div>
-    </div>
-    <div class="footer"><span>engineer · agents · direction</span><span class="pnum">48 / 53</span></div>
-  </section>
-
-  <!-- ============ S49 · Web to CLI ============ -->
-  <section class="slide" data-notes="These are working modes, not a universal ranking of products. Web, IDE and CLI clients can each have tools, repository access or agent loops depending on configuration. In my longer tasks, a working directory makes rules, results and executable checks reusable. Reuse across models and clients may require adaptation; rerun evaluations after changing the model, tools or environment. Local files support portability and accumulation without guaranteeing permanent validity.">
-    <p class="eyebrow"><b>06</b> / conclusion</p>
-    <h2>From the chat box to the working directory</h2>
-    <p class="sub" style="margin-top:8px">For my longer tasks, a working directory makes rules and results reusable.</p>
-    <div class="content">
-      <div class="mathline">
-        <div class="phase">
-          <div class="ph">Mode A · Conversation</div>
-          <h3>Web chat</h3>
-          <div class="ms"><b>Discuss and explore</b><span>Questions, explanations, uploaded material</span></div>
-          <div class="ms"><b>Tools depend on configuration</b><span>Web interfaces can also offer tools and memory</span></div>
-        </div>
-        <div class="phase">
-          <div class="ph">Mode B · In-editor</div>
-          <h3>IDE editor</h3>
-          <div class="ms"><b>Edit close to the code</b><span>Files, diagnostics and repository context</span></div>
-          <div class="ms"><b>Assist or run an agent</b><span>Capabilities depend on tools and permissions</span></div>
-        </div>
-        <div class="phase">
-          <div class="ph">Mode C · Tool-enabled loop</div>
-          <h3>Repo &amp; CLI Agent</h3>
-          <div class="ms"><b>Tools &amp; isolated agents</b><span>Symplectic integrators · Series expansion · Reviewers</span></div>
-          <div class="ms"><b>Autonomous verification</b><span>Hypothesis → Experiment → Conservation checks → git</span></div>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
-        <span class="pill"><i></i>OpenCode</span>
-        <span class="pill"><i></i>Claude Code</span>
-        <span class="pill"><i></i>Codex CLI</span>
-        <span class="pill"><i></i>Cursor</span>
-        <span class="pill"><i></i>Markdown SOP Protocol</span>
-      </div>
-      <div class="keyline">Files are interfaces. Build <b>portable research assets</b> in local workspaces.</div>
-      <p class="micro" style="margin-top:8px">Files and checks are reusable across tools; rerun evaluations when the model or environment changes.</p>
-    </div>
-    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">49 / 53</span></div>
-  </section>
-
-  <!-- ============ S50 · Two attempts ============ -->
-  <section class="slide" data-notes="The first attempt: when OpenClaw emerged, I treated a probabilistic model like a deterministic calculator and went fully hands-off without checks. It failed completely. The second attempt: continuing postdoc work in iStart, I shifted from fixer to coach. I defined the objective (WHAT) and pointed out counterexamples, letting Codex and GPT-5.3–5.5 execute (HOW). When it attempted to claim Ax=b with b≠0 had x=0, I intervened. After three rejections, GPT-6.1 Sol scanned the paper and caught subtle issues. The takeaway: verification is asymmetric (evals are easier than generation); humans must act as coaches providing constraints and direction.">
-    <p class="eyebrow"><b>06</b> / conclusion</p>
-    <h2>Two attempts</h2>
-    <p class="sub" style="margin-top:8px">Same intention. Different governance: from abdication to coaching.</p>
-    <div class="content">
-      <div class="two even">
-        <div class="card">
-          <div class="k">OpenClaw · Early attempt</div>
-          <div class="big" style="font-size:22px">Mistaken for calculator · Hands-off</div>
-          <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>Expected the agent to autonomously deliver an end-to-end paper.</li>
-            <li>Early model was brittle; hallucinations compounded without evals.</li>
-            <li>Complete human abdication, hoping for an unguided miracle.</li>
-          </ul>
-          <p class="micro" style="margin-top:10px">My outcome: no completed paper; too little guidance and checking.</p>
-        </div>
-        <div class="card accent">
-          <div class="k">Codex · GPT-5.3–5.5 · iStart</div>
-          <div class="big" style="font-size:22px">Act as Coach · Verification loop</div>
-          <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>Postdoc extension; I framed clear goals (WHAT) while AI drafted (HOW).</li>
-            <li>Refused to be a line-by-line fixer; coached by flagging flawed steps.</li>
-            <li>Caught absurd derivation: <span style="font-family:var(--mono);font-size:11.5px">Ax = b, b ≠ 0 → x = 0</span> ✗</li>
-            <li>After 3 rejections, GPT-6.1 Sol scanned deeper issues for final fixes.</li>
-          </ul>
-          <p class="micro" style="margin-top:10px">Lesson: verification asymmetry — evaluating is easier than drafting.</p>
-        </div>
-      </div>
-      <div class="keyline">Do not act as a line-by-line fixer; act as a <b>coach defining standards and counterexamples</b>.</div>
-    </div>
-    <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">50 / 53</span></div>
-  </section>
-
-  <!-- ============ S51 · Low-hanging fruit ============ -->
-  <section class="slide" data-notes="These are lessons from my practice. Humans set goals, provide counterexamples and inspect evidence. Dynamical checks offer complementary evidence: energy-error behavior, symplecticity residual DΦᵀ J DΦ − J, and step-size convergence. A symplectic integrator generally does not exactly conserve the original Hamiltonian, and small energy error alone does not establish a correct trajectory. As drafting becomes cheaper, I choose to invest more in problem selection, reusable knowledge and evaluation assets. This is a personal allocation of effort, not a claim that only those assets have value.">
-    <p class="eyebrow"><b>06</b> / conclusion</p>
-    <h2>Low-hanging fruit &amp; compounding assets</h2>
-    <p class="sub" style="margin-top:8px">Drafting a paper is only the start; compounding assets are evals and taste.</p>
-    <div class="content">
-      <div class="three tight">
-        <div class="card"><div class="k">01 · Human as Coach</div><div class="big" style="font-size:20px">Frame WHAT &amp; bounds</div><p>Define clear objectives; let AI explore the HOW. Point out logical flaws rather than patching code by hand.</p></div>
-        <div class="card"><div class="k">02 · Systematic Evals</div><div class="big" style="font-size:20px">Dynamical checks</div><p>Energy-error behavior, symplecticity residuals and convergence tests provide complementary evidence.</p></div>
-        <div class="card accent"><div class="k">03 · Compounding Assets</div><div class="big" style="font-size:20px">Taste &amp; eval suites</div><p>A single paper depreciates quickly. What compounds is your knowledge base, codebase SOPs, and formal scorers.</p></div>
-      </div>
-      <p class="bigquote2">As drafting becomes cheaper, I invest more in <b>problem selection, reusable knowledge and evaluation</b>. These assets can accumulate across projects.</p>
-      <div class="keyline">The central question: which problems are <b>worth tackling together with machines</b>?</div>
-    </div>
-    <div class="footer"><span>Coach · Eval · Compounding</span><span class="pnum">51 / 53</span></div>
   </section>
 
   <!-- ============ S52 · Young person's opportunity ============ -->

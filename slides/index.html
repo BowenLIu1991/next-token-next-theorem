@@ -811,7 +811,7 @@
   </section>
 
   <!-- ============ S1b · 全景导航 ============ -->
-  <section class="slide" data-notes="全景导航页。点击章节卡片跳到该章开头，点击小标签跳到关键页。页码按当前 48 页顺序显示。此页只用于导航，不进入论证；如果时间紧，可直接从 Token 开始。">
+  <section class="slide" data-notes="全景导航页。点击章节卡片跳到该章开头，点击小标签跳到关键页。页码按当前 38 页顺序显示。此页只用于导航，不进入论证；如果时间紧，可直接从 Token 开始。">
     <p class="eyebrow"><b>00</b> / 全景</p>
     <h2>全景：从 token 到定理</h2>
     <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
@@ -841,26 +841,26 @@
         <div class="card mapcard" data-goto="23" role="button" tabindex="0">
           <div class="k">03 · 系统与工程</div>
           <h3>把模型放进系统</h3>
-          <p>上下文 · Agent · 代码审查</p>
-          <div class="range">p. 24–35</div>
-          <div class="maplinks"><span class="maplink" data-goto="30">Claude Code</span><span class="maplink" data-goto="34">系统总图</span></div>
+          <p>上下文 · Harness · Skill</p>
+          <div class="range">p. 24–30</div>
+          <div class="maplinks"><span class="maplink" data-goto="27">Harness</span><span class="maplink" data-goto="28">系统总图</span><span class="maplink" data-goto="29">Skill</span></div>
         </div>
-        <div class="card mapcard" data-goto="35" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="30" role="button" tabindex="0">
           <div class="k">04 · AI × 数学</div>
           <h3>从工具到搜索</h3>
           <p>加速 · 时间线 · 共同模式</p>
-          <div class="range">p. 36–41</div>
-          <div class="maplinks"><span class="maplink" data-goto="36">时间线</span><span class="maplink" data-goto="38">共同模式</span></div>
+          <div class="range">p. 31–36</div>
+          <div class="maplinks"><span class="maplink" data-goto="31">时间线</span><span class="maplink" data-goto="33">共同模式</span></div>
         </div>
-        <div class="card mapcard" data-goto="41" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="36" role="button" tabindex="0">
           <div class="k">05 · 结论</div>
           <h3>回到我的实践</h3>
           <p>工作方式 · 复利 · 收束</p>
-          <div class="range">p. 42–48</div>
-          <div class="maplinks"><span class="maplink" data-goto="44">两次尝试</span><span class="maplink" data-goto="47">结尾</span></div>
+          <div class="range">p. 37–38</div>
+          <div class="maplinks"><span class="maplink" data-goto="37">结尾</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 个章节 · 48 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
+      <p class="micro" style="margin-top:14px">6 个章节 · 38 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -1929,252 +1929,123 @@
     <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">29 / 53</span></div>
   </section>
 
-  <!-- ============ S30 · 大海捞针 ============ -->
-  <section class="slide" data-notes="上下文窗口是固定预算。大海捞针测试：在长文里藏一句话，问模型那句话是什么；换长度、换位置，重复很多次。结果是越长越难，中间位置最差。窗口大不等于找得到。">
+  <!-- ============ S30 · Context 与 Memory ============ -->
+  <section class="slide" data-notes="把 Context 有限、Context engineering 与 Memory 合成一页。窗口从 4k 到 1M，但长文仍会大海捞针，中间信息最易被稀释；容量不等于有效利用。工程上把窗口当工作台：system、历史、检索、工具、当前问题分层放；太长就检索，太散就结构化，超窗就摘要或交给子 agent。Memory 只留信号：任务、约束、决定、已验证事实；闲聊、重复、过期信息是噪声。写入、检索、压缩、遗忘四步，对应工作/情节/语义/程序四层。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context 是有限的</h2>
+    <h2>Context 与 Memory：有限窗口，怎么放</h2>
+    <p class="sub" style="margin-top:8px">窗口是预算，不是仓库：先放对，再决定留什么。</p>
     <div class="content">
-      <p class="micro">大海捞针：在长文里藏一句话</p>
-      <div class="needle">
-        <span class="pin" style="left:70%"></span>
-        <span class="lab" style="left:70%">针</span>
-      </div>
-      <div class="two" style="margin-top:24px">
-        <div>
-          <p class="micro">检索准确率（示意）</p>
-          <div class="heatwrap">
+      <div class="three" style="gap:16px;align-items:stretch">
+        <div class="card" style="padding:14px 16px;justify-content:flex-start">
+          <div class="k">01 · 窗口有限</div>
+          <div class="big" style="font-size:21px">4k → 1M，仍会丢</div>
+          <p style="font-size:14px;line-height:1.5;margin-top:6px">大海捞针：长文中间的信息最容易被稀释。</p>
+          <div class="heatwrap" style="margin-top:8px;grid-template-columns:30px 1fr">
             <div class="heaty"><span>4k</span><span>8k</span><span>32k</span><span>128k</span></div>
             <div class="heat"><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.40"></i><i style="--a:0.40"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.30"></i><i style="--a:0.20"></i><i style="--a:0.20"></i><i style="--a:0.30"></i><i style="--a:0.50"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.35"></i><i style="--a:0.18"></i><i style="--a:0.10"></i><i style="--a:0.10"></i><i style="--a:0.18"></i><i style="--a:0.35"></i><i style="--a:0.50"></i></div>
           </div>
-          <p class="micro" style="margin-top:8px">横轴：针的位置 0 → 100%</p>
+          <p class="micro" style="margin-top:6px">示意 · Liu et al., 2023</p>
+          <p style="font-size:13px;margin-top:6px">容量 ≠ 有效利用。</p>
         </div>
-        <div class="stack">
-          <div class="card"><div class="k">怎么做</div><p>藏一句话，换长度、换位置，问它是什么</p></div>
-          <div class="card"><div class="k">已观察到的失效模式</div><p>长度与位置可能影响检索；具体表现随模型和任务变化</p></div>
-          <div class="card accent"><div class="k">含义</div><p>窗口大 ≠ 找得到</p></div>
+        <div class="card" style="padding:14px 16px;justify-content:flex-start">
+          <div class="k">02 · 怎么放</div>
+          <div class="big" style="font-size:21px">工作台，不是仓库</div>
+          <div class="ctxwin" style="margin-top:8px;padding:7px;gap:4px">
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">system · 规则</div>
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">历史 · 前几轮</div>
+            <div class="blk hl" style="padding:5px 8px;font-size:10.5px">检索 · 相关文档</div>
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">工具 · 返回结果</div>
+            <div class="blk" style="padding:5px 8px;font-size:10.5px">当前 · 这次的问题</div>
+          </div>
+          <p style="font-size:13px;line-height:1.5;margin-top:8px">太长→检索；太散→结构化；超窗→摘要或子 agent。</p>
+        </div>
+        <div class="card" style="padding:14px 16px;justify-content:flex-start">
+          <div class="k">03 · 留什么</div>
+          <div class="big" style="font-size:21px">信号，不是日志</div>
+          <div class="memgrid" style="margin-top:8px;gap:6px">
+            <div class="box sig" style="padding:7px"><b style="font-size:11.5px">信号</b><span style="font-size:10px">任务 · 约束 · 决定 · 事实</span></div>
+            <div class="box noi" style="padding:7px"><b style="font-size:11.5px">噪声</b><span style="font-size:10px">闲聊 · 重复 · 过期 · 日志</span></div>
+          </div>
+          <div class="memacts" style="margin-top:8px;gap:4px 12px">
+            <div style="padding-top:4px"><b>写</b><span>只存决定与事实</span></div>
+            <div style="padding-top:4px"><b>取</b><span>按当前任务</span></div>
+            <div style="padding-top:4px"><b>压</b><span>摘要、合并</span></div>
+            <div style="padding-top:4px"><b>忘</b><span>过期即删</span></div>
+          </div>
+          <p class="micro" style="margin-top:6px">工作 · 情节 · 语义 · 程序</p>
         </div>
       </div>
-      <p class="micro" style="margin:12px 0 0">示意图，非实测数据 · 参见 Liu et al., Lost in the Middle（2023）。</p>
-      <div class="keyline">窗口容量与<b>有效利用上下文</b>，是不同的指标。</div>
+      <div class="keyline">窗口容量 ≠ 有效利用；Context 决定<b>放什么</b>，Memory 决定<b>留什么</b>。</div>
     </div>
-    <div class="footer"><span>needle in a haystack</span><span class="pnum">30 / 53</span></div>
-  </section>
-
-  <!-- ============ S31 · Context ============ -->
-  <section class="slide" data-notes="上下文窗口是工作台，不是仓库。放什么、怎么放，比放多少更重要。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context engineering：把窗口当工作台</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">窗口里装什么</p>
-          <div class="ctxwin">
-            <div class="blk">system：规则</div>
-            <div class="blk">历史：前几轮</div>
-            <div class="blk hl">检索：相关文档</div>
-            <div class="blk">工具：返回结果</div>
-            <div class="blk">当前：这次的问题</div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">太长</div><p>检索，只放相关的</p></div>
-          <div class="card"><div class="k">太散</div><p>结构化，分块标注</p></div>
-          <div class="card"><div class="k">中间丢失</div><p>关键信息放首尾</p></div>
-          <div class="card accent"><div class="k">超窗</div><p>压缩、摘要、子 agent</p></div>
-        </div>
-      </div>
-      <div class="keyline">上下文越相关越好。</div>
-    </div>
-    <div class="footer"><span>context engineering · RAG</span><span class="pnum">31 / 53</span></div>
-  </section>
-
-  <section class="slide" data-notes="Memory 的核心不是存，是选。信号是任务、约束、决定、已验证事实；噪声是闲聊、重复、过期信息、原始日志。工作/情节/语义/程序四层。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Memory：信号与噪声</h2>
-    <div class="content">
-      <div class="two">
-        <div>
-          <p class="micro">窗口里的内容</p>
-          <div class="memgrid">
-            <div class="box sig"><b>信号</b><span>任务 · 约束 · 决定 · 已验证事实</span></div>
-            <div class="box noi"><b>噪声</b><span>闲聊 · 重复 · 过期 · 原始日志</span></div>
-          </div>
-          <div class="memacts">
-            <div><b>写入</b><span>只存决定与事实</span></div>
-            <div><b>检索</b><span>按当前任务取</span></div>
-            <div><b>压缩</b><span>摘要、合并</span></div>
-            <div><b>遗忘</b><span>过期即删</span></div>
-          </div>
-        </div>
-        <div class="stack">
-          <div class="card"><div class="k">工作记忆</div><p>当前窗口；只放这次要用的</p></div>
-          <div class="card"><div class="k">情节记忆</div><p>历史摘要；决定与未决问题</p></div>
-          <div class="card"><div class="k">语义记忆</div><p>外部库 + 检索；按需取</p></div>
-          <div class="card accent"><div class="k">程序记忆</div><p>system + tools；规则与能力</p></div>
-        </div>
-      </div>
-      <div class="keyline">记忆的关键是取得准。</div>
-    </div>
-    <div class="footer"><span>memory hierarchy</span><span class="pnum">35 / 53</span></div>
+    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">26 / 53</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
-  <section class="slide" data-notes="模型自己算 4**1.5 可能错；它只需要写一行 Python，由运行时执行，结果回到上下文。工具不只是计算器，也是模型接触外部世界的接口。">
+  <section class="slide" data-notes="工具调用是协议，不是模型真在执行。先定义签名：名字、参数和返回；模型看到工具描述后，输出一个 tool_call；运行时校验参数，在沙箱里执行，把 stdout / stderr 作为 observation 放回上下文。例子里 4**1.5 由 Python 算，模型只负责写对调用。工具输出仍是不可信输入：要限制权限、设置超时、记录日志；工具描述本身也在上下文里，写得清楚会直接影响调用质量。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Tool calling：算不准，就交给程序</h2>
     <div class="content">
-      <div class="two">
-        <div class="panel">
-          <div class="sentence">工具：run_python(code: str) → str</div>
-          <div class="idrow" style="margin-top:10px;color:#cfd2d9">call&nbsp; run_python("print(2 * 4**1.5)")<br>obs&nbsp;&nbsp; 16.0</div>
-          <div class="idrow" style="margin-top:12px;color:#8b8f98">// T = 2 × 4**1.5 = 16</div>
+      <div class="two" style="gap:34px">
+        <div class="panel" style="padding:18px 20px">
+          <div class="sentence" style="font-size:12px;margin-bottom:7px;color:#8b8f98">tool schema</div>
+          <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.65;color:#cfd2d9;white-space:pre-wrap">{
+  "name": "run_python",
+  "args": {"code": "str"},
+  "returns": "str",
+  "limits": ["sandbox", "timeout"]
+}</pre>
+          <div class="sentence" style="font-size:12px;margin:14px 0 7px;color:#8b8f98">one call</div>
+          <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.65;color:#cfd2d9;white-space:pre-wrap">call  run_python("print(2 * 4**1.5)")
+obs   "16.0"</pre>
+          <div class="idrow" style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);color:#8b8f98;font-size:11px">// T = 2 × 4**1.5 = 16</div>
+          <div class="micro" style="margin-top:10px;color:#8b8f98">计算 · 代码 · 检索 · 数据库 · 文件 · API</div>
+        </div>
+        <div class="stack" style="gap:10px">
+          <div class="card" style="padding:12px 14px"><div class="k">01 定义</div><p style="font-size:14.5px">名字、参数、返回、边界；工具描述也进入上下文。</p></div>
+          <div class="card" style="padding:12px 14px"><div class="k">02 调用</div><p style="font-size:14.5px">模型输出 tool_call；只提议，不执行。</p></div>
+          <div class="card" style="padding:12px 14px"><div class="k">03 执行</div><p style="font-size:14.5px">运行时校验参数，沙箱里真的跑；超时与权限由系统管。</p></div>
+          <div class="card accent" style="padding:12px 14px"><div class="k">04 观察</div><p style="font-size:14.5px">stdout / stderr 回到上下文；模型决定继续或停止。</p></div>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:18px">工具输出仍是<b>不可信输入</b>：校验参数、限制权限、设置超时、保留日志。</div>
+      <div class="keyline">模型提议，程序执行，<b>系统管边界</b>。</div>
+    </div>
+    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">27 / 53</span></div>
+  </section>
+
+  <!-- ============ S34b · Harness ============ -->
+  <section class="slide" data-notes="Harness 解决的是模型不能保证的事：调用是否合法、能不能执行、结果对不对、坏了能不能停。它不提升模型智力，而是把提议放进可检查、可停止、可复现的边界：工具注册与参数校验、沙箱与权限、超时与重试、结果验证、回滚与停止、日志。典型循环：提议 → 校验 → 执行 → 观察 → 验证 → 继续或停止。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Harness：让概率输出变成可运行的系统</h2>
+    <p class="sub" style="margin-top:8px">模型会提议；harness 负责让提议合法、可执行、可检查、可停止。</p>
+    <div class="content">
+      <div class="two" style="grid-template-columns:1.05fr .95fr;gap:32px">
+        <div>
+          <p class="micro">一个受控循环</p>
+          <div class="loop" style="margin-top:10px;padding-top:0;border-top:0;flex-wrap:wrap;justify-content:flex-start;gap:6px">
+            <span class="step" style="padding:7px 9px;font-size:12px">提议</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 9px;font-size:12px">校验</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 9px;font-size:12px">执行</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 9px;font-size:12px">观察</span><span class="arr">→</span>
+            <span class="step hl" style="padding:7px 9px;font-size:12px">验证</span><span class="arr">→</span>
+            <span class="step hl" style="padding:7px 9px;font-size:12px">继续/停止</span>
+          </div>
+          <div class="card" style="margin-top:16px;padding:14px 16px">
+            <div class="k">Harness 管什么</div>
+            <p style="font-size:15px">工具注册与参数校验 · 沙箱与权限 · 超时与重试 · 结果验证 · 回滚与停止 · 日志与复现</p>
+          </div>
+          <div class="scaleband" style="margin-top:16px">不提升模型智力；让错误<b>可发现、可停止、可复现</b>。</div>
         </div>
         <div class="stack">
-          <div class="card"><div class="k">01 定义</div><p>工具签名：名字、参数、返回</p></div>
-          <div class="card"><div class="k">02 调用</div><p>模型输出一段代码</p></div>
-          <div class="card"><div class="k">03 执行</div><p>沙箱里真的跑</p></div>
-          <div class="card accent"><div class="k">04 观察</div><p>结果回到上下文，继续</p></div>
+          <div class="card"><div class="k">01 权限与沙箱</div><p>能做什么、不能做什么；先限制，再执行</p></div>
+          <div class="card"><div class="k">02 超时与重试</div><p>失败不无限循环；重试有上限</p></div>
+          <div class="card"><div class="k">03 验证与回滚</div><p>结果对不对；坏了能否退回</p></div>
+          <div class="card accent"><div class="k">04 日志与停止</div><p>能否复现；什么时候必须停手</p></div>
         </div>
       </div>
-      <div class="keyline">模型负责提议，程序负责算对。</div>
+      <div class="keyline">模型提供概率，harness 提供<b>边界</b>。</div>
     </div>
-    <div class="footer"><span>function calling</span><span class="pnum">33 / 53</span></div>
-  </section>
-
-  <!-- ============ S34 · Agent 与客户端 ============ -->
-  <section class="slide" data-notes="这是真实的 agent 客户端截图。左边是循环：Thought → 工具调用 → 观察，重复。右上是上下文用量，底部是模型、模式和这次会话的成本。模型只负责提议，客户端负责执行、记录、计费和停手。">
-    <p class="eyebrow"><b>03</b> / agent</p>
-    <h2>Agent：模型被放进一个循环</h2>
-    <div class="content">
-      <div class="agent">
-        <img class="shot-wide" src="../assets/figures/agent_client.png" alt="Agent 客户端：Thought、工具调用、上下文与成本">
-        <div class="anno">
-          <div class="item"><div class="n">01</div><h4>循环</h4><p>Thought → 工具调用 → 观察，重复</p></div>
-          <div class="item"><div class="n">02</div><h4>上下文</h4><p>234K tokens · 23% used · $0.22</p></div>
-          <div class="item"><div class="n">03</div><h4>客户端</h4><p>模型 + 工具 + 会话 + 账单</p></div>
-          <div class="item"><div class="n">04</div><h4>模型</h4><p>DeepSeek V4.1 Flash · high</p></div>
-        </div>
-      </div>
-      <div class="keyline">模型负责提议，客户端负责把提议变成<b>行动</b>。</div>
-    </div>
-    <div class="footer"><span>agent · client · loop</span><span class="pnum">34 / 53</span></div>
-  </section>
-
-
-  <!-- ============ S36 · 参考案例：Claude Code 代码审查 ============ -->
-  <section class="slide" data-notes="案例第一幕：人的卡点。来源：Osmani、Lunt、Wang，How the Claude Code team does code review（2026-10-15）。先讲问题：Agent 产出增长，逐行人工审查来不及。约 2,500 到 30,000 多指 Anthropic monorepo 每日落地变更，时间为 2026 年 5 到 9 月，不等同于 git commit 数量。Claude Code 有独立仓库；后者 6 到 9 月合并 PR 超过翻倍，回滚占比下降超过 40%。两组数据对象不同，属于团队自述观察，不是受控因果实验。目标同时计算人的审查时间和故障修复时间，以免把工作从审查挪到修复。后三页展示系统怎样接住瓶颈：分层检查、按风险安排人工、事故进入评测回路。具体科研问题的解决方式不在本报告范围内。">
-    <p class="eyebrow"><b>04</b> / application</p>
-    <h2>代码产出激增，人工审查来不及了</h2>
-    <p class="sub" style="margin-top:8px">Claude Code 团队的卡点：代码增长得比人的注意力更快。</p>
-    <div class="content" style="margin-top:22px">
-      <div class="two even" style="gap:32px;align-items:center">
-        <div class="card" style="padding:18px 20px">
-          <div class="k">产出压力 · Anthropic monorepo</div>
-          <div style="font-family:var(--mono);font-size:46px;line-height:1.3;letter-spacing:-.04em">2,500 → <b style="color:var(--accent)">30,000+</b></div>
-          <p style="font-size:18px">每日落地变更 · 2026 年 5 月 → 9 月</p>
-          <p class="micro" style="font-size:13px">Claude Code 使用另一个独立仓库。</p>
-        </div>
-        <div class="stack" style="gap:12px">
-          <div class="card" style="padding:14px 20px"><div class="k">生产端</div><p style="font-size:20px;margin:0">Agent 更快地产出更多代码。</p></div>
-          <div class="card accent" style="padding:14px 20px"><div class="k">人的卡点</div><p style="font-size:20px;margin:0">人的审查时间与注意力有限。</p></div>
-          <div class="card" style="padding:14px 20px"><div class="k">结果</div><p style="font-size:20px;margin:0">逐行人工审查跟不上产出。</p></div>
-        </div>
-      </div>
-      <div class="scaleband" style="margin-top:22px">目标：减少<b>审查 + 修复的总人时</b>，同时以回滚率与事故率把关。</div>
-      <div class="keyline">下一步收益，来自<b>重新组织审查流程</b>。</div>
-      <p class="micro" style="margin:10px 0 0;font-size:11.5px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
-    </div>
-    <div class="footer"><span>参考案例 · 人的处理瓶颈 · 1 / 4</span><span class="pnum">36 / 53</span></div>
-  </section>
-
-  <!-- ============ S37 · 审查案例：上下文 ============ -->
-  <section class="slide" data-notes="案例第二页，来源为 Osmani、Lunt、Wang 的 How the Claude Code team does code review（2026-10-15）。CLAUDE.md 描述项目技术栈、约定、目标与非目标，保持简短并链接其他文档。REVIEW.md 由代码负责人编写，定义局部失败模式、跳过路径、低价值意见的限制，以及发现问题时应提供的证据；团队另外检查审查器是否真正遵守这些规则。提交代码变更前，由新上下文的子 Agent 审查；审查还需结合代码库和变更意图，而不只看作者解释。新上下文有助于减少沿袭作者叙述，但不保证错误独立。重复发现的问题前移到规则、Skill 或可执行的 lint 检查。这是文章中的具体上下文资产，供同行参考，具体科研流程由研究者自行判断。">
-    <p class="eyebrow"><b>04</b> / 参考案例 · 2 / 4</p>
-    <h2>用系统接住常规审查</h2>
-    <p class="sub" style="margin-top:8px">检查贯穿工作流程，人的注意力留给关键判断。</p>
-    <div class="content">
-      <div class="three" style="gap:18px">
-        <div class="card" style="padding:18px 20px;min-height:210px">
-          <div class="k">01 · 提交之前</div><div class="big" style="font-size:23px">先产出检查证据</div>
-          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>测试、构建、检查界面</li><li>新上下文的 Agent 审查</li><li>提交审查前先修一轮</li></ul>
-        </div>
-        <div class="card" style="padding:18px 20px;min-height:210px">
-          <div class="k">02 · 审查之中</div><div class="big" style="font-size:23px">分层发现问题</div>
-          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>AI 审查，复核发现</li><li>安全检查与自动测试</li><li>每项发现都要处理</li></ul>
-        </div>
-        <div class="card accent" style="padding:18px 20px;min-height:210px">
-          <div class="k">03 · 批准与发布</div><div class="big" style="font-size:23px">控制剩余风险</div>
-          <ul style="padding-left:18px;margin:14px 0 0;font-size:18px;line-height:1.8"><li>按风险安排人工批准</li><li>合并检查，分阶段发布</li><li>快速发现，快速回滚</li></ul>
-        </div>
-      </div>
-      <div class="scaleband" style="margin-top:24px"><b>共享上下文：</b>CLAUDE.md 存项目约定；REVIEW.md 存局部失败标准与证据要求。</div>
-      <div class="keyline">常规检查持续运行，人聚焦<b>判断与风险</b>。</div>
-      <p class="micro" style="margin:12px 0 0;font-size:12px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
-    </div>
-    <div class="footer"><span>参考案例 · 上下文资产 · 审查标准</span><span class="pnum">37 / 53</span></div>
-  </section>
-
-  <!-- ============ S38 · 审查案例：风险与责任 ============ -->
-  <section class="slide" data-notes="案例第三页。这张表概括文章中的团队风险分级，不是通用审批政策。低风险包括文档、文案和仅内部功能；中风险包括常规产品变更和部分敏感模块变更；高风险包括最高风险代码和指定路径。变更本身决定风险等级。较轻审批流程仅对可信作者开放；其他作者需要第二人批准。额外分类器和指定敏感路径可能要求更多人工审批。Agent 批准不能占用需要人的审批位。指挥 Agent 进行变更的人计入审查者并承担责任。批准针对特定提交，后续无法被系统担保的提交需要重新批准。人还负责判断是否值得做、架构和高风险代码、阅读证据与承担结果。合并检查、分阶段发布和回滚是另外的保障。这里展示注意力如何分配，不宣称流程保证正确性。">
-    <p class="eyebrow"><b>04</b> / 参考案例 · 3 / 4</p>
-    <h2>人的注意力，按风险分配</h2>
-    <p class="sub" style="margin-top:8px">团队的审批策略，以及明确的责任归属。</p>
-    <div class="content">
-      <table class="compare" style="font-size:19px;margin:0">
-        <thead><tr><th>变更风险</th><th>例子</th><th>人工审批</th></tr></thead>
-        <tbody>
-          <tr><td>低</td><td>文档、文案、仅内部使用的功能</td><td>可免人工审批*</td></tr>
-          <tr><td>中</td><td>常规产品变更</td><td>1 人*</td></tr>
-          <tr><td>高</td><td>最高风险代码、指定路径</td><td>2 人</td></tr>
-        </tbody>
-      </table>
-      <p class="micro" style="margin:12px 0 0">* 较轻流程仅对可信作者开放，且须通过必要检查；敏感路径可能要求额外审批。</p>
-      <div class="three" style="margin-top:22px;gap:18px">
-        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">方向</div><p style="font-size:18px;margin:0">人判断这件事是否值得做。</p></div>
-        <div class="card" style="min-height:112px;padding:16px 20px"><div class="k">证据</div><p style="font-size:18px;margin:0">批准针对某个明确的提交。</p></div>
-        <div class="card accent" style="min-height:112px;padding:16px 20px"><div class="k">责任</div><p style="font-size:18px;margin:0">指挥 Agent 的人对变更负责。</p></div>
-      </div>
-      <div class="keyline">需要人的审批位由<b>人</b>担任，每次变更有<b>明确负责人</b>。</div>
-      <p class="micro" style="margin:12px 0 0;font-size:12px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
-    </div>
-    <div class="footer"><span>参考案例 · 风险分级 · 人的责任</span><span class="pnum">38 / 53</span></div>
-  </section>
-
-  <!-- ============ S39 · 审查案例：评测与停止 ============ -->
-  <section class="slide" data-notes="案例第四页。历史事故和回滚由熟悉代码的工程师确认，转成评测案例。审查器每天运行这些案例，提示词、工具或模型变化时重新评分。团队同时衡量真实错误检出、误报与审查轮数，用已知干净的变更检查有害误报。更多评论不代表更好的审查。文章记录一次变更在夜间经历超过 50 轮审查修复；反复被指出的代码约 59% 在第一轮时就已存在。后续策略是三轮后请作者重新考虑方案，之后聚焦新增变更、指出一类错误以一次修复全部实例、避免重复报告。三轮是升级处理规则，不是三轮保证正确。这个案例的复利来自已确认的失败评测集、可复用审查标准和可执行检查；具体科研领域的适用性由听众判断。">
-    <p class="eyebrow"><b>04</b> / 参考案例 · 4 / 4</p>
-    <h2>让审查持续改进，也能停下来</h2>
-    <p class="sub" style="margin-top:8px">失败进入评测集，审查循环设置升级处理条件。</p>
-    <div class="content">
-      <div class="loop" style="margin-top:0">
-        <span class="step">事故 / 回滚</span><span class="arr">→</span>
-        <span class="step hl">工程师确认的案例</span><span class="arr">→</span>
-        <span class="step">每日评测</span><span class="arr">→</span>
-        <span class="step">改进审查器</span><span class="arr">↺</span>
-      </div>
-      <div class="two even" style="margin-top:24px;gap:24px">
-        <div class="card" style="padding:18px 20px">
-          <div class="k">同时衡量质量与成本</div>
-          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
-            <li>发现了多少真实错误</li>
-            <li>对干净变更产生多少误报</li>
-            <li>经过几轮才能通过审查</li>
-          </ul>
-        </div>
-        <div class="card accent" style="padding:18px 20px">
-          <div class="k">给循环设置边界</div>
-          <ul style="padding-left:20px;margin:8px 0 0;font-size:20px;line-height:1.8">
-            <li>三轮后重新审视方案</li>
-            <li>后续聚焦新增变更</li>
-            <li>按错误类别修复，避免重复</li>
-          </ul>
-        </div>
-      </div>
-      <p class="micro" style="margin:16px 0 0">原文记录的失败模式：一次变更在夜间经历了 50 多轮审查与修复。</p>
-      <div class="keyline">把失败沉淀为<b>可复用的检查</b>，让审查经验持续<b>复利</b>。</div>
-      <p class="micro" style="margin:12px 0 0;font-size:12px">来源：Osmani、Lunt、Wang · 2026-10-15 · <a style="color:inherit" href="https://claude.dev/blog/solving-code-review-at-anthropic/">How the Claude Code team does code review</a> · 团队自述实践。</p>
-    </div>
-    <div class="footer"><span>参考案例 · 评测集 · 有边界的审查循环</span><span class="pnum">39 / 53</span></div>
+    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">28 / 53</span></div>
   </section>
 
   <!-- ============ S40 · 系统图 ============ -->
@@ -2204,9 +2075,43 @@
           <div class="row"><span class="n">06</span><b>Harness</b><p>工具、沙箱、权限、验证、日志</p></div>
         </div>
       </div>
-      <div class="keyline">模型生成<b>提议</b>；系统管理上下文与状态，执行工具并<b>检查结果</b>。</div>
+      <div class="keyline">Memory 管状态，Tool calling 管计算，Harness 管验证：三者合起来才是 <b>Agent 系统</b>。</div>
     </div>
     <div class="footer"><span>model · state · execution framework</span><span class="pnum">40 / 53</span></div>
+  </section>
+
+  <!-- ============ S36b · Skill ============ -->
+  <section class="slide" data-notes="Skill 把一套做法封装成可复用能力：一个 SKILL.md 说明何时用、按什么步骤做、检查点是什么；scripts/ 放确定性脚本；references/ 放领域资料；assets/ 放模板。它按需加载，不占常驻上下文；可以版本化、复用、审查。它不改变模型权重，仍是上下文与工具的组合。例子：把这份 deck 的制作流程写成 skill：提纲 → 生成 → 截图 → 审计 → 导出。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Skill：把一套做法封装成可复用能力</h2>
+    <p class="sub" style="margin-top:8px">不是更大的模型，而是按需加载的流程、脚本与参考资料。</p>
+    <div class="content" style="margin-top:18px">
+      <div class="two" style="grid-template-columns:1fr 1fr;gap:34px">
+        <div>
+          <div class="panel" style="padding:18px 20px">
+            <div class="sentence" style="font-size:12px;margin-bottom:8px;color:#8b8f98">skill package</div>
+            <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.7;color:#cfd2d9;white-space:pre-wrap">skill/
+  SKILL.md        when · steps · checks
+  scripts/        deterministic ops
+  references/     domain docs
+  assets/         templates</pre>
+          </div>
+          <div class="chain" style="margin-top:14px">
+            <span class="c">提纲</span><span class="arr">→</span><span class="c">生成</span><span class="arr">→</span><span class="c">截图</span><span class="arr">→</span><span class="c keep">审计</span><span class="arr">→</span><span class="c">导出</span>
+          </div>
+          <p class="micro" style="margin-top:8px">例：把这份 deck 的制作流程写成 skill</p>
+        </div>
+        <div class="stack">
+          <div class="card"><div class="k">01 触发</div><p>名称与描述：什么时候该用，什么时候不该用</p></div>
+          <div class="card"><div class="k">02 步骤</div><p>SKILL.md：先做什么、后做什么、检查点在哪</p></div>
+          <div class="card"><div class="k">03 工具</div><p>scripts/：把确定性操作固化，减少每次重写</p></div>
+          <div class="card accent"><div class="k">04 资产</div><p>references/ 与 assets/：领域知识、模板、示例</p></div>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:10px">Skill 按需加载、可版本化、可复用；仍受上下文预算与工具权限约束。</div>
+      <div class="keyline" style="margin-top:12px">把一次性的提示，变成<b>可版本化的流程</b>。</div>
+    </div>
+    <div class="footer"><span>skill package · procedure · scripts · references</span><span class="pnum">30 / 53</span></div>
   </section>
 
   <!-- ============ S41 · 加速 ============ -->
@@ -2377,153 +2282,6 @@
       <div class="keyline">解题可以搜索；<b>做数学需要方向</b>。</div>
     </div>
     <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
-  </section>
-
-  <!-- ============ S47 · 电机与流水线 ============ -->
-  <section class="slide" data-notes="Eric Schmidt 讲过一个故事：电机刚发明时，工厂主把中央蒸汽机拆掉换成电机，其他不变，效率只升 30%。几十年后，电机做小、每台机器自备动力，工厂彻底围绕生产流重新设计，流水线诞生，效率提高几十倍。AI 今天一样：在聊天框里反复调试 Prompt（Prompting Harder）是单机时代，换个窗口就归零；只有把天体力学知识、代码规范、推导准则沉淀为结构化上下文（Context Engineering），建立流水线，才能拿到复利。模型是租来的，上下文与资产库才是自己的。">
-    <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>电机与流水线</h2>
-    <p class="sub" style="margin-top:8px">Eric Schmidt 讲过一个故事；AI 正在经历同一件事。</p>
-    <div class="content">
-      <div class="two" style="grid-template-columns:1.2fr .8fr;gap:40px">
-        <div class="story">
-          <p>电机刚被发明的时候，工厂主的做法很直觉：把中央蒸汽机拆掉，换一台电机，其他一切不变。效率提高了大约 30%。</p>
-          <p>过了几十年，有人意识到电机可以做得很小。每台机器可以有自己的电机。工厂可以围绕生产流程本身来设计；动力源变成每台机器自己的事。</p>
-          <p>流水线诞生了。效率提高了几十倍。</p>
-        </div>
-        <div>
-          <div class="numrow"><span class="n">30%</span><span class="l">单机模式 · Prompting Harder<br>换窗口即归零 · 无法积累</span></div>
-          <div class="numrow accent"><span class="n">10×+</span><span class="l">流水线 · Context Engineering<br>沉淀规则与模板 · 持续复利</span></div>
-          <p class="pull">30% 和几十倍的差距，是<b>可积累的工作方式</b>。</p>
-        </div>
-      </div>
-      <div class="ai-note">模型是租来的，上下文与系统才是自己的：别只在旧步骤里「问一下 AI」，把规则、工具与检验沉淀为长期资产。</div>
-      <div class="keyline">收益在<b>布局与复利</b>。</div>
-    </div>
-    <div class="footer"><span>电机 · 流水线 · 工作方式</span><span class="pnum">47 / 53</span></div>
-  </section>
-
-  <!-- ============ S48 · 算法工程师的困境 ============ -->
-  <section class="slide" data-notes="算法工程师的困境一年前就出现了：模型会写代码之后，价值从实现转向定义问题、设计 harness、验证和对系统负责。数学正在经历同一件事。">
-    <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>算法工程师的困境</h2>
-    <p class="sub" style="margin-top:8px">这个问题在一年前出现；数学正在经历同一件事。</p>
-    <div class="content">
-      <p style="font-size:21px;line-height:1.45;color:#2f2b25;margin:0 0 18px">“如果模型会写代码，我的工作是什么？”</p>
-      <div class="ba">
-        <div class="side">
-          <div class="yr">之前</div>
-          <h3>写算法</h3>
-          <ul>
-            <li>实现、调试、优化</li>
-            <li>对代码负责</li>
-            <li>价值 = 交付代码</li>
-          </ul>
-        </div>
-        <div class="mid"><div class="ar">→</div><div class="lab">约一年</div></div>
-        <div class="side now">
-          <div class="yr">现在</div>
-          <h3>指挥搜索</h3>
-          <ul>
-            <li>定义问题</li>
-            <li>设计 harness</li>
-            <li>验证、对系统负责</li>
-          </ul>
-        </div>
-      </div>
-      <div class="keyline">工作从「产出答案」转向<b>「指挥搜索」</b>。</div>
-    </div>
-    <div class="footer"><span>工程师 · agent · 方向</span><span class="pnum">48 / 53</span></div>
-  </section>
-
-  <!-- ============ S49 · 网页到 CLI ============ -->
-  <section class="slide" data-notes="这里展示工作模式，不是产品的通用等级。网页、IDE 和 CLI 都可能按配置提供工具、仓库访问或 Agent 循环。对我的长任务，工作目录让规则、结果与可执行检查持续复用。跨模型或客户端复用可能需要适配；模型、工具或环境变化后要重新评测。本地文件有助于可移植性与积累，但不保证永远有效。">
-    <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>从网页对话框到工作目录</h2>
-    <p class="sub" style="margin-top:8px">对我的长任务，工作目录让规则与结果可以持续复用。</p>
-    <div class="content">
-      <div class="mathline">
-        <div class="phase">
-          <div class="ph">模式 A · 对话</div>
-          <h3>网页对话</h3>
-          <div class="ms"><b>讨论与探索</b><span>提问、解释、上传资料</span></div>
-          <div class="ms"><b>工具能力取决于配置</b><span>网页也可以提供工具与记忆</span></div>
-        </div>
-        <div class="phase">
-          <div class="ph">模式 B · 编辑器</div>
-          <h3>IDE 编辑器</h3>
-          <div class="ms"><b>紧贴代码进行编辑</b><span>文件、诊断、仓库上下文</span></div>
-          <div class="ms"><b>辅助编辑或运行 Agent</b><span>能力取决于工具与权限</span></div>
-        </div>
-        <div class="phase">
-          <div class="ph">模式 C · 工具循环</div>
-          <h3>工作目录 Agent</h3>
-          <div class="ms"><b>工具集成与子智能体</b><span>Python 辛积分 · 摄动展开 · 隔离审查</span></div>
-          <div class="ms"><b>自主闭环与版本可控</b><span>假说 → 实验 → 守恒校验 → git 归档</span></div>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
-        <span class="pill"><i></i>OpenCode</span>
-        <span class="pill"><i></i>Claude Code</span>
-        <span class="pill"><i></i>Codex CLI</span>
-        <span class="pill"><i></i>Cursor</span>
-        <span class="pill"><i></i>Markdown SOP 协议</span>
-      </div>
-      <div class="keyline">文件即接口；在 <b>本地工作目录</b> 沉淀可移植的科研资产。</div>
-      <p class="micro" style="margin-top:8px">文件与检查可跨工具复用；模型或环境变化后，重新运行评测。</p>
-    </div>
-    <div class="footer"><span>web · IDE · CLI · desktop</span><span class="pnum">49 / 53</span></div>
-  </section>
-
-  <!-- ============ S50 · 两次尝试 ============ -->
-  <section class="slide" data-notes="第一次是 OpenClaw 刚出来时，试图让它端到端全包：把概率模型当成确定性计算器，人类完全放手，无检查无回路，直接崩溃。第二次是博士后工作的继续 iStart：转变角色做 Coach 而不做 Fixer。我定目标（WHAT）、提供约束、指出逻辑破绽，让 Codex 与 GPT-5.3–5.5 推进实现（HOW）。它犯过离谱错误，比如试图证明 Ax=b 在 b≠0 时 x=0，被我指出后修正。被拒 3 次后，9 月用 GPT-6.1 Sol 再次全面复扫并修正。经验在于：检验（Eval）比生成容易，人要当指出方向和反例的 Coach。">
-    <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>两次尝试</h2>
-    <p class="sub" style="margin-top:8px">同样的目标，不同的治理方式：从放任到做 Coach。</p>
-    <div class="content">
-      <div class="two even">
-        <div class="card">
-          <div class="k">OpenClaw · 早期尝试</div>
-          <div class="big" style="font-size:22px">误当计算器 · 完全放任</div>
-          <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>试图让 agent 端到端全包写完论文。</li>
-            <li>早期模型弱、幻觉多，且无任何外部检验回路。</li>
-            <li>人类彻底退场，期待自动化奇迹。</li>
-          </ul>
-          <p class="micro" style="margin-top:10px">我的结果：没有完成论文；引导与检查不足。</p>
-        </div>
-        <div class="card accent">
-          <div class="k">Codex · GPT-5.3–5.5 · iStart</div>
-          <div class="big" style="font-size:22px">做 Coach · 建立验证回路</div>
-          <ul style="margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.65">
-            <li>博后工作延伸；没时间手写，由我定义清晰目标（WHAT）。</li>
-            <li>不做逐句修改的 Fixer，做指出破绽的 Coach。</li>
-            <li>纠正荒谬推导：<span style="font-family:var(--mono);font-size:11.5px">Ax = b, b ≠ 0 → x = 0</span> ✗</li>
-            <li>拒稿 3 次后，用 GPT-6.1 Sol 扫出深层隐患并修正。</li>
-          </ul>
-          <p class="micro" style="margin-top:10px">成效：验证不对称性——Eval 比生成更容易。</p>
-        </div>
-      </div>
-      <div class="keyline">不做救火的 Fixer，做定标准与反例的 <b>Coach</b>。</div>
-    </div>
-    <div class="footer"><span>OpenClaw · Codex · iStart</span><span class="pnum">50 / 53</span></div>
-  </section>
-
-  <!-- ============ S51 · 低垂的果实 ============ -->
-  <section class="slide" data-notes="这是我的实践体会：人定目标、给反例、阅读检查证据。动力学检查提供互补证据，包括能量误差行为、辛性残差 DΦᵀ J DΦ − J 和步长收敛。辛积分器一般不精确守恒原哈密顿量，能量误差小也不能单独说明轨道正确。起草变得更便宜后，我选择把更多时间投入选题、可复用知识与评估资产。这是个人的投入取舍，不表示其他成果没有价值。">
-    <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>低垂的果实与长期复利</h2>
-    <p class="sub" style="margin-top:8px">生成论文只是起点；可复利的资产是评估器与科研品味。</p>
-    <div class="content">
-      <div class="three tight">
-        <div class="card"><div class="k">01 · 人类作为 Coach</div><div class="big" style="font-size:20px">定目标与反例</div><p>明确定义 WHAT，放手让 AI 探索 HOW；给出逻辑反例，拒绝人工逐行代修。</p></div>
-        <div class="card"><div class="k">02 · 系统化的 Eval</div><div class="big" style="font-size:20px">动力学检验</div><p>能量误差行为、辛性残差、步长收敛测试，提供互补的检查证据。</p></div>
-        <div class="card accent"><div class="k">03 · 可复利资产</div><div class="big" style="font-size:20px">品味与评估集</div><p>单篇论文是易贬值的果实；持久复利的是知识库、代码 SOP 与形式化评测器。</p></div>
-      </div>
-      <p class="bigquote2">当起草变得更便宜，我更愿意投入<b>选题、可复用知识与评估系统</b>。这些资产可以跨项目积累，形成长期复利。</p>
-      <div class="keyline">下一个核心问题：哪个问题<b>值得机器与人类一起做</b>？</div>
-    </div>
-    <div class="footer"><span>Coach · Eval · 长期复利</span><span class="pnum">51 / 53</span></div>
   </section>
 
   <!-- ============ S52 · 年轻人的机会 ============ -->

@@ -2,7 +2,7 @@
 
 > 状态：✅ 已确认 / ⚠️ 需核实 / ⬜ 待补
 > 报告前必须把 ⚠️ 全部处理掉。
-> 当前主讲 48 页：第 2 页全景导航；四类任务对比第 20 页，章节总结第 22 页，GRPO 目标函数第 14 页、机制第 15 页，REFLEX 第 16 页；模型没有记忆第 23 页，四短板第 24 页，Context 与 Memory 第 25–28 页，代码审查案例第 31–34 页，系统总图第 35 页，AI × math 第 36–41 页，结论第 42–48 页。下表的 S 引用保留历史素材标识，当前显示页码以浏览器和最新大纲为准。
+> 当前主讲 38 页：第 2 页全景导航；四类任务对比第 20 页，章节总结第 22 页，GRPO 目标函数第 14 页、机制第 15 页，REFLEX 第 16 页；模型没有记忆第 23 页，四短板第 24 页，Context 与 Memory 合并页第 26 页，Tool calling 第 27 页，Harness 第 28 页，系统图第 29 页，Skill 第 30 页，AI × math 第 31–36 页，结论第 37–38 页。下表的 S 引用保留历史素材标识，当前显示页码以浏览器和最新大纲为准。
 
 ---
 
@@ -44,7 +44,7 @@
 | 跨领域收益与冲突 | Li et al., [*Can One Domain Help Others?*](https://arxiv.org/abs/2507.17512), 2025 | 讲者备注；基础模型、训练域和数据配比影响迁移，观察到收益也有冲突 |
 | REFLEX | Y. Zhang, **B. Liu**, X. Zhang, A. Mandal, C. Xu, Z. Wu, *REFLEX: Reinforcement Feedback Learning with LLMs for E-commerce Query Expansion*, WSDM 2026, 1288–1292 | 第 16 页 GRPO 实例：搜索引擎在环、无人工标注奖励、SFT 预热 + GRPO、消融结果 | ✅ 依据论文与作者材料；结果限于该数据集与 3B 骨干 |
 
-下表中的训练机制 S 页码为旧稿；相关细节现位于备份模式，不在主讲中展开。GRPO 与 REFLEX 的主讲页码按当前顺序（第 20–21 页）。
+下表中的训练机制 S 页码为旧稿；相关细节现位于备份模式，不在主讲中展开。GRPO 与 REFLEX 的主讲页码按当前顺序（第 14–16 页）。
 
 | 主题 | 文献 / 工具 | 用途 | 状态 |
 |---|---|---|---|
@@ -70,7 +70,7 @@
 | 长上下文失效 | Liu et al., *Lost in the Middle*, 2023 | S25 | ✅ |
 | Agent 设计 | Anthropic, *Building Effective Agents*, 2024 | S27–S28 | ✅ |
 | 代码 agent | Yang et al., *SWE-agent*, 2024 | S28 | ✅ |
-| 代码审查参考案例 | Addy Osmani, Morgan Westlee Lunt & Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), 2026-10-15 | S36–S39：产出激增 → 人工瓶颈 → 系统检查 → 风险分工与评测积累 | ✅ 已读原文；monorepo 与 Claude Code 独立仓库数字分开；团队自述，非独立效果验证 |
+| 代码审查参考案例 | Addy Osmani, Morgan Westlee Lunt & Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), 2026-10-15 | 已从主讲删除；保留为备用素材 | ✅ 已读原文；monorepo 与 Claude Code 独立仓库数字分开；团队自述，非独立效果验证 |
 | Context rot | Chroma 技术报告, 2025 | S25 | ⚠️ 行业报告，非同行评审 |
 | prompt caching | 各供应商文档 | S8 | ⚠️ 价格随日期变 |
 

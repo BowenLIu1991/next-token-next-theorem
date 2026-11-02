@@ -22,8 +22,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - **训练概览**：预训练 → 后训练；后训练介绍 SFT 与 RL，重点解释 RL。细节保留为单独打开的备份模式。
 - **奖励与问题求解**：从 Atari、AlphaGo 等游戏案例，讲到数学与代码的共享技能、测试与反例，以及产品设计和交易的反馈边界。
 - **算力与搜索**：RL 改进策略，算力扩大可验证搜索；有限搜索空间、有解且可靠判定时，穷举可找到满足规范的解，成本可能很高。
-- **使用**：prompt、context、memory、agent loop、harness 如何组合成系统。
-- **工程参考案例**：第 31–34 页依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。
+- **使用**：context／memory、tool calling、harness、系统图与 skill 如何组合成 agent 系统。
 - **AI × math**：FunSearch、AlphaGeometry、AlphaProof、o1 / R1、AlphaEvolve、IMO 2025，以及 2026 年 OpenAI 的公开声称。
 - **结论**：概率负责广度，验证负责正确，人负责方向。
 
@@ -37,13 +36,13 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **48 页**，16:9，1280 × 720。
+- **38 页**，16:9，1280 × 720。
 - 第 2 页为可点击的全景导航；两页采样介绍、“一个测试或反例”页与“训练与工作，使用不同的循环”页已删除；应用开头的“从会说话到会干活”“2023”“Prompt”三页，以及 CoT 与 CoT pruning 两页也已删除。训练概览在第 10 页，第 11–22 页讲奖励驱动的问题求解。
 - 第 20 页将编程、数学、产品设计、交易四类例子放在同一页比较反馈条件，去掉单独的 Kepler 周期奖励示例。
 - 第 22 页总结：环境 → next-token 预测 → 检查与追溯 → 定义 loss → 反向传播更新参数。
 - 第 14 页给出 DeepSeekMath 的 GRPO 目标函数；第 15 页解释组内相对优势；第 16 页以 REFLEX 的搜索引擎在环训练与消融结果为实例。
 - 第 23 页“模型没有记忆”作为具体案例；第 24 页收束为四个短板与三类能力：Context／Memory、Function calling、Harness。
-- 第 25–28 页讲 Context 与 Memory；第 29–30 页讲 Tool calling 与 Agent；第 31–34 页为代码审查案例；第 35 页为系统总图。
+- 第 25 页讲 Context window 的膨胀；第 26 页把“Context 有限、Context engineering、Memory”合成一页；第 27 页讲 Tool calling，第 28 页讲 Harness；第 29 页用系统图收束 Memory + Tool + Harness = Agent 系统；第 30 页讲 Skill。
 - 主讲与备份模式分别按当前顺序自动生成页码。
 - 原训练细节保存为 **12 页备份**，不计入主讲或主讲 PDF；用 `?appendix=1` 打开，支持正常翻页与备注。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
@@ -95,7 +94,7 @@ python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-toke
 python3 assets/demos/render_pdf.py --html docs/index.html --appendix --out /path/to/training-appendix.pdf
 ```
 
-脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 48 页的满版 PDF。依赖：
+脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 38 页的满版 PDF。依赖：
 
 ```bash
 python3 -m pip install pillow pypdf
@@ -118,7 +117,7 @@ python3 -m pip install pillow pypdf
 │   └── .nojekyll
 ├── slides/
 │   ├── en.html                   # English source (53 main pages)
-│   ├── index.html                # 中文源文件（48 页主讲，自包含）
+│   ├── index.html                # 中文源文件（38 页主讲，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -195,8 +194,8 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 
 ## 状态
 
-- [x] 48 页 HTML 幻灯片（English + 中文）
-- [x] PDF 导出（两版各 48 页）
+- [x] 38 页 HTML 幻灯片（English + 中文）
+- [x] PDF 导出（两版各 38 页）
 - [x] GitHub Pages 目录（`docs/`，英文主站）
 - [x] 讲稿、提纲、文献、Q&A
 - [x] tokenizer 实测数据
