@@ -1656,6 +1656,70 @@
     <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
+  <!-- ============ S24a · GRPO objective ============ -->
+  <section class="slide" data-notes="这页给出 DeepSeekMath 中 GRPO 的目标函数，作为下一页机制说明的公式基础。对每个问题 q，从旧策略 πθold 采样一组 G 个输出 o_i；每个输出有标量奖励 r_i，并在组内标准化得到 Â。目标函数先对每个输出的 token 求平均，再对组内输出求平均。逐 token 项包含两部分：裁剪的概率比乘以优势，减去相对参考策略的 KL 正则。ρ 是新旧策略在同一 token 上的概率比；clip 把比值限制在 1±ε；β 控制 KL 惩罚。最大化该目标，相当于提高高优势回答的概率，同时限制策略偏移。公式按 DeepSeekMath 的 GRPO 目标整理；实际实现会在采样、掩码、KL 估计和分布式计算上有差异。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>GRPO 的目标函数</h2>
+    <p class="sub" style="margin-top:8px">DeepSeekMath：组内相对优势，加上裁剪与 KL 约束。</p>
+    <div class="content">
+      <div class="mathblock" style="font-size:20px;margin-top:2px">
+        <math display="block">
+          <msub><mi>J</mi><mtext>GRPO</mtext></msub><mo>(</mo><mi>θ</mi><mo>)</mo>
+          <mo>=</mo>
+          <msub><mi>E</mi><mrow><mi>q</mi><mo>∼</mo><mi>P</mi><mo>(</mo><mi>Q</mi><mo>)</mo><mo>,</mo><mo>{</mo><msub><mi>o</mi><mi>i</mi></msub><msubsup><mo>}</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>G</mi></msubsup><mo>∼</mo><msub><mi>π</mi><msub><mi>θ</mi><mtext>old</mtext></msub></msub></mrow></msub>
+          <mrow><mo>[</mo>
+            <mfrac><mn>1</mn><mi>G</mi></mfrac>
+            <munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>G</mi></munderover>
+            <mfrac><mn>1</mn><mrow><mo>|</mo><msub><mi>o</mi><mi>i</mi></msub><mo>|</mo></mrow></mfrac>
+            <munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><mo>|</mo><msub><mi>o</mi><mi>i</mi></msub><mo>|</mo></mrow></munderover>
+            <msub><mi>L</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub>
+          <mo>]</mo></mrow>
+        </math>
+      </div>
+      <div class="card accent" style="padding:14px 18px;margin-top:14px">
+        <div class="k">逐 token 项</div>
+        <div class="mathblock" style="font-size:19px;margin-top:4px">
+          <math display="block">
+            <msub><mi>L</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>=</mo>
+            <mi>min</mi><mo>[</mo>
+            <msub><mi>ρ</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>θ</mi><mo>)</mo><msub><mover><mi>A</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>,</mo>
+            <mi>clip</mi><mo>(</mo><msub><mi>ρ</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>θ</mi><mo>)</mo><mo>,</mo><mn>1</mn><mo>−</mo><mi>ε</mi><mo>,</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo><msub><mover><mi>A</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>]</mo>
+            <mo>−</mo><mi>β</mi><msub><mi>D</mi><mtext>KL</mtext></msub><mo>[</mo><msub><mi>π</mi><mi>θ</mi></msub><mo>‖</mo><msub><mi>π</mi><mtext>ref</mtext></msub><mo>]</mo>
+          </math>
+        </div>
+      </div>
+      <div class="two even" style="gap:18px;margin-top:14px">
+        <div class="card" style="padding:12px 16px">
+          <div class="k">概率比</div>
+          <div class="mathblock" style="font-size:16px;margin-top:2px">
+            <math display="block">
+              <msub><mi>ρ</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>θ</mi><mo>)</mo><mo>=</mo>
+              <mfrac>
+                <mrow><msub><mi>π</mi><mi>θ</mi></msub><mo>(</mo><msub><mi>o</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>∣</mo><mi>q</mi><mo>,</mo><msub><mi>o</mi><mrow><mi>i</mi><mo>,</mo><mo>&lt;</mo><mi>t</mi></mrow></msub><mo>)</mo></mrow>
+                <mrow><msub><mi>π</mi><msub><mi>θ</mi><mtext>old</mtext></msub></msub><mo>(</mo><msub><mi>o</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>∣</mo><mi>q</mi><mo>,</mo><msub><mi>o</mi><mrow><mi>i</mi><mo>,</mo><mo>&lt;</mo><mi>t</mi></mrow></msub><mo>)</mo></mrow>
+              </mfrac>
+            </math>
+          </div>
+        </div>
+        <div class="card accent" style="padding:12px 16px">
+          <div class="k">组内优势</div>
+          <div class="mathblock" style="font-size:16px;margin-top:2px">
+            <math display="block">
+              <msub><mover><mi>A</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>=</mo>
+              <mfrac>
+                <mrow><msub><mi>r</mi><mi>i</mi></msub><mo>−</mo><mtext>mean</mtext><mo>(</mo><msub><mi>r</mi><mn>1</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>r</mi><mi>G</mi></msub><mo>)</mo></mrow>
+                <mrow><mtext>std</mtext><mo>(</mo><msub><mi>r</mi><mn>1</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>r</mi><mi>G</mi></msub><mo>)</mo></mrow>
+              </mfrac>
+            </math>
+          </div>
+        </div>
+      </div>
+      <div class="keyline">提高高优势回答的概率，同时用 <b>clip 与 KL</b> 限制更新幅度。</div>
+      <p class="micro" style="margin-top:10px">来源：Shao et al., <i>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</i>, arXiv:2402.03300, 2024 · 公式按 GRPO 目标整理；实现细节可能不同。</p>
+    </div>
+    <div class="footer"><span>GRPO objective · advantage · clip · KL</span><span class="pnum">25 / 53</span></div>
+  </section>
+
   <!-- ============ S24b · GRPO ============ -->
   <section class="slide" data-notes="GRPO（Group Relative Policy Optimization）是 PPO 的一类变体，常用于数学、代码等可验证任务。对同一个问题 q，用旧策略采样一组 G 个回答，分别得到奖励 r_i。它不训练单独的 critic / value model，而是把同一组奖励的均值作为基线，用组内标准差归一化，得到相对优势 A_i。策略更新时使用概率比和裁剪，并加 KL 正则限制相对参考策略的偏移。直觉是：同一道题里，比组内平均更好的回答获得正优势，更差的获得负优势；绝对分数尺度不影响组内排序。组大小、奖励噪声和难度都会影响效果。公式对应 DeepSeekMath 的 GRPO 目标；本页只讲机制，不展开推导。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>

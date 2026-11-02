@@ -23,7 +23,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - **奖励与问题求解**：从 Atari、AlphaGo 等游戏案例，讲到数学与代码的共享技能、测试与反例，以及产品设计和交易的反馈边界。
 - **算力与搜索**：RL 改进策略，算力扩大可验证搜索；有限搜索空间、有解且可靠判定时，穷举可找到满足规范的解，成本可能很高。
 - **使用**：prompt、context、memory、agent loop、harness 如何组合成系统。
-- **工程参考案例**：第 33–36 页依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。
+- **工程参考案例**：第 34–37 页依据 [Claude Code 团队的代码审查实践](https://claude.dev/blog/solving-code-review-at-anthropic/)（2026-10-15），讲述代码产出激增 → 人工审查瓶颈 → 系统化检查 → 风险分工与评测积累，供学术同行参考。
 - **AI × math**：FunSearch、AlphaGeometry、AlphaProof、o1 / R1、AlphaEvolve、IMO 2025，以及 2026 年 OpenAI 的公开声称。
 - **结论**：概率负责广度，验证负责正确，人负责方向。
 
@@ -37,11 +37,11 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **50 页**，16:9，1280 × 720。
-- 两页采样介绍、“一个测试或反例”页与“训练与工作，使用不同的循环”页已删除；训练概览在第 10 页，第 11–21 页讲奖励驱动的问题求解。
+- **51 页**，16:9，1280 × 720。
+- 两页采样介绍、“一个测试或反例”页与“训练与工作，使用不同的循环”页已删除；训练概览在第 10 页，第 11–22 页讲奖励驱动的问题求解。
 - 第 17 页将编程、数学、产品设计、交易四类例子放在同一页比较反馈条件，去掉单独的 Kepler 周期奖励示例。
 - 第 19 页总结：环境 → next-token 预测 → 检查与追溯 → 定义 loss → 反向传播更新参数。
-- 第 20–21 页介绍 GRPO 的组内相对优势，并以 REFLEX 的搜索引擎在环训练与消融结果作为实例。
+- 第 20 页给出 DeepSeekMath 的 GRPO 目标函数；第 21 页解释组内相对优势；第 22 页以 REFLEX 的搜索引擎在环训练与消融结果为实例。
 - 主讲与备份模式分别按当前顺序自动生成页码。
 - 原训练细节保存为 **12 页备份**，不计入主讲或主讲 PDF；用 `?appendix=1` 打开，支持正常翻页与备注。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
@@ -93,7 +93,7 @@ python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-toke
 python3 assets/demos/render_pdf.py --html docs/index.html --appendix --out /path/to/training-appendix.pdf
 ```
 
-脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 50 页的满版 PDF。依赖：
+脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 51 页的满版 PDF。依赖：
 
 ```bash
 python3 -m pip install pillow pypdf
@@ -115,8 +115,8 @@ python3 -m pip install pillow pypdf
 │   ├── from-next-token-to-next-theorem-zh.pdf   # 中文
 │   └── .nojekyll
 ├── slides/
-│   ├── en.html                   # English source (50 main pages)
-│   ├── index.html                # 中文源文件（50 页主讲，自包含）
+│   ├── en.html                   # English source (51 main pages)
+│   ├── index.html                # 中文源文件（51 页主讲，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -193,8 +193,8 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 
 ## 状态
 
-- [x] 50 页 HTML 幻灯片（English + 中文）
-- [x] PDF 导出（两版各 50 页）
+- [x] 51 页 HTML 幻灯片（English + 中文）
+- [x] PDF 导出（两版各 51 页）
 - [x] GitHub Pages 目录（`docs/`，英文主站）
 - [x] 讲稿、提纲、文献、Q&A
 - [x] tokenizer 实测数据
