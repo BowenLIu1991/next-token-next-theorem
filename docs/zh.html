@@ -1656,6 +1656,79 @@
     <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
+  <!-- ============ S24b · GRPO ============ -->
+  <section class="slide" data-notes="GRPO（Group Relative Policy Optimization）是 PPO 的一类变体，常用于数学、代码等可验证任务。对同一个问题 q，用旧策略采样一组 G 个回答，分别得到奖励 r_i。它不训练单独的 critic / value model，而是把同一组奖励的均值作为基线，用组内标准差归一化，得到相对优势 A_i。策略更新时使用概率比和裁剪，并加 KL 正则限制相对参考策略的偏移。直觉是：同一道题里，比组内平均更好的回答获得正优势，更差的获得负优势；绝对分数尺度不影响组内排序。组大小、奖励噪声和难度都会影响效果。公式对应 DeepSeekMath 的 GRPO 目标；本页只讲机制，不展开推导。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>GRPO：同一道题，比较一组回答</h2>
+    <p class="sub" style="margin-top:8px">不用 critic，用组内相对表现构造优势。</p>
+    <div class="content">
+      <div class="loop" style="gap:10px">
+        <span class="step">同一问题</span><span class="arr">→</span>
+        <span class="step">采样一组回答</span><span class="arr">→</span>
+        <span class="step">逐个评分</span><span class="arr">→</span>
+        <span class="step hl">组内相对优势</span><span class="arr">↺</span>
+      </div>
+      <div class="two even" style="margin-top:26px;gap:24px;align-items:stretch">
+        <div class="card" style="padding:18px 20px">
+          <div class="k">组内标准化</div>
+          <div class="mathblock" style="margin-top:8px;font-size:26px">
+            <math>
+              <msub><mi>A</mi><mi>i</mi></msub><mo>=</mo>
+              <mfrac>
+                <mrow><msub><mi>r</mi><mi>i</mi></msub><mo>−</mo><mtext>mean</mtext><mo>(</mo><mi>r</mi><mo>)</mo></mrow>
+                <mrow><mtext>std</mtext><mo>(</mo><mi>r</mi><mo>)</mo></mrow>
+              </mfrac>
+            </math>
+          </div>
+          <p style="font-size:19px;margin-top:12px">高于组内平均 → 正优势；低于平均 → 负优势。</p>
+        </div>
+        <div class="stack">
+          <div class="card" style="padding:14px 18px"><div class="k">不需要 critic</div><p style="font-size:19px;margin:0">同一组样本的均值就是基线，省掉单独的价值模型。</p></div>
+          <div class="card accent" style="padding:14px 18px"><div class="k">稳定更新</div><p style="font-size:19px;margin:0">概率比裁剪 + KL 正则，限制策略偏移。</p></div>
+        </div>
+      </div>
+      <div class="keyline">GRPO 看的是<b>相对好坏</b>，不是绝对分数。</div>
+    </div>
+    <div class="footer"><span>GRPO · group-relative advantage · no critic</span><span class="pnum">25 / 53</span></div>
+  </section>
+
+  <!-- ============ S24c · REFLEX ============ -->
+  <section class="slide" data-notes="REFLEX 是 WSDM 2026 的电商 Query 扩展工作（Zhang, Liu, et al.）。任务：给定初始 Query 和它召回的 top-k 商品，让 LLM 生成扩展 Query，提交真实搜索引擎，取回结果并与原 Query 结果取并集。奖励不需要人工标注：相关性项 Rel(Y)/Rel(q)，覆盖项 Ret(Y)/Ret(q)，格式不合规直接给 0；总奖励 r = r_rel + 0.1·r_size。训练分两阶段：先用 1 万条蒸馏样本做 SFT 预热，固化 think / answer JSON 格式并稳定 RL；再用 10 万条真实 Query 与线上搜索引擎交互做 GRPO，8×H200 全参微调。结果表是论文报告的消融：仅 SFT 12.8 / 8.9，仅 GRPO 57.5 / 25.2，预热 + GRPO 72.8 / 32.4。ΔCoverage / ΔRel 指取得正增益的 Query 占比，10,000 条真实 Query、5 次采样取均值；这是该数据集与 3B 骨干上的结果，不外推到所有检索场景。">
+    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
+    <h2>REFLEX：把搜索引擎放进 RL 闭环</h2>
+    <p class="sub" style="margin-top:8px">电商 Query 扩展：生成 → 检索 → 用结果质量给奖励。</p>
+    <div class="content">
+      <div class="loop" style="gap:8px">
+        <span class="step">Query + top-k 商品</span><span class="arr">→</span>
+        <span class="step">LLM 生成扩展</span><span class="arr">→</span>
+        <span class="step">搜索引擎</span><span class="arr">→</span>
+        <span class="step">结果并集</span><span class="arr">→</span>
+        <span class="step hl">奖励</span><span class="arr">↺</span>
+      </div>
+      <div class="two even" style="margin-top:24px;gap:22px;align-items:stretch">
+        <div class="stack">
+          <div class="card" style="padding:14px 18px"><div class="k">奖励 · 无需人工标注</div><p style="font-size:18px;margin:0">相关性 Rel(Y)/Rel(q) + 覆盖 Ret(Y)/Ret(q)；格式不合规记 0。</p></div>
+          <div class="card" style="padding:14px 18px"><div class="k">训练</div><p style="font-size:18px;margin:0">SFT 预热 1 万条 → GRPO 10 万条真实 Query；8×H200。</p></div>
+        </div>
+        <div class="card accent" style="padding:16px 18px">
+          <div class="k">正增益 Query 占比 · %</div>
+          <table class="compare" style="font-size:17px;margin-top:8px">
+            <thead><tr><th>设置</th><th>ΔCov</th><th>ΔRel</th></tr></thead>
+            <tbody>
+              <tr><td>仅 SFT</td><td>12.8</td><td>8.9</td></tr>
+              <tr><td>仅 GRPO</td><td>57.5</td><td>25.2</td></tr>
+              <tr><td><b>预热 + GRPO</b></td><td><b>72.8</b></td><td><b>32.4</b></td></tr>
+            </tbody>
+          </table>
+          <p class="micro" style="margin-top:8px">10,000 queries · 5 samples · LLaMA 3.2-3B</p>
+        </div>
+      </div>
+      <div class="keyline">GRPO 把“检索结果更好”变成<b>可优化的奖励</b>。</div>
+      <p class="micro" style="margin-top:10px">Zhang, Liu, et al., REFLEX, WSDM 2026 · 结果为该数据集与骨干上的消融。</p>
+    </div>
+    <div class="footer"><span>REFLEX · search-in-the-loop · GRPO ablation</span><span class="pnum">26 / 53</span></div>
+  </section>
+
   <!-- ============ S25 · 从会说话到会干活 ============ -->
   <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
     <p class="eyebrow"><b>04</b> / application</p>

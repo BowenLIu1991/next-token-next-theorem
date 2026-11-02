@@ -1658,6 +1658,79 @@
     <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
+  <!-- ============ S24b · GRPO ============ -->
+  <section class="slide" data-notes="GRPO (Group Relative Policy Optimization) is a PPO variant often used for verifiable tasks such as math and code. For a question q, sample a group of G responses from the old policy and score each with reward r_i. Instead of training a separate critic or value model, GRPO uses the group mean as a baseline and normalizes by the group standard deviation to form a relative advantage A_i. Policy updates use a probability ratio with clipping and a KL penalty against a reference policy. Intuition: within one question, responses better than the group average receive positive advantage and worse ones negative advantage; the absolute reward scale does not change within-group ordering. Group size, reward noise and task difficulty all affect results. The formula corresponds to the GRPO objective in DeepSeekMath; this slide explains the mechanism without derivation.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>GRPO: compare a group of answers</h2>
+    <p class="sub" style="margin-top:8px">No critic; use relative performance within a group.</p>
+    <div class="content">
+      <div class="loop" style="gap:10px">
+        <span class="step">One question</span><span class="arr">→</span>
+        <span class="step">Sample a group</span><span class="arr">→</span>
+        <span class="step">Score each</span><span class="arr">→</span>
+        <span class="step hl">Relative advantage</span><span class="arr">↺</span>
+      </div>
+      <div class="two even" style="margin-top:26px;gap:24px;align-items:stretch">
+        <div class="card" style="padding:18px 20px">
+          <div class="k">Group normalization</div>
+          <div class="mathblock" style="margin-top:8px;font-size:26px">
+            <math>
+              <msub><mi>A</mi><mi>i</mi></msub><mo>=</mo>
+              <mfrac>
+                <mrow><msub><mi>r</mi><mi>i</mi></msub><mo>−</mo><mtext>mean</mtext><mo>(</mo><mi>r</mi><mo>)</mo></mrow>
+                <mrow><mtext>std</mtext><mo>(</mo><mi>r</mi><mo>)</mo></mrow>
+              </mfrac>
+            </math>
+          </div>
+          <p style="font-size:19px;margin-top:12px">Above the group mean → positive; below → negative.</p>
+        </div>
+        <div class="stack">
+          <div class="card" style="padding:14px 18px"><div class="k">No critic</div><p style="font-size:19px;margin:0">The group mean is the baseline, so no separate value model is needed.</p></div>
+          <div class="card accent" style="padding:14px 18px"><div class="k">Stable updates</div><p style="font-size:19px;margin:0">Clipped probability ratios and a KL penalty limit policy drift.</p></div>
+        </div>
+      </div>
+      <div class="keyline">GRPO learns from <b>relative quality</b>, not absolute scores.</div>
+    </div>
+    <div class="footer"><span>GRPO · group-relative advantage · no critic</span><span class="pnum">25 / 53</span></div>
+  </section>
+
+  <!-- ============ S24c · REFLEX ============ -->
+  <section class="slide" data-notes="REFLEX is a WSDM 2026 e-commerce query-expansion paper (Zhang, Liu, et al.). Given an initial query and the top-k products retrieved for it, the LLM generates expanded queries, submits them to a real search engine, and unions the results with those of the original query. Rewards need no human labels: relevance Rel(Y)/Rel(q), coverage Ret(Y)/Ret(q), and zero for format violations; total reward r = r_rel + 0.1·r_size. Training has two stages: SFT warm start on 10k distilled samples to fix the think/answer JSON format and stabilize RL, then GRPO on 100k real queries with the online search engine, full fine-tuning on 8×H200. The ablation reports SFT only 12.8/8.9, GRPO only 57.5/25.2, warm start + GRPO 72.8/32.4. ΔCoverage/ΔRel are the share of queries with positive gain, over 10,000 real queries and five samples. These are results for this dataset and 3B backbone, not a universal retrieval claim.">
+    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
+    <h2>REFLEX: search engine in the RL loop</h2>
+    <p class="sub" style="margin-top:8px">E-commerce query expansion: generate → retrieve → reward result quality.</p>
+    <div class="content">
+      <div class="loop" style="gap:8px">
+        <span class="step">Query + top-k products</span><span class="arr">→</span>
+        <span class="step">LLM expands</span><span class="arr">→</span>
+        <span class="step">Search engine</span><span class="arr">→</span>
+        <span class="step">Union of results</span><span class="arr">→</span>
+        <span class="step hl">Reward</span><span class="arr">↺</span>
+      </div>
+      <div class="two even" style="margin-top:24px;gap:22px;align-items:stretch">
+        <div class="stack">
+          <div class="card" style="padding:14px 18px"><div class="k">Reward · no human labels</div><p style="font-size:18px;margin:0">Relevance Rel(Y)/Rel(q) + coverage Ret(Y)/Ret(q); format violations score 0.</p></div>
+          <div class="card" style="padding:14px 18px"><div class="k">Training</div><p style="font-size:18px;margin:0">SFT warm start on 10k → GRPO on 100k real queries; 8×H200.</p></div>
+        </div>
+        <div class="card accent" style="padding:16px 18px">
+          <div class="k">Queries with positive gain · %</div>
+          <table class="compare" style="font-size:17px;margin-top:8px">
+            <thead><tr><th>Setting</th><th>ΔCov</th><th>ΔRel</th></tr></thead>
+            <tbody>
+              <tr><td>SFT only</td><td>12.8</td><td>8.9</td></tr>
+              <tr><td>GRPO only</td><td>57.5</td><td>25.2</td></tr>
+              <tr><td><b>Warm start + GRPO</b></td><td><b>72.8</b></td><td><b>32.4</b></td></tr>
+            </tbody>
+          </table>
+          <p class="micro" style="margin-top:8px">10,000 queries · 5 samples · LLaMA 3.2-3B</p>
+        </div>
+      </div>
+      <div class="keyline">GRPO turns <b>better retrieval</b> into an optimizable reward.</div>
+      <p class="micro" style="margin-top:10px">Zhang, Liu, et al., REFLEX, WSDM 2026 · ablation on this dataset and backbone.</p>
+    </div>
+    <div class="footer"><span>REFLEX · search-in-the-loop · GRPO ablation</span><span class="pnum">26 / 53</span></div>
+  </section>
+
   <!-- ============ S25 · 从会说话到会干活 ============ -->
   <section class="slide" data-notes="应用层可以分成三步：会说话、会思考、会干活。每一步都在解决前一步留下的问题。">
     <p class="eyebrow"><b>04</b> / application</p>

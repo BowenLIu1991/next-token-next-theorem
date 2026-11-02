@@ -1,6 +1,6 @@
 # LinkedIn post — From the Next Token to the Next Theorem
 
-> Production-history note: the initial build described below had 50 slides. The current deck has 48 slides after the review-case expansion, sampling cuts, four-domain consolidation, page deletions and a new section summary. Keep the original three-hour production story distinct from later revisions.
+> Production-history note: the initial build described below had 50 slides. The current deck has 50 slides after the review-case expansion, sampling cuts, page deletions, a section summary, and new GRPO / REFLEX slides. Keep the original three-hour production story distinct from later revisions.
 
 ## English main post
 
