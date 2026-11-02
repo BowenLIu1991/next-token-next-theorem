@@ -811,7 +811,7 @@
   </section>
 
   <!-- ============ S1b · 全景导航 ============ -->
-  <section class="slide" data-notes="全景导航页。点击章节卡片跳到该章开头，点击小标签跳到关键页。页码按当前 38 页顺序显示。此页只用于导航，不进入论证；如果时间紧，可直接从 Token 开始。">
+  <section class="slide" data-notes="全景导航页。点击章节卡片跳到该章开头，点击小标签跳到关键页。页码按当前 39 页顺序显示。此页只用于导航，不进入论证；如果时间紧，可直接从 Token 开始。">
     <p class="eyebrow"><b>00</b> / 全景</p>
     <h2>全景：从 token 到定理</h2>
     <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
@@ -841,26 +841,26 @@
         <div class="card mapcard" data-goto="23" role="button" tabindex="0">
           <div class="k">03 · 系统与工程</div>
           <h3>把模型放进系统</h3>
-          <p>上下文 · Harness · Skill</p>
-          <div class="range">p. 24–30</div>
-          <div class="maplinks"><span class="maplink" data-goto="27">Harness</span><span class="maplink" data-goto="28">系统总图</span><span class="maplink" data-goto="29">Skill</span></div>
+          <p>上下文 · Harness · Skill · 长时运行</p>
+          <div class="range">p. 24–31</div>
+          <div class="maplinks"><span class="maplink" data-goto="27">Harness</span><span class="maplink" data-goto="28">系统图</span><span class="maplink" data-goto="29">Skill</span><span class="maplink" data-goto="30">长时运行</span></div>
         </div>
-        <div class="card mapcard" data-goto="30" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="31" role="button" tabindex="0">
           <div class="k">04 · AI × 数学</div>
           <h3>从工具到搜索</h3>
           <p>加速 · 时间线 · 共同模式</p>
-          <div class="range">p. 31–36</div>
-          <div class="maplinks"><span class="maplink" data-goto="31">时间线</span><span class="maplink" data-goto="33">共同模式</span></div>
+          <div class="range">p. 32–37</div>
+          <div class="maplinks"><span class="maplink" data-goto="32">时间线</span><span class="maplink" data-goto="34">共同模式</span></div>
         </div>
-        <div class="card mapcard" data-goto="36" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="37" role="button" tabindex="0">
           <div class="k">05 · 结论</div>
           <h3>回到我的实践</h3>
           <p>工作方式 · 复利 · 收束</p>
-          <div class="range">p. 37–38</div>
-          <div class="maplinks"><span class="maplink" data-goto="37">结尾</span></div>
+          <div class="range">p. 38–39</div>
+          <div class="maplinks"><span class="maplink" data-goto="38">结尾</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 个章节 · 38 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
+      <p class="micro" style="margin-top:14px">6 个章节 · 39 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -2114,6 +2114,44 @@ obs   "16.0"</pre>
     <div class="footer"><span>skill package · procedure · scripts · references</span><span class="pnum">30 / 53</span></div>
   </section>
 
+  <!-- ============ S36c · 长时间运行 ============ -->
+  <section class="slide" data-notes="Agent loop 和 skill 不是模型内部能力，而是更外围的运行时与复用层。Loop 在环境里反复观察、行动、修正，状态放在外部，可以持续数小时或数天；它留下轨迹：成功路径、失败与修复、工具调用、检查点。把轨迹里可重复的部分提炼出来，写成 skill：触发条件、步骤、脚本、参考资料。下一轮按需加载，直接复用。Loop 是运行时，skill 是编译后的经验；memory 是状态，harness 是边界。">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>长时间运行：把 loop 固化成 skill</h2>
+    <p class="sub" style="margin-top:8px">loop 产生经验；skill 把经验变成下一轮可加载的流程。</p>
+    <div class="content">
+      <div class="three" style="gap:16px;align-items:stretch">
+        <div class="card" style="padding:16px;justify-content:flex-start">
+          <div class="k">01 · 跑起来</div>
+          <div class="big" style="font-size:24px">Loop</div>
+          <div class="loop" style="margin-top:12px;padding-top:0;border-top:0;justify-content:flex-start;gap:6px">
+            <span class="step" style="padding:7px 10px;font-size:12px">观察</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 10px;font-size:12px">行动</span><span class="arr">↺</span>
+          </div>
+          <p style="font-size:14px">状态放到外部；可以持续数小时或数天。</p>
+        </div>
+        <div class="card" style="padding:16px;justify-content:flex-start">
+          <div class="k">02 · 提炼</div>
+          <div class="big" style="font-size:24px">轨迹 → 步骤</div>
+          <div class="chain" style="margin-top:12px"><span class="c">成功</span><span class="c">失败</span><span class="c">修复</span><span class="c">检查点</span></div>
+          <p style="font-size:14px">去掉偶然，留下可重复的部分。</p>
+        </div>
+        <div class="card" style="padding:16px;justify-content:flex-start">
+          <div class="k">03 · 固化</div>
+          <div class="big" style="font-size:24px">Skill</div>
+          <div class="panel" style="margin-top:12px;padding:10px 12px">
+            <pre style="margin:0;font-family:var(--mono);font-size:10.5px;line-height:1.55;color:#cfd2d9;white-space:pre-wrap">SKILL.md
+scripts/
+references/</pre>
+          </div>
+          <p style="font-size:14px">按需加载，下一轮直接用。</p>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:18px">loop 是运行时；skill 是编译后的经验；memory 是状态；harness 是边界。</div>
+      <div class="keyline">长时间运行不只完成任务，也把做法变成<b>资产</b>。</div>
+    </div>
+    <div class="footer"><span>long-running · trajectory · compiled procedure</span><span class="pnum">31 / 53</span></div>
+  </section>
   <!-- ============ S41 · 加速 ============ -->
   <section class="slide" data-notes="选取的里程碑包括 2024 年 IMO 银牌级 28/42 和 2025 年金牌级 35/42。2026 年 OpenAI 发布属于公司报告，不代表每项结果已独立确认。其 2026-10-06 原文描述的是每项结果平均使用约三小时 ChatGPT Pro 思考的等价算力，不是实际三小时解完。不同系统、测试设置与预算之间也不是受控的纵向比较。">
     <p class="eyebrow"><b>05</b> / AI × math</p>

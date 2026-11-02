@@ -841,26 +841,26 @@
         <div class="card mapcard" data-goto="23" role="button" tabindex="0">
           <div class="k">03 · Systems &amp; engineering</div>
           <h3>Put the model in a system</h3>
-          <p>Context · harness · skills</p>
-          <div class="range">p. 24–30</div>
-          <div class="maplinks"><span class="maplink" data-goto="27">Harness</span><span class="maplink" data-goto="28">System map</span><span class="maplink" data-goto="29">Skill</span></div>
+          <p>Context · harness · skills · long runs</p>
+          <div class="range">p. 24–31</div>
+          <div class="maplinks"><span class="maplink" data-goto="27">Harness</span><span class="maplink" data-goto="28">System map</span><span class="maplink" data-goto="29">Skill</span><span class="maplink" data-goto="30">Long runs</span></div>
         </div>
-        <div class="card mapcard" data-goto="30" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="31" role="button" tabindex="0">
           <div class="k">04 · AI × math</div>
           <h3>From tools to search</h3>
           <p>Acceleration · timeline · pattern</p>
-          <div class="range">p. 31–36</div>
-          <div class="maplinks"><span class="maplink" data-goto="31">Timeline</span><span class="maplink" data-goto="33">Pattern</span></div>
+          <div class="range">p. 32–37</div>
+          <div class="maplinks"><span class="maplink" data-goto="32">Timeline</span><span class="maplink" data-goto="34">Pattern</span></div>
         </div>
-        <div class="card mapcard" data-goto="36" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="37" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>Back to practice</h3>
           <p>Workflow · compounding · close</p>
-          <div class="range">p. 37–38</div>
-          <div class="maplinks"><span class="maplink" data-goto="37">Close</span></div>
+          <div class="range">p. 38–39</div>
+          <div class="maplinks"><span class="maplink" data-goto="38">Close</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 sections · 38 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
+      <p class="micro" style="margin-top:14px">6 sections · 39 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -2116,6 +2116,44 @@ obs   "16.0"</pre>
     <div class="footer"><span>skill package · procedure · scripts · references</span><span class="pnum">30 / 53</span></div>
   </section>
 
+  <!-- ============ S36c · Long-running ============ -->
+  <section class="slide" data-notes="Agent loop and skill are not internal model capabilities; they are the outer runtime and reuse layers. The loop repeatedly observes, acts, and revises in an environment, keeps state outside, and can run for hours or days. It leaves a trajectory: successful paths, failures and repairs, tool calls, checkpoints. Distill the repeatable parts into a skill: trigger conditions, steps, scripts, references. The next run loads it on demand and reuses it. The loop is runtime; the skill is compiled experience; memory is state; harness is the boundary.">
+    <p class="eyebrow"><b>04</b> / application</p>
+    <h2>Long-running: turn the loop into a skill</h2>
+    <p class="sub" style="margin-top:8px">The loop produces experience; the skill turns it into a procedure the next run can load.</p>
+    <div class="content">
+      <div class="three" style="gap:16px;align-items:stretch">
+        <div class="card" style="padding:16px;justify-content:flex-start">
+          <div class="k">01 · Run</div>
+          <div class="big" style="font-size:24px">Loop</div>
+          <div class="loop" style="margin-top:12px;padding-top:0;border-top:0;justify-content:flex-start;gap:6px">
+            <span class="step" style="padding:7px 10px;font-size:12px">Observe</span><span class="arr">→</span>
+            <span class="step" style="padding:7px 10px;font-size:12px">Act</span><span class="arr">↺</span>
+          </div>
+          <p style="font-size:14px">State lives outside; a run can last hours or days.</p>
+        </div>
+        <div class="card" style="padding:16px;justify-content:flex-start">
+          <div class="k">02 · Distill</div>
+          <div class="big" style="font-size:24px">Trajectory → steps</div>
+          <div class="chain" style="margin-top:12px"><span class="c">Success</span><span class="c">Failure</span><span class="c">Repair</span><span class="c">Checkpoint</span></div>
+          <p style="font-size:14px">Drop the accidental; keep what repeats.</p>
+        </div>
+        <div class="card" style="padding:16px;justify-content:flex-start">
+          <div class="k">03 · Codify</div>
+          <div class="big" style="font-size:24px">Skill</div>
+          <div class="panel" style="margin-top:12px;padding:10px 12px">
+            <pre style="margin:0;font-family:var(--mono);font-size:10.5px;line-height:1.55;color:#cfd2d9;white-space:pre-wrap">SKILL.md
+scripts/
+references/</pre>
+          </div>
+          <p style="font-size:14px">Load on demand; use it on the next run.</p>
+        </div>
+      </div>
+      <div class="scaleband" style="margin-top:18px">Loop is runtime; skill is compiled experience; memory is state; harness is the boundary.</div>
+      <div class="keyline">Long runs do not only finish tasks; they turn practice into an <b>asset</b>.</div>
+    </div>
+    <div class="footer"><span>long-running · trajectory · compiled procedure</span><span class="pnum">31 / 53</span></div>
+  </section>
   <!-- ============ S41 · 加速 ============ -->
   <section class="slide" data-notes="Selected milestones: 2024 IMO silver-level 28/42 and 2025 gold-level 35/42. The 2026 OpenAI release is a company report, not independent confirmation of every result. Its 2026-10-06 post describes average compute equivalent to roughly three hours of ChatGPT Pro thinking per result, not three hours of elapsed solving time. The different systems, test conditions and budgets are not a controlled longitudinal experiment.">
     <p class="eyebrow"><b>05</b> / AI × math</p>
