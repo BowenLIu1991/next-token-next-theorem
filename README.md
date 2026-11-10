@@ -36,11 +36,14 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **39 页**，16:9，1280 × 720。
-- 第 2 页为可点击的全景导航；两页采样介绍、“一个测试或反例”页与“训练与工作，使用不同的循环”页已删除；应用开头的“从会说话到会干活”“2023”“Prompt”三页，以及 CoT 与 CoT pruning 两页也已删除。训练概览在第 10 页，第 11–22 页讲奖励驱动的问题求解。
+- **42 页**，16:9，1280 × 720。
+- 第 2 页为天体力学研究简介，现单位匿名为“某美国电商公司”；第 3 页为全景导航。
+- 两页采样介绍、“一个测试或反例”页与“训练与工作，使用不同的循环”页已删除；应用开头的“从会说话到会干活”“2023”“Prompt”三页，以及 CoT 与 CoT pruning 两页也已删除。训练概览在第 11 页，第 12–22 页讲奖励驱动的问题求解。
 - 第 20 页将编程、数学、产品设计、交易四类例子放在同一页比较反馈条件，去掉单独的 Kepler 周期奖励示例。
 - 第 22 页总结：环境 → next-token 预测 → 检查与追溯 → 定义 loss → 反向传播更新参数。
-- 第 14 页给出 DeepSeekMath 的 GRPO 目标函数；第 15 页解释组内相对优势；第 16 页以 REFLEX 的搜索引擎在环训练与消融结果为实例。
+- 第 15 页给出 DeepSeekMath 的 GRPO 目标函数；第 16 页解释组内相对优势；REFLEX 电商案例整页已删除。
+- 第 36 页左右对照 DAG 与 MCTS；第 37 页为个人机制猜测：外部证明图／树在 Agent 提议与 Lean 检查中演进；第 38 页区分系统设计与模型能力的瓶颈。
+- 第 39–40 页分别介绍 OpenAI 批量数学发布与 NS 声称，链接官方公告和数学仓库；结论第 41–42 页。
 - 第 23 页“模型没有记忆”作为具体案例；第 24 页收束为四个短板与三类能力：Context／Memory、Function calling、Harness。
 - 第 25 页讲 Context window 的膨胀；第 26 页把“Context 有限、Context engineering、Memory”合成一页；第 27 页讲 Tool calling，第 28 页讲 Harness；第 29 页用系统图收束 Memory + Tool + Harness = Agent 系统；第 30 页讲 Skill；第 31 页讲长时间运行如何把 loop 固化成 skill。
 - 主讲与备份模式分别按当前顺序自动生成页码。
@@ -94,7 +97,7 @@ python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-toke
 python3 assets/demos/render_pdf.py --html docs/index.html --appendix --out /path/to/training-appendix.pdf
 ```
 
-脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 39 页的满版 PDF。依赖：
+脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 42 页的满版 PDF。依赖：
 
 ```bash
 python3 -m pip install pillow pypdf
@@ -117,7 +120,7 @@ python3 -m pip install pillow pypdf
 │   └── .nojekyll
 ├── slides/
 │   ├── en.html                   # English source (53 main pages)
-│   ├── index.html                # 中文源文件（39 页主讲，自包含）
+│   ├── index.html                # 中文源文件（42 页主讲，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -175,7 +178,7 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 
 - **AlphaFold 不是 RL**：它是监督学习，用已知蛋白质结构做标签；2024 年诺贝尔化学奖表彰的是蛋白质结构预测与设计，不是强化学习。
 - **IMO 2025 是“金牌级”**，不是官方金牌；Gemini 由 IMO 协调员评分，OpenAI 由前奖牌得主评分。
-- **2026 年 OpenAI 的 372 个问题**：公司公开报告，722 篇论文，其中 3 个撤回，同行评议未完成。幻灯片用“报告”，不用“证明”。
+- **2026 年 OpenAI 数学发布**：首发 722 篇手稿、372 个相关结果族，来自约 4,000 个尝试问题；仓库持续修订。结果族不等于独立解决的问题数，也不能直接据此算成功率。部分成果附 Lean，本项目没有逐篇独立验证。
 - **Navier–Stokes / 黎曼相关**：都是公开声称，争议中；372 批里的 “quasi-Riemann” 不是完整黎曼猜想证明。
 - **价格与用量**：来自报告当日的截图；价格会变。
 - **所有引用与链接**：见 [`notes/03_references.md`](notes/03_references.md)。
@@ -194,8 +197,8 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 
 ## 状态
 
-- [x] 39 页 HTML 幻灯片（English + 中文）
-- [x] PDF 导出（两版各 39 页）
+- [x] 42 页 HTML 幻灯片（English + 中文）
+- [x] PDF 导出（两版各 42 页）
 - [x] GitHub Pages 目录（`docs/`，英文主站）
 - [x] 讲稿、提纲、文献、Q&A
 - [x] tokenizer 实测数据

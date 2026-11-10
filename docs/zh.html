@@ -809,33 +809,53 @@
     <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 53</span></div>
   </section>
 
+  <!-- ============ BIO · 简介 ============ -->
+  <section class="slide" data-notes="按本人提供的履历整理。南开大学陈省身数学研究所硕博阶段 2013–2018，其中博士 2015–2018。2018–2020 奥格斯堡大学博士后，2020–2022 上海交通大学吴文俊助理教授，2022–2024 华为主任工程师，2024 至今某美国电商公司应用研究员。天体力学研究：N 体周期解的存在性与稳定性；受限四体问题椭圆相对平衡的线性稳定性（JDE 2020）；平面四体椭圆菱形解的线性不稳定性（Nonlinearity 2021）；受限 N 体椭圆相对平衡的两个特殊情形（JMP 2026）；广义 Lennard–Jones 系统的解与同形解（Acta Math Sin 2018/2020）。工具是辛指标理论、辛几何与变分方法。工业经历只交代转向大模型、RL、搜索与推荐和 AI4Science，现单位匿名，不展示业务效果或联系方式。">
+    <p class="eyebrow"><b>00</b> / 关于我</p>
+    <h2>刘博文 <span style="font-size:30px;font-weight:400;color:var(--muted)">Bowen Liu</span></h2>
+    <p class="sub" style="margin-top:8px">研究主线：N 体周期解、椭圆相对平衡与线性稳定性。</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two" style="grid-template-columns:1fr 1.15fr;gap:24px;align-items:center">
+        <div class="stack" style="gap:10px">
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2013–2018 · 南开大学 · 陈省身数学研究所</div><p style="font-size:23px;margin:0">硕博阶段 · 数学博士（2018）</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2018–2020 · 奥格斯堡大学</div><p style="font-size:23px;margin:0">博士后研究员</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2020–2022 · 上海交通大学</div><p style="font-size:23px;margin:0">吴文俊助理教授</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2022–2024 · 华为</div><p style="font-size:23px;margin:0">主任工程师 · AI4Science 与大模型</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2024–至今 · 某美国电商公司</div><p style="font-size:23px;margin:0">应用研究员 · LLM、RL、搜索与推荐</p></div>
+        </div>
+        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">天体力学研究</div><p style="font-size:24px;line-height:1.75">N 体周期解的存在性与稳定性<br>受限四体：椭圆相对平衡<br>平面四体：椭圆菱形解的不稳定性<br>广义 Lennard–Jones 系统的同形解</p><div class="keyline" style="font-size:22px;margin-top:18px">辛指标理论 · 辛几何 · 变分方法</div></div>
+      </div>
+    </div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
+  </section>
+
   <!-- ============ S1b · 全景导航 ============ -->
-  <section class="slide" data-notes="全景导航页。点击章节卡片跳到该章开头，点击小标签跳到关键页。页码按当前 39 页顺序显示。此页只用于导航，不进入论证；如果时间紧，可直接从 Token 开始。">
+  <section class="slide" data-notes="当前 42 页：简介 2，全景 3，Token 4–9，模型 10，训练与 RL 11–22，无状态 23，四短板 24，应用 25–31，AI 数学 32–40，结论 41–42。DAG/MCTS 定义 36，机制猜测 37，局限 38，批量结果 39，NS 40。REFLEX 整页已按要求删除。">
     <p class="eyebrow"><b>00</b> / 全景</p>
     <h2>全景：从 token 到定理</h2>
     <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
     <div class="content" style="margin-top:18px">
       <div class="mapgrid">
-        <div class="card mapcard" data-goto="2" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="3" role="button" tabindex="0">
           <div class="k">00 · 开场与 Token</div>
           <h3>Token</h3>
           <p>十个整数 · 词表 · 计费</p>
-          <div class="range">p. 3–8</div>
-          <div class="maplinks"><span class="maplink" data-goto="2">10 个整数</span><span class="maplink" data-goto="4">词表</span></div>
+          <div class="range">p. 4–9</div>
+          <div class="maplinks"><span class="maplink" data-goto="1">简介</span><span class="maplink" data-goto="3">10 个整数</span><span class="maplink" data-goto="5">词表</span></div>
         </div>
-        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="9" role="button" tabindex="0">
           <div class="k">01 · 模型</div>
           <h3>一个函数</h3>
           <p>概率分布</p>
-          <div class="range">p. 9</div>
-          <div class="maplinks"><span class="maplink" data-goto="8">概率分布</span></div>
+          <div class="range">p. 10</div>
+          <div class="maplinks"><span class="maplink" data-goto="9">概率分布</span></div>
         </div>
-        <div class="card mapcard" data-goto="9" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="10" role="button" tabindex="0">
           <div class="k">02 · 训练与问题求解</div>
           <h3>从奖励中学习</h3>
           <p>RL 循环 · 数学与代码 · GRPO</p>
-          <div class="range">p. 10–23</div>
-          <div class="maplinks"><span class="maplink" data-goto="10">RL 循环</span><span class="maplink" data-goto="13">GRPO 公式</span><span class="maplink" data-goto="15">REFLEX</span><span class="maplink" data-goto="22">无状态</span></div>
+          <div class="range">p. 11–23</div>
+          <div class="maplinks"><span class="maplink" data-goto="11">RL 循环</span><span class="maplink" data-goto="14">GRPO 公式</span><span class="maplink" data-goto="22">无状态</span></div>
         </div>
         <div class="card mapcard" data-goto="23" role="button" tabindex="0">
           <div class="k">03 · 系统与工程</div>
@@ -848,18 +868,18 @@
           <div class="k">04 · AI × 数学</div>
           <h3>从工具到搜索</h3>
           <p>加速 · 时间线 · 共同模式</p>
-          <div class="range">p. 32–37</div>
-          <div class="maplinks"><span class="maplink" data-goto="32">时间线</span><span class="maplink" data-goto="34">共同模式</span></div>
+          <div class="range">p. 32–40</div>
+          <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 篇</span><span class="maplink" data-goto="39">NS</span></div>
         </div>
-        <div class="card mapcard" data-goto="37" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="40" role="button" tabindex="0">
           <div class="k">05 · 结论</div>
           <h3>回到我的实践</h3>
           <p>工作方式 · 复利 · 收束</p>
-          <div class="range">p. 38–39</div>
-          <div class="maplinks"><span class="maplink" data-goto="38">结尾</span></div>
+          <div class="range">p. 41–42</div>
+          <div class="maplinks"><span class="maplink" data-goto="41">结尾</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 个章节 · 39 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
+      <p class="micro" style="margin-top:14px">6 个章节 · 42 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -1686,43 +1706,6 @@
     <div class="footer"><span>GRPO · group-relative advantage · no critic</span><span class="pnum">25 / 53</span></div>
   </section>
 
-  <!-- ============ S24c · REFLEX ============ -->
-  <section class="slide" data-notes="REFLEX 是 WSDM 2026 的电商 Query 扩展工作（Zhang, Liu, et al.）。任务：给定初始 Query 和它召回的 top-k 商品，让 LLM 生成扩展 Query，提交真实搜索引擎，取回结果并与原 Query 结果取并集。奖励不需要人工标注：相关性项 Rel(Y)/Rel(q)，覆盖项 Ret(Y)/Ret(q)，格式不合规直接给 0；总奖励 r = r_rel + 0.1·r_size。训练分两阶段：先用 1 万条蒸馏样本做 SFT 预热，固化 think / answer JSON 格式并稳定 RL；再用 10 万条真实 Query 与线上搜索引擎交互做 GRPO，8×H200 全参微调。结果表是论文报告的消融：仅 SFT 12.8 / 8.9，仅 GRPO 57.5 / 25.2，预热 + GRPO 72.8 / 32.4。ΔCoverage / ΔRel 指取得正增益的 Query 占比，10,000 条真实 Query、5 次采样取均值；这是该数据集与 3B 骨干上的结果，不外推到所有检索场景。">
-    <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>REFLEX：把搜索引擎放进 RL 闭环</h2>
-    <p class="sub" style="margin-top:8px">电商 Query 扩展：生成 → 检索 → 用结果质量给奖励。</p>
-    <div class="content">
-      <div class="loop" style="gap:8px">
-        <span class="step">Query + top-k 商品</span><span class="arr">→</span>
-        <span class="step">LLM 生成扩展</span><span class="arr">→</span>
-        <span class="step">搜索引擎</span><span class="arr">→</span>
-        <span class="step">结果并集</span><span class="arr">→</span>
-        <span class="step hl">奖励</span><span class="arr">↺</span>
-      </div>
-      <div class="two even" style="margin-top:24px;gap:22px;align-items:stretch">
-        <div class="stack">
-          <div class="card" style="padding:14px 18px"><div class="k">奖励 · 无需人工标注</div><p style="font-size:18px;margin:0">相关性 Rel(Y)/Rel(q) + 覆盖 Ret(Y)/Ret(q)；格式不合规记 0。</p></div>
-          <div class="card" style="padding:14px 18px"><div class="k">训练</div><p style="font-size:18px;margin:0">SFT 预热 1 万条 → GRPO 10 万条真实 Query；8×H200。</p></div>
-        </div>
-        <div class="card accent" style="padding:16px 18px">
-          <div class="k">正增益 Query 占比 · %</div>
-          <table class="compare" style="font-size:17px;margin-top:8px">
-            <thead><tr><th>设置</th><th>ΔCov</th><th>ΔRel</th></tr></thead>
-            <tbody>
-              <tr><td>仅 SFT</td><td>12.8</td><td>8.9</td></tr>
-              <tr><td>仅 GRPO</td><td>57.5</td><td>25.2</td></tr>
-              <tr><td><b>预热 + GRPO</b></td><td><b>72.8</b></td><td><b>32.4</b></td></tr>
-            </tbody>
-          </table>
-          <p class="micro" style="margin-top:8px">10,000 queries · 5 samples · LLaMA 3.2-3B</p>
-        </div>
-      </div>
-      <div class="keyline">GRPO 把“检索结果更好”变成<b>可优化的奖励</b>。</div>
-      <p class="micro" style="margin-top:10px">Zhang, Liu, et al., REFLEX, WSDM 2026 · 结果为该数据集与骨干上的消融。</p>
-    </div>
-    <div class="footer"><span>REFLEX · search-in-the-loop · GRPO ablation</span><span class="pnum">26 / 53</span></div>
-  </section>
-
   <!-- ============ S16 · 数学与代码的共性 ============ -->
   <section class="slide" data-notes="这里把数学和代码的共同优势收成三点。第一，外部环境相对封闭：数学在公理化系统中工作，由定义、公理和推理规则构成；代码在语言规范与运行环境中工作，语法、类型、库和执行语义给出边界。求解时不需要不断询问外部世界，问题一旦形式化，系统内部就能给出判定或行为。第二，错误可追溯：证明可以逐步检查，定位失效的推理步骤；代码可以借测试、异常栈和行号定位到具体位置。第三，数据结构清晰：形式化对象与代码可解析、可筛选，适合批量生成和验证。封闭是相对任务而言，程序可能依赖输入、外部库和运行时，数学建模仍需先把现实问题形式化；语料仍需筛选，证明和测试也可能不完整。严格穷举还需有限搜索空间、解存在和可靠终止的判定，成本可能极高。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
@@ -2217,7 +2200,7 @@ references/</pre>
           <h3>规模：从 benchmark 到开放问题</h3>
           <div class="ms"><div class="d">2025.07</div><b>IMO 2025</b><span>金牌级 35/42；自然语言、无工具</span></div>
           <div class="ms"><div class="d">2025</div><b>形式化金牌（声称）</b><span>Aristotle 等；Lean 可验</span></div>
-          <div class="ms"><div class="d">2026.05–10</div><b>OpenAI</b><span>单位距离反例；NS / 黎曼相关（声称）；372 个问题（报告）</span></div>
+          <div class="ms"><div class="d">2026.05–10</div><b>OpenAI</b><span>单位距离反例；NS / 黎曼相关（声称）；首发 372 结果族</span></div>
         </div>
       </div>
       <div class="keyline">每一次跃迁，都是<b>生成器 + 验证器 + 搜索</b>。</div>
@@ -2241,7 +2224,7 @@ references/</pre>
           <tr><td>2025.01</td><td>R1</td><td>"directly apply RL ... rule-based rewards"</td><td>RLVR</td></tr>
           <tr><td>2025.05</td><td>AlphaEvolve</td><td>"evolutionary coding agent"</td><td>进化搜索</td></tr>
           <tr><td>2025.07</td><td>IMO 2025</td><td>"natural language ... no tools"</td><td>端到端</td></tr>
-          <tr><td>2026.09–10</td><td>OpenAI</td><td>"NS solution; 372 problems; 722 papers"</td><td>开放问题</td></tr>
+          <tr><td>2026.09–10</td><td>OpenAI</td><td>NS 破裂声称；首发 372 结果族、722 篇手稿</td><td>开放问题</td></tr>
         </tbody>
       </table>
       <div class="keyline">关键词在变，底层动作没变：<b>提议、验证、再搜索</b>。</div>
@@ -2272,54 +2255,126 @@ references/</pre>
     <div class="footer"><span>generator · verifier · search</span><span class="pnum">44 / 53</span></div>
   </section>
 
-  <!-- ============ S45 · 猜测 ============ -->
-  <section class="slide" data-notes="本页是公开方法启发的机制假设，不是对私有系统的完整还原。OpenAI 2026-10-06 原文说，平均每项结果使用的算力相当于约三小时 ChatGPT Pro 思考。这是算力等价值，不是墙钟耗时，也不能据此判断并行度。自动形式化、RLVR、搜索、蒸馏和 Harness 是可能组件，单一成本统计不能识别实际采用了哪些方法。">
-    <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>一些猜测：大结果可能是怎么来的</h2>
-    <div class="content">
-      <div class="caveat">以下机制假设，来自公开论文、博客和 benchmark 的交叉印证，标注为<strong>猜测</strong>。</div>
-      <div class="four spec">
-        <div class="card"><div class="k">01 数据</div><p><b>自动形式化 + 合成</b>：非形式题转 Lean；拒绝采样留下可验证的。</p></div>
-        <div class="card"><div class="k">02 训练</div><p><b>RLVR + 长 CoT</b>：答案可验证，奖励才能规模化。</p></div>
-        <div class="card"><div class="k">03 推理</div><p><b>Test-time search</b>：best-of-N、树搜索、进化。</p></div>
-        <div class="card"><div class="k">04 蒸馏</div><p><b>把搜索写回模型</b>：下一次不用搜那么久。</p></div>
-        <div class="card"><div class="k">05 工程</div><p><b>Harness</b>：并行、缓存、评测、回放。</p></div>
-        <div class="card accent"><div class="k">06 赌注</div><p><b>验证</b>：谁有更硬的 verifier，谁就有更快的飞轮。</p></div>
+  <!-- ============ SEARCH · DAG 与 MCTS ============ -->
+  <section class="slide" data-notes="定义页，不声称这些就是 OpenAI 的具体实现。DAG 是 directed acyclic graph，有向无环图：节点表示对象，边带方向，沿边不能走回起点。用于证明时，节点可为引理或目标，边表示前提到结论的依赖；共享引理允许多个后继复用。图结构本身不保证节点正确，依赖关系仍需验证。MCTS 是 Monte Carlo tree search：节点是搜索状态，边是候选动作，反复执行选择、扩展、模拟或价值评估、回传；平衡探索新分支与利用已有好分支，集中有限搜索预算。形式证明可用模型提出 tactic，用 Lean 得到后继状态或错误反馈，用启发式价值或证明完成信号评价。Lean 不自动评估所有未完成分支的未来价值。多个子目标具有 AND 结构，替代动作具有 OR 结构，真实证明搜索可能使用 AND/OR 树或超图。本页将结构与策略分开：DAG 描述如何关联知识，MCTS 描述如何决定扩展哪里。">
+    <p class="eyebrow"><b>05</b> / AI × math · 搜索的两个概念</p>
+    <h2>DAG 存依赖；MCTS 决定往哪里搜</h2>
+    <div class="content" style="margin-top:22px">
+      <div class="two even" style="gap:22px;align-items:stretch">
+        <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">DAG · Directed Acyclic Graph</div><div class="big" style="font-size:30px">有向无环图：一种结构</div>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="A 与 B 指向 C，C 指向 T；B 同时支持 T，表示引理复用">
+            <g stroke="#c2410c" stroke-width="2" fill="none"><path d="M80 40 L225 80 M80 130 L225 80 L405 80 M80 130 Q240 175 405 100"/></g><g fill="#c2410c" font-size="25"><text x="190" y="72">›</text><text x="190" y="106">›</text><text x="360" y="88">›</text><text x="365" y="132">›</text></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="15" width="70" height="50" rx="8"/><rect x="20" y="105" width="70" height="50" rx="8"/><rect x="225" y="55" width="60" height="50" rx="8"/><rect x="405" y="55" width="60" height="50" rx="8"/></g><g font-size="26" text-anchor="middle" fill="#15171c"><text x="55" y="49">A</text><text x="55" y="139">B</text><text x="255" y="89">C</text><text x="435" y="89">T</text></g>
+          </svg>
+          <p style="font-size:23px;line-height:1.6">节点：引理、子目标<br>有向边：前提 → 结论<br>无环：避免循环论证；共享节点可复用</p>
+        </div>
+        <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">MCTS · Monte Carlo Tree Search</div><div class="big" style="font-size:30px">蒙特卡洛树搜索：一种策略</div>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="树从一个状态向多条候选路径展开，橙色路径示意获得更多搜索预算">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 20 L90 80 L35 145 M90 80 L145 145 M240 20 L390 80 L335 145 M390 80 L445 145"/></g><path d="M240 20 L240 80 L270 145" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 145" stroke="#c2410c" stroke-width="2" fill="none"/><g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="20" r="14"/><circle cx="90" cy="80" r="13"/><circle cx="390" cy="80" r="13"/><circle cx="35" cy="145" r="9"/><circle cx="145" cy="145" r="9"/><circle cx="335" cy="145" r="9"/><circle cx="445" cy="145" r="9"/></g><g fill="#c2410c"><circle cx="240" cy="80" r="14"/><circle cx="205" cy="145" r="9"/><circle cx="270" cy="145" r="10"/></g>
+          </svg>
+          <p style="font-size:23px;line-height:1.6">节点：状态；分支：候选动作<br>选择 → 扩展 → 模拟／评估 → 回传<br>平衡探索与利用，分配搜索预算</p>
+        </div>
       </div>
-      <p class="micro" style="margin-top:10px">OpenAI 报告：每项结果约 3 小时 ChatGPT Pro 等价算力 · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">2026-10-06</a>。</p>
-      <div class="keyline">已知算力预算，<b>系统设计仍有多种可能</b>。</div>
+      <div class="keyline" style="font-size:26px;margin-top:20px">DAG 回答“<b>依赖什么</b>”；MCTS 回答“<b>下一步试什么</b>”。</div>
+    </div>
+    <div class="footer"><span>structure ≠ search policy · conceptual diagrams</span><span class="pnum">36 / 42</span></div>
+  </section>
+
+  <!-- ============ S45 · 猜测 ============ -->
+  <section class="slide" data-notes="这是演讲者的机制猜测，不是 OpenAI 披露的实现。把定理证明视为两个可结合的搜索视角：DAG 管理已证引理与子目标依赖，MCTS 对证明动作做选择、扩展、采样评估与回传。依赖箭头表示前提到结论，循环依赖不能作为有效证明。图中 MCTS 分支粗细只示意预算分配，不代表实测概率；Lean 可以检查证明动作产生的状态与完成的形式证明，搜索还可使用启发式价值，未闭合目标不能仅因可编译就视为证明成功。对于拆解目标，多子目标一般具有 AND 关系，替代证明动作具有 OR 关系；实际算法可能需要 AND/OR 搜索或超图，不能将这张树当作完整实现。爆破是演讲者对有模型引导、有限预算、可验证的大规模搜索的概括，不是原文引语。Chen 与 Li 2606.01861 研究的是无向定理语义图上的可逆随机游走、prover-conjecturer 自博弈与多样性，在连通性等假设下证明可证知识集合增长。它既不是证明依赖 DAG，也没有据此证明 OpenAI 使用 MCTS。已证引理可复用；搜索轨迹是否回写权重需要额外训练，运行时复用本身不改变权重。">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>我的猜测：Agent ＋ Lean 推动证明图演进</h2>
+    <p class="sub" style="margin-top:8px">外部维护中间图／树：待证目标、候选路径、已证引理与验证反馈。</p>
+    <div class="content" style="margin-top:20px">
+      <div class="two even" style="gap:22px;align-items:stretch">
+        <div class="card" style="padding:16px 20px">
+          <div class="k" style="font-size:16px">01 · 维护结构：目标、依赖与已证引理</div>
+          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="已证引理 A 和 B 支撑 C，B 和 C 支撑目标 T 的无环依赖示意">
+            <defs><marker id="dag-arrow-zh" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6" fill="none" stroke="#c2410c"/></marker></defs>
+            <g stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#dag-arrow-zh)"><path d="M95 43 L222 74"/><path d="M95 126 L222 91"/><path d="M276 82 L399 82"/><path d="M95 126 Q250 175 408 106"/></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="17" width="75" height="50" rx="8"/><rect x="20" y="102" width="75" height="50" rx="8"/><rect x="223" y="57" width="54" height="50" rx="8"/><rect x="400" y="57" width="60" height="50" rx="8"/></g>
+            <g fill="#15171c" font-size="25" text-anchor="middle" dominant-baseline="middle"><text x="57" y="43">A ✓</text><text x="57" y="128">B ✓</text><text x="250" y="83">C</text><text x="430" y="83">T</text></g>
+          </svg>
+          <p style="font-size:22px;line-height:1.55">节点存子目标；边记录依赖<br>已证引理固化，供其他节点复用</p>
+        </div>
+        <div class="card" style="padding:16px 20px">
+          <div class="k" style="font-size:16px">02 · 演进结构：提议、检查、更新</div>
+          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="从证明状态向多个动作展开，验证反馈后将更多预算分配给有希望分支的搜索树示意">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 24 L90 80 L35 143 M90 80 L145 143 M240 24 L390 80 L445 143 M390 80 L335 143"/></g>
+            <path d="M240 24 L240 80 L270 143" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 143" stroke="#c2410c" stroke-width="2" fill="none"/>
+            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="24" r="16"/><circle cx="90" cy="80" r="14"/><circle cx="390" cy="80" r="14"/><circle cx="35" cy="143" r="10"/><circle cx="145" cy="143" r="10"/><circle cx="335" cy="143" r="10"/><circle cx="445" cy="143" r="10"/></g>
+            <g fill="#c2410c"><circle cx="240" cy="80" r="15"/><circle cx="205" cy="143" r="10"/><circle cx="270" cy="143" r="11"/></g><text x="300" y="129" fill="#c2410c" font-size="22">反馈 ↺</text>
+          </svg>
+          <p style="font-size:22px;line-height:1.55">选节点 → Agent 尝试 → Lean 检查<br>通过则固化；失败则修正或换路</p>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:26px;margin-top:18px"><b>图存中间状态，Agent 扩展候选，Lean 把关证明。</b></div>
+      <p class="micro" style="font-size:14px;line-height:1.5;margin:12px 0 0">我的“问题爆破”猜测，非官方实现 · MCTS 可作为选点策略 · <a style="color:inherit" href="https://arxiv.org/abs/2606.01861">Chen &amp; Li，2026</a><br>该论文的定理语义图与这里的证明依赖图不同；Lean 接受局部步骤后，仍须闭合全部子目标。</p>
     </div>
     <div class="footer"><span>speculation · public sources</span><span class="pnum">45 / 53</span></div>
   </section>
 
   <!-- ============ S46 · 还没解决 ============ -->
-  <section class="slide" data-notes="已经发生：竞赛题、形式证明、构造搜索、部分开放问题（2026 OpenAI 报告 372 个）。还没：选题、定义、长程研究计划、品味。解题可以搜索；做数学需要方向。">
+  <section class="slide" data-notes="这是演讲者的成熟度判断。约 4000 个尝试问题经过结果族聚合与重要性筛选，形成首发 372 族、722 篇手稿；OpenAI 没有声称解决全部尝试问题。发布统计不是严格成功率，不能把未发表的每个问题都算成失败，也不能从总数判定系统与模型各自的贡献。系统瓶颈可能涉及拆解、节点选择、共享状态、并行预算与反馈；模型瓶颈可能涉及引理、关键推理、形式化与新构造。Lean 检查形式推导，不负责创造关键思想。前页外部图/树演进实现仍是演讲者猜测。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>还没解决的：从解题到做数学</h2>
-    <div class="content">
-      <div class="two even">
-        <div>
-          <p class="micro">已经发生</p>
-          <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">竞赛题</div><p>IMO 金牌级；自然语言、限时</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">形式证明</div><p>Lean 可验；不再依赖人眼</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">构造搜索</div><p>cap set、矩阵乘法、调度</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">开放问题</div><p>OpenAI 报告 372 个；筛选仍靠人</p></div>
-          </div>
-        </div>
-        <div>
-          <p class="micro">还没</p>
-          <div class="stack" style="gap:10px">
-            <div class="card accent" style="padding:14px 16px"><div class="k">选题</div><p>什么问题值得做</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">定义</div><p>新概念、新结构</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">长程</div><p>几个月的研究计划</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">品味</div><p>美、重要、可生长</p></div>
-          </div>
-        </div>
+    <h2>我的判断：进展显著，技术路线仍在成熟</h2>
+    <p class="sub" style="margin-top:8px">OpenAI 披露尝试约 4,000 个问题；发布结果覆盖其中一部分。</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two even" style="gap:22px;align-items:stretch">
+        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">01 · 系统设计的瓶颈</div><div class="big" style="font-size:30px">如何组织搜索</div><p style="font-size:24px;line-height:1.75">目标拆解与节点选择<br>分支协作与中间状态共享<br>预算分配与验证反馈</p></div>
+        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">02 · 模型能力的瓶颈</div><div class="big" style="font-size:30px">能否找到关键一步</div><p style="font-size:24px;line-height:1.75">提出有效引理与新构造<br>跨越长程推理的难点<br>将思路写成严格证明</p></div>
       </div>
-      <div class="keyline">解题可以搜索；<b>做数学需要方向</b>。</div>
+      <div class="keyline" style="font-size:26px;margin-top:22px">Lean 守住形式逻辑；<b>系统与模型共同决定能走多远</b>。</div>
+      <p class="micro" style="font-size:16px;line-height:1.5;margin:16px 0 0">部分问题仍未解决；具体失败原因需实验区分。<br>问题数与结果族口径不同，不能直接相除当成功率。<a href="https://github.com/openai/math" style="color:inherit">来源：openai/math ↗</a></p>
     </div>
     <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
+  </section>
+
+  <!-- ============ M2026a · 批量结果 ============ -->
+  <section class="slide" data-notes="核对日期 2026-11-10。OpenAI 10 月 6 日公告及 openai/math 发布版 README（adc7f1241b42e322a6451854ab7e4b4c146bf78a）给出首发 722 篇手稿、372 个相关结果族，评测尝试约 4000 个问题。一个结果族可能包含主结果、辅助论证、推论与替代证明，因此不能称为解决 700 个独立问题，也不能直接用 372/4000 算成功率。仓库持续修订，本页固定展示首发规模。公司报告平均每项结果约 3 小时 ChatGPT Pro 思考的等价算力，不是实际耗时。部分成果附 Lean；正确性、形式化覆盖范围、原创性与重要性需逐项审查。本轮未逐篇审查或本地编译。">
+    <p class="eyebrow"><b>05</b> / AI × math · 2026-10-06</p>
+    <h2>OpenAI：批量生成研究级数学结果</h2>
+    <p class="sub" style="margin-top:8px">从单题演示，到一整批可供审查与接续研究的手稿。</p>
+    <div class="content" style="margin-top:22px">
+      <div class="three" style="gap:18px">
+        <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">722</div><p style="font-size:22px">首发手稿</p></div>
+        <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">372</div><p style="font-size:22px">相关结果族</p></div>
+        <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">≈4,000</div><p style="font-size:22px">尝试的问题</p></div>
+      </div>
+      <div class="two even" style="gap:18px;margin-top:18px;align-items:stretch">
+        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">公开了什么</div><p style="font-size:22px;line-height:1.55">论文与证明材料<br>部分结果的 Lean 形式化<br>10 份推理摘要与算力统计</p></div>
+        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">我怎么读这组数字</div><p style="font-size:22px;line-height:1.55">一个结果族可对应多篇手稿<br>约 3 Pro 小时 / 结果：算力等价值<br>正确性、原创性、重要性逐项审查</p></div>
+      </div>
+      <div class="keyline" style="margin-top:18px;font-size:26px">候选成果开始批量生成；<b>验证与理解成为关键工作</b>。</div>
+      <p class="micro" style="font-size:14px;margin:12px 0 0">首发规模 · OpenAI 报告 · 仓库持续修订 · <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/" style="color:inherit">官方公告</a> · <a href="https://github.com/openai/math" style="color:inherit">openai/math ↗</a></p>
+    </div>
+    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">38 / 41</span></div>
+  </section>
+
+  <!-- ============ M2026b · Navier–Stokes ============ -->
+  <section class="slide" data-notes="来源：OpenAI 2026-09-08 公告及 openai/NavierStokesAndEuler 仓库公开说明。公司声称对正黏性，在三维全空间和周期情形中构造光滑初值、光滑外力，使全局光滑解不存在，对应 Clay 问题 C/D 的破裂路径；公告描述初始静止、演化中有限能量。这里强调有外力的存在性反例，不扩展为无外力情形，不声称得到任意初值的显式解。公司披露约 10000 个并发 agent，88 小时找到论证，额外 17 小时形式化与验证；各组探索不同路线，经 Codex 汇总中间结论，再交叉分享与继续搜索。公告没有说明使用 DAG 或 MCTS；不能用前面的机制示意还原私有实现。这些运行时间与上一页平均 Pro 等价算力不能直接比较。Clay 9 月 11 日公告称 apparently settled，同时说明评估过程将审慎进行。Bastounis、Circelli、Hansen 的 arXiv:2610.08144 指出自然语言证明与 Lean 证明的对应差异，并非据此证明最终定理错误。本轮未编译仓库或独立核查数学证明。">
+    <p class="eyebrow"><b>05</b> / AI × math · 2026-09-08</p>
+    <h2>Navier–Stokes：一次长程多 agent 研究</h2>
+    <p class="sub" style="margin-top:8px">OpenAI 报告：带光滑外力的三维不可压流体，可在有限时间失去光滑性。</p>
+    <div class="content" style="margin-top:18px">
+      <div class="mathband" style="margin-top:0;padding:12px 0;justify-content:center">
+        <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size:30px"><mrow><msub><mi>∂</mi><mi>t</mi></msub><mi>u</mi><mo>+</mo><mo>(</mo><mi>u</mi><mo>·</mo><mo>∇</mo><mo>)</mo><mi>u</mi><mo>=</mo><mo>−</mo><mo>∇</mo><mi>p</mi><mo>+</mo><mi>ν</mi><mo>Δ</mo><mi>u</mi><mo>+</mo><mi mathcolor="#c2410c">f</mi><mo>,</mo><mspace width="1em"/><mo>∇</mo><mo>·</mo><mi>u</mi><mo>=</mo><mn>0</mn></mrow></math>
+      </div>
+      <div class="two" style="grid-template-columns:1fr 1.15fr;gap:22px;margin-top:18px;align-items:stretch">
+        <div class="card" style="padding:18px 20px"><div class="k" style="font-size:16px">结果范围 · 公司声称</div><p style="font-size:22px;line-height:1.6">正黏性 · 光滑初值与外力<br>全空间 ℝ³ 与周期情形<br>有限时奇性 · 对应 Clay C / D</p><p style="font-size:18px;color:var(--muted)">构造破裂情形；无外力问题另需讨论。</p></div>
+        <div>
+          <div class="three" style="gap:10px">
+            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">≈10⁴</div><p style="font-size:18px">并发 agent</p></div>
+            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">88 h</div><p style="font-size:18px">找到论证</p></div>
+            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">+17 h</div><p style="font-size:18px">形式化与验证</p></div>
+          </div>
+          <p style="font-size:22px;line-height:1.6;margin:16px 0 0">分组探索 → 汇总中间结论<br>交叉分享 → 继续搜索 → Lean 检查</p>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:24px;margin-top:18px">形式证明检查逻辑；<b>原问题、形式陈述与论文的对应仍须审查</b>。</div>
+      <p class="micro" style="font-size:14px;margin:12px 0 0">OpenAI 报告 · <a href="https://openai.com/zh-Hans-CN/index/navier-stokes-solution/" style="color:inherit">官方公告</a> · <a href="https://github.com/openai/NavierStokesAndEuler" style="color:inherit">数学仓库 ↗</a> · <a href="https://arxiv.org/abs/2610.08144" style="color:inherit">形式化对应问题的讨论</a></p>
+    </div>
+    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">39 / 41</span></div>
   </section>
 
   <!-- ============ S52 · 年轻人的机会 ============ -->

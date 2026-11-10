@@ -809,33 +809,53 @@
     <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 53</span></div>
   </section>
 
+  <!-- ============ BIO · About me ============ -->
+  <section class="slide" data-notes="Based on the speaker's CV. Nankai Chern Institute, graduate studies 2013–2018, PhD 2015–2018; Augsburg postdoc 2018–2020; Shanghai Jiao Tong Wu Wen-Tsun Assistant Professor 2020–2022; Huawei Principal Engineer 2022–2024; Applied Researcher at a US e-commerce company since 2024. Celestial mechanics: existence and stability of periodic N-body solutions; elliptic relative equilibria in restricted four-body systems (JDE 2020); linear instability of planar four-body elliptic rhombi (Nonlinearity 2021); two special cases of restricted N-body elliptic relative equilibria (JMP 2026); generalized Lennard-Jones solutions and homographic motions (Acta Math Sin 2018/2020). Methods: symplectic index theory, symplectic geometry and variational methods. Current employer anonymized; no business results or personal contact details.">
+    <p class="eyebrow"><b>00</b> / About me</p>
+    <h2>Bowen Liu <span style="font-size:30px;font-weight:400;color:var(--muted)">刘博文</span></h2>
+    <p class="sub" style="margin-top:8px">Periodic N-body solutions, elliptic relative equilibria and linear stability.</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two" style="grid-template-columns:1fr 1.15fr;gap:24px;align-items:center">
+        <div class="stack" style="gap:10px">
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2013–2018 · Nankai · Chern Institute</div><p style="font-size:23px;margin:0">Graduate studies · Mathematics PhD (2018)</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2018–2020 · University of Augsburg</div><p style="font-size:23px;margin:0">Postdoctoral Researcher</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2020–2022 · Shanghai Jiao Tong University</div><p style="font-size:23px;margin:0">Wu Wen-Tsun Assistant Professor</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2022–2024 · Huawei</div><p style="font-size:23px;margin:0">Principal Engineer · AI4Science &amp; LLMs</p></div>
+          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2024–present · A US e-commerce company</div><p style="font-size:23px;margin:0">Applied Researcher · LLMs, RL &amp; search</p></div>
+        </div>
+        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">Celestial mechanics research</div><p style="font-size:24px;line-height:1.75">Periodic N-body solutions: existence &amp; stability<br>Restricted four-body elliptic equilibria<br>Linear instability of elliptic rhombi<br>Homographic Lennard–Jones solutions</p><div class="keyline" style="font-size:22px;margin-top:18px">Symplectic indices · Geometry · Variational methods</div></div>
+      </div>
+    </div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
+  </section>
+
   <!-- ============ S1b · Overview map ============ -->
-  <section class="slide" data-notes="Overview map. Click a section card to jump to its first page; click a small tag to jump to a key page. Page numbers follow the current 52-page order. This slide is navigation only and carries no argument; if time is short, start directly at Token.">
+  <section class="slide" data-notes="42 pages. Biography 2, overview 3, Token 4–9, model 10, training and rewards 11–22, statelessness 23, limitations 24, applications 25–31, AI math 32–40, closing 41–42. DAG/MCTS definitions 36, hypothesis 37, maturity 38, batch release 39, NS 40. REFLEX was removed at the speaker's request.">
     <p class="eyebrow"><b>00</b> / overview</p>
     <h2>Overview: from token to theorem</h2>
     <p class="sub" style="margin-top:8px">Click a section card to jump; click a tag for a key page.</p>
     <div class="content" style="margin-top:18px">
       <div class="mapgrid">
-        <div class="card mapcard" data-goto="2" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="3" role="button" tabindex="0">
           <div class="k">00 · Opening + Token</div>
           <h3>Token</h3>
           <p>Ten integers · vocabulary · billing</p>
-          <div class="range">p. 3–8</div>
-          <div class="maplinks"><span class="maplink" data-goto="2">Ten integers</span><span class="maplink" data-goto="4">Vocabulary</span></div>
+          <div class="range">p. 4–9</div>
+          <div class="maplinks"><span class="maplink" data-goto="1">About me</span><span class="maplink" data-goto="3">Ten integers</span><span class="maplink" data-goto="5">Vocabulary</span></div>
         </div>
-        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="9" role="button" tabindex="0">
           <div class="k">01 · Model</div>
           <h3>One function</h3>
           <p>Distribution</p>
-          <div class="range">p. 9</div>
-          <div class="maplinks"><span class="maplink" data-goto="8">Distribution</span></div>
+          <div class="range">p. 10</div>
+          <div class="maplinks"><span class="maplink" data-goto="9">Distribution</span></div>
         </div>
-        <div class="card mapcard" data-goto="9" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="10" role="button" tabindex="0">
           <div class="k">02 · Training &amp; problem solving</div>
           <h3>Learning from reward</h3>
           <p>RL loop · math and code · GRPO</p>
-          <div class="range">p. 10–23</div>
-          <div class="maplinks"><span class="maplink" data-goto="10">RL loop</span><span class="maplink" data-goto="13">GRPO formula</span><span class="maplink" data-goto="15">REFLEX</span><span class="maplink" data-goto="22">Stateless</span></div>
+          <div class="range">p. 11–23</div>
+          <div class="maplinks"><span class="maplink" data-goto="11">RL loop</span><span class="maplink" data-goto="14">GRPO formula</span><span class="maplink" data-goto="22">Stateless</span></div>
         </div>
         <div class="card mapcard" data-goto="23" role="button" tabindex="0">
           <div class="k">03 · Systems &amp; engineering</div>
@@ -848,18 +868,18 @@
           <div class="k">04 · AI × math</div>
           <h3>From tools to search</h3>
           <p>Acceleration · timeline · pattern</p>
-          <div class="range">p. 32–37</div>
-          <div class="maplinks"><span class="maplink" data-goto="32">Timeline</span><span class="maplink" data-goto="34">Pattern</span></div>
+          <div class="range">p. 32–40</div>
+          <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 papers</span><span class="maplink" data-goto="39">NS</span></div>
         </div>
-        <div class="card mapcard" data-goto="37" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="40" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>Back to practice</h3>
           <p>Workflow · compounding · close</p>
-          <div class="range">p. 38–39</div>
-          <div class="maplinks"><span class="maplink" data-goto="38">Close</span></div>
+          <div class="range">p. 41–42</div>
+          <div class="maplinks"><span class="maplink" data-goto="41">Close</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 sections · 39 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
+      <p class="micro" style="margin-top:14px">6 sections · 42 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -1688,43 +1708,6 @@
     <div class="footer"><span>GRPO · group-relative advantage · no critic</span><span class="pnum">25 / 53</span></div>
   </section>
 
-  <!-- ============ S24c · REFLEX ============ -->
-  <section class="slide" data-notes="REFLEX is a WSDM 2026 e-commerce query-expansion paper (Zhang, Liu, et al.). Given an initial query and the top-k products retrieved for it, the LLM generates expanded queries, submits them to a real search engine, and unions the results with those of the original query. Rewards need no human labels: relevance Rel(Y)/Rel(q), coverage Ret(Y)/Ret(q), and zero for format violations; total reward r = r_rel + 0.1·r_size. Training has two stages: SFT warm start on 10k distilled samples to fix the think/answer JSON format and stabilize RL, then GRPO on 100k real queries with the online search engine, full fine-tuning on 8×H200. The ablation reports SFT only 12.8/8.9, GRPO only 57.5/25.2, warm start + GRPO 72.8/32.4. ΔCoverage/ΔRel are the share of queries with positive gain, over 10,000 real queries and five samples. These are results for this dataset and 3B backbone, not a universal retrieval claim.">
-    <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>REFLEX: search engine in the RL loop</h2>
-    <p class="sub" style="margin-top:8px">E-commerce query expansion: generate → retrieve → reward result quality.</p>
-    <div class="content">
-      <div class="loop" style="gap:8px">
-        <span class="step">Query + top-k products</span><span class="arr">→</span>
-        <span class="step">LLM expands</span><span class="arr">→</span>
-        <span class="step">Search engine</span><span class="arr">→</span>
-        <span class="step">Union of results</span><span class="arr">→</span>
-        <span class="step hl">Reward</span><span class="arr">↺</span>
-      </div>
-      <div class="two even" style="margin-top:24px;gap:22px;align-items:stretch">
-        <div class="stack">
-          <div class="card" style="padding:14px 18px"><div class="k">Reward · no human labels</div><p style="font-size:18px;margin:0">Relevance Rel(Y)/Rel(q) + coverage Ret(Y)/Ret(q); format violations score 0.</p></div>
-          <div class="card" style="padding:14px 18px"><div class="k">Training</div><p style="font-size:18px;margin:0">SFT warm start on 10k → GRPO on 100k real queries; 8×H200.</p></div>
-        </div>
-        <div class="card accent" style="padding:16px 18px">
-          <div class="k">Queries with positive gain · %</div>
-          <table class="compare" style="font-size:17px;margin-top:8px">
-            <thead><tr><th>Setting</th><th>ΔCov</th><th>ΔRel</th></tr></thead>
-            <tbody>
-              <tr><td>SFT only</td><td>12.8</td><td>8.9</td></tr>
-              <tr><td>GRPO only</td><td>57.5</td><td>25.2</td></tr>
-              <tr><td><b>Warm start + GRPO</b></td><td><b>72.8</b></td><td><b>32.4</b></td></tr>
-            </tbody>
-          </table>
-          <p class="micro" style="margin-top:8px">10,000 queries · 5 samples · LLaMA 3.2-3B</p>
-        </div>
-      </div>
-      <div class="keyline">GRPO turns <b>better retrieval</b> into an optimizable reward.</div>
-      <p class="micro" style="margin-top:10px">Zhang, Liu, et al., REFLEX, WSDM 2026 · ablation on this dataset and backbone.</p>
-    </div>
-    <div class="footer"><span>REFLEX · search-in-the-loop · GRPO ablation</span><span class="pnum">26 / 53</span></div>
-  </section>
-
   <!-- ============ S16 · What math and code share ============ -->
   <section class="slide" data-notes="Three shared advantages. First, a relatively closed external environment: mathematics works inside an axiomatic system of definitions, axioms and inference rules; code works inside a language specification and runtime, with syntax, types, libraries and execution semantics. Once the problem is formalized, solving need not keep querying the external world. Second, errors are traceable: a proof can be checked step by step to locate the failing inference; tests, exception traces and line numbers locate a code error. Third, data is structured: formal objects and code are parseable and filterable, supporting bulk generation and verification. Closure is relative to the task: programs may depend on inputs, external libraries and runtimes; modeling still requires formalizing the real problem. Data still needs curation, and proofs or tests can be incomplete. Exhaustive search additionally needs finiteness, an existing solution and reliable termination.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
@@ -2219,7 +2202,7 @@ references/</pre>
           <h3>Scale: from benchmarks to open problems</h3>
           <div class="ms"><div class="d">2025.07</div><b>IMO 2025</b><span>Gold level 35/42; natural language, no tools</span></div>
           <div class="ms"><div class="d">2025</div><b>Formal gold (claimed)</b><span>Aristotle et al.; Lean-checkable</span></div>
-          <div class="ms"><div class="d">2026.05–10</div><b>OpenAI</b><span>Unit-distance counterexample; NS / Riemann-related (claimed); 372 problems (report)</span></div>
+          <div class="ms"><div class="d">2026.05–10</div><b>OpenAI</b><span>Unit-distance counterexample; NS / Riemann-related (claimed); 372 result families at launch</span></div>
         </div>
       </div>
       <div class="keyline">Every leap combines a <b>generator, a verifier and search</b>.</div>
@@ -2243,7 +2226,7 @@ references/</pre>
           <tr><td>2025.01</td><td>R1</td><td>"directly apply RL ... rule-based rewards"</td><td>RLVR</td></tr>
           <tr><td>2025.05</td><td>AlphaEvolve</td><td>"evolutionary coding agent"</td><td>evolve code</td></tr>
           <tr><td>2025.07</td><td>IMO 2025</td><td>"natural language ... no tools"</td><td>end to end</td></tr>
-          <tr><td>2026.09–10</td><td>OpenAI</td><td>"NS solution; 372 problems; 722 papers"</td><td>open problems</td></tr>
+          <tr><td>2026.09–10</td><td>OpenAI</td><td>NS breakdown claim; 372 families, 722 manuscripts at launch</td><td>open problems</td></tr>
         </tbody>
       </table>
       <div class="keyline">The keywords change; the underlying move stays: <b>propose, verify, search again</b>.</div>
@@ -2274,54 +2257,126 @@ references/</pre>
     <div class="footer"><span>generator · verifier · search</span><span class="pnum">44 / 53</span></div>
   </section>
 
-  <!-- ============ S45 · 猜测 ============ -->
-  <section class="slide" data-notes="These mechanisms are hypotheses from published methods, not a reconstruction of a private system. OpenAI's 2026-10-06 post says the average result used compute equivalent to roughly three hours of ChatGPT Pro thinking. This is not wall-clock elapsed time and does not identify parallelism. Autoformalization, RLVR, search, distillation and harness improvements are possible components; this cost statistic cannot identify which were used.">
-    <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>Some guesses: how the big results may have happened</h2>
-    <div class="content">
-      <div class="caveat">The following mechanism hypotheses come from public papers, blogs, and benchmarks, and are labeled as <strong>guesses</strong>.</div>
-      <div class="four spec">
-        <div class="card"><div class="k">01 Data</div><p><b>Autoformalization + synthesis</b>: informal problems → Lean; rejection sampling keeps the verifiable ones.</p></div>
-        <div class="card"><div class="k">02 Training</div><p><b>RLVR + long CoT</b>: verifiable answers let rewards scale.</p></div>
-        <div class="card"><div class="k">03 Inference</div><p><b>Test-time search</b>: best-of-N, tree search, evolution.</p></div>
-        <div class="card"><div class="k">04 Distillation</div><p><b>Write search back into the model</b>: less search next time.</p></div>
-        <div class="card"><div class="k">05 Engineering</div><p><b>Harness</b>: parallelism, caching, evals, replay.</p></div>
-        <div class="card accent"><div class="k">06 The bet</div><p><b>Verification</b>: the harder your verifier, the faster your flywheel.</p></div>
+  <!-- ============ SEARCH · DAG and MCTS ============ -->
+  <section class="slide" data-notes="Definitions, not a reconstruction of OpenAI's system. A directed acyclic graph has directed edges and no directed cycles. In a proof-dependency DAG, nodes are lemmas or goals, edges point from prerequisites to conclusions, and shared lemmas can support multiple downstream results. A DAG alone does not establish correctness. Monte Carlo tree search repeatedly selects, expands, simulates or evaluates, and backs up feedback to balance exploration and exploitation. States are nodes and actions are branches. A model may propose proof tactics; Lean returns successor states or errors. A heuristic value can assess unfinished branches; Lean does not predict all future search value. Multiple subgoals have AND structure and alternative actions OR structure, so full proof search may need AND/OR trees or hypergraphs. Separate the knowledge representation from the budget allocation policy.">
+    <p class="eyebrow"><b>05</b> / AI × math · Two search concepts</p>
+    <h2>DAG: dependencies. MCTS: where to search next.</h2>
+    <div class="content" style="margin-top:22px">
+      <div class="two even" style="gap:22px;align-items:stretch">
+        <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">DAG · Directed Acyclic Graph</div><div class="big" style="font-size:30px">A dependency structure</div>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="A and B support C, C supports T, and B is reused for T">
+            <g stroke="#c2410c" stroke-width="2" fill="none"><path d="M80 40 L225 80 M80 130 L225 80 L405 80 M80 130 Q240 175 405 100"/></g><g fill="#c2410c" font-size="25"><text x="190" y="72">›</text><text x="190" y="106">›</text><text x="360" y="88">›</text><text x="365" y="132">›</text></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="15" width="70" height="50" rx="8"/><rect x="20" y="105" width="70" height="50" rx="8"/><rect x="225" y="55" width="60" height="50" rx="8"/><rect x="405" y="55" width="60" height="50" rx="8"/></g><g font-size="26" text-anchor="middle" fill="#15171c"><text x="55" y="49">A</text><text x="55" y="139">B</text><text x="255" y="89">C</text><text x="435" y="89">T</text></g>
+          </svg>
+          <p style="font-size:23px;line-height:1.6">Nodes: lemmas and subgoals<br>Directed edges: premises → conclusion<br>No cycles; shared lemmas can be reused</p>
+        </div>
+        <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">MCTS · Monte Carlo Tree Search</div><div class="big" style="font-size:30px">A search policy</div>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="A search tree, with a promising branch receiving more search budget">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 20 L90 80 L35 145 M90 80 L145 145 M240 20 L390 80 L335 145 M390 80 L445 145"/></g><path d="M240 20 L240 80 L270 145" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 145" stroke="#c2410c" stroke-width="2" fill="none"/><g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="20" r="14"/><circle cx="90" cy="80" r="13"/><circle cx="390" cy="80" r="13"/><circle cx="35" cy="145" r="9"/><circle cx="145" cy="145" r="9"/><circle cx="335" cy="145" r="9"/><circle cx="445" cy="145" r="9"/></g><g fill="#c2410c"><circle cx="240" cy="80" r="14"/><circle cx="205" cy="145" r="9"/><circle cx="270" cy="145" r="10"/></g>
+          </svg>
+          <p style="font-size:23px;line-height:1.6">Nodes: states; branches: candidate actions<br>Select → expand → evaluate → back up<br>Balance exploration and exploitation</p>
+        </div>
       </div>
-      <p class="micro" style="margin-top:10px">OpenAI reports ≈3 ChatGPT Pro-hours of compute per result · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">6 Oct 2026</a>.</p>
-      <div class="keyline">A reported compute budget leaves the <b>system design open</b>.</div>
+      <div class="keyline" style="font-size:26px;margin-top:20px">DAG: “<b>What depends on what?</b>” MCTS: “<b>What should we try next?</b>”</div>
+    </div>
+    <div class="footer"><span>structure ≠ search policy · conceptual diagrams</span><span class="pnum">36 / 42</span></div>
+  </section>
+
+  <!-- ============ S45 · 猜测 ============ -->
+  <section class="slide" data-notes="The speaker's mechanism hypothesis, not OpenAI's disclosed implementation. A proof-dependency DAG organizes reusable lemmas and subgoals; arrows point from prerequisites to conclusions, without circular reasoning. MCTS selects, expands, samples or evaluates, and backs up feedback to allocate budget over proof actions. Line weights are illustrative, not measured probabilities. Lean checks formal steps and completed proofs; heuristic values can guide unfinished branches. A compiling state with open goals is not a completed proof. Multiple subgoals have AND structure and alternative actions OR structure; actual implementations may need AND/OR search or hypergraphs. Search at scale is the speaker's interpretation, not a quotation. Chen and Li 2606.01861 study reversible random walks on an undirected semantic theorem graph, conjecturer-prover self-play and diversity under assumptions. That graph is not this dependency DAG, nor evidence of OpenAI using MCTS. Reusing verified lemmas at runtime does not update model weights; training on successful trajectories is a separate step.">
+    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <h2>My hypothesis: agents + Lean evolve a proof graph</h2>
+    <p class="sub" style="margin-top:8px">Keep an external graph / tree of goals, candidate paths, verified lemmas and feedback.</p>
+    <div class="content" style="margin-top:20px">
+      <div class="two even" style="gap:22px;align-items:stretch">
+        <div class="card" style="padding:16px 20px">
+          <div class="k" style="font-size:16px">01 · Maintain goals and dependencies</div>
+          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="An acyclic proof-dependency graph with reusable lemmas A and B supporting C and target T">
+            <defs><marker id="dag-arrow-en" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6" fill="none" stroke="#c2410c"/></marker></defs>
+            <g stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#dag-arrow-en)"><path d="M95 43 L222 74"/><path d="M95 126 L222 91"/><path d="M276 82 L399 82"/><path d="M95 126 Q250 175 408 106"/></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="17" width="75" height="50" rx="8"/><rect x="20" y="102" width="75" height="50" rx="8"/><rect x="223" y="57" width="54" height="50" rx="8"/><rect x="400" y="57" width="60" height="50" rx="8"/></g>
+            <g fill="#15171c" font-size="25" text-anchor="middle" dominant-baseline="middle"><text x="57" y="43">A ✓</text><text x="57" y="128">B ✓</text><text x="250" y="83">C</text><text x="430" y="83">T</text></g>
+          </svg>
+          <p style="font-size:22px;line-height:1.55">Nodes store goals; edges track dependencies<br>Verified lemmas become reusable nodes</p>
+        </div>
+        <div class="card" style="padding:16px 20px">
+          <div class="k" style="font-size:16px">02 · Propose, check and update</div>
+          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="A proof-search tree with more budget allocated to a promising branch after feedback">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 24 L90 80 L35 143 M90 80 L145 143 M240 24 L390 80 L445 143 M390 80 L335 143"/></g>
+            <path d="M240 24 L240 80 L270 143" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 143" stroke="#c2410c" stroke-width="2" fill="none"/>
+            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="24" r="16"/><circle cx="90" cy="80" r="14"/><circle cx="390" cy="80" r="14"/><circle cx="35" cy="143" r="10"/><circle cx="145" cy="143" r="10"/><circle cx="335" cy="143" r="10"/><circle cx="445" cy="143" r="10"/></g>
+            <g fill="#c2410c"><circle cx="240" cy="80" r="15"/><circle cx="205" cy="143" r="10"/><circle cx="270" cy="143" r="11"/></g><text x="300" y="129" fill="#c2410c" font-size="22">Feedback ↺</text>
+          </svg>
+          <p style="font-size:22px;line-height:1.55">Select node → agent attempt → Lean check<br>Keep verified work; revise or switch paths</p>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:26px;margin-top:18px"><b>The graph stores state; agents extend it; Lean checks proofs.</b></div>
+      <p class="micro" style="font-size:14px;line-height:1.5;margin:12px 0 0">My search-at-scale hypothesis, not a disclosed implementation · MCTS is one possible policy · <a style="color:inherit" href="https://arxiv.org/abs/2606.01861">Chen &amp; Li, 2026</a><br>Their semantic theorem graph is distinct. Accepted local steps still leave all remaining goals to close.</p>
     </div>
     <div class="footer"><span>speculation · public sources</span><span class="pnum">45 / 53</span></div>
   </section>
 
   <!-- ============ S46 · 还没解决 ============ -->
-  <section class="slide" data-notes="已经发生：竞赛题、形式证明、构造搜索、部分开放问题（2026 OpenAI 报告 372 个）。还没：选题、定义、长程研究计划、品味。解题可以搜索；做数学需要方向。">
+  <section class="slide" data-notes="The speaker's assessment of maturity. About 4000 attempted problems were aggregated into result families and screened for significance, yielding 372 families and 722 manuscripts at launch. OpenAI does not claim to solve every attempted problem. These release counts are not a controlled success rate; unreported attempts cannot all be counted as failures. Aggregate counts cannot separate system versus model causes. Possible system bottlenecks include goal decomposition, node selection, state sharing, budgets and feedback. Possible model bottlenecks include useful lemmas, key reasoning steps, formalization and new constructions. Lean checks formal derivations; it does not supply key ideas. The external graph/tree implementation remains the speaker's hypothesis.">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>What remains: from solving to doing mathematics</h2>
-    <div class="content">
-      <div class="two even">
-        <div>
-          <p class="micro">Already happening</p>
-          <div class="stack" style="gap:10px">
-            <div class="card" style="padding:14px 16px"><div class="k">Contest problems</div><p>IMO gold level; natural language, timed</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">Formal proofs</div><p>Lean-checkable; machine verification</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">Construction search</div><p>Cap sets, matrix multiplication, scheduling</p></div>
-            <div class="card" style="padding:14px 16px"><div class="k">Open problems</div><p>372 in the OpenAI report; humans still curate</p></div>
-          </div>
-        </div>
-        <div>
-          <p class="micro">Still open</p>
-          <div class="stack" style="gap:10px">
-            <div class="card accent" style="padding:14px 16px"><div class="k">Choosing a problem</div><p>Which question is worth asking</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">Definitions</div><p>New concepts, new structures</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">Long horizon</div><p>A research plan spanning months</p></div>
-            <div class="card accent" style="padding:14px 16px"><div class="k">Taste</div><p>Beauty, importance, growth</p></div>
-          </div>
-        </div>
+    <h2>My assessment: real progress, a route still maturing</h2>
+    <p class="sub" style="margin-top:8px">OpenAI reports ≈4,000 attempted problems; the release covers a subset of that effort.</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two even" style="gap:22px;align-items:stretch">
+        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">01 · System bottlenecks</div><div class="big" style="font-size:30px">Organizing the search</div><p style="font-size:24px;line-height:1.75">Goal decomposition; node selection<br>Branch coordination; shared state<br>Budget allocation; verifier feedback</p></div>
+        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">02 · Model bottlenecks</div><div class="big" style="font-size:30px">Finding the key step</div><p style="font-size:24px;line-height:1.75">Useful lemmas and new constructions<br>Difficult long-horizon reasoning<br>Turning ideas into rigorous proofs</p></div>
       </div>
-      <div class="keyline">Solving can be searched; <b>doing mathematics needs direction</b>.</div>
+      <div class="keyline" style="font-size:26px;margin-top:22px">Lean checks formal logic; <b>system and model jointly set the frontier</b>.</div>
+      <p class="micro" style="font-size:16px;line-height:1.5;margin:16px 0 0">Problems remain open; experiments must distinguish failure causes.<br>Attempt counts and result families are different units, not a success rate. <a href="https://github.com/openai/math" style="color:inherit">Source: openai/math ↗</a></p>
     </div>
     <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
+  </section>
+
+  <!-- ============ M2026a · Mathematics release ============ -->
+  <section class="slide" data-notes="Sources checked on 2026-11-10: OpenAI's October 6 announcement and search-indexed launch README at openai/math commit adc7f1241b42e322a6451854ab7e4b4c146bf78a. Launch counts: 722 manuscripts in 372 related result families, from approximately 4000 attempted problems. Families can include main results, companion arguments, consequences and alternative proofs. Neither 722 independent solved problems nor a 372/4000 success rate follows. The repository evolves. The reported average of about three ChatGPT Pro thinking hours per result is a compute equivalent, not elapsed time. Some results have Lean formalizations; coverage, assumptions, correspondence, novelty and significance require individual review. No local Lean build or paper-by-paper mathematical verification was performed.">
+    <p class="eyebrow"><b>05</b> / AI × math · 2026-10-06</p>
+    <h2>OpenAI: research mathematics at batch scale</h2>
+    <p class="sub" style="margin-top:8px">From a single demonstration to a collection for review and follow-on research.</p>
+    <div class="content" style="margin-top:22px">
+      <div class="three" style="gap:18px">
+        <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">722</div><p style="font-size:22px">Manuscripts at launch</p></div>
+        <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">372</div><p style="font-size:22px">Related result families</p></div>
+        <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">≈4,000</div><p style="font-size:22px">Problems attempted</p></div>
+      </div>
+      <div class="two even" style="gap:18px;margin-top:18px;align-items:stretch">
+        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">What was released</div><p style="font-size:22px;line-height:1.55">Manuscripts and proof artifacts<br>Lean formalizations for some results<br>10 reasoning summaries; compute data</p></div>
+        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">How I read the numbers</div><p style="font-size:22px;line-height:1.55">One family can include several papers<br>≈3 Pro hours / result: compute equivalent<br>Review truth, novelty and significance</p></div>
+      </div>
+      <div class="keyline" style="margin-top:18px;font-size:26px">Candidate results arrive in batches; <b>verification and understanding matter</b>.</div>
+      <p class="micro" style="font-size:14px;margin:12px 0 0">Launch counts · OpenAI report · Repository evolves · <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/" style="color:inherit">Announcement</a> · <a href="https://github.com/openai/math" style="color:inherit">openai/math ↗</a></p>
+    </div>
+    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">38 / 41</span></div>
+  </section>
+
+  <!-- ============ M2026b · Navier–Stokes ============ -->
+  <section class="slide" data-notes="Sources: OpenAI September 8 announcement and public openai/NavierStokesAndEuler repository description. OpenAI claims finite-time breakdown for smooth data and smooth forcing, for positive viscosity, in whole space and periodic 3D settings: the C/D route in the Clay formulation. Do not extend the claim to unforced NS or explicit solutions for arbitrary data. Company-reported execution: roughly 10000 concurrent agents, 88 hours to find the argument, plus 17 hours for Lean formalization and verification. Groups explored routes, with useful intermediate results consolidated through Codex and shared across groups. The announcement does not disclose DAG or MCTS usage; our mechanism diagrams are not a reconstruction of this private system. Elapsed-time figures are not comparable to the prior slide's average Pro compute equivalents. Clay's September 11 announcement says apparently settled and describes an unhurried evaluation process. Bastounis, Circelli and Hansen, arXiv:2610.08144, discuss mismatches between the written and formal proofs, not a disproof of the final result. No local build or independent mathematical proof audit was performed.">
+    <p class="eyebrow"><b>05</b> / AI × math · 2026-09-08</p>
+    <h2>Navier–Stokes: a long-running multiagent effort</h2>
+    <p class="sub" style="margin-top:8px">OpenAI reports finite-time breakdown in smooth, forced 3D incompressible flow.</p>
+    <div class="content" style="margin-top:18px">
+      <div class="mathband" style="margin-top:0;padding:12px 0;justify-content:center">
+        <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size:30px"><mrow><msub><mi>∂</mi><mi>t</mi></msub><mi>u</mi><mo>+</mo><mo>(</mo><mi>u</mi><mo>·</mo><mo>∇</mo><mo>)</mo><mi>u</mi><mo>=</mo><mo>−</mo><mo>∇</mo><mi>p</mi><mo>+</mo><mi>ν</mi><mo>Δ</mo><mi>u</mi><mo>+</mo><mi mathcolor="#c2410c">f</mi><mo>,</mo><mspace width="1em"/><mo>∇</mo><mo>·</mo><mi>u</mi><mo>=</mo><mn>0</mn></mrow></math>
+      </div>
+      <div class="two" style="grid-template-columns:1fr 1.15fr;gap:22px;margin-top:18px;align-items:stretch">
+        <div class="card" style="padding:18px 20px"><div class="k" style="font-size:16px">Scope of the reported result</div><p style="font-size:22px;line-height:1.6">Positive viscosity; smooth data &amp; force<br>Whole space ℝ³ and periodic flow<br>Finite-time breakdown; Clay C / D</p><p style="font-size:18px;color:var(--muted)">A breakdown construction; unforced NS is separate.</p></div>
+        <div>
+          <div class="three" style="gap:10px">
+            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">≈10⁴</div><p style="font-size:18px">Concurrent agents</p></div>
+            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">88 h</div><p style="font-size:18px">Find the argument</p></div>
+            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">+17 h</div><p style="font-size:18px">Formalize &amp; check</p></div>
+          </div>
+          <p style="font-size:22px;line-height:1.6;margin:16px 0 0">Explore in groups → consolidate findings<br>Share → search further → Lean checks</p>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:24px;margin-top:18px">Check the logic; <b>also audit the problem–statement–paper correspondence</b>.</div>
+      <p class="micro" style="font-size:14px;margin:12px 0 0">OpenAI report · <a href="https://openai.com/index/navier-stokes-solution/" style="color:inherit">Announcement</a> · <a href="https://github.com/openai/NavierStokesAndEuler" style="color:inherit">Mathematics repository ↗</a> · <a href="https://arxiv.org/abs/2610.08144" style="color:inherit">Formalization correspondence discussion</a></p>
+    </div>
+    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">39 / 41</span></div>
   </section>
 
   <!-- ============ S52 · Young person's opportunity ============ -->
