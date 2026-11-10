@@ -1695,10 +1695,14 @@
           </div>
           
         </div>
-        <div class="stack">
-          <div class="card" style="padding:14px 18px"><div class="k">组内竞争</div><p style="font-size:18px;margin:0">同一题的回答互相比较，不跨题比较绝对分数。</p></div>
-          <div class="card accent" style="padding:14px 18px"><div class="k">向更好的结果学习</div><p style="font-size:18px;margin:0">正优势回答提高概率；负优势回答降低概率。</p></div>
-          <div class="card" style="padding:14px 18px"><div class="k">不需要 critic</div><p style="font-size:18px;margin:0">组均值就是基线，省掉单独的价值模型。</p></div>
+        <div class="stack" style="gap:8px">
+          <div class="card" style="padding:10px 16px"><div class="k">组内竞争</div><p style="font-size:18px;margin:0">同一题的回答互相比较，不跨题比较绝对分数。</p></div>
+          <div class="card accent" style="padding:10px 16px"><div class="k">优势决定更新方向</div>
+            <div style="display:flex;gap:10px;align-items:baseline;font-size:18px;line-height:1.65"><b style="font-family:var(--mono);color:var(--accent);min-width:58px">Â &gt; 0</b><span>提高这个回答的概率</span></div>
+            <div style="display:flex;gap:10px;align-items:baseline;font-size:18px;line-height:1.65"><b style="font-family:var(--mono);color:var(--accent);min-width:58px">Â &lt; 0</b><span>降低这个回答的概率</span></div>
+            <div style="display:flex;gap:10px;align-items:baseline;font-size:18px;line-height:1.65"><b style="font-family:var(--mono);color:var(--accent);min-width:58px">Â ≈ 0</b><span>没有相对优势，梯度贡献很小</span></div>
+          </div>
+          <div class="card" style="padding:10px 16px"><div class="k">不需要 critic</div><p style="font-size:18px;margin:0">组均值就是基线，省掉单独的价值模型。</p></div>
         </div>
       </div>
       <div class="keyline">同一道题里，让<b>更好的回答胜出</b>。</div>
@@ -1712,9 +1716,9 @@
     <h2>数学与代码，共享一类反馈优势</h2>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">01 · 外部环境封闭</div><div class="big" style="font-size:26px">公理系统 · 运行环境</div><p style="font-size:19px">数学靠定义、公理与推理规则；代码靠语言规范与运行时。系统自足，不需要外部信息。</p></div>
-        <div class="card"><div class="k">02 · 错误可追溯</div><div class="big" style="font-size:26px">定位到具体步骤</div><p style="font-size:19px">证明逐步检查，找到失效步骤；测试、异常栈与行号定位代码错误。</p></div>
-        <div class="card accent"><div class="k">03 · 数据干净</div><div class="big" style="font-size:26px">可解析、可筛选</div><p style="font-size:19px">形式化对象与代码结构清晰，便于批量生成、过滤与验证。</p></div>
+        <div class="card" style="justify-content:flex-start"><div class="k">01 · 外部环境封闭</div><div class="big" style="font-size:26px">公理系统 · 运行环境</div><p style="font-size:19px">数学靠定义、公理与推理规则；代码靠语言规范与运行时。系统自足，不需要外部信息。</p></div>
+        <div class="card" style="justify-content:flex-start"><div class="k">02 · 错误可追溯</div><div class="big" style="font-size:26px">定位到具体步骤</div><p style="font-size:19px">证明逐步检查，找到失效步骤；测试、异常栈与行号定位代码错误。</p></div>
+        <div class="card accent" style="justify-content:flex-start"><div class="k">03 · 数据干净</div><div class="big" style="font-size:26px">可解析、可筛选</div><p style="font-size:19px">形式化对象与代码结构清晰，便于批量生成、过滤与验证。</p></div>
       </div>
       <div class="scaleband" style="margin-top:20px">两条路线：学习更好的策略 + 用算力生成、验证更多候选。</div>
       <div class="keyline">封闭环境 + 可定位错误 + 干净数据 → <b>反馈便宜，可大规模试错</b>。</div>
@@ -1818,36 +1822,33 @@
     <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
-  <!-- ============ S11 · 无状态 ============ -->
-  <section class="slide" data-notes="这是从模型章节移到问题章节的一页：训练结束后，模型仍然没有跨调用记忆；每次调用独立，参数不变。所谓对话，是客户端把历史重新发一遍。没有前文，代词“它”就失去指代。">
+  <!-- ============ S11 · 只会预测 ============ -->
+  <section class="slide" data-notes="这一页只讲一个核心事实：训练结束后，模型唯一会做的是 next-token prediction。给它前文，它给下一个 token 的概率分布，然后采样一个 token。记忆不是模型内部能力：对话历史由客户端每次重发。计算也不是执行程序：算术、符号推导都是训练中学到的记忆与模式补全，精确结果应交给代码或计算器。工具与计划同样不在模型里：读文件、跑代码、查数据库由外部执行；目标与分解也是生成出来的文本。页底说的“能力从系统里来”，指上下文管理、工具调用与 Harness 在外围补上状态、计算与验证。"">
     <p class="eyebrow"><b>03</b> / LLM 的问题</p>
-    <h2>模型没有记忆</h2>
-    <div class="content">
-      <div class="two even">
-        <div class="term">
-          <div class="tcap">调用 A</div>
-          <div class="row"><span class="role">system</span><span class="txt">你是天体力学助手</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">希尔区是什么？</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">希尔区是……</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">它为什么重要？</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">因为它界定了……</span></div>
-        </div>
-        <div class="term">
-          <div class="tcap">调用 B · 新的一次</div>
-          <div class="row"><span class="role">system</span><span class="txt">你是天体力学助手</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">它为什么重要？</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt empty">（不知道“它”指什么）</span></div>
-        </div>
+    <h2>模型只会预测下一个 token</h2>
+    <p class="sub" style="margin-top:8px">记忆、计算、工具与计划，都在这个动作外面。</p>
+    <div class="content" style="margin-top:18px">
+      <div class="chain" style="justify-content:center;margin-top:2px">
+        <span class="chip2">前文 token</span><span class="arr">→</span>
+        <span class="chip2">模型</span><span class="arr">→</span>
+        <span class="chip2">下一个 token 的概率</span><span class="arr">→</span>
+        <span class="chip2 last">采样</span>
       </div>
-      <div class="keyline">模型无状态；所谓“对话”，是客户端把历史<b>重发</b>一遍。</div>
-      
+      <p style="text-align:center;font-size:20px;color:var(--muted);margin:12px 0 0">唯一动作：给下一个 token 打分，采样一个。</p>
+      <div class="four" style="margin-top:22px;gap:14px">
+        <div class="card" style="padding:11px 14px"><div class="k">01 · 不记住上一轮</div><p style="font-size:19px;line-height:1.45">对话历史由客户端每次重发</p></div>
+        <div class="card accent" style="padding:11px 14px"><div class="k">02 · 不做真正计算</div><p style="font-size:19px;line-height:1.45">算术是记忆与模式补全</p></div>
+        <div class="card" style="padding:11px 14px"><div class="k">03 · 不直接行动</div><p style="font-size:19px;line-height:1.45">工具由外部执行</p></div>
+        <div class="card" style="padding:11px 14px"><div class="k">04 · 不维护目标</div><p style="font-size:19px;line-height:1.45">计划也是生成的文本</p></div>
+      </div>
+      <div class="keyline">模型只给下一个 token；<b>其余能力都从系统里来</b>。</div>
     </div>
-    <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
+    <div class="footer"><span>next-token prediction</span><span class="pnum">23 / 53</span></div>
   </section>
 
 
   <!-- ============ S24d · 模型的两个短板 ============ -->
-  <section class="slide" data-notes="训练结束后，模型的核心能力是 next-token prediction，但还有四类短板。记忆：参数推理时不更新，知识在权重与概率分布里；所谓对话是客户端重发历史。Context：从 4k 到 1M，但长文仍会大海捞针，中间信息被稀释。计算：算术按分布生成，不执行程序。概率输出：同一输入可能不同，错误可能看起来合理。对应三类系统能力：Context 管理与 Memory；Function calling；Harness（验证、权限、重试、评测）。">
+  <section class="slide" data-notes="训练结束后，模型的核心能力是 next-token prediction，但还有四类短板。记忆：参数推理时不更新，知识在权重与概率分布里；所谓对话是客户端重发历史。Context：从 4k 到 1M，但长文仍会大海捞针，中间信息被稀释。计算：看似计算的输出都是记忆与模式补全，不执行程序；精确结果交给代码或计算器。概率输出：同一输入可能不同，错误可能看起来合理。对应三类系统能力：Context 管理与 Memory；Function calling；Harness（验证、权限、重试、评测）。">
     <p class="eyebrow"><b>03</b> / 从模型到系统</p>
     <h2>训练之后：四个短板，三类系统能力</h2>
     <p class="sub" style="margin-top:8px">模型会预测；状态、计算与可靠性还在模型之外。</p>
@@ -1855,8 +1856,8 @@
       <div class="three" style="gap:18px;align-items:stretch">
         <div class="card" style="padding:15px 18px">
           <div class="k">01 · 记忆与上下文</div>
-          <div class="big" style="font-size:22px">没有记忆，窗口有限</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+          <div class="big" style="font-size:22px">不保存状态，窗口有限</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
             <li>参数推理时不更新；知识在权重里</li>
             <li>“对话”是客户端重发历史</li>
             <li>4k → 1M，但长文仍会“大海捞针”</li>
@@ -1864,11 +1865,11 @@
           
         </div>
         <div class="card" style="padding:15px 18px">
-          <div class="k">02 · 精确计算</div>
-          <div class="big" style="font-size:22px">按分布生成，不执行程序</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
-            <li>算术是 token 预测，不是计算</li>
-            <li>看起来合理，也可能算错</li>
+          <div class="k">02 · 计算是记忆</div>
+          <div class="big" style="font-size:22px">记忆与模式补全</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
+            <li>算术来自训练分布，不是执行算法</li>
+            <li>看起来像计算，实则是调用学过的映射</li>
             <li>长程任务会累积误差</li>
           </ul>
           
@@ -1876,7 +1877,7 @@
         <div class="card" style="padding:15px 18px">
           <div class="k">03 · 概率输出</div>
           <div class="big" style="font-size:22px">同一输入，也可能不同</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
             <li>输出是分布采样，不是确定函数</li>
             <li>错误可能自信而合理</li>
             <li>长时运行需要停止与回滚</li>

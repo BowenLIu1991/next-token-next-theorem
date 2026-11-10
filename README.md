@@ -45,7 +45,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - 第 15 页给出 DeepSeekMath 的 GRPO 目标函数；第 16 页解释组内相对优势；REFLEX 电商案例整页已删除。
 - 第 36 页左右对照 DAG 与 MCTS；第 37 页为个人机制猜测：外部证明图／树在 Agent 提议与 Lean 检查中演进；第 38 页区分系统设计与模型能力的瓶颈。
 - 第 39–40 页分别介绍 OpenAI 批量数学发布与 NS 声称，链接官方公告和数学仓库；结论第 41–41 页。
-- 第 23 页“模型没有记忆”作为具体案例；第 24 页收束为四个短板与三类能力：Context／Memory、Function calling、Harness。
+- 第 23 页“模型只会预测下一个 token”作为总判断：不记住上一轮、不做真正计算、不直接行动、不维护目标；第 24 页收束为四个短板与三类能力：Context／Memory、Function calling、Harness。
 - 第 25 页讲 Context window 的膨胀；第 26 页把“Context 有限、Context engineering、Memory”合成一页；第 27 页讲 Tool calling，第 28 页讲 Harness；第 29 页用系统图收束 Memory + Tool + Harness = Agent 系统；第 30 页讲 Skill；第 31 页讲长时间运行如何把 loop 固化成 skill。
 - 主讲与备份模式分别按当前顺序自动生成页码。
 - 原训练细节保存为 **12 页备份**，不计入主讲或主讲 PDF；用 `?appendix=1` 打开，支持正常翻页与备注。

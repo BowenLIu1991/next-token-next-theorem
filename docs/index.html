@@ -1697,10 +1697,14 @@
           </div>
           
         </div>
-        <div class="stack">
-          <div class="card" style="padding:14px 18px"><div class="k">Competition within a group</div><p style="font-size:18px;margin:0">Compare answers to one question, not absolute scores.</p></div>
-          <div class="card accent" style="padding:14px 18px"><div class="k">Learn from better outcomes</div><p style="font-size:18px;margin:0">Better answers gain probability; worse ones lose it.</p></div>
-          <div class="card" style="padding:14px 18px"><div class="k">No critic</div><p style="font-size:18px;margin:0">Group mean is the baseline; no value model.</p></div>
+        <div class="stack" style="gap:8px">
+          <div class="card" style="padding:10px 16px"><div class="k">Competition within a group</div><p style="font-size:18px;margin:0">Compare answers to one question, not absolute scores.</p></div>
+          <div class="card accent" style="padding:10px 16px"><div class="k">Advantage sets the direction</div>
+            <div style="display:flex;gap:10px;align-items:baseline;font-size:18px;line-height:1.65"><b style="font-family:var(--mono);color:var(--accent);min-width:58px">Â &gt; 0</b><span>Raise this answer's probability</span></div>
+            <div style="display:flex;gap:10px;align-items:baseline;font-size:18px;line-height:1.65"><b style="font-family:var(--mono);color:var(--accent);min-width:58px">Â &lt; 0</b><span>Lower this answer's probability</span></div>
+            <div style="display:flex;gap:10px;align-items:baseline;font-size:18px;line-height:1.65"><b style="font-family:var(--mono);color:var(--accent);min-width:58px">Â ≈ 0</b><span>No relative edge; little gradient</span></div>
+          </div>
+          <div class="card" style="padding:10px 16px"><div class="k">No critic</div><p style="font-size:18px;margin:0">Group mean is the baseline; no value model.</p></div>
         </div>
       </div>
       <div class="keyline">Within one question, let <b>better answers win</b>.</div>
@@ -1714,9 +1718,9 @@
     <h2>Math and code share a feedback advantage</h2>
     <div class="content">
       <div class="three">
-        <div class="card"><div class="k">01 · Closed environment</div><div class="big" style="font-size:26px">Axioms · Runtime</div><p style="font-size:19px">Math uses definitions, axioms and inference rules; code uses a language spec and runtime. The system is self-contained.</p></div>
-        <div class="card"><div class="k">02 · Traceable errors</div><div class="big" style="font-size:26px">Locate the step</div><p style="font-size:19px">Proofs check inference step by step; tests, traces and line numbers locate code errors.</p></div>
-        <div class="card accent"><div class="k">03 · Clean data</div><div class="big" style="font-size:26px">Parse and filter</div><p style="font-size:19px">Formal objects and code are structured, enabling bulk generation and verification.</p></div>
+        <div class="card" style="justify-content:flex-start"><div class="k">01 · Closed environment</div><div class="big" style="font-size:26px">Axioms · Runtime</div><p style="font-size:19px">Math uses definitions, axioms and inference rules; code uses a language spec and runtime. The system is self-contained.</p></div>
+        <div class="card" style="justify-content:flex-start"><div class="k">02 · Traceable errors</div><div class="big" style="font-size:26px">Locate the step</div><p style="font-size:19px">Proofs check inference step by step; tests, traces and line numbers locate code errors.</p></div>
+        <div class="card accent" style="justify-content:flex-start"><div class="k">03 · Clean data</div><div class="big" style="font-size:26px">Parse and filter</div><p style="font-size:19px">Formal objects and code are structured, enabling bulk generation and verification.</p></div>
       </div>
       <div class="scaleband" style="margin-top:20px">Two levers: better policies + more compute for candidate generation and verification.</div>
       <div class="keyline">Closed environment + localizable errors + clean data → <b>cheap feedback, large-scale trial and error</b>.</div>
@@ -1820,36 +1824,33 @@
     <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">24 / 53</span></div>
   </section>
 
-  <!-- ============ S11 · 无状态 ============ -->
-  <section class="slide" data-notes="This page moves from the model section to the problem section: after training, the model still has no memory across calls; each call is independent and parameters stay fixed. A conversation is the client resending the history. Without prior text, “it” has no referent.">
+  <!-- ============ S11 · Prediction only ============ -->
+  <section class="slide" data-notes="One fact carries this page: after training, the model does next-token prediction. Given prior tokens, it scores the next token and one is sampled. Memory is not an internal capability: the client resends the conversation history. Computation is not program execution: arithmetic and symbolic steps are learned recall and pattern completion; exact results belong in code or a calculator. Tools and plans also live outside the model: files, code and databases are handled externally; goals and decomposition are generated text. The closing line means context management, tool calling and a harness supply state, computation and verification around the model.">
     <p class="eyebrow"><b>03</b> / LLM problems</p>
-    <h2>The model is stateless</h2>
-    <div class="content">
-      <div class="two even">
-        <div class="term">
-          <div class="tcap">Call A</div>
-          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">What is the Hill region?</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">The Hill region is …</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt">Because it defines …</span></div>
-        </div>
-        <div class="term">
-          <div class="tcap">Call B · a fresh call</div>
-          <div class="row"><span class="role">system</span><span class="txt">You are a celestial mechanics assistant</span></div>
-          <div class="row"><span class="role">user</span><span class="txt">Why does it matter?</span></div>
-          <div class="row"><span class="role">assistant</span><span class="txt empty">(“it” has no referent here)</span></div>
-        </div>
+    <h2>The model only predicts the next token</h2>
+    <p class="sub" style="margin-top:8px">Memory, computation, tools and plans are built outside that one action.</p>
+    <div class="content" style="margin-top:18px">
+      <div class="chain" style="justify-content:center;margin-top:2px">
+        <span class="chip2">Prior tokens</span><span class="arr">→</span>
+        <span class="chip2">Model</span><span class="arr">→</span>
+        <span class="chip2">Next-token scores</span><span class="arr">→</span>
+        <span class="chip2 last">Sample</span>
       </div>
-      <div class="keyline">The model is stateless; a “conversation” is the client <b>resending</b> the history.</div>
-      
+      <p style="text-align:center;font-size:20px;color:var(--muted);margin:12px 0 0">One action: score the next token, then sample one.</p>
+      <div class="four" style="margin-top:22px;gap:14px">
+        <div class="card" style="padding:11px 14px"><div class="k">01 · No memory of the last turn</div><p style="font-size:19px;line-height:1.45">The client resends the history</p></div>
+        <div class="card accent" style="padding:11px 14px"><div class="k">02 · No real computation</div><p style="font-size:19px;line-height:1.45">Arithmetic is recall and pattern completion</p></div>
+        <div class="card" style="padding:11px 14px"><div class="k">03 · No direct action</div><p style="font-size:19px;line-height:1.45">Tools execute outside the model</p></div>
+        <div class="card" style="padding:11px 14px"><div class="k">04 · No persistent goal</div><p style="font-size:19px;line-height:1.45">Plans are generated text too</p></div>
+      </div>
+      <div class="keyline">The model supplies one token; <b>the system supplies the rest</b>.</div>
     </div>
-    <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
+    <div class="footer"><span>next-token prediction</span><span class="pnum">23 / 53</span></div>
   </section>
 
 
   <!-- ============ S24d · Two limits of the model ============ -->
-  <section class="slide" data-notes="After training, the core capability is next-token prediction, but four limits remain. Memory: parameters do not update at inference; knowledge lives in the weights and the probability distribution; a conversation resends history. Context: 4k to 1M, but long inputs still lose the middle—the needle-in-a-haystack problem. Computation: arithmetic is generated from a distribution, not executed. Probabilistic output: the same input can yield different outputs, and errors can sound plausible. Three system capabilities follow: context management and memory; function calling; and a harness for verification, permissions, retries and evals.">
+  <section class="slide" data-notes="After training, the core capability is next-token prediction, but four limits remain. Memory: parameters do not update at inference; knowledge lives in the weights and the probability distribution; a conversation resends history. Context: 4k to 1M, but long inputs still lose the middle—the needle-in-a-haystack problem. Computation: outputs that look computed are recall and pattern completion, not program execution; exact results belong in code or a calculator. Probabilistic output: the same input can yield different outputs, and errors can sound plausible. Three system capabilities follow: context management and memory; function calling; and a harness for verification, permissions, retries and evals.">
     <p class="eyebrow"><b>03</b> / from model to system</p>
     <h2>After training: four limits, three system capabilities</h2>
     <p class="sub" style="margin-top:8px">The model predicts; state, computation and reliability live outside it.</p>
@@ -1857,8 +1858,8 @@
       <div class="three" style="gap:18px;align-items:stretch">
         <div class="card" style="padding:15px 18px">
           <div class="k">01 · Memory &amp; context</div>
-          <div class="big" style="font-size:22px">No memory, limited window</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+          <div class="big" style="font-size:22px">No persistent state, limited window</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
             <li>Parameters fixed at inference; knowledge in weights</li>
             <li>A “conversation” resends history</li>
             <li>4k → 1M, but long inputs still lose the middle</li>
@@ -1866,11 +1867,11 @@
           
         </div>
         <div class="card" style="padding:15px 18px">
-          <div class="k">02 · Exact computation</div>
-          <div class="big" style="font-size:22px">Generated, not executed</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
-            <li>Arithmetic is token prediction, not calculation</li>
-            <li>Plausible answers can still be wrong</li>
+          <div class="k">02 · Computation is recall</div>
+          <div class="big" style="font-size:22px">Recall and pattern completion</div>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
+            <li>Arithmetic comes from training patterns, not an algorithm</li>
+            <li>It looks like computation but recalls learned mappings</li>
             <li>Errors compound over long tasks</li>
           </ul>
           
@@ -1878,7 +1879,7 @@
         <div class="card" style="padding:15px 18px">
           <div class="k">03 · Probabilistic output</div>
           <div class="big" style="font-size:22px">Same input, different output</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:15.5px;line-height:1.65">
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
             <li>Output is sampled, not a deterministic function</li>
             <li>Errors can sound confident and plausible</li>
             <li>Long runs need stopping and rollback</li>
