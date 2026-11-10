@@ -64,6 +64,7 @@
     font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;
   }
   .pnum{font-variant-numeric:tabular-nums}
+  .footer > span:first-child{display:none}
 
   /* ---------- cover ---------- */
   .cover{justify-content:center}
@@ -797,7 +798,6 @@
   <section class="slide active cover" data-notes="开场 20 秒。不自我介绍超过一句。直接抛问题：一个只会预测下一个词的模型，凭什么能证明定理。">
     <div class="kicker">Celestial Mechanics × AI · 2026</div>
     <h1>From the next token<br><span class="thin">to the next theorem</span></h1>
-    <p class="sub">How a model works — and how I use it in practice</p>
     <div class="meta">
       <span>Bowen Liu</span>
     </div>
@@ -815,22 +815,22 @@
     <h2>Bowen Liu <span style="font-size:30px;font-weight:400;color:var(--muted)">刘博文</span></h2>
     <p class="sub" style="margin-top:8px">Periodic N-body solutions, elliptic relative equilibria and linear stability.</p>
     <div class="content" style="margin-top:22px">
-      <div class="two" style="grid-template-columns:1fr 1.15fr;gap:24px;align-items:center">
-        <div class="stack" style="gap:10px">
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2013–2018 · Nankai · Chern Institute</div><p style="font-size:23px;margin:0">Graduate studies · Mathematics PhD (2018)</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2018–2020 · University of Augsburg</div><p style="font-size:23px;margin:0">Postdoctoral Researcher</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2020–2022 · Shanghai Jiao Tong University</div><p style="font-size:23px;margin:0">Wu Wen-Tsun Assistant Professor</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2022–2024 · Huawei</div><p style="font-size:23px;margin:0">Principal Engineer · AI4Science &amp; LLMs</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2024–present · A US e-commerce company</div><p style="font-size:23px;margin:0">Applied Researcher · LLMs, RL &amp; search</p></div>
+      <div class="two" style="grid-template-columns:1.08fr 1fr;gap:24px;align-items:stretch">
+        <div class="card" style="padding:10px 20px;display:flex;flex-direction:column;justify-content:center">
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2013–2018</span><span style="font-size:19px"><b>Nankai University</b> · Chern Institute · Math PhD</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2018–2020</span><span style="font-size:19px"><b>University of Augsburg</b> · Postdoc</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2020–2022</span><span style="font-size:19px"><b>Shanghai Jiao Tong</b> · Wu Wen-Tsun Asst. Prof.</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2022–2024</span><span style="font-size:19px"><b>Huawei</b> · Principal Engineer</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2024–now</span><span style="font-size:19px"><b>US e-commerce</b> · Applied Researcher</span></div>
         </div>
-        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">Celestial mechanics research</div><p style="font-size:24px;line-height:1.75">Periodic N-body solutions: existence &amp; stability<br>Restricted four-body elliptic equilibria<br>Linear instability of elliptic rhombi<br>Homographic Lennard–Jones solutions</p><div class="keyline" style="font-size:22px;margin-top:18px">Symplectic indices · Geometry · Variational methods</div></div>
+        <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:17px">Celestial mechanics research</div><p style="font-size:24px;line-height:1.8;margin-top:6px">Periodic N-body: existence &amp; stability<br>Restricted four-body elliptic equilibria<br>Linear instability of elliptic rhombi<br>Homographic Lennard–Jones solutions</p><div class="keyline" style="font-size:22px;margin-top:18px">Symplectic indices · Variational methods</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 41</span></div>
   </section>
 
   <!-- ============ S1b · Overview map ============ -->
-  <section class="slide" data-notes="42 pages. Biography 2, overview 3, Token 4–9, model 10, training and rewards 11–22, statelessness 23, limitations 24, applications 25–31, AI math 32–40, closing 41–42. DAG/MCTS definitions 36, hypothesis 37, maturity 38, batch release 39, NS 40. REFLEX was removed at the speaker's request.">
+  <section class="slide" data-notes="41 pages. Biography 2, overview 3, Token 4–9, model 10, training and rewards 11–22, statelessness 23, limitations 24, applications 25–31, AI math 32–40, closing 41. DAG/MCTS definitions 36, hypothesis 37, maturity 38, batch release 39, NS 40. REFLEX was removed at the speaker's request.">
     <p class="eyebrow"><b>00</b> / overview</p>
     <h2>Overview: from token to theorem</h2>
     <p class="sub" style="margin-top:8px">Click a section card to jump; click a tag for a key page.</p>
@@ -873,13 +873,13 @@
         </div>
         <div class="card mapcard" data-goto="40" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
-          <h3>Back to practice</h3>
-          <p>Workflow · compounding · close</p>
-          <div class="range">p. 41–42</div>
-          <div class="maplinks"><span class="maplink" data-goto="41">Close</span></div>
+          <h3>From token to theorem</h3>
+          <p>Probability · verification · direction</p>
+          <div class="range">p. 41</div>
+          <div class="maplinks"><span class="maplink" data-goto="40">Close</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 sections · 42 pages · Click any card to start; `N` notes, `F` fullscreen.</p>
+      
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -923,7 +923,7 @@
             <span class="tok"><span class="tok-t">学</span><span class="tok-id">8590</span></span>
           </div>
           <div class="idrow"><b>12</b> characters &nbsp;→&nbsp; <b>10</b> tokens &nbsp;→&nbsp; 10 integers &nbsp;&nbsp;·&nbsp;&nbsp; two-character words often map to one token</div>
-          <div class="micro" style="margin-top:6px;color:#8b8f98">“This book systematically introduces celestial mechanics.”</div>
+          
         </div>
       </div>
       <div class="qgrid">
@@ -974,7 +974,7 @@
         <span class="accent">Subwords: the compromise</span>
       </div>
 
-      <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
+      
       <div class="keyline">Subwords are an engineering compromise between <b>sequence length</b> and <b>vocabulary size</b>.</div>
     </div>
     <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">03 / 53</span></div>
@@ -987,7 +987,7 @@
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro" style="margin:0 0 8px"><span style="color:var(--accent)">Foundations of Celestial Mechanics</span> &nbsp;·&nbsp; row number = ID &nbsp;·&nbsp; sorted by ID</p>
+          
           <div class="ledger">
             <div class="ledger-head"><span>ID</span><span>Token</span><span></span></div>
             <div class="ledger-row"><span class="ln">290</span><span class="tk">▁the</span><span class="tag"></span></div>
@@ -1002,7 +1002,7 @@
           </div>
         </div>
         <div>
-          <p class="micro" style="margin:0 0 6px">Vocabulary size = number of rows</p>
+          
           <div class="vocab-num">200,019</div>
           <div class="vocab-cap">o200k · GPT-4o generation</div>
           <div class="ruler">
@@ -1027,12 +1027,12 @@
     <h2>Tokens: the model's unit and the billing unit</h2>
     <div class="content">
       <img class="shot" src="../assets/figures/deepseek_usage.png" alt="DeepSeek usage: 285M tokens, 2,599 requests, ¥27.18" style="max-width:1060px">
-      <p class="micro" style="margin-top:10px">Last month · ≈110k tokens per request · ≈¥0.01 each</p>
+      
       <div class="ratio2">
         <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">per English character</div></div>
         <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">per Chinese character</div></div>
       </div>
-      <p class="micro" style="margin-top:12px">Rule of thumb: a word, a number or a symbol ≈ 1 token; tokenizers differ, so trust the usage the API returns.</p>
+      
       <div class="keyline">Token is both the smallest unit of the model and the smallest unit of the bill.</div>
     </div>
     <div class="footer"><span>usage · billing</span><span class="pnum">05 / 53</span></div>
@@ -1046,12 +1046,12 @@
       <div class="two">
         <div>
           <img class="shot" src="../assets/figures/deepseek_pricing.png" alt="DeepSeek price list">
-          <p class="micro" style="margin-top:10px">deepseek-flash · 1M context · 384K output · CNY per million tokens</p>
-          <p class="micro" style="margin-top:6px">1M context ≈ the whole Three-Body trilogy</p>
+          
+          
         </div>
         <div style="align-self:center">
           <div class="calcbox">
-            <p class="micro" style="margin:0">One call · off-peak</p>
+            
             <div class="cline">Input 100k + output 2k</div>
             <div class="cres">¥0.01<span>cache hit</span></div>
             <div class="cres">¥0.11<span>cache miss</span></div>
@@ -1088,7 +1088,7 @@
         </div>
       </div>
       <div class="keyline">The ID is an <b>address</b>; the vector is the <b>content</b>.</div>
-      <p class="micro" style="margin-top:14px">This step is called embedding; no dimension has a name, yet distance carries meaning.</p>
+      
     </div>
     <div class="footer"><span>embedding</span><span class="pnum">07 / 53</span></div>
   </section>
@@ -1109,7 +1109,7 @@
             <span class="chip2">to</span>
             <span class="chip2">the</span>
           </div>
-          <p class="micro" style="margin-top:12px">Each token is already a vector</p>
+          
         </div>
         <div>
           <p class="micro" style="margin:0 0 8px;text-align:center">Model</p>
@@ -1118,7 +1118,7 @@
             <div class="layers"><i></i><i></i><i></i></div>
             <div class="cap">N layers · self-attention</div>
           </div>
-          <p class="micro" style="text-align:center;margin-top:10px">GPT · Llama · Qwen are all variants</p>
+          
         </div>
         <div>
           <p class="micro" style="margin:0">softmax(z)</p>
@@ -1167,7 +1167,7 @@
           <div class="k">Stage 01</div>
           <div class="big" style="font-size:30px">Pretraining</div>
           <p style="font-size:20px;margin-top:16px">Large-scale text, code and other data<br>Learn language, knowledge and patterns</p>
-          <p class="micro" style="font-size:16px;margin-top:18px">Output: a base model</p>
+          
         </div>
         <div class="farrow" aria-hidden="true">→</div>
         <div class="card" style="padding:18px 20px">
@@ -1209,7 +1209,7 @@
               <mo>(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>∣</mo><msub><mi>x</mi><mrow><mo>&lt;</mo><mi>t</mi></mrow></msub><mo>)</mo>
             </math>
           </div>
-          <p class="micro" style="margin-top:12px">Given the preceding text, predict the next token</p>
+          
         </div>
         <div class="stack">
           <div class="card"><div class="k">Data</div><div class="big">Trillions of tokens</div><p>Web pages, code, papers, books</p></div>
@@ -1268,7 +1268,7 @@
         <div style="align-self:center">
           <div class="vocab-num">19</div>
           <div class="vocab-cap">training samples</div>
-          <p class="micro" style="margin-top:8px">Every position predicts the next token</p>
+          
         </div>
       </div>
 
@@ -1285,7 +1285,7 @@
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro" style="margin:0 0 6px">Negative log-likelihood · cross-entropy</p>
+          
           <table class="loss">
             <thead><tr><th>p(correct token)</th><th>−log p</th></tr></thead>
             <tbody>
@@ -1295,9 +1295,9 @@
               <tr><td>0.01</td><td>4.61</td></tr>
             </tbody>
           </table>
-          <p class="micro" style="margin-top:12px">Units: nats · ÷ ln 2 = bits</p>
-          <p class="micro" style="margin-top:6px">Perplexity PPL = exp(mean −log p)</p>
-          <p class="micro" style="margin-top:6px">∂L/∂z = p − onehot(y)</p>
+          
+          
+          
         </div>
         <div class="stack">
           <div class="card"><div class="k">Single position</div><p>−log p = surprise, and the code length of this token</p></div>
@@ -1321,7 +1321,7 @@
         <div class="card"><div class="k">Compress</div><div class="big" style="font-size:22px">Squeeze out redundancy</div><p>Keep the reusable structure</p></div>
         <div class="card accent"><div class="k">Structure</div><div class="big" style="font-size:22px">Grammar · causality · physics</div><p>Transfer to unseen problems</p></div>
       </div>
-      <p class="micro" style="margin-top:18px">An interpretation of prediction training; search and correction also depend on inference-time methods.</p>
+      
       <div class="keyline">My working perspective: prediction rewards <b>reusable structure</b>.</div>
     </div>
     <div class="footer"><span>compression · learned structure</span><span class="pnum">16 / 53</span></div>
@@ -1331,7 +1331,7 @@
   <section class="slide" data-notes="In this common SFT setup, loss is applied to assistant answer tokens; masks vary by implementation. SFT emphasizes demonstrated behavior and may also teach task-specific information. Much of the model's broad knowledge comes from pretraining.">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>SFT: learn the job from worked answers</h2>
-    <p class="micro" style="margin:8px 0 0">supervised fine-tuning · instruction tuning</p>
+    
     <div class="content">
       <div class="two">
         <div>
@@ -1340,7 +1340,7 @@
             <div class="row"><span class="role">user</span><span class="txt">What is this book about?</span><span class="tag">input</span></div>
             <div class="row target"><span class="role">assistant</span><span class="txt">It systematically introduces the fundamental concepts and theorems of celestial mechanics.</span><span class="tag">target</span></div>
           </div>
-          <p class="micro" style="margin-top:8px">Orange = the only tokens that contribute to the loss.</p>
+          
           <div class="sftloss">
             <div class="fl on"><span class="fl-k">SFT</span><span class="fl-eq">−Σ<sub>t∈answer</sub> log p(y<sub>t</sub> | prompt, y<sub>&lt;t</sub>)</span></div>
           </div>
@@ -1373,7 +1373,7 @@
           <div class="card accent"><div class="k">assistant</div><p>The model's answer; the only part that carries loss</p></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:16px">system / user = condition &nbsp;·&nbsp; assistant = supervision target (loss on these tokens only)</p>
+      
       <div class="keyline">system sets the rules, user sets the task, assistant is the learning target.</div>
     </div>
     <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 53</span></div>
@@ -1402,7 +1402,7 @@
           <div class="card accent" style="padding:14px 16px"><div class="k">03 Append</div><p>Add it to the input and repeat</p></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">Probabilities are illustrative, to show the mechanism · real outputs follow the model</p>
+      
       <div class="keyline">One step at a time: append the result, then take the next step.</div>
     </div>
     <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 53</span></div>
@@ -1426,7 +1426,7 @@
         <div class="card"><div class="k">Trial and error</div><div class="big" style="font-size:22px">Action → feedback</div><p>Reinforce what works, revise what fails</p></div>
         <div class="card accent"><div class="k">Goal</div><div class="big" style="font-size:22px">Cumulative reward</div><p>Long-run return over the immediate step</p></div>
       </div>
-      <p class="micro" style="margin:0 0 6px">Objective · maximize expected discounted return</p>
+      
       <div class="mathblock" style="margin-top:8px;font-size:24px">
         <math>
           <munder><mtext>max</mtext><mi>π</mi></munder>
@@ -1438,7 +1438,7 @@
           <mo>]</mo>
         </math>
       </div>
-      <p class="micro" style="margin-top:10px">π policy · γ discount · r<sub>t</sub> reward · E expectation</p>
+      
       <div class="keyline">What RL learns is a <b>policy</b>.</div>
     </div>
     <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 53</span></div>
@@ -1460,7 +1460,7 @@
         <span class="pill"><i></i>has a reward</span>
         <span class="pill"><i></i>unlimited retries</span>
       </div>
-      <p class="micro" style="margin-top:16px">DeepMind: Atari · AlphaGo · AlphaStar (RL) &nbsp;|&nbsp; AlphaFold → 2024 Nobel Prize in Chemistry (Hassabis &amp; Jumper)</p>
+      
       <div class="sidenote"><b>AlphaFold is supervised learning:</b> labels are known structures; no reward, no trial and error.</div>
       <div class="keyline">Math and code bring their own <b>simulator</b>.</div>
     </div>
@@ -1484,7 +1484,7 @@
               <mo>(</mo><msub><mi>p</mi><mi>θ</mi></msub><mo>‖</mo><msub><mi>p</mi><mtext>ref</mtext></msub><mo>)</mo>
             </math>
           </div>
-          <p class="micro" style="margin-top:12px">Reward comes from programs: answer matching, unit tests, Lean compilation</p>
+          
         </div>
         <div class="rlex">
           <div class="q">Q: What is Chapter 4 about?</div>
@@ -1500,7 +1500,7 @@
         <div class="sa"><span class="bad">GPT-4o often says 2</span><span class="ar">→</span><span class="good">o1 / R1 says 3</span></div>
         <div class="note">Split the letters, then count</div>
       </div>
-      <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · the DeepSeek moment</p>
+      
       <div class="keyline">Same text, new objective: the reward arrives only when the answer checks out.</div>
     </div>
     <div class="footer"><span>Foundations of Celestial Mechanics · RLVR</span><span class="pnum">22 / 53</span></div>
@@ -1522,7 +1522,7 @@
         <span class="step">Reward</span><span class="arr">→</span>
         <span class="step hl">Update</span>
       </div>
-      <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO are RL; DPO is preference optimization, usually placed in the RLHF family.</p>
+      
       <div class="keyline">Different algorithms, same loop: sample → score → update.</div>
     </div>
     <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 53</span></div>
@@ -1568,7 +1568,7 @@
         <div class="card accent"><div class="k">Policy</div><div class="big" style="font-size:24px">Improve action choices</div><p style="font-size:19px">Use experience to seek higher long-run return.</p></div>
       </div>
       <div class="keyline">RL uses <b>outcome feedback</b> to learn <b>how to choose actions</b>.</div>
-      <p class="micro" style="margin-top:12px">Reference: Sutton &amp; Barto, Reinforcement Learning: An Introduction.</p>
+      
     </div>
     <div class="footer"><span>reinforcement learning · reward · policy</span><span class="pnum">13 / 53</span></div>
   </section>
@@ -1586,7 +1586,7 @@
       </div>
       <div class="tl-facts"><span class="pill"><i></i>Explicit rules</span><span class="pill"><i></i>Measurable outcomes</span><span class="pill"><i></i>Many repeatable trials</span></div>
       <div class="keyline">The game engine supplies an <b>environment and feedback</b>.</div>
-      <p class="micro" style="margin-top:14px">Sources: <a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., 2015</a> · Silver et al., 2016 · <a style="color:inherit" href="https://openai.com/index/openai-five-defeats-dota-2-world-champions/">OpenAI Five, 2019</a> · Vinyals et al., 2019.</p>
+      
     </div>
     <div class="footer"><span>selected milestones · games · deep RL</span><span class="pnum">14 / 53</span></div>
   </section>
@@ -1604,7 +1604,7 @@
       </div>
       <div class="scaleband" style="margin-top:24px">Repeated trials + outcome feedback → a policy that seeks higher reward.</div>
       <div class="keyline">A useful environment lets the agent <b>try, evaluate and try again</b>.</div>
-      <p class="micro" style="margin-top:12px">Example: <a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., Nature (2015), Breakout demonstration</a>.</p>
+      
     </div>
     <div class="footer"><span>trial and error · delayed reward · repeatable environment</span><span class="pnum">15 / 53</span></div>
   </section>
@@ -1668,7 +1668,7 @@
         </div>
       </div>
       <div class="keyline">Raise high-advantage responses while <b>clip and KL</b> limit policy drift.</div>
-      <p class="micro" style="margin-top:10px">Source: Shao et al., <i>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</i>, arXiv:2402.03300, 2024.</p>
+      
     </div>
     <div class="footer"><span>GRPO objective · advantage · clip · KL</span><span class="pnum">25 / 53</span></div>
   </section>
@@ -1695,7 +1695,7 @@
             <div class="a bad" style="font-size:16px"><span>C · r = 0.50</span><b>−0.4 ↓</b></div>
             <div class="a good" style="font-size:16px"><span>D · r = 0.80</span><b>+0.7 ↑</b></div>
           </div>
-          <p class="micro" style="margin-top:8px">Mean 0.60, std 0.27; illustrative values.</p>
+          
         </div>
         <div class="stack">
           <div class="card" style="padding:14px 18px"><div class="k">Competition within a group</div><p style="font-size:18px;margin:0">Compare answers to one question, not absolute scores.</p></div>
@@ -1720,7 +1720,7 @@
       </div>
       <div class="scaleband" style="margin-top:20px">Two levers: better policies + more compute for candidate generation and verification.</div>
       <div class="keyline">Closed environment + localizable errors + clean data → <b>cheap feedback, large-scale trial and error</b>.</div>
-      <p class="micro" style="margin-top:12px">Closure is relative: code still depends on inputs and libraries; modeling still needs formalization; data still needs curation.</p>
+      
     </div>
     <div class="footer"><span>closed environment · traceable errors · clean data</span><span class="pnum">16 / 53</span></div>
   </section>
@@ -1736,7 +1736,7 @@
       </div>
       <div class="scaleband" style="margin-top:24px"><b>Reported transfer:</b> math RL → coding scores · code training → state tracking.</div>
       <div class="keyline">Shared skills support <b>transfer</b>; the data mixture determines the gain.</div>
-      <p class="micro" style="margin-top:12px">Sources: <a style="color:inherit" href="https://arxiv.org/abs/2505.16400">Chen et al., AceReason (2025)</a> · <a style="color:inherit" href="https://arxiv.org/abs/2405.21068">Kim et al. (2024)</a> · <a style="color:inherit" href="https://arxiv.org/abs/2402.03300">Shao et al., DeepSeekMath (2024)</a>.</p>
+      
     </div>
     <div class="footer"><span>shared skills · transfer · task-dependent evidence</span><span class="pnum">17 / 53</span></div>
   </section>
@@ -1748,9 +1748,9 @@
     <div class="content">
       <div class="loop"><span class="step">Read files</span><span class="arr">→</span><span class="step">Edit</span><span class="arr">→</span><span class="step hl">Run tests</span><span class="arr">→</span><span class="step">Inspect &amp; revise</span><span class="arr">↺</span></div>
       <div class="three" style="margin-top:28px"><div class="card"><div class="k">Workspace</div><p style="font-size:20px">Files and specifications define the task.</p></div><div class="card"><div class="k">Tools</div><p style="font-size:20px">Changes can be executed immediately.</p></div><div class="card accent"><div class="k">Feedback</div><p style="font-size:20px">Failures guide the next edit.</p></div></div>
-      <p class="micro" style="margin-top:20px">Examples: Claude Code, Codex, OpenCode and other coding agents.</p>
+      
       <div class="keyline">Code connects <b>generation, action and feedback</b> in one workspace.</div>
-      <p class="micro" style="margin-top:12px">Earlier generate-and-filter example: Li et al., AlphaCode, Science (2022).</p>
+      
     </div>
     <div class="footer"><span>coding agents · local tools · fast feedback</span><span class="pnum">19 / 53</span></div>
   </section>
@@ -1780,7 +1780,7 @@
         </div>
       </div>
       <div class="keyline">Checkable goals turn more compute into <b>systematic search and candidate filtering</b>.</div>
-      <p class="micro" style="margin-top:10px">For finite, solvable tasks with reliable, decidable checks, exhaustive search finds a valid solution; cost still matters.</p>
+      
     </div>
     <div class="footer"><span>code · math · product design · trading</span><span class="pnum">20 / 53</span></div>
   </section>
@@ -1791,7 +1791,7 @@
     <h2>Correctness is a floor; quality is an ambition</h2>
     <div class="content">
       <table class="compare" style="font-size:20px"><thead><tr><th></th><th>Code</th><th>Mathematics</th></tr></thead><tbody><tr><td>Checkable structure</td><td>Syntax, types, tests, specifications</td><td>Definitions, assumptions, proof steps</td></tr><tr><td>Correctness</td><td>Specified behavior is satisfied</td><td>A claim follows from its assumptions</td></tr><tr><td>Quality</td><td>Clarity, maintainability, efficiency</td><td>Elegance, generality, usefulness</td></tr></tbody></table>
-      <p class="micro" style="margin-top:18px">Structured artifacts make checks easier; data quality still requires curation.</p>
+      
       <div class="keyline">Both communities pursue <b>good work</b> beyond a pass/fail result.</div>
     </div>
     <div class="footer"><span>structured data · correctness · disciplinary taste</span><span class="pnum">23 / 53</span></div>
@@ -1842,7 +1842,7 @@
         </div>
       </div>
       <div class="keyline">The model is stateless; a “conversation” is the client <b>resending</b> the history.</div>
-      <p class="micro" style="margin-top:14px">Parameters stay fixed at inference time; state lives only in the context.</p>
+      
     </div>
     <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
   </section>
@@ -1863,7 +1863,7 @@
             <li>A “conversation” resends history</li>
             <li>4k → 1M, but long inputs still lose the middle</li>
           </ul>
-          <p class="micro" style="margin-top:10px">→ Context management · retrieval · memory</p>
+          
         </div>
         <div class="card" style="padding:15px 18px">
           <div class="k">02 · Exact computation</div>
@@ -1873,7 +1873,7 @@
             <li>Plausible answers can still be wrong</li>
             <li>Errors compound over long tasks</li>
           </ul>
-          <p class="micro" style="margin-top:10px">→ Function calling · call a program</p>
+          
         </div>
         <div class="card" style="padding:15px 18px">
           <div class="k">03 · Probabilistic output</div>
@@ -1883,7 +1883,7 @@
             <li>Errors can sound confident and plausible</li>
             <li>Long runs need stopping and rollback</li>
           </ul>
-          <p class="micro" style="margin-top:10px">→ Harness · verification · permissions · evals</p>
+          
         </div>
       </div>
       <div class="keyline">Four limits, three system capabilities: <b>state, computation, reliability</b>.</div>
@@ -1955,7 +1955,7 @@
             <div style="padding-top:4px"><b>COMPRESS</b><span>summarize, merge</span></div>
             <div style="padding-top:4px"><b>FORGET</b><span>delete stale</span></div>
           </div>
-          <p class="micro" style="margin-top:6px">working · episodic · semantic · procedural</p>
+          
         </div>
       </div>
       <div class="keyline">Capacity ≠ effective use; Context decides <b>what goes in</b>, Memory decides <b>what stays</b>.</div>
@@ -1981,7 +1981,7 @@
           <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.65;color:#cfd2d9;white-space:pre-wrap">call  run_python("print(2 * 4**1.5)")
 obs   "16.0"</pre>
           <div class="idrow" style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);color:#8b8f98;font-size:11px">// T = 2 × 4**1.5 = 16</div>
-          <div class="micro" style="margin-top:10px;color:#8b8f98">calc · code · search · database · files · APIs</div>
+          
         </div>
         <div class="stack" style="gap:10px">
           <div class="card" style="padding:12px 14px"><div class="k">01 Define</div><p style="font-size:14.5px">Name, arguments, return, boundary; the description is context too.</p></div>
@@ -2051,7 +2051,7 @@ obs   "16.0"</pre>
           <div class="tag ctx">Context</div>
         </div>
         <div class="syslegend">
-          <p class="micro" style="margin:0 0 2px">Inner ring: one call · Middle ring: across calls · Outer ring: engineering boundary</p>
+          
           <div class="row"><span class="n">01</span><b>LLM</b><p>A probability generator: tokens in, a distribution over the next token out</p></div>
           <div class="row"><span class="n">02</span><b>Prompt</b><p>This call's conditions: system / user / few-shot</p></div>
           <div class="row"><span class="n">03</span><b>Context</b><p>Every token visible to this call; the window is finite</p></div>
@@ -2084,7 +2084,7 @@ obs   "16.0"</pre>
           <div class="chain" style="margin-top:14px">
             <span class="c">Outline</span><span class="arr">→</span><span class="c">Generate</span><span class="arr">→</span><span class="c">Screenshot</span><span class="arr">→</span><span class="c keep">Audit</span><span class="arr">→</span><span class="c">Export</span>
           </div>
-          <p class="micro" style="margin-top:8px">Example: this deck's production loop as a skill</p>
+          
         </div>
         <div class="stack" style="gap:8px">
           <div class="card" style="padding:10px 16px"><div class="k" style="margin-bottom:2px">01 Trigger</div><p style="margin:0">Name and description: when to use it, when not to</p></div>
@@ -2171,7 +2171,7 @@ references/</pre>
         <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">gold level</span></div>
         <div class="note">12 months, +7 points</div>
       </div>
-      <p class="micro" style="margin:10px 0 0">* Compute equivalent, not elapsed time · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">OpenAI, 6 Oct 2026</a> · Company report.</p>
+      
       <div class="keyline">This is a staircase with <b>three steps</b>.</div>
     </div>
     <div class="footer"><span>from basic apps to research level</span><span class="pnum">41 / 53</span></div>
@@ -2311,7 +2311,7 @@ references/</pre>
         </div>
       </div>
       <div class="keyline" style="font-size:26px;margin-top:18px"><b>The graph stores state; agents extend it; Lean checks proofs.</b></div>
-      <p class="micro" style="font-size:14px;line-height:1.5;margin:12px 0 0">My search-at-scale hypothesis, not a disclosed implementation · MCTS is one possible policy · <a style="color:inherit" href="https://arxiv.org/abs/2606.01861">Chen &amp; Li, 2026</a><br>Their semantic theorem graph is distinct. Accepted local steps still leave all remaining goals to close.</p>
+      
     </div>
     <div class="footer"><span>speculation · public sources</span><span class="pnum">45 / 53</span></div>
   </section>
@@ -2327,7 +2327,7 @@ references/</pre>
         <div class="card" style="padding:20px"><div class="k" style="font-size:17px">02 · Model bottlenecks</div><div class="big" style="font-size:30px">Finding the key step</div><p style="font-size:24px;line-height:1.75">Useful lemmas and new constructions<br>Difficult long-horizon reasoning<br>Turning ideas into rigorous proofs</p></div>
       </div>
       <div class="keyline" style="font-size:26px;margin-top:22px">Lean checks formal logic; <b>system and model jointly set the frontier</b>.</div>
-      <p class="micro" style="font-size:16px;line-height:1.5;margin:16px 0 0">Problems remain open; experiments must distinguish failure causes.<br>Attempt counts and result families are different units, not a success rate. <a href="https://github.com/openai/math" style="color:inherit">Source: openai/math ↗</a></p>
+      
     </div>
     <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
   </section>
@@ -2348,7 +2348,7 @@ references/</pre>
         <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">How I read the numbers</div><p style="font-size:22px;line-height:1.55">One family can include several papers<br>≈3 Pro hours / result: compute equivalent<br>Review truth, novelty and significance</p></div>
       </div>
       <div class="keyline" style="margin-top:18px;font-size:26px">Candidate results arrive in batches; <b>verification and understanding matter</b>.</div>
-      <p class="micro" style="font-size:14px;margin:12px 0 0">Launch counts · OpenAI report · Repository evolves · <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/" style="color:inherit">Announcement</a> · <a href="https://github.com/openai/math" style="color:inherit">openai/math ↗</a></p>
+      
     </div>
     <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">38 / 41</span></div>
   </section>
@@ -2374,57 +2374,9 @@ references/</pre>
         </div>
       </div>
       <div class="keyline" style="font-size:24px;margin-top:18px">Check the logic; <b>also audit the problem–statement–paper correspondence</b>.</div>
-      <p class="micro" style="font-size:14px;margin:12px 0 0">OpenAI report · <a href="https://openai.com/index/navier-stokes-solution/" style="color:inherit">Announcement</a> · <a href="https://github.com/openai/NavierStokesAndEuler" style="color:inherit">Mathematics repository ↗</a> · <a href="https://arxiv.org/abs/2610.08144" style="color:inherit">Formalization correspondence discussion</a></p>
+      
     </div>
     <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">39 / 41</span></div>
-  </section>
-
-  <!-- ============ S52 · Young person's opportunity ============ -->
-  <section class="slide" data-notes="天体力学正在变成数据领域：Gaia、卫星跟踪、巡天、N 体模拟。数据比手多。年轻人的机会在于：既懂领域，又会处理数据，能把噪声去掉、把信号找出来。工具是新的，问题是老的。">
-    <p class="eyebrow"><b>06</b> / conclusion</p>
-    <h2>A young person's opportunity</h2>
-    <p class="sub" style="margin-top:8px">Celestial mechanics is becoming a data field. The scarce skill is finding the signal.</p>
-    <div class="content">
-      <div class="sigflow">
-        <div class="sigcard">
-          <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <g fill="#9a9ea6">
-              <circle cx="22" cy="28" r="1.6"/><circle cx="38" cy="52" r="1.6"/><circle cx="54" cy="24" r="1.6"/><circle cx="70" cy="68" r="1.6"/><circle cx="86" cy="38" r="1.6"/><circle cx="102" cy="58" r="1.6"/><circle cx="118" cy="30" r="1.6"/><circle cx="134" cy="72" r="1.6"/><circle cx="150" cy="42" r="1.6"/><circle cx="166" cy="62" r="1.6"/><circle cx="182" cy="34" r="1.6"/><circle cx="198" cy="66" r="1.6"/><circle cx="30" cy="78" r="1.6"/><circle cx="48" cy="14" r="1.6"/><circle cx="66" cy="84" r="1.6"/><circle cx="84" cy="18" r="1.6"/><circle cx="104" cy="82" r="1.6"/><circle cx="122" cy="16" r="1.6"/><circle cx="142" cy="80" r="1.6"/><circle cx="160" cy="14" r="1.6"/><circle cx="178" cy="82" r="1.6"/><circle cx="196" cy="24" r="1.6"/><circle cx="26" cy="48" r="1.6"/><circle cx="44" cy="64" r="1.6"/><circle cx="62" cy="44" r="1.6"/><circle cx="80" cy="72" r="1.6"/><circle cx="98" cy="46" r="1.6"/><circle cx="136" cy="52" r="1.6"/><circle cx="172" cy="52" r="1.6"/><circle cx="204" cy="44" r="1.6"/>
-            </g>
-            <g fill="#c2410c"><circle cx="70" cy="20" r="2.2"/><circle cx="120" cy="64" r="2.2"/><circle cx="156" cy="26" r="2.2"/><circle cx="88" cy="78" r="2.2"/><circle cx="190" cy="58" r="2.2"/></g>
-          </svg>
-          <h3>Data</h3>
-          <p>Gaia. Satellite tracking. Surveys. N-body simulations.</p>
-          <span class="micro">More data than hands.</span>
-        </div>
-        <div class="sigarrow">→</div>
-        <div class="sigcard">
-          <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <path d="M25 15 H195 L125 55 V88 H95 V55 Z" fill="none" stroke="#b9b3a6" stroke-width="1.5"/>
-            <g fill="#9a9ea6"><circle cx="50" cy="10" r="1.6"/><circle cx="85" cy="8" r="1.6"/><circle cx="120" cy="11" r="1.6"/><circle cx="155" cy="8" r="1.6"/><circle cx="188" cy="10" r="1.6"/><circle cx="70" cy="25" r="1.6"/><circle cx="105" cy="24" r="1.6"/><circle cx="140" cy="26" r="1.6"/><circle cx="172" cy="24" r="1.6"/></g>
-            <circle cx="110" cy="62" r="4" fill="#c2410c"/>
-          </svg>
-          <h3>Craft</h3>
-          <p>Denoise. Model. Verify. Agents run the pipeline.</p>
-          <span class="micro">The new leverage.</span>
-        </div>
-        <div class="sigarrow">→</div>
-        <div class="sigcard accent">
-          <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <line x1="20" y1="85" x2="205" y2="85" stroke="#dcd7cb"/>
-            <line x1="20" y1="15" x2="20" y2="85" stroke="#dcd7cb"/>
-            <path d="M20 78 C55 78 65 35 100 35 S150 70 200 55" fill="none" stroke="#c2410c" stroke-width="2"/>
-            <circle cx="100" cy="35" r="4" fill="#c2410c"/>
-          </svg>
-          <h3>Signal</h3>
-          <p>Resonances. Anomalies. New orbits.</p>
-          <span class="micro">The old questions.</span>
-        </div>
-      </div>
-      <p class="bigquote2">More data than hands. New tools. Old questions. <b>That is a young person's advantage.</b></p>
-      <div class="keyline">The bottleneck is <b>signal</b>.</div>
-    </div>
-    <div class="footer"><span>data · craft · signal</span><span class="pnum">52 / 53</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
@@ -2446,7 +2398,7 @@ references/</pre>
       </div>
       <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">53 / 53</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">41 / 41</span></div>
   </section>
 
 </div>

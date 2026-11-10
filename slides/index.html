@@ -64,6 +64,7 @@
     font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;
   }
   .pnum{font-variant-numeric:tabular-nums}
+  .footer > span:first-child{display:none}
 
   /* ---------- cover ---------- */
   .cover{justify-content:center}
@@ -797,7 +798,6 @@
   <section class="slide active cover" data-notes="开场 20 秒。不自我介绍超过一句。直接抛问题：一个只会预测下一个词的模型，凭什么能证明定理。">
     <div class="kicker">天体力学 × AI · 2026</div>
     <h1>从下一个 token<br><span class="thin">到下一个定理</span></h1>
-    <p class="sub">一个模型如何工作，以及我如何使用它</p>
     <div class="meta">
       <span>刘博文</span>
     </div>
@@ -815,22 +815,22 @@
     <h2>刘博文 <span style="font-size:30px;font-weight:400;color:var(--muted)">Bowen Liu</span></h2>
     <p class="sub" style="margin-top:8px">研究主线：N 体周期解、椭圆相对平衡与线性稳定性。</p>
     <div class="content" style="margin-top:22px">
-      <div class="two" style="grid-template-columns:1fr 1.15fr;gap:24px;align-items:center">
-        <div class="stack" style="gap:10px">
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2013–2018 · 南开大学 · 陈省身数学研究所</div><p style="font-size:23px;margin:0">硕博阶段 · 数学博士（2018）</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2018–2020 · 奥格斯堡大学</div><p style="font-size:23px;margin:0">博士后研究员</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2020–2022 · 上海交通大学</div><p style="font-size:23px;margin:0">吴文俊助理教授</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2022–2024 · 华为</div><p style="font-size:23px;margin:0">主任工程师 · AI4Science 与大模型</p></div>
-          <div class="card" style="padding:12px 18px"><div class="k" style="font-size:16px;margin-bottom:4px">2024–至今 · 某美国电商公司</div><p style="font-size:23px;margin:0">应用研究员 · LLM、RL、搜索与推荐</p></div>
+      <div class="two" style="grid-template-columns:1.08fr 1fr;gap:24px;align-items:stretch">
+        <div class="card" style="padding:10px 20px;display:flex;flex-direction:column;justify-content:center">
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2013–2018</span><span style="font-size:19px"><b>南开大学</b> · 陈省身数学研究所 · 数学博士</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2018–2020</span><span style="font-size:19px"><b>奥格斯堡大学</b> · 博士后</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2020–2022</span><span style="font-size:19px"><b>上海交通大学</b> · 吴文俊助理教授</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2022–2024</span><span style="font-size:19px"><b>华为</b> · 主任工程师</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:13px 0"><span style="font-family:var(--mono);font-size:15px;color:var(--muted);white-space:nowrap">2024–至今</span><span style="font-size:19px"><b>某美国电商公司</b> · 应用研究员</span></div>
         </div>
-        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">天体力学研究</div><p style="font-size:24px;line-height:1.75">N 体周期解的存在性与稳定性<br>受限四体：椭圆相对平衡<br>平面四体：椭圆菱形解的不稳定性<br>广义 Lennard–Jones 系统的同形解</p><div class="keyline" style="font-size:22px;margin-top:18px">辛指标理论 · 辛几何 · 变分方法</div></div>
+        <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:17px">天体力学研究</div><p style="font-size:24px;line-height:1.8;margin-top:6px">N 体周期解的存在性与稳定性<br>受限四体：椭圆相对平衡<br>平面四体：椭圆菱形解的不稳定性<br>广义 Lennard–Jones 系统的同形解</p><div class="keyline" style="font-size:22px;margin-top:18px">辛指标理论 · 辛几何 · 变分方法</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 41</span></div>
   </section>
 
   <!-- ============ S1b · 全景导航 ============ -->
-  <section class="slide" data-notes="当前 42 页：简介 2，全景 3，Token 4–9，模型 10，训练与 RL 11–22，无状态 23，四短板 24，应用 25–31，AI 数学 32–40，结论 41–42。DAG/MCTS 定义 36，机制猜测 37，局限 38，批量结果 39，NS 40。REFLEX 整页已按要求删除。">
+  <section class="slide" data-notes="当前 41 页：简介 2，全景 3，Token 4–9，模型 10，训练与 RL 11–22，无状态 23，四短板 24，应用 25–31，AI 数学 32–40，结论 41。DAG/MCTS 定义 36，机制猜测 37，局限 38，批量结果 39，NS 40。REFLEX 整页已按要求删除。">
     <p class="eyebrow"><b>00</b> / 全景</p>
     <h2>全景：从 token 到定理</h2>
     <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
@@ -873,13 +873,13 @@
         </div>
         <div class="card mapcard" data-goto="40" role="button" tabindex="0">
           <div class="k">05 · 结论</div>
-          <h3>回到我的实践</h3>
-          <p>工作方式 · 复利 · 收束</p>
-          <div class="range">p. 41–42</div>
-          <div class="maplinks"><span class="maplink" data-goto="41">结尾</span></div>
+          <h3>从 token 到定理</h3>
+          <p>概率 · 验证 · 方向</p>
+          <div class="range">p. 41</div>
+          <div class="maplinks"><span class="maplink" data-goto="40">结尾</span></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">6 个章节 · 42 页 · 点击任意卡片开始；`N` 显示讲稿，`F` 全屏。</p>
+      
     </div>
     <div class="footer"><span>overview · six sections</span><span class="pnum">02 / 53</span></div>
   </section>
@@ -973,7 +973,7 @@
         <span class="accent">子词：折中</span>
       </div>
 
-      <p class="micro" style="margin-top:10px">GPT-2 50k · GPT-4 100k · Llama 3 128k · GPT-4o 200k</p>
+      
       <div class="keyline">子词不是语义单位，是<b>序列长度</b>与<b>词表大小</b>之间的工程折中。</div>
     </div>
     <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">03 / 53</span></div>
@@ -986,7 +986,7 @@
     <div class="content">
       <div class="two">
         <div>
-          <p class="micro" style="margin:0 0 8px"><span style="color:var(--accent)">《天体力学基础》</span> &nbsp;·&nbsp; 行号 = ID &nbsp;·&nbsp; 按 ID 排序</p>
+          
           <div class="ledger">
             <div class="ledger-head"><span>ID</span><span>片段</span><span></span></div>
             <div class="ledger-row"><span class="ln">867</span><span class="tk">天</span><span class="tag"></span></div>
@@ -1026,12 +1026,12 @@
     <h2>Token 是模型的单位，也是账单的单位</h2>
     <div class="content">
       <img class="shot" src="../assets/figures/deepseek_usage.png" alt="DeepSeek 用量：2.85 亿 token，2,599 次请求，27.18 元" style="max-width:1060px">
-      <p class="micro" style="margin-top:10px">上月用量 · 平均每次 ≈ 110k token · ≈ 1 分钱</p>
+      
       <div class="ratio2">
         <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">1 个英文字符</div></div>
         <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">1 个中文字符</div></div>
       </div>
-      <p class="micro" style="margin-top:12px">直观理解：一个词、一个数字、一个符号 ≈ 1 token；不同 tokenizer 不同，以返回的 usage 为准。</p>
+      
       <div class="keyline">Token 既是模型的最小单位，也是账单的最小单位。</div>
     </div>
     <div class="footer"><span>usage · billing</span><span class="pnum">05 / 53</span></div>
@@ -1045,8 +1045,8 @@
       <div class="two">
         <div>
           <img class="shot" src="../assets/figures/deepseek_pricing.png" alt="DeepSeek 价格表">
-          <p class="micro" style="margin-top:10px">deepseek-flash · 1M 上下文 · 384K 输出 · 元 / 百万 token</p>
-          <p class="micro" style="margin-top:6px">1M 上下文 ≈ 一部《三体》三部曲</p>
+          
+          
         </div>
         <div style="align-self:center">
           <div class="calcbox">
@@ -1087,7 +1087,7 @@
         </div>
       </div>
       <div class="keyline">ID 是<b>地址</b>，向量是<b>内容</b>。</div>
-      <p class="micro" style="margin-top:14px">这一步叫 embedding；每一维没有名字，但距离有意义。</p>
+      
     </div>
     <div class="footer"><span>embedding</span><span class="pnum">07 / 53</span></div>
   </section>
@@ -1116,7 +1116,7 @@
             <div class="layers"><i></i><i></i><i></i></div>
             <div class="cap">N 层 · 自注意力</div>
           </div>
-          <p class="micro" style="text-align:center;margin-top:10px">GPT · Llama · Qwen 都是变体</p>
+          
         </div>
         <div>
           <p class="micro" style="margin:0">softmax(z)</p>
@@ -1165,7 +1165,7 @@
           <div class="k">阶段 01 · Pretraining</div>
           <div class="big" style="font-size:30px">预训练</div>
           <p style="font-size:20px;margin-top:16px">大规模文本、代码等语料<br>学习语言、知识与模式</p>
-          <p class="micro" style="font-size:16px;margin-top:18px">产出：基础模型 · base model</p>
+          
         </div>
         <div class="farrow" aria-hidden="true">→</div>
         <div class="card" style="padding:18px 20px">
@@ -1293,9 +1293,9 @@
               <tr><td>0.01</td><td>4.61</td></tr>
             </tbody>
           </table>
-          <p class="micro" style="margin-top:12px">单位：nats · ÷ ln 2 = bits</p>
-          <p class="micro" style="margin-top:6px">困惑度 PPL = exp(平均 −log p)</p>
-          <p class="micro" style="margin-top:6px">∂L/∂z = p − onehot(y)</p>
+          
+          
+          
         </div>
         <div class="stack">
           <div class="card"><div class="k">单个位置</div><p>−log p = 惊讶度，也是编码这个 token 的长度</p></div>
@@ -1319,7 +1319,7 @@
         <div class="card"><div class="k">压缩</div><div class="big" style="font-size:22px">挤掉冗余</div><p>留下可复用的结构</p></div>
         <div class="card accent"><div class="k">结构</div><div class="big" style="font-size:22px">语法 · 因果 · 物理</div><p>迁移到没见过的题</p></div>
       </div>
-      <p class="micro" style="margin-top:18px">这是理解预测训练的一种视角；搜索与纠错也依赖推理时的方法。</p>
+      
       <div class="keyline">我的工作视角：预测训练推动模型学习<b>可复用的结构</b>。</div>
     </div>
     <div class="footer"><span>compression · learned structure</span><span class="pnum">16 / 53</span></div>
@@ -1329,7 +1329,7 @@
   <section class="slide" data-notes="这里采用一种常见 SFT 设置：只对 assistant 的答案 token 算 loss，具体 mask 随实现变化。SFT 强调模仿示范，也可能学习任务相关信息；广泛知识主要来自预训练。">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>SFT：看标准答案学做事</h2>
-    <p class="micro" style="margin:8px 0 0">supervised fine-tuning · 监督微调 / 指令微调</p>
+    
     <div class="content">
       <div class="two">
         <div>
@@ -1338,7 +1338,7 @@
             <div class="row"><span class="role">user</span><span class="txt">这本书讲什么？</span><span class="tag">输入</span></div>
             <div class="row target"><span class="role">assistant</span><span class="txt">系统介绍天体力学的基本概念和定理，以及一些有代表性的研究成果。</span><span class="tag">目标</span></div>
           </div>
-          <p class="micro" style="margin-top:8px">橙色 = 唯一参与 loss 的 token。</p>
+          
           <div class="sftloss">
             <div class="fl on"><span class="fl-k">SFT</span><span class="fl-eq">−Σ<sub>t∈answer</sub> log p(y<sub>t</sub> | prompt, y<sub>&lt;t</sub>)</span></div>
           </div>
@@ -1371,7 +1371,7 @@
           <div class="card accent"><div class="k">assistant</div><p>模型的回答；训练时只对它算 loss</p></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:16px">system / user = 条件 &nbsp;·&nbsp; assistant = 监督目标（只算这些 token 的 loss）</p>
+      
       <div class="keyline">system 定规则，user 给任务，assistant 是学习目标。</div>
     </div>
     <div class="footer"><span>roles · loss mask</span><span class="pnum">18 / 53</span></div>
@@ -1400,7 +1400,7 @@
           <div class="card accent" style="padding:14px 16px"><div class="k">03 接回</div><p>拼到输入末尾，重复</p></div>
         </div>
       </div>
-      <p class="micro" style="margin-top:14px">概率为示意，用于说明机制 · 真实输出以模型为准</p>
+      
       <div class="keyline">一次只走一步；把结果接回输入，再走下一步。</div>
     </div>
     <div class="footer"><span>autoregressive decoding</span><span class="pnum">19 / 53</span></div>
@@ -1436,7 +1436,7 @@
           <mo>]</mo>
         </math>
       </div>
-      <p class="micro" style="margin-top:10px">π 策略 · γ 折扣 · r<sub>t</sub> 奖励 · E 期望</p>
+      
       <div class="keyline">RL 学的是<b>策略</b>。</div>
     </div>
     <div class="footer"><span>agent · environment · reward</span><span class="pnum">20 / 53</span></div>
@@ -1458,7 +1458,7 @@
         <span class="pill"><i></i>有 reward</span>
         <span class="pill"><i></i>可无限试错</span>
       </div>
-      <p class="micro" style="margin-top:16px">DeepMind：Atari · AlphaGo · AlphaStar（RL） &nbsp;|&nbsp; AlphaFold → 2024 诺贝尔化学奖（Hassabis &amp; Jumper）</p>
+      
       <div class="sidenote"><b>AlphaFold 是监督学习。</b> 它用已知结构做标签；没有奖励，也没有试错。</div>
       <div class="keyline">数学和代码自带 <b>simulator</b>。</div>
     </div>
@@ -1482,7 +1482,7 @@
               <mo>(</mo><msub><mi>p</mi><mi>θ</mi></msub><mo>‖</mo><msub><mi>p</mi><mtext>ref</mtext></msub><mo>)</mo>
             </math>
           </div>
-          <p class="micro" style="margin-top:12px">奖励来自程序：答案匹配、单元测试、Lean 编译</p>
+          
         </div>
         <div class="rlex">
           <div class="q">Q：第四章讲什么？</div>
@@ -1498,7 +1498,7 @@
         <div class="sa"><span class="bad">GPT-4o 常答 2</span><span class="ar">→</span><span class="good">o1 / R1 答 3</span></div>
         <div class="note">先拆字母，再数</div>
       </div>
-      <p class="micro" style="margin-top:8px">2024.09 o1 → 2025.01 R1 · DeepSeek moment</p>
+      
       <div class="keyline">同一段文字，从“预测下一个词”变成“答对才给分”。</div>
     </div>
     <div class="footer"><span>《天体力学基础》· RLVR</span><span class="pnum">22 / 53</span></div>
@@ -1520,7 +1520,7 @@
         <span class="step">奖励</span><span class="arr">→</span>
         <span class="step hl">更新</span>
       </div>
-      <p class="micro" style="margin-top:12px">PPO / GRPO / RLOO 是 RL；DPO 是偏好优化，常被归到 RLHF 谱系。</p>
+      
       <div class="keyline">算法不同，循环相同：采样 → 打分 → 更新。</div>
     </div>
     <div class="footer"><span>PPO · GRPO · RLOO · DPO</span><span class="pnum">23 / 53</span></div>
@@ -1566,7 +1566,7 @@
         <div class="card accent"><div class="k">策略 · Policy</div><div class="big" style="font-size:24px">改进动作选择</div><p style="font-size:19px">根据经验调整，追求长期回报。</p></div>
       </div>
       <div class="keyline">RL 根据<b>结果反馈</b>，学习<b>怎样选择动作</b>。</div>
-      <p class="micro" style="margin-top:12px">参考：Sutton &amp; Barto, Reinforcement Learning: An Introduction。</p>
+      
     </div>
     <div class="footer"><span>强化学习 · 奖励 · 策略</span><span class="pnum">13 / 53</span></div>
   </section>
@@ -1584,7 +1584,7 @@
       </div>
       <div class="tl-facts"><span class="pill"><i></i>规则明确</span><span class="pill"><i></i>结果可衡量</span><span class="pill"><i></i>可反复尝试</span></div>
       <div class="keyline">游戏引擎同时提供<b>环境与反馈</b>。</div>
-      <p class="micro" style="margin-top:14px">来源：<a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., 2015</a> · Silver et al., 2016 · <a style="color:inherit" href="https://openai.com/index/openai-five-defeats-dota-2-world-champions/">OpenAI Five, 2019</a> · Vinyals et al., 2019。</p>
+      
     </div>
     <div class="footer"><span>著名案例 · 游戏 · 深度强化学习</span><span class="pnum">14 / 53</span></div>
   </section>
@@ -1602,7 +1602,7 @@
       </div>
       <div class="scaleband" style="margin-top:24px">反复尝试 + 结果反馈 → 学习取得更高回报的策略。</div>
       <div class="keyline">有用的环境，让智能体<b>尝试、评价、再尝试</b>。</div>
-      <p class="micro" style="margin-top:12px">例子：<a style="color:inherit" href="https://www.nature.com/articles/nature14236">Mnih et al., Nature（2015），Breakout 演示</a>。</p>
+      
     </div>
     <div class="footer"><span>试错 · 延迟奖励 · 可重复运行的环境</span><span class="pnum">15 / 53</span></div>
   </section>
@@ -1666,7 +1666,7 @@
         </div>
       </div>
       <div class="keyline">提高高优势回答的概率，同时用 <b>clip 与 KL</b> 限制更新幅度。</div>
-      <p class="micro" style="margin-top:10px">来源：Shao et al., <i>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</i>, arXiv:2402.03300, 2024。</p>
+      
     </div>
     <div class="footer"><span>GRPO objective · advantage · clip · KL</span><span class="pnum">25 / 53</span></div>
   </section>
@@ -1693,7 +1693,7 @@
             <div class="a bad" style="font-size:16px"><span>C · r = 0.50</span><b>−0.4 ↓</b></div>
             <div class="a good" style="font-size:16px"><span>D · r = 0.80</span><b>+0.7 ↑</b></div>
           </div>
-          <p class="micro" style="margin-top:8px">均值 0.60，标准差 0.27；数值为示意。</p>
+          
         </div>
         <div class="stack">
           <div class="card" style="padding:14px 18px"><div class="k">组内竞争</div><p style="font-size:18px;margin:0">同一题的回答互相比较，不跨题比较绝对分数。</p></div>
@@ -1718,7 +1718,7 @@
       </div>
       <div class="scaleband" style="margin-top:20px">两条路线：学习更好的策略 + 用算力生成、验证更多候选。</div>
       <div class="keyline">封闭环境 + 可定位错误 + 干净数据 → <b>反馈便宜，可大规模试错</b>。</div>
-      <p class="micro" style="margin-top:12px">“封闭”是相对任务而言：代码仍依赖输入与库，数学建模仍需形式化；数据也仍需筛选。</p>
+      
     </div>
     <div class="footer"><span>封闭环境 · 可追溯错误 · 干净数据</span><span class="pnum">16 / 53</span></div>
   </section>
@@ -1734,7 +1734,7 @@
       </div>
       <div class="scaleband" style="margin-top:24px"><b>已有迁移证据：</b>数学 RL → 代码表现；代码训练 → 状态追踪。</div>
       <div class="keyline">共享技能支持<b>能力迁移</b>，数据配比影响实际收益。</div>
-      <p class="micro" style="margin-top:12px">来源：<a style="color:inherit" href="https://arxiv.org/abs/2505.16400">Chen et al., AceReason（2025）</a> · <a style="color:inherit" href="https://arxiv.org/abs/2405.21068">Kim et al.（2024）</a> · <a style="color:inherit" href="https://arxiv.org/abs/2402.03300">Shao et al., DeepSeekMath（2024）</a>。</p>
+      
     </div>
     <div class="footer"><span>共享技能 · 能力迁移 · 具体任务中的证据</span><span class="pnum">17 / 53</span></div>
   </section>
@@ -1746,9 +1746,9 @@
     <div class="content">
       <div class="loop"><span class="step">读文件</span><span class="arr">→</span><span class="step">修改</span><span class="arr">→</span><span class="step hl">跑测试</span><span class="arr">→</span><span class="step">观察与修订</span><span class="arr">↺</span></div>
       <div class="three" style="margin-top:28px"><div class="card"><div class="k">工作目录</div><p style="font-size:20px">文件与规范定义任务。</p></div><div class="card"><div class="k">真实工具</div><p style="font-size:20px">修改可以立即执行。</p></div><div class="card accent"><div class="k">结果反馈</div><p style="font-size:20px">失败指导下一次修改。</p></div></div>
-      <p class="micro" style="margin-top:20px">例子：Claude Code、Codex、OpenCode，以及其他 coding agents。</p>
+      
       <div class="keyline">代码在同一工作目录连接<b>生成、行动与反馈</b>。</div>
-      <p class="micro" style="margin-top:12px">更早的生成与筛选案例：Li et al., AlphaCode, Science（2022）。</p>
+      
     </div>
     <div class="footer"><span>coding agents · 本地工具 · 快速反馈</span><span class="pnum">19 / 53</span></div>
   </section>
@@ -1778,7 +1778,7 @@
         </div>
       </div>
       <div class="keyline">可检查的目标，让更多算力能用于<b>系统搜索与候选筛选</b>。</div>
-      <p class="micro" style="margin-top:10px">对有限、有解且可可靠判定的任务，穷举能找到满足规范的解；计算成本仍需考虑。</p>
+      
     </div>
     <div class="footer"><span>编程 · 数学 · 产品设计 · 交易</span><span class="pnum">20 / 53</span></div>
   </section>
@@ -1789,7 +1789,7 @@
     <h2>正确是底线，优秀是追求</h2>
     <div class="content">
       <table class="compare" style="font-size:20px"><thead><tr><th></th><th>代码</th><th>数学</th></tr></thead><tbody><tr><td>可检查结构</td><td>语法、类型、测试、规范</td><td>定义、假设、证明步骤</td></tr><tr><td>正确性</td><td>满足指定行为</td><td>命题从假设推出</td></tr><tr><td>优秀程度</td><td>清晰、可维护、高效</td><td>优雅、一般、有用</td></tr></tbody></table>
-      <p class="micro" style="margin-top:18px">结构化产物让检查更容易；数据质量仍需要筛选与整理。</p>
+      
       <div class="keyline">两个领域都追求<b>好作品</b>，超越一次通过或失败。</div>
     </div>
     <div class="footer"><span>结构化数据 · 正确性 · 学科品味</span><span class="pnum">23 / 53</span></div>
@@ -1840,7 +1840,7 @@
         </div>
       </div>
       <div class="keyline">模型无状态；所谓“对话”，是客户端把历史<b>重发</b>一遍。</div>
-      <p class="micro" style="margin-top:14px">参数在推理时不更新；状态只存在于上下文里。</p>
+      
     </div>
     <div class="footer"><span>stateless</span><span class="pnum">11 / 53</span></div>
   </section>
@@ -1861,7 +1861,7 @@
             <li>“对话”是客户端重发历史</li>
             <li>4k → 1M，但长文仍会“大海捞针”</li>
           </ul>
-          <p class="micro" style="margin-top:10px">→ Context 管理 · 检索 · Memory</p>
+          
         </div>
         <div class="card" style="padding:15px 18px">
           <div class="k">02 · 精确计算</div>
@@ -1871,7 +1871,7 @@
             <li>看起来合理，也可能算错</li>
             <li>长程任务会累积误差</li>
           </ul>
-          <p class="micro" style="margin-top:10px">→ Function calling · 计算交给程序</p>
+          
         </div>
         <div class="card" style="padding:15px 18px">
           <div class="k">03 · 概率输出</div>
@@ -1881,7 +1881,7 @@
             <li>错误可能自信而合理</li>
             <li>长时运行需要停止与回滚</li>
           </ul>
-          <p class="micro" style="margin-top:10px">→ Harness · 验证 · 权限 · 评测</p>
+          
         </div>
       </div>
       <div class="keyline">四个短板，三类系统能力：<b>状态、计算、可靠性</b>。</div>
@@ -1979,7 +1979,7 @@
           <pre style="margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.65;color:#cfd2d9;white-space:pre-wrap">call  run_python("print(2 * 4**1.5)")
 obs   "16.0"</pre>
           <div class="idrow" style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);color:#8b8f98;font-size:11px">// T = 2 × 4**1.5 = 16</div>
-          <div class="micro" style="margin-top:10px;color:#8b8f98">计算 · 代码 · 检索 · 数据库 · 文件 · API</div>
+          
         </div>
         <div class="stack" style="gap:10px">
           <div class="card" style="padding:12px 14px"><div class="k">01 定义</div><p style="font-size:14.5px">名字、参数、返回、边界；工具描述也进入上下文。</p></div>
@@ -2049,7 +2049,7 @@ obs   "16.0"</pre>
           <div class="tag ctx">Context</div>
         </div>
         <div class="syslegend">
-          <p class="micro" style="margin:0 0 2px">内圈：一次调用 · 中圈：跨调用 · 外圈：工程边界</p>
+          
           <div class="row"><span class="n">01</span><b>LLM</b><p>概率生成器：输入 token，输出下一个 token 的分布</p></div>
           <div class="row"><span class="n">02</span><b>Prompt</b><p>这次的条件：system / user / few-shot</p></div>
           <div class="row"><span class="n">03</span><b>Context</b><p>这次能看到的全部 token；窗口有限</p></div>
@@ -2082,7 +2082,7 @@ obs   "16.0"</pre>
           <div class="chain" style="margin-top:14px">
             <span class="c">提纲</span><span class="arr">→</span><span class="c">生成</span><span class="arr">→</span><span class="c">截图</span><span class="arr">→</span><span class="c keep">审计</span><span class="arr">→</span><span class="c">导出</span>
           </div>
-          <p class="micro" style="margin-top:8px">例：把这份 deck 的制作流程写成 skill</p>
+          
         </div>
         <div class="stack" style="gap:8px">
           <div class="card" style="padding:10px 16px"><div class="k" style="margin-bottom:2px">01 触发</div><p style="margin:0">名称与描述：什么时候该用，什么时候不该用</p></div>
@@ -2169,7 +2169,7 @@ references/</pre>
         <div class="st"><span class="d">2025.07</span><b>35/42</b><span class="m">金牌级</span></div>
         <div class="note">12 个月，+7 分</div>
       </div>
-      <p class="micro" style="margin:10px 0 0">* 算力等价值，非实际耗时 · <a style="color:inherit" href="https://openai.com/index/sharing-ai-progress-in-mathematics/">OpenAI，2026-10-06</a> · 公司报告。</p>
+      
       <div class="keyline">这是一条阶梯：<b>三个台阶</b>。</div>
     </div>
     <div class="footer"><span>from basic apps to research-level</span><span class="pnum">41 / 53</span></div>
@@ -2309,7 +2309,7 @@ references/</pre>
         </div>
       </div>
       <div class="keyline" style="font-size:26px;margin-top:18px"><b>图存中间状态，Agent 扩展候选，Lean 把关证明。</b></div>
-      <p class="micro" style="font-size:14px;line-height:1.5;margin:12px 0 0">我的“问题爆破”猜测，非官方实现 · MCTS 可作为选点策略 · <a style="color:inherit" href="https://arxiv.org/abs/2606.01861">Chen &amp; Li，2026</a><br>该论文的定理语义图与这里的证明依赖图不同；Lean 接受局部步骤后，仍须闭合全部子目标。</p>
+      
     </div>
     <div class="footer"><span>speculation · public sources</span><span class="pnum">45 / 53</span></div>
   </section>
@@ -2325,7 +2325,7 @@ references/</pre>
         <div class="card" style="padding:20px"><div class="k" style="font-size:17px">02 · 模型能力的瓶颈</div><div class="big" style="font-size:30px">能否找到关键一步</div><p style="font-size:24px;line-height:1.75">提出有效引理与新构造<br>跨越长程推理的难点<br>将思路写成严格证明</p></div>
       </div>
       <div class="keyline" style="font-size:26px;margin-top:22px">Lean 守住形式逻辑；<b>系统与模型共同决定能走多远</b>。</div>
-      <p class="micro" style="font-size:16px;line-height:1.5;margin:16px 0 0">部分问题仍未解决；具体失败原因需实验区分。<br>问题数与结果族口径不同，不能直接相除当成功率。<a href="https://github.com/openai/math" style="color:inherit">来源：openai/math ↗</a></p>
+      
     </div>
     <div class="footer"><span>solved vs. open</span><span class="pnum">46 / 53</span></div>
   </section>
@@ -2346,7 +2346,7 @@ references/</pre>
         <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">我怎么读这组数字</div><p style="font-size:22px;line-height:1.55">一个结果族可对应多篇手稿<br>约 3 Pro 小时 / 结果：算力等价值<br>正确性、原创性、重要性逐项审查</p></div>
       </div>
       <div class="keyline" style="margin-top:18px;font-size:26px">候选成果开始批量生成；<b>验证与理解成为关键工作</b>。</div>
-      <p class="micro" style="font-size:14px;margin:12px 0 0">首发规模 · OpenAI 报告 · 仓库持续修订 · <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/" style="color:inherit">官方公告</a> · <a href="https://github.com/openai/math" style="color:inherit">openai/math ↗</a></p>
+      
     </div>
     <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">38 / 41</span></div>
   </section>
@@ -2372,57 +2372,9 @@ references/</pre>
         </div>
       </div>
       <div class="keyline" style="font-size:24px;margin-top:18px">形式证明检查逻辑；<b>原问题、形式陈述与论文的对应仍须审查</b>。</div>
-      <p class="micro" style="font-size:14px;margin:12px 0 0">OpenAI 报告 · <a href="https://openai.com/zh-Hans-CN/index/navier-stokes-solution/" style="color:inherit">官方公告</a> · <a href="https://github.com/openai/NavierStokesAndEuler" style="color:inherit">数学仓库 ↗</a> · <a href="https://arxiv.org/abs/2610.08144" style="color:inherit">形式化对应问题的讨论</a></p>
+      
     </div>
     <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">39 / 41</span></div>
-  </section>
-
-  <!-- ============ S52 · 年轻人的机会 ============ -->
-  <section class="slide" data-notes="天体力学正在变成数据领域：Gaia、卫星跟踪、巡天、N 体模拟。数据比手多。年轻人的机会在于：既懂领域，又会处理数据，能把噪声去掉、把信号找出来。工具是新的，问题是老的。">
-    <p class="eyebrow"><b>06</b> / 结论</p>
-    <h2>年轻人的机会</h2>
-    <p class="sub" style="margin-top:8px">天体力学正在变成数据领域；稀缺的是找到信号的能力。</p>
-    <div class="content">
-      <div class="sigflow">
-        <div class="sigcard">
-          <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <g fill="#9a9ea6">
-              <circle cx="22" cy="28" r="1.6"/><circle cx="38" cy="52" r="1.6"/><circle cx="54" cy="24" r="1.6"/><circle cx="70" cy="68" r="1.6"/><circle cx="86" cy="38" r="1.6"/><circle cx="102" cy="58" r="1.6"/><circle cx="118" cy="30" r="1.6"/><circle cx="134" cy="72" r="1.6"/><circle cx="150" cy="42" r="1.6"/><circle cx="166" cy="62" r="1.6"/><circle cx="182" cy="34" r="1.6"/><circle cx="198" cy="66" r="1.6"/><circle cx="30" cy="78" r="1.6"/><circle cx="48" cy="14" r="1.6"/><circle cx="66" cy="84" r="1.6"/><circle cx="84" cy="18" r="1.6"/><circle cx="104" cy="82" r="1.6"/><circle cx="122" cy="16" r="1.6"/><circle cx="142" cy="80" r="1.6"/><circle cx="160" cy="14" r="1.6"/><circle cx="178" cy="82" r="1.6"/><circle cx="196" cy="24" r="1.6"/><circle cx="26" cy="48" r="1.6"/><circle cx="44" cy="64" r="1.6"/><circle cx="62" cy="44" r="1.6"/><circle cx="80" cy="72" r="1.6"/><circle cx="98" cy="46" r="1.6"/><circle cx="136" cy="52" r="1.6"/><circle cx="172" cy="52" r="1.6"/><circle cx="204" cy="44" r="1.6"/>
-            </g>
-            <g fill="#c2410c"><circle cx="70" cy="20" r="2.2"/><circle cx="120" cy="64" r="2.2"/><circle cx="156" cy="26" r="2.2"/><circle cx="88" cy="78" r="2.2"/><circle cx="190" cy="58" r="2.2"/></g>
-          </svg>
-          <h3>数据</h3>
-          <p>Gaia、卫星跟踪、巡天、N 体模拟。</p>
-          <span class="micro">数据比手多。</span>
-        </div>
-        <div class="sigarrow">→</div>
-        <div class="sigcard">
-          <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <path d="M25 15 H195 L125 55 V88 H95 V55 Z" fill="none" stroke="#b9b3a6" stroke-width="1.5"/>
-            <g fill="#9a9ea6"><circle cx="50" cy="10" r="1.6"/><circle cx="85" cy="8" r="1.6"/><circle cx="120" cy="11" r="1.6"/><circle cx="155" cy="8" r="1.6"/><circle cx="188" cy="10" r="1.6"/><circle cx="70" cy="25" r="1.6"/><circle cx="105" cy="24" r="1.6"/><circle cx="140" cy="26" r="1.6"/><circle cx="172" cy="24" r="1.6"/></g>
-            <circle cx="110" cy="62" r="4" fill="#c2410c"/>
-          </svg>
-          <h3>手艺</h3>
-          <p>去噪、建模、验证；agent 跑流水线。</p>
-          <span class="micro">新的杠杆。</span>
-        </div>
-        <div class="sigarrow">→</div>
-        <div class="sigcard accent">
-          <svg viewBox="0 0 220 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <line x1="20" y1="85" x2="205" y2="85" stroke="#dcd7cb"/>
-            <line x1="20" y1="15" x2="20" y2="85" stroke="#dcd7cb"/>
-            <path d="M20 78 C55 78 65 35 100 35 S150 70 200 55" fill="none" stroke="#c2410c" stroke-width="2"/>
-            <circle cx="100" cy="35" r="4" fill="#c2410c"/>
-          </svg>
-          <h3>信号</h3>
-          <p>共振、异常、新轨道。</p>
-          <span class="micro">问题还是老的。</span>
-        </div>
-      </div>
-      <p class="bigquote2">数据比手多，工具是新的，问题是老的。<b>这就是年轻人的机会。</b></p>
-      <div class="keyline">瓶颈在<b>信号</b>。</div>
-    </div>
-    <div class="footer"><span>数据 · 手艺 · 信号</span><span class="pnum">52 / 53</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
@@ -2444,7 +2396,7 @@ references/</pre>
       </div>
       <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">53 / 53</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">41 / 41</span></div>
   </section>
 
 </div>
