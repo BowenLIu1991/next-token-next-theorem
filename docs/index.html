@@ -253,7 +253,7 @@
     color:var(--muted);margin-bottom:10px}
   .stagecard .big{font-family:var(--mono);font-size:38px;letter-spacing:-.02em;line-height:1.1}
   .stagecard .foot{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.4}
-  .flowarrow{font-family:var(--mono);font-size:22px;color:var(--accent);text-align:center}
+  .flowarrow{font-family:var(--mono);font-size:22px;color:var(--accent);text-align:center;align-self:center}
   .vec{font-family:var(--mono);font-size:21px;letter-spacing:.01em;white-space:nowrap}
 
   /* ---------- model / probabilities ---------- */
@@ -1113,7 +1113,7 @@
         </div>
         <div>
           <p class="micro" style="margin:0 0 8px;text-align:center">Model</p>
-          <div class="transformer">
+          <div class="transformer" style="margin-top:12px">
             <div class="tf">Transformer</div>
             <div class="layers"><i></i><i></i><i></i></div>
             <div class="cap">N layers · self-attention</div>
@@ -1839,7 +1839,7 @@
       <p style="text-align:center;font-size:20px;color:var(--muted);margin:12px 0 0">One action: score the next token, then sample one.</p>
       <div class="four" style="margin-top:22px;gap:14px">
         <div class="card" style="padding:11px 14px"><div class="k">01 · No memory of the last turn</div><p style="font-size:19px;line-height:1.45">The client resends the history</p></div>
-        <div class="card accent" style="padding:11px 14px"><div class="k">02 · No real computation</div><p style="font-size:19px;line-height:1.45">Arithmetic is recall and pattern completion</p></div>
+        <div class="card accent" style="padding:11px 14px"><div class="k">02 · No real computation</div><p style="font-size:19px;line-height:1.45">Arithmetic is recall, not computation</p></div>
         <div class="card" style="padding:11px 14px"><div class="k">03 · No direct action</div><p style="font-size:19px;line-height:1.45">Tools execute outside the model</p></div>
         <div class="card" style="padding:11px 14px"><div class="k">04 · No persistent goal</div><p style="font-size:19px;line-height:1.45">Plans are generated text too</p></div>
       </div>
@@ -1871,7 +1871,7 @@
           <div class="big" style="font-size:22px">Recall and pattern completion</div>
           <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
             <li>Arithmetic comes from training patterns, not an algorithm</li>
-            <li>It looks like computation but recalls learned mappings</li>
+            <li>Times table: recall, not algorithm</li>
             <li>Errors compound over long tasks</li>
           </ul>
           
@@ -2003,7 +2003,7 @@ obs   "16.0"</pre>
     <h2>Harness: turn probabilistic output into a runnable system</h2>
     <p class="sub" style="margin-top:8px">The model proposes; the harness makes the proposal legal, executable, checkable, and stoppable.</p>
     <div class="content">
-      <div class="two" style="grid-template-columns:1fr 1.08fr;gap:32px;align-items:center">
+      <div class="two" style="grid-template-columns:1fr 1.08fr;gap:32px;align-items:start">
         <div>
           <p class="micro">A controlled loop</p>
           <div class="loop" style="margin-top:10px;padding-top:0;border-top:0;flex-wrap:wrap;justify-content:flex-start;gap:8px">
@@ -2240,7 +2240,7 @@ references/</pre>
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>The common pattern: generate → verify → search</h2>
     <div class="content">
-      <div class="flow">
+      <div class="flow" style="grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr)">
         <div class="fcard"><div class="k">Generate</div><h4>LLM</h4><p>Candidate proofs, programs, constructions</p></div>
         <div class="farrow">→</div>
         <div class="fcard"><div class="k">Verify</div><h4>Lean / tests / numerics</h4><p>Returns right or wrong, a score, a counterexample</p></div>
@@ -2248,9 +2248,11 @@ references/</pre>
         <div class="fcard accent"><div class="k">Search / learn</div><h4>best-of-N · trees · evolution · RL</h4><p>Turns the signal into the next policy</p></div>
       </div>
       <div class="loop">↺ Back to the generator: the next round is stronger</div>
-      <div class="three tight" style="margin-top:32px">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr);gap:8px;margin-top:32px">
         <div class="card"><div class="k">Manual only</div><p>Review stays manual; scale stalls</p></div>
+        <div></div>
         <div class="card"><div class="k">One shot</div><p>One draw per attempt; luck decides</p></div>
+        <div></div>
         <div class="card accent"><div class="k">Both</div><p>Probability is filtered into correctness, then written back into the model</p></div>
       </div>
       <div class="keyline">The model supplies probability; <b>the verifier supplies the gradient</b>.</div>
@@ -2265,15 +2267,20 @@ references/</pre>
     <div class="content" style="margin-top:22px">
       <div class="two even" style="gap:22px;align-items:stretch">
         <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">DAG · Directed Acyclic Graph</div><div class="big" style="font-size:30px">A dependency structure</div>
-          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="A and B support C, C supports T, and B is reused for T">
-            <g stroke="#c2410c" stroke-width="2" fill="none"><path d="M80 40 L225 80 M80 130 L225 80 L405 80 M80 130 Q240 175 405 100"/></g><g fill="#c2410c" font-size="25"><text x="190" y="72">›</text><text x="190" y="106">›</text><text x="360" y="88">›</text><text x="365" y="132">›</text></g>
-            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="15" width="70" height="50" rx="8"/><rect x="20" y="105" width="70" height="50" rx="8"/><rect x="225" y="55" width="60" height="50" rx="8"/><rect x="405" y="55" width="60" height="50" rx="8"/></g><g font-size="26" text-anchor="middle" fill="#15171c"><text x="55" y="49">A</text><text x="55" y="139">B</text><text x="255" y="89">C</text><text x="435" y="89">T</text></g>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="DAG: A and B support C; C supports T; B also supports T">
+            <defs><marker id="dag36" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c2410c"/></marker></defs>
+            <g stroke="#c2410c" stroke-width="2.2" fill="none" marker-end="url(#dag36)"><path d="M98 53 L205 80"/><path d="M98 127 L205 100"/><path d="M279 90 L384 90"/><path d="M98 127 C190 158 320 150 384 112"/></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="22" y="28" width="76" height="50" rx="9"/><rect x="22" y="102" width="76" height="50" rx="9"/><rect x="205" y="65" width="74" height="50" rx="9"/><rect x="384" y="65" width="74" height="50" rx="9"/></g>
+            <g fill="#15171c" font-size="26" text-anchor="middle" dominant-baseline="middle"><text x="60" y="53">A</text><text x="60" y="127">B</text><text x="242" y="90">C</text><text x="421" y="90">T</text></g>
           </svg>
           <p style="font-size:23px;line-height:1.6">Nodes: lemmas and subgoals<br>Directed edges: premises → conclusion<br>No cycles; shared lemmas can be reused</p>
         </div>
         <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">MCTS · Monte Carlo Tree Search</div><div class="big" style="font-size:30px">A search policy</div>
-          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="A search tree, with a promising branch receiving more search budget">
-            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 20 L90 80 L35 145 M90 80 L145 145 M240 20 L390 80 L335 145 M390 80 L445 145"/></g><path d="M240 20 L240 80 L270 145" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 145" stroke="#c2410c" stroke-width="2" fill="none"/><g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="20" r="14"/><circle cx="90" cy="80" r="13"/><circle cx="390" cy="80" r="13"/><circle cx="35" cy="145" r="9"/><circle cx="145" cy="145" r="9"/><circle cx="335" cy="145" r="9"/><circle cx="445" cy="145" r="9"/></g><g fill="#c2410c"><circle cx="240" cy="80" r="14"/><circle cx="205" cy="145" r="9"/><circle cx="270" cy="145" r="10"/></g>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="MCTS: a search tree where the orange branch receives more budget">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 48 L90 100 M90 100 L35 150 M90 100 L145 150 M240 48 L390 100 M390 100 L335 150 M390 100 L445 150"/></g>
+            <path d="M240 48 L240 100 L270 150" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 100 L205 150" stroke="#c2410c" stroke-width="2" fill="none"/>
+            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="48" r="14"/><circle cx="90" cy="100" r="12"/><circle cx="390" cy="100" r="12"/><circle cx="35" cy="150" r="8"/><circle cx="145" cy="150" r="8"/><circle cx="335" cy="150" r="8"/><circle cx="445" cy="150" r="8"/></g>
+            <g fill="#c2410c"><circle cx="240" cy="100" r="14"/><circle cx="205" cy="150" r="8"/><circle cx="270" cy="150" r="10"/></g>
           </svg>
           <p style="font-size:23px;line-height:1.6">Nodes: states; branches: candidate actions<br>Select → expand → evaluate → back up<br>Balance exploration and exploitation</p>
         </div>
@@ -2292,21 +2299,21 @@ references/</pre>
       <div class="two even" style="gap:22px;align-items:stretch">
         <div class="card" style="padding:16px 20px">
           <div class="k" style="font-size:16px">01 · Maintain goals and dependencies</div>
-          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="An acyclic proof-dependency graph with reusable lemmas A and B supporting C and target T">
-            <defs><marker id="dag-arrow-en" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6" fill="none" stroke="#c2410c"/></marker></defs>
-            <g stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#dag-arrow-en)"><path d="M95 43 L222 74"/><path d="M95 126 L222 91"/><path d="M276 82 L399 82"/><path d="M95 126 Q250 175 408 106"/></g>
-            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="17" width="75" height="50" rx="8"/><rect x="20" y="102" width="75" height="50" rx="8"/><rect x="223" y="57" width="54" height="50" rx="8"/><rect x="400" y="57" width="60" height="50" rx="8"/></g>
-            <g fill="#15171c" font-size="25" text-anchor="middle" dominant-baseline="middle"><text x="57" y="43">A ✓</text><text x="57" y="128">B ✓</text><text x="250" y="83">C</text><text x="430" y="83">T</text></g>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="DAG: A and B support C; C supports T; B also supports T">
+            <defs><marker id="dag37" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c2410c"/></marker></defs>
+            <g stroke="#c2410c" stroke-width="2.2" fill="none" marker-end="url(#dag37)"><path d="M98 53 L205 80"/><path d="M98 127 L205 100"/><path d="M279 90 L384 90"/><path d="M98 127 C190 158 320 150 384 112"/></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="22" y="28" width="76" height="50" rx="9"/><rect x="22" y="102" width="76" height="50" rx="9"/><rect x="205" y="65" width="74" height="50" rx="9"/><rect x="384" y="65" width="74" height="50" rx="9"/></g>
+            <g fill="#15171c" font-size="26" text-anchor="middle" dominant-baseline="middle"><text x="60" y="53">A ✓</text><text x="60" y="127">B ✓</text><text x="242" y="90">C</text><text x="421" y="90">T</text></g>
           </svg>
           <p style="font-size:22px;line-height:1.55">Nodes store goals; edges track dependencies<br>Verified lemmas become reusable nodes</p>
         </div>
         <div class="card" style="padding:16px 20px">
           <div class="k" style="font-size:16px">02 · Propose, check and update</div>
-          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="A proof-search tree with more budget allocated to a promising branch after feedback">
-            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 24 L90 80 L35 143 M90 80 L145 143 M240 24 L390 80 L445 143 M390 80 L335 143"/></g>
-            <path d="M240 24 L240 80 L270 143" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 143" stroke="#c2410c" stroke-width="2" fill="none"/>
-            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="24" r="16"/><circle cx="90" cy="80" r="14"/><circle cx="390" cy="80" r="14"/><circle cx="35" cy="143" r="10"/><circle cx="145" cy="143" r="10"/><circle cx="335" cy="143" r="10"/><circle cx="445" cy="143" r="10"/></g>
-            <g fill="#c2410c"><circle cx="240" cy="80" r="15"/><circle cx="205" cy="143" r="10"/><circle cx="270" cy="143" r="11"/></g><text x="300" y="129" fill="#c2410c" font-size="22">Feedback ↺</text>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="MCTS: a search tree where the orange branch receives more budget">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 48 L90 100 M90 100 L35 150 M90 100 L145 150 M240 48 L390 100 M390 100 L335 150 M390 100 L445 150"/></g>
+            <path d="M240 48 L240 100 L270 150" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 100 L205 150" stroke="#c2410c" stroke-width="2" fill="none"/>
+            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="48" r="14"/><circle cx="90" cy="100" r="12"/><circle cx="390" cy="100" r="12"/><circle cx="35" cy="150" r="8"/><circle cx="145" cy="150" r="8"/><circle cx="335" cy="150" r="8"/><circle cx="445" cy="150" r="8"/></g>
+            <g fill="#c2410c"><circle cx="240" cy="100" r="14"/><circle cx="205" cy="150" r="8"/><circle cx="270" cy="150" r="10"/></g><text x="300" y="128" fill="#c2410c" font-size="22">Feedback ↺</text>
           </svg>
           <p style="font-size:22px;line-height:1.55">Select node → agent attempt → Lean check<br>Keep verified work; revise or switch paths</p>
         </div>
@@ -2344,9 +2351,9 @@ references/</pre>
         <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">372</div><p style="font-size:22px">Related result families</p></div>
         <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">≈4,000</div><p style="font-size:22px">Problems attempted</p></div>
       </div>
-      <div class="two even" style="gap:18px;margin-top:18px;align-items:stretch">
-        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">What was released</div><p style="font-size:22px;line-height:1.55">Manuscripts and proof artifacts<br>Lean formalizations for some results<br>10 reasoning summaries; compute data</p></div>
-        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">How I read the numbers</div><p style="font-size:22px;line-height:1.55">One family can include several papers<br>≈3 Pro hours / result: compute equivalent<br>Review truth, novelty and significance</p></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px;align-items:stretch">
+        <div class="card" style="padding:16px 20px;grid-column:span 2"><div class="k" style="font-size:16px">What was released</div><p style="font-size:22px;line-height:1.55">Manuscripts and proof artifacts<br>Lean formalizations for some results<br>10 reasoning summaries; compute data</p></div>
+        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">How I read the numbers</div><p style="font-size:19px;line-height:1.55">One family: several papers<br>3 Pro hours: compute equivalent<br>Truth, novelty, significance: review</p></div>
       </div>
       <div class="keyline" style="margin-top:18px;font-size:26px">Candidate results arrive in batches; <b>verification and understanding matter</b>.</div>
       

@@ -253,7 +253,7 @@
     color:var(--muted);margin-bottom:10px}
   .stagecard .big{font-family:var(--mono);font-size:38px;letter-spacing:-.02em;line-height:1.1}
   .stagecard .foot{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.4}
-  .flowarrow{font-family:var(--mono);font-size:22px;color:var(--accent);text-align:center}
+  .flowarrow{font-family:var(--mono);font-size:22px;color:var(--accent);text-align:center;align-self:center}
   .vec{font-family:var(--mono);font-size:21px;letter-spacing:.01em;white-space:nowrap}
 
   /* ---------- model / probabilities ---------- */
@@ -1111,7 +1111,7 @@
         </div>
         <div>
           <p class="micro" style="margin:0 0 8px;text-align:center">模型</p>
-          <div class="transformer">
+          <div class="transformer" style="margin-top:12px">
             <div class="tf">Transformer</div>
             <div class="layers"><i></i><i></i><i></i></div>
             <div class="cap">N 层 · 自注意力</div>
@@ -1837,7 +1837,7 @@
       <p style="text-align:center;font-size:20px;color:var(--muted);margin:12px 0 0">唯一动作：给下一个 token 打分，采样一个。</p>
       <div class="four" style="margin-top:22px;gap:14px">
         <div class="card" style="padding:11px 14px"><div class="k">01 · 不记住上一轮</div><p style="font-size:19px;line-height:1.45">对话历史由客户端每次重发</p></div>
-        <div class="card accent" style="padding:11px 14px"><div class="k">02 · 不做真正计算</div><p style="font-size:19px;line-height:1.45">算术是记忆与模式补全</p></div>
+        <div class="card accent" style="padding:11px 14px"><div class="k">02 · 不做真正计算</div><p style="font-size:19px;line-height:1.45">算术是记忆，不是现场计算</p></div>
         <div class="card" style="padding:11px 14px"><div class="k">03 · 不直接行动</div><p style="font-size:19px;line-height:1.45">工具由外部执行</p></div>
         <div class="card" style="padding:11px 14px"><div class="k">04 · 不维护目标</div><p style="font-size:19px;line-height:1.45">计划也是生成的文本</p></div>
       </div>
@@ -1869,7 +1869,7 @@
           <div class="big" style="font-size:22px">记忆与模式补全</div>
           <ul style="padding-left:18px;margin:10px 0 0;font-size:17.5px;line-height:1.65">
             <li>算术来自训练分布，不是执行算法</li>
-            <li>看起来像计算，实则是调用学过的映射</li>
+            <li>像九九表：调用记忆，不是算法</li>
             <li>长程任务会累积误差</li>
           </ul>
           
@@ -2001,7 +2001,7 @@ obs   "16.0"</pre>
     <h2>Harness：让概率输出变成可运行的系统</h2>
     <p class="sub" style="margin-top:8px">模型会提议；harness 负责让提议合法、可执行、可检查、可停止。</p>
     <div class="content">
-      <div class="two" style="grid-template-columns:1fr 1.08fr;gap:32px;align-items:center">
+      <div class="two" style="grid-template-columns:1fr 1.08fr;gap:32px;align-items:start">
         <div>
           <p class="micro">一个受控循环</p>
           <div class="loop" style="margin-top:10px;padding-top:0;border-top:0;flex-wrap:wrap;justify-content:flex-start;gap:8px">
@@ -2238,7 +2238,7 @@ references/</pre>
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>共同的模式：生成 → 验证 → 搜索</h2>
     <div class="content">
-      <div class="flow">
+      <div class="flow" style="grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr)">
         <div class="fcard"><div class="k">生成</div><h4>LLM</h4><p>候选证明、程序、构造</p></div>
         <div class="farrow">→</div>
         <div class="fcard"><div class="k">验证</div><h4>Lean / 测试 / 数值</h4><p>给出对错、分数、反例</p></div>
@@ -2246,9 +2246,11 @@ references/</pre>
         <div class="fcard accent"><div class="k">搜索 / 学习</div><h4>best-of-N · 树 · 进化 · RL</h4><p>把信号变成下一步策略</p></div>
       </div>
       <div class="loop">↺ 回到生成器：下一轮更强</div>
-      <div class="three tight" style="margin-top:32px">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr);gap:8px;margin-top:32px">
         <div class="card"><div class="k">没有验证器</div><p>只能靠人看；无法规模化</p></div>
+        <div></div>
         <div class="card"><div class="k">没有搜索</div><p>一次生成；好答案靠运气</p></div>
+        <div></div>
         <div class="card accent"><div class="k">两者都有</div><p>概率被筛成正确，再写回模型</p></div>
       </div>
       <div class="keyline">模型提供概率，<b>验证器提供梯度</b>。</div>
@@ -2263,15 +2265,20 @@ references/</pre>
     <div class="content" style="margin-top:22px">
       <div class="two even" style="gap:22px;align-items:stretch">
         <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">DAG · Directed Acyclic Graph</div><div class="big" style="font-size:30px">有向无环图：一种结构</div>
-          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="A 与 B 指向 C，C 指向 T；B 同时支持 T，表示引理复用">
-            <g stroke="#c2410c" stroke-width="2" fill="none"><path d="M80 40 L225 80 M80 130 L225 80 L405 80 M80 130 Q240 175 405 100"/></g><g fill="#c2410c" font-size="25"><text x="190" y="72">›</text><text x="190" y="106">›</text><text x="360" y="88">›</text><text x="365" y="132">›</text></g>
-            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="15" width="70" height="50" rx="8"/><rect x="20" y="105" width="70" height="50" rx="8"/><rect x="225" y="55" width="60" height="50" rx="8"/><rect x="405" y="55" width="60" height="50" rx="8"/></g><g font-size="26" text-anchor="middle" fill="#15171c"><text x="55" y="49">A</text><text x="55" y="139">B</text><text x="255" y="89">C</text><text x="435" y="89">T</text></g>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="DAG：A 与 B 指向 C，C 指向 T，B 也支持 T">
+            <defs><marker id="dag36" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c2410c"/></marker></defs>
+            <g stroke="#c2410c" stroke-width="2.2" fill="none" marker-end="url(#dag36)"><path d="M98 53 L205 80"/><path d="M98 127 L205 100"/><path d="M279 90 L384 90"/><path d="M98 127 C190 158 320 150 384 112"/></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="22" y="28" width="76" height="50" rx="9"/><rect x="22" y="102" width="76" height="50" rx="9"/><rect x="205" y="65" width="74" height="50" rx="9"/><rect x="384" y="65" width="74" height="50" rx="9"/></g>
+            <g fill="#15171c" font-size="26" text-anchor="middle" dominant-baseline="middle"><text x="60" y="53">A</text><text x="60" y="127">B</text><text x="242" y="90">C</text><text x="421" y="90">T</text></g>
           </svg>
           <p style="font-size:23px;line-height:1.6">节点：引理、子目标<br>有向边：前提 → 结论<br>无环：避免循环论证；共享节点可复用</p>
         </div>
         <div class="card" style="padding:18px 20px"><div class="k" style="font-size:17px">MCTS · Monte Carlo Tree Search</div><div class="big" style="font-size:30px">蒙特卡洛树搜索：一种策略</div>
-          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="树从一个状态向多条候选路径展开，橙色路径示意获得更多搜索预算">
-            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 20 L90 80 L35 145 M90 80 L145 145 M240 20 L390 80 L335 145 M390 80 L445 145"/></g><path d="M240 20 L240 80 L270 145" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 145" stroke="#c2410c" stroke-width="2" fill="none"/><g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="20" r="14"/><circle cx="90" cy="80" r="13"/><circle cx="390" cy="80" r="13"/><circle cx="35" cy="145" r="9"/><circle cx="145" cy="145" r="9"/><circle cx="335" cy="145" r="9"/><circle cx="445" cy="145" r="9"/></g><g fill="#c2410c"><circle cx="240" cy="80" r="14"/><circle cx="205" cy="145" r="9"/><circle cx="270" cy="145" r="10"/></g>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="MCTS：从根状态向候选动作展开，橙色路径获得更多搜索预算">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 48 L90 100 M90 100 L35 150 M90 100 L145 150 M240 48 L390 100 M390 100 L335 150 M390 100 L445 150"/></g>
+            <path d="M240 48 L240 100 L270 150" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 100 L205 150" stroke="#c2410c" stroke-width="2" fill="none"/>
+            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="48" r="14"/><circle cx="90" cy="100" r="12"/><circle cx="390" cy="100" r="12"/><circle cx="35" cy="150" r="8"/><circle cx="145" cy="150" r="8"/><circle cx="335" cy="150" r="8"/><circle cx="445" cy="150" r="8"/></g>
+            <g fill="#c2410c"><circle cx="240" cy="100" r="14"/><circle cx="205" cy="150" r="8"/><circle cx="270" cy="150" r="10"/></g>
           </svg>
           <p style="font-size:23px;line-height:1.6">节点：状态；分支：候选动作<br>选择 → 扩展 → 模拟／评估 → 回传<br>平衡探索与利用，分配搜索预算</p>
         </div>
@@ -2290,21 +2297,21 @@ references/</pre>
       <div class="two even" style="gap:22px;align-items:stretch">
         <div class="card" style="padding:16px 20px">
           <div class="k" style="font-size:16px">01 · 维护结构：目标、依赖与已证引理</div>
-          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="已证引理 A 和 B 支撑 C，B 和 C 支撑目标 T 的无环依赖示意">
-            <defs><marker id="dag-arrow-zh" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6" fill="none" stroke="#c2410c"/></marker></defs>
-            <g stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#dag-arrow-zh)"><path d="M95 43 L222 74"/><path d="M95 126 L222 91"/><path d="M276 82 L399 82"/><path d="M95 126 Q250 175 408 106"/></g>
-            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="20" y="17" width="75" height="50" rx="8"/><rect x="20" y="102" width="75" height="50" rx="8"/><rect x="223" y="57" width="54" height="50" rx="8"/><rect x="400" y="57" width="60" height="50" rx="8"/></g>
-            <g fill="#15171c" font-size="25" text-anchor="middle" dominant-baseline="middle"><text x="57" y="43">A ✓</text><text x="57" y="128">B ✓</text><text x="250" y="83">C</text><text x="430" y="83">T</text></g>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="DAG：A 与 B 指向 C，C 指向 T，B 也支持 T">
+            <defs><marker id="dag37" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c2410c"/></marker></defs>
+            <g stroke="#c2410c" stroke-width="2.2" fill="none" marker-end="url(#dag37)"><path d="M98 53 L205 80"/><path d="M98 127 L205 100"/><path d="M279 90 L384 90"/><path d="M98 127 C190 158 320 150 384 112"/></g>
+            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="22" y="28" width="76" height="50" rx="9"/><rect x="22" y="102" width="76" height="50" rx="9"/><rect x="205" y="65" width="74" height="50" rx="9"/><rect x="384" y="65" width="74" height="50" rx="9"/></g>
+            <g fill="#15171c" font-size="26" text-anchor="middle" dominant-baseline="middle"><text x="60" y="53">A ✓</text><text x="60" y="127">B ✓</text><text x="242" y="90">C</text><text x="421" y="90">T</text></g>
           </svg>
           <p style="font-size:22px;line-height:1.55">节点存子目标；边记录依赖<br>已证引理固化，供其他节点复用</p>
         </div>
         <div class="card" style="padding:16px 20px">
           <div class="k" style="font-size:16px">02 · 演进结构：提议、检查、更新</div>
-          <svg viewBox="0 0 480 165" style="width:100%;height:auto;display:block" role="img" aria-label="从证明状态向多个动作展开，验证反馈后将更多预算分配给有希望分支的搜索树示意">
-            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 24 L90 80 L35 143 M90 80 L145 143 M240 24 L390 80 L445 143 M390 80 L335 143"/></g>
-            <path d="M240 24 L240 80 L270 143" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 80 L205 143" stroke="#c2410c" stroke-width="2" fill="none"/>
-            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="24" r="16"/><circle cx="90" cy="80" r="14"/><circle cx="390" cy="80" r="14"/><circle cx="35" cy="143" r="10"/><circle cx="145" cy="143" r="10"/><circle cx="335" cy="143" r="10"/><circle cx="445" cy="143" r="10"/></g>
-            <g fill="#c2410c"><circle cx="240" cy="80" r="15"/><circle cx="205" cy="143" r="10"/><circle cx="270" cy="143" r="11"/></g><text x="300" y="129" fill="#c2410c" font-size="22">反馈 ↺</text>
+          <svg viewBox="0 0 480 165" style="width:100%;display:block;margin:10px 0" role="img" aria-label="MCTS：从根状态向候选动作展开，橙色路径获得更多搜索预算">
+            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 48 L90 100 M90 100 L35 150 M90 100 L145 150 M240 48 L390 100 M390 100 L335 150 M390 100 L445 150"/></g>
+            <path d="M240 48 L240 100 L270 150" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 100 L205 150" stroke="#c2410c" stroke-width="2" fill="none"/>
+            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="48" r="14"/><circle cx="90" cy="100" r="12"/><circle cx="390" cy="100" r="12"/><circle cx="35" cy="150" r="8"/><circle cx="145" cy="150" r="8"/><circle cx="335" cy="150" r="8"/><circle cx="445" cy="150" r="8"/></g>
+            <g fill="#c2410c"><circle cx="240" cy="100" r="14"/><circle cx="205" cy="150" r="8"/><circle cx="270" cy="150" r="10"/></g><text x="300" y="128" fill="#c2410c" font-size="22">反馈 ↺</text>
           </svg>
           <p style="font-size:22px;line-height:1.55">选节点 → Agent 尝试 → Lean 检查<br>通过则固化；失败则修正或换路</p>
         </div>
@@ -2342,9 +2349,9 @@ references/</pre>
         <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">372</div><p style="font-size:22px">相关结果族</p></div>
         <div class="card" style="min-height:110px"><div class="big" style="font-size:52px">≈4,000</div><p style="font-size:22px">尝试的问题</p></div>
       </div>
-      <div class="two even" style="gap:18px;margin-top:18px;align-items:stretch">
-        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">公开了什么</div><p style="font-size:22px;line-height:1.55">论文与证明材料<br>部分结果的 Lean 形式化<br>10 份推理摘要与算力统计</p></div>
-        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">我怎么读这组数字</div><p style="font-size:22px;line-height:1.55">一个结果族可对应多篇手稿<br>约 3 Pro 小时 / 结果：算力等价值<br>正确性、原创性、重要性逐项审查</p></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px;align-items:stretch">
+        <div class="card" style="padding:16px 20px;grid-column:span 2"><div class="k" style="font-size:16px">公开了什么</div><p style="font-size:22px;line-height:1.55">论文与证明材料<br>部分结果的 Lean 形式化<br>10 份推理摘要与算力统计</p></div>
+        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:16px">我怎么读这组数字</div><p style="font-size:20px;line-height:1.55">结果族可含多篇手稿<br>约 3 Pro 小时：算力等价值<br>正确性、原创性、重要性待审</p></div>
       </div>
       <div class="keyline" style="margin-top:18px;font-size:26px">候选成果开始批量生成；<b>验证与理解成为关键工作</b>。</div>
       
