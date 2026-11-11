@@ -826,11 +826,11 @@
         <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:17px">天体力学研究</div><p style="font-size:24px;line-height:1.8;margin-top:6px">N 体周期解的存在性与稳定性<br>受限四体：椭圆相对平衡<br>平面四体：椭圆菱形解的不稳定性<br>广义 Lennard–Jones 系统的同形解</p><div class="keyline" style="font-size:22px;margin-top:18px">辛指标理论 · 辛几何 · 变分方法</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 41</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
   </section>
 
   <!-- ============ S1b · 全景导航 ============ -->
-  <section class="slide" data-notes="当前 41 页：简介 2，全景 3，Token 4–9，模型 10，训练与 RL 11–22，无状态 23，四短板 24，应用 25–31，AI 数学 32–40，结论 41。DAG/MCTS 定义 36，机制猜测 37，局限 38，批量结果 39，NS 40。REFLEX 整页已按要求删除。">
+  <section class="slide" data-notes="当前 42 页：简介 2，全景 3，Token 4–9，模型 10，训练与 RL 11–22，无状态 23，四短板 24，应用 25–31，AI 数学 32–41，结论 42。DAG/MCTS 定义 36，机制猜测 37，局限 38，批量结果 39，NS 40。REFLEX 整页已按要求删除。">
     <p class="eyebrow"><b>00</b> / 全景</p>
     <h2>全景：从 token 到定理</h2>
     <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
@@ -866,17 +866,17 @@
         </div>
         <div class="card mapcard" data-goto="31" role="button" tabindex="0">
           <div class="k">04 · AI × 数学</div>
-          <h3>从工具到搜索</h3>
-          <p>加速 · 时间线 · 共同模式</p>
-          <div class="range">p. 32–40</div>
-          <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 篇</span><span class="maplink" data-goto="39">NS</span></div>
+          <h3>从工具到系统</h3>
+          <p>加速 · 机制 · 定理爆破系统</p>
+          <div class="range">p. 32–41</div>
+          <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 篇</span><span class="maplink" data-goto="39">NS</span><span class="maplink" data-goto="40">爆破系统</span></div>
         </div>
-        <div class="card mapcard" data-goto="40" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="41" role="button" tabindex="0">
           <div class="k">05 · 结论</div>
           <h3>从 token 到定理</h3>
           <p>概率 · 验证 · 方向</p>
-          <div class="range">p. 41</div>
-          <div class="maplinks"><span class="maplink" data-goto="40">结尾</span></div>
+          <div class="range">p. 42</div>
+          <div class="maplinks"><span class="maplink" data-goto="41">结尾</span></div>
         </div>
       </div>
       
@@ -2385,6 +2385,31 @@ references/</pre>
     <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">39 / 41</span></div>
   </section>
 
+  <!-- ============ S47 · 定理爆破系统 ============ -->
+  <section class="slide" data-notes="把前面收束成系统视角：模型不是整台机器，只是 CPU。定理爆破系统可以分成五层：工作负载是定理与证明图；CPU 是 LLM，负责提议下一步；调度是 loop 与 harness，负责并发、预算、重试、检查点与停止；验证是 Lean 与工具，负责对错与计算；状态是 context、memory 与日志，保存图、预算和运行轨迹。数学定义问题与正确性标准；系统工程决定吞吐、成本与长时稳定。单次 token 预测像一条微指令，系统把大量候选组织成可验证的证明。不要说成模型单独解定理。">
+    <p class="eyebrow"><b>05</b> / AI × math · 系统视角</p>
+    <h2>定理爆破系统：LLM 是 CPU</h2>
+    <p class="sub" style="margin-top:8px">问题不只是一道数学题，而是一台机器的吞吐与稳定性。</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two" style="grid-template-columns:1.2fr .8fr;gap:24px;align-items:stretch">
+        <div class="stack" style="gap:8px">
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:66px;margin:0;font-size:12px">工作负载</span><b style="font-size:20px">定理 · 证明图</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">解什么</span></div>
+          <div class="card accent" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:66px;margin:0;font-size:12px">CPU</span><b style="font-size:20px">LLM</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">提议下一步</span></div>
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:66px;margin:0;font-size:12px">调度</span><b style="font-size:20px">Loop + Harness</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">并发 · 重试 · 检查点 · 停止</span></div>
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:66px;margin:0;font-size:12px">验证</span><b style="font-size:20px">Lean / 工具</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">对错与计算</span></div>
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:66px;margin:0;font-size:12px">状态</span><b style="font-size:20px">Context + Memory</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">图 · 日志 · 预算</span></div>
+        </div>
+        <div class="stack" style="gap:10px">
+          <div class="card" style="padding:12px 16px"><div class="k">01 · 不只是数学</div><p style="font-size:18px;line-height:1.5">拆解、调度、状态、验证都是工程</p></div>
+          <div class="card" style="padding:12px 16px"><div class="k">02 · 吞吐</div><p style="font-size:18px;line-height:1.5">并发、缓存、回收、成本</p></div>
+          <div class="card accent" style="padding:12px 16px"><div class="k">03 · 稳定</div><p style="font-size:18px;line-height:1.5">长时运行、可恢复、可审计</p></div>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:26px;margin-top:22px">模型是 CPU；<b>定理爆破靠整台机器</b>。</div>
+    </div>
+    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">41 / 53</span></div>
+  </section>
+
   <!-- ============ S53 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <p class="eyebrow"><b>06</b> / 结论</p>
@@ -2404,7 +2429,7 @@ references/</pre>
       </div>
       <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">41 / 41</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">42 / 42</span></div>
   </section>
 
 </div>

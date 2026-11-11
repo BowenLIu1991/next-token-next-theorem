@@ -826,11 +826,11 @@
         <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:17px">Celestial mechanics research</div><p style="font-size:24px;line-height:1.8;margin-top:6px">Periodic N-body: existence &amp; stability<br>Restricted four-body elliptic equilibria<br>Linear instability of elliptic rhombi<br>Homographic Lennard–Jones solutions</p><div class="keyline" style="font-size:22px;margin-top:18px">Symplectic indices · Variational methods</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 41</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
   </section>
 
   <!-- ============ S1b · Overview map ============ -->
-  <section class="slide" data-notes="41 pages. Biography 2, overview 3, Token 4–9, model 10, training and rewards 11–22, statelessness 23, limitations 24, applications 25–31, AI math 32–40, closing 41. DAG/MCTS definitions 36, hypothesis 37, maturity 38, batch release 39, NS 40. REFLEX was removed at the speaker's request.">
+  <section class="slide" data-notes="42 pages. Biography 2, overview 3, Token 4–9, model 10, training and rewards 11–22, statelessness 23, limitations 24, applications 25–31, AI math 32–41, closing 42. DAG/MCTS definitions 36, hypothesis 37, maturity 38, batch release 39, NS 40. REFLEX was removed at the speaker's request.">
     <p class="eyebrow"><b>00</b> / overview</p>
     <h2>Overview: from token to theorem</h2>
     <p class="sub" style="margin-top:8px">Click a section card to jump; click a tag for a key page.</p>
@@ -866,17 +866,17 @@
         </div>
         <div class="card mapcard" data-goto="31" role="button" tabindex="0">
           <div class="k">04 · AI × math</div>
-          <h3>From tools to search</h3>
-          <p>Acceleration · timeline · pattern</p>
-          <div class="range">p. 32–40</div>
-          <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 papers</span><span class="maplink" data-goto="39">NS</span></div>
+          <h3>From tools to systems</h3>
+          <p>Acceleration · mechanisms · theorem cracking</p>
+          <div class="range">p. 32–41</div>
+          <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 papers</span><span class="maplink" data-goto="39">NS</span><span class="maplink" data-goto="40">System</span></div>
         </div>
-        <div class="card mapcard" data-goto="40" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="41" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>From token to theorem</h3>
           <p>Probability · verification · direction</p>
-          <div class="range">p. 41</div>
-          <div class="maplinks"><span class="maplink" data-goto="40">Close</span></div>
+          <div class="range">p. 42</div>
+          <div class="maplinks"><span class="maplink" data-goto="41">Close</span></div>
         </div>
       </div>
       
@@ -2387,6 +2387,31 @@ references/</pre>
     <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">39 / 41</span></div>
   </section>
 
+  <!-- ============ S47 · Theorem-cracking system ============ -->
+  <section class="slide" data-notes="A system view: the model is not the whole machine; it is the CPU. Five layers: workload is the theorem and proof graph; CPU is the LLM proposing the next step; scheduler is the loop and harness managing concurrency, budget, retries, checkpoints and stopping; verifier is Lean and tools checking correctness and doing computation; state is context, memory and logs holding the graph, budget and trajectory. Mathematics defines the problem and correctness; systems engineering determines throughput, cost and long-run stability. A token prediction is like a micro-instruction; the system organizes many candidates into a checkable proof. Do not describe it as the model solving the theorem alone.">
+    <p class="eyebrow"><b>05</b> / AI × math · systems view</p>
+    <h2>Theorem-cracking system: LLM as CPU</h2>
+    <p class="sub" style="margin-top:8px">Not just a mathematics problem; a machine for throughput and stability.</p>
+    <div class="content" style="margin-top:22px">
+      <div class="two" style="grid-template-columns:1.2fr .8fr;gap:24px;align-items:stretch">
+        <div class="stack" style="gap:8px">
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:76px;margin:0;font-size:12px">Workload</span><b style="font-size:20px">Theorem · proof graph</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">what to solve</span></div>
+          <div class="card accent" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:76px;margin:0;font-size:12px">CPU</span><b style="font-size:20px">LLM</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">propose next</span></div>
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:76px;margin:0;font-size:12px">Scheduler</span><b style="font-size:20px">Loop + Harness</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">concurrency · retries · checkpoints · stop</span></div>
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:76px;margin:0;font-size:12px">Verifier</span><b style="font-size:20px">Lean / tools</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">correctness · compute</span></div>
+          <div class="card" style="padding:10px 14px;display:flex;align-items:baseline;gap:12px"><span class="k" style="width:76px;margin:0;font-size:12px">State</span><b style="font-size:20px">Context + Memory</b><span style="margin-left:auto;font-size:14px;color:var(--muted)">graph · logs · budget</span></div>
+        </div>
+        <div class="stack" style="gap:10px">
+          <div class="card" style="padding:12px 16px"><div class="k">01 · Not only mathematics</div><p style="font-size:18px;line-height:1.5">Decomposition, scheduling, state, verification</p></div>
+          <div class="card" style="padding:12px 16px"><div class="k">02 · Throughput</div><p style="font-size:18px;line-height:1.5">Concurrency, caching, reclamation, cost</p></div>
+          <div class="card accent" style="padding:12px 16px"><div class="k">03 · Stability</div><p style="font-size:18px;line-height:1.5">Long runs, recovery, auditability</p></div>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:26px;margin-top:22px">The model is the CPU; <b>theorem cracking needs the whole machine</b>.</div>
+    </div>
+    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">41 / 53</span></div>
+  </section>
+
   <!-- ============ S53 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <p class="eyebrow"><b>06</b> / conclusion</p>
@@ -2406,7 +2431,7 @@ references/</pre>
       </div>
       <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">41 / 41</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">42 / 42</span></div>
   </section>
 
 </div>
