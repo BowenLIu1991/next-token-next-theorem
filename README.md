@@ -36,7 +36,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **33 页**，16:9，1280 × 720。
+- **32 页**，16:9，1280 × 720。
 - 页底解释性小字已删除；正文只保留必要短标签与页码，减少视觉噪声。
 - 字体统一为两类：Sans 用于标题、正文与卡片；Mono 用于 token、ID、数字、代码、eyebrow 与页码。字号收为 9 级：72 / 44 / 32 / 24 / 22 / 18 / 16 / 14 / 12 px。
 - 第 2 页为天体力学研究简介，现单位匿名为“某美国电商公司”；第 3 页为全景导航。
@@ -45,8 +45,8 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - 训练 9–15：预训练/后训练、RL 循环、游戏与环境反馈（合并）、GRPO 公式与组内比较、数学/代码反馈优势与迁移（合并）、四类任务、环境/反馈/参数更新总结。旧“正确与优秀”页删除。
 - 转折 17：“模型只会预测下一个 token”合并旧“四个短板”，收束为状态、计算、可靠性三类系统能力。
 - 系统 16–23：Context window、Context 与 Memory、计算/记忆、Tool calling、Harness、系统图、Skill 与长时间运行（合并）。
-- AI × 数学 24–32：加速时间线（合并）、公开表述、生成→验证→搜索（含 DAG/MCTS）、证明图判断与瓶颈（合并）、OpenAI 批量结果、NS、定理爆破系统、出错概率、六个系统界面。
-- 结论 33：“从下一个 token 到下一个定理”。
+- AI × 数学 24–31：加速时间线（合并）、公开表述、生成→验证→搜索与证明图（合并）、OpenAI 批量结果、NS、定理爆破系统、出错概率、六个系统界面。
+- 结论 32：“从下一个 token 到下一个定理”。
 - 主讲与备份模式分别按当前顺序自动生成页码。
 - 原训练细节保存为 **12 页备份**，不计入主讲或主讲 PDF；用 `?appendix=1` 打开，支持正常翻页与备注。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
@@ -98,7 +98,7 @@ python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-toke
 python3 assets/demos/render_pdf.py --html docs/index.html --appendix --out /path/to/training-appendix.pdf
 ```
 
-脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 33 页的满版 PDF。依赖：
+脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 32 页的满版 PDF。依赖：
 
 ```bash
 python3 -m pip install pillow pypdf
@@ -120,8 +120,8 @@ python3 -m pip install pillow pypdf
 │   ├── from-next-token-to-next-theorem-zh.pdf   # 中文
 │   └── .nojekyll
 ├── slides/
-│   ├── en.html                   # English source (33 main pages)
-│   ├── index.html                # 中文源文件（33 页主讲，自包含）
+│   ├── en.html                   # English source (32 main pages)
+│   ├── index.html                # 中文源文件（32 页主讲，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -199,8 +199,8 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 
 ## 状态
 
-- [x] 33 页 HTML 幻灯片（English + 中文）
-- [x] PDF 导出（两版各 33 页）
+- [x] 32 页 HTML 幻灯片（English + 中文）
+- [x] PDF 导出（两版各 32 页）
 - [x] GitHub Pages 目录（`docs/`，英文主站）
 - [x] 讲稿、提纲、文献、Q&A
 - [x] tokenizer 实测数据

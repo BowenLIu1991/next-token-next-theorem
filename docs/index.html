@@ -52,6 +52,10 @@
     background:linear-gradient(90deg,var(--accent) 0 18%,transparent 18%);
     opacity:.85;
   }
+  .sectionbar{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .sectionbar b{color:var(--accent);font-weight:600}
+  .sectionbar .name{font-family:var(--sans);font-size:var(--fs-small);font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink)}
+  .sectionbar .desc{font-family:var(--sans);font-size:var(--fs-micro);letter-spacing:0;text-transform:none;color:var(--muted)}
   .eyebrow{
     font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;
     color:var(--muted);margin:0 0 14px;
@@ -243,7 +247,7 @@
     font-family:var(--mono);font-size:var(--fs-micro);color:var(--muted)}
   .calc b{color:var(--ink);font-weight:600;font-size:var(--fs-small);margin-left:4px}
   .calc span{color:var(--accent);margin:0 2px}
-  .ruler{position:relative;height:222px;margin-top:16px}
+  .ruler{position:relative;height:188px;margin-top:16px}
   .ruler .axis{position:absolute;left:8px;top:2%;bottom:2%;width:1px;background:var(--line)}
   .ruler .tick{position:absolute;left:0;right:0;transform:translateY(-50%)}
   .ruler .tick::before{content:"";position:absolute;left:8px;top:50%;width:12px;height:1px;background:var(--ink)}
@@ -815,7 +819,7 @@
       <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
-    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 33</span></div>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 32</span></div>
   </section>
 
   <!-- ============ BIO · About me ============ -->
@@ -835,11 +839,11 @@
         <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:var(--fs-small)">Celestial mechanics research</div><p style="font-size:var(--fs-key);line-height:1.8;margin-top:6px">Periodic N-body: existence &amp; stability<br>Restricted four-body elliptic equilibria<br>Linear instability of elliptic rhombi<br>Homographic Lennard–Jones solutions</p><div class="keyline" style="margin-top:18px">Symplectic indices · Variational methods</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">02 / 33</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">02 / 32</span></div>
   </section>
 
   <!-- ============ S1b · Overview map ============ -->
-  <section class="slide" data-notes="33 pages: cover 1, bio 2, overview 3, Token 4–7, model 8, training 9–15, systems 16–23, AI math 24–32, conclusion 33. The six sections form a chain: token → model → training → prediction only → systems → mathematics.">
+  <section class="slide" data-notes="32 pages: cover 1, bio 2, overview 3, Token 4–7, model 8, training 9–15, systems 16–23, AI math 24–31, conclusion 32. The six sections form a chain: token → model → training → prediction only → systems → mathematics.">
     <p class="eyebrow"><b>00</b> / overview</p>
     <h2>Overview: from token to theorem</h2>
     <p class="sub" style="margin-top:8px">Click a section card to jump; click a chip for a key page.</p>
@@ -877,24 +881,24 @@
           <div class="k">04 · AI × math</div>
           <h3>From tools to systems</h3>
           <p>Acceleration · proof graph · theorem cracking</p>
-          <div class="range">p. 24–32</div>
-          <div class="maplinks"><span class="maplink" data-goto="25">DAG/MCTS</span><span class="maplink" data-goto="27">722 papers</span><span class="maplink" data-goto="28">NS</span><span class="maplink" data-goto="29">Cracking system</span></div>
+          <div class="range">p. 24–31</div>
+          <div class="maplinks"><span class="maplink" data-goto="25">DAG/MCTS</span><span class="maplink" data-goto="26">722 papers</span><span class="maplink" data-goto="27">NS</span><span class="maplink" data-goto="28">Cracking system</span></div>
         </div>
-        <div class="card mapcard" data-goto="32" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="31" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>From token to theorem</h3>
           <p>Probability · verification · direction</p>
-          <div class="range">p. 33</div>
-          <div class="maplinks"><span class="maplink" data-goto="32">Close</span></div>
+          <div class="range">p. 32</div>
+          <div class="maplinks"><span class="maplink" data-goto="31">Close</span></div>
         </div>
       </div>
     </div>
-    <div class="footer"><span>overview · six sections</span><span class="pnum">03 / 33</span></div>
+    <div class="footer"><span>overview · six sections</span><span class="pnum">03 / 32</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
   <section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
-    <p class="eyebrow"><b>00</b> / opening</p>
+    <div class="sectionbar"><b>00</b><span class="name">Opening &amp; Token</span><span class="desc">text → token → integers</span></div>
     <h2>What the model sees: ten integers</h2>
     <div class="content">
       <div class="examples">
@@ -940,7 +944,7 @@
         <div class="q"><span class="n">03</span>How do we put it to work?</div>
       </div>
     </div>
-    <div class="footer"><span>token · model · usage</span><span class="pnum">04 / 33</span></div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">04 / 32</span></div>
   </section>
 
   <!-- ============ S3 · 切分 ============ -->
@@ -985,7 +989,7 @@
       
       <div class="keyline">Subwords are an engineering compromise between <b>sequence length</b> and <b>vocabulary size</b>.</div>
     </div>
-    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">05 / 33</span></div>
+    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">05 / 32</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
@@ -994,8 +998,8 @@
     <h2>Tokens: the unit of model and bill</h2>
     <p class="sub" style="margin-top:8px">The model computes in tokens; the bill does too.</p>
     <div class="content">
-      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:center">
-        <div>
+      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:stretch">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%">
           <img class="shot" src="assets/figures/deepseek_usage.png" alt="DeepSeek usage: 285 million tokens, 2599 requests, 27.18 RMB">
           <div class="ratio2" style="margin-top:16px">
             <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">per English character</div></div>
@@ -1012,7 +1016,7 @@
       </div>
       <div class="keyline">A token is the smallest unit of both the model and the bill.</div>
     </div>
-    <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 33</span></div>
+    <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 32</span></div>
   </section>
 
 <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，后面的 embedding 就按它取行。词表大小直接决定输入输出两层参数量。">
@@ -1053,7 +1057,7 @@
       <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">Vocabulary row 134437 → [0.12, −0.44, 0.08, …] · 4,096 dims</div>
       <div class="keyline">ID is the <b>row number</b>; the vector is the <b>representation</b>.</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">07 / 33</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">07 / 32</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
@@ -1063,7 +1067,7 @@
 
   <!-- ============ S8 · 输入到概率分布 ============ -->
   <section class="slide" data-notes="模型的任务只有一句话：给定输入，输出词表上每个 token 的概率。数学上先算 logits z，再 softmax 成概率；所有概率加起来等于 1。中间是 Transformer，可能是各种变体。不要把它想成数据库，它在算分布。">
-    <p class="eyebrow"><b>02</b> / model</p>
+    <div class="sectionbar"><b>01</b><span class="name">Model</span><span class="desc">one function, one distribution</span></div>
     <h2>What the model does: input → probability distribution</h2>
     <div class="content">
       <div class="modelrow">
@@ -1122,12 +1126,12 @@
       </div>
       <div class="keyline">A scorer: it gives every token in the vocabulary a <b>score</b>, then turns scores into <b>probabilities</b>.</div>
     </div>
-    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 33</span></div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 32</span></div>
   </section>
 
   <!-- ============ S12 · 从预测到解题 ============ -->
   <section class="slide" data-notes="Organize training into two stages: pretraining and post-training. Pretraining learns language, knowledge and regularities from large-scale text, code and other data, producing a base model. Post-training further shapes task behavior. This talk introduces two common components of post-training: SFT learns from demonstrations; RL uses rewards to improve a policy. This is a teaching overview, not an exhaustive or mandatory recipe: post-training may include other methods or iterative stages. SFT and RL belong within post-training rather than being peers of pretraining. We now focus on RL: how reward guides learning and which tasks provide useful feedback. Detailed training material remains available at ?appendix=1.">
-    <p class="eyebrow"><b>03</b> / training</p>
+    <div class="sectionbar"><b>02</b><span class="name">Training &amp; problem solving</span><span class="desc">feedback, reward, updates</span></div>
     <h2>Training: pretraining and post-training</h2>
     <div class="content">
       <div class="flow" style="grid-template-columns:.85fr 38px 1.15fr">
@@ -1157,7 +1161,7 @@
       </div>
       <div class="keyline">Our focus is <b>RL</b>: improving <b>problem-solving</b> through reward.</div>
     </div>
-    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">09 / 33</span></div>
+    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">09 / 32</span></div>
   </section>
 
   <template id="training-details">
@@ -1538,7 +1542,7 @@
       <div class="keyline">RL uses <b>outcome feedback</b> to learn <b>how to choose actions</b>.</div>
       
     </div>
-    <div class="footer"><span>reinforcement learning · reward · policy</span><span class="pnum">10 / 33</span></div>
+    <div class="footer"><span>reinforcement learning · reward · policy</span><span class="pnum">10 / 32</span></div>
   </section>
 
   <!-- ============ S14 · Games made RL visible ============ -->
@@ -1560,7 +1564,7 @@
       </div>
       <div class="keyline">A game engine supplies both environment and feedback; strategy grows from repeated attempts.</div>
     </div>
-    <div class="footer"><span>games · delayed reward · repeatable environments</span><span class="pnum">11 / 33</span></div>
+    <div class="footer"><span>games · delayed reward · repeatable environments</span><span class="pnum">11 / 32</span></div>
   </section>
 
   <!-- ============ S15 · Why games work ============ -->
@@ -1588,7 +1592,7 @@
               <mo>]</mo>
             </math>
           </div>
-          <div class="mathblock" style="font-size:var(--fs-label);margin-top:4px">
+          <div class="mathblock" style="font-size:var(--fs-label);margin-top:10px">
             <math display="block">
               <msub><mi>L</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>=</mo>
               <mtext>min</mtext><mo>[</mo>
@@ -1601,7 +1605,7 @@
               <mo>]</mo><mo>−</mo><mi>β</mi><msub><mi>D</mi><mtext>KL</mtext></msub>
             </math>
           </div>
-          <div class="k" style="margin-top:12px">Group advantage</div>
+          <div class="k" style="margin-top:16px">Group advantage</div>
           <div class="mathblock" style="font-size:var(--fs-small);margin-top:2px">
             <math display="block">
               <msub><mover><mi>A</mi><mo>^</mo></mover><mi>i</mi></msub><mo>=</mo>
@@ -1611,7 +1615,7 @@
               </mfrac>
             </math>
           </div>
-          <p class="micro" style="margin:8px 0 0">ρ is the new-to-old policy ratio; clip and KL bound the update.</p>
+          <p class="micro" style="margin:10px 0 0">ρ is the new-to-old policy ratio; clip and KL bound the update.</p>
         </div>
         <div>
           <div class="card" style="padding:12px 15px">
@@ -1633,7 +1637,7 @@
       </div>
       <div class="keyline">Within one question, let the <b>better answer win</b>.</div>
     </div>
-    <div class="footer"><span>GRPO · objective · group-relative advantage</span><span class="pnum">12 / 33</span></div>
+    <div class="footer"><span>GRPO · objective · group-relative advantage</span><span class="pnum">12 / 32</span></div>
   </section>
 
 
@@ -1658,7 +1662,7 @@
       </div>
       <div class="keyline">Cheap feedback enables scale; shared skills enable transfer.</div>
     </div>
-    <div class="footer"><span>feedback · transfer · shared reasoning</span><span class="pnum">13 / 33</span></div>
+    <div class="footer"><span>feedback · transfer · shared reasoning</span><span class="pnum">13 / 32</span></div>
   </section>
 
   <!-- ============ S17 · Shared reasoning skills ============ -->
@@ -1693,7 +1697,7 @@
       <div class="keyline">Checkable goals turn more compute into <b>systematic search and candidate filtering</b>.</div>
       
     </div>
-    <div class="footer"><span>code · math · product design · trading</span><span class="pnum">14 / 33</span></div>
+    <div class="footer"><span>code · math · product design · trading</span><span class="pnum">14 / 32</span></div>
   </section>
 
   <!-- ============ S23 · Correctness and quality ============ -->
@@ -1719,12 +1723,12 @@
       </div>
       <div class="keyline">The environment supplies feedback; <b>loss turns it into parameter updates</b>.</div>
     </div>
-    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">15 / 33</span></div>
+    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">15 / 32</span></div>
   </section>
 
   <!-- ============ S11 · Prediction only ============ -->
   <section class="slide" data-notes="This is the pivot. After training, the model only does next-token prediction: given context, it returns a distribution over the next token and samples one. Memory is not internal: the client resends history. Computation is not program execution: arithmetic and symbolic derivation are learned recall and pattern completion; exact results belong to code or a calculator. Action and goals are external too: tools execute outside; plans are generated text. Four limits map to three system capabilities: state, computation, reliability; probabilistic output needs verification, stopping and rollback.">
-    <p class="eyebrow"><b>03</b> / from model to system</p>
+    <div class="sectionbar"><b>03</b><span class="name">Systems &amp; engineering</span><span class="desc">state, computation, bounds</span></div>
     <h2>The model only predicts the next token</h2>
     <p class="sub" style="margin-top:8px">Memory, computation, action and goals live outside that action.</p>
     <div class="content" style="margin-top:16px">
@@ -1743,7 +1747,7 @@
       <div class="scaleband" style="margin-top:16px">Four limits → three system capabilities: <b>state, computation, reliability</b>; probabilistic output needs verification, stopping, rollback.</div>
       <div class="keyline">The model gives only the next token; <b>everything else comes from the system</b>.</div>
     </div>
-    <div class="footer"><span>next-token prediction · four limits · three capabilities</span><span class="pnum">16 / 33</span></div>
+    <div class="footer"><span>next-token prediction · four limits · three capabilities</span><span class="pnum">16 / 32</span></div>
   </section>
 
 
@@ -1779,12 +1783,13 @@
       </div>
       <div class="keyline">Memory owns state, tool calls compute, harness owns bounds: together they form an <b>agent system</b>.</div>
     </div>
-    <div class="footer"><span>model · state · execution framework</span><span class="pnum">17 / 33</span></div>
+    <div class="footer"><span>model · state · execution framework</span><span class="pnum">17 / 32</span></div>
   </section>
 
 <section class="slide" data-notes="最早 GPT-3 只有 2k token，ChatGPT 是 4k；后来 32k、128k，再到 1M。窗口变长带来三个问题：贵、慢、稀释。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>The inflation of the context window</h2>
+    <p class="sub" style="margin-top:8px">Context is every token the model can see in this call; the window is its limit.</p>
     <div class="content">
       <div class="ctxbars">
         <div class="cb"><span class="y">2020</span><div class="track"><div class="fill" style="width:12%"></div></div><span class="n">2k</span></div>
@@ -1800,7 +1805,7 @@
       </div>
       <div class="keyline">A longer window raises the ceiling; relevance decides what lands.</div>
     </div>
-    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">18 / 33</span></div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">18 / 32</span></div>
   </section>
 
   <!-- ============ S30 · Context and memory ============ -->
@@ -1850,7 +1855,7 @@
       </div>
       <div class="keyline">Capacity ≠ effective use; Context decides <b>what goes in</b>, Memory decides <b>what stays</b>.</div>
     </div>
-    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">19 / 33</span></div>
+    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">19 / 32</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -1860,7 +1865,7 @@
     <h2>Calculation, or recall?</h2>
     <p class="sub" style="margin-top:8px">The model predicts the next token; it does not execute multiplication.</p>
     <div class="content">
-      <div class="two" style="grid-template-columns:1.05fr .95fr;gap:26px;align-items:center">
+      <div class="two" style="grid-template-columns:1.05fr .95fr;gap:26px;align-items:stretch">
         <div class="card" style="padding:22px 24px">
           <div class="k">13 × 15</div>
           <div style="font-family:var(--mono);font-size:var(--fs-display);line-height:1.5">
@@ -1871,7 +1876,7 @@
           </div>
           <div class="scaleband" style="margin-top:16px">3 × 5 = 15 is recall; decomposition and addition are still token prediction.</div>
         </div>
-        <div class="stack" style="gap:12px">
+        <div class="stack" style="gap:12px;height:100%;justify-content:space-between">
           <div class="card" style="padding:14px 16px"><div class="k">01 · Times table</div><p>3 × 5 = 15 is memorized, not computed.</p></div>
           <div class="card" style="padding:14px 16px"><div class="k">02 · Decomposition</div><p>13 × 15 can be broken into known pieces; decomposing is not arithmetic.</p></div>
           <div class="card accent" style="padding:14px 16px"><div class="k">03 · Sampling</div><p>When data is sparse, the distribution is flat; sampling can pick a wrong answer.</p></div>
@@ -1879,14 +1884,14 @@
       </div>
       <div class="keyline">Deterministic problems need deterministic results; <b>exact computation belongs to a program</b>.</div>
     </div>
-    <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">20 / 33</span></div>
+    <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">20 / 32</span></div>
   </section>
 
 <section class="slide" data-notes="Tool calling is a protocol, not the model executing code. First define the signature: name, arguments, return. The model sees the tool description, emits a tool_call, the runtime validates arguments, executes in a sandbox, and returns stdout / stderr as an observation in the context. In the example, Python computes 4**1.5; the model only has to write the right call. Tool output is still untrusted input: limit permissions, set timeouts, keep logs. The tool description is itself context; clear names and arguments change call quality. Repeated operations should be written as a function and called once, not regenerated token by token; this is another reason for tool calling.">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Tool calling: let a program do the arithmetic</h2>
     <div class="content">
-      <div class="two" style="gap:34px">
+      <div class="two" style="gap:34px;align-items:stretch">
         <div class="panel" style="padding:18px 20px">
           <div class="sentence" style="font-size:var(--fs-micro);margin-bottom:7px;color:#8b8f98">tool schema</div>
           <pre style="margin:0;font-family:var(--mono);font-size:var(--fs-micro);line-height:1.65;color:#cfd2d9;white-space:pre-wrap">{
@@ -1911,7 +1916,7 @@ obs   "16.0"</pre>
       <div class="scaleband" style="margin-top:18px">Tool output is still <b>untrusted input</b>: validate arguments, limit permissions, set timeouts, keep logs.</div>
       <div class="keyline">The model proposes, the program executes; <b>repeated work becomes a function, not tokens</b>.</div>
     </div>
-    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">21 / 33</span></div>
+    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">21 / 32</span></div>
   </section>
 
   <!-- ============ S34b · Harness ============ -->
@@ -1920,8 +1925,8 @@ obs   "16.0"</pre>
     <h2>Harness: bound the tools, recover the run</h2>
     <p class="sub" style="margin-top:8px">Tools execute in an environment; probabilistic output will eventually fail on long runs.</p>
     <div class="content">
-      <div class="two" style="grid-template-columns:1fr 1.08fr;gap:32px;align-items:start">
-        <div>
+      <div class="two" style="grid-template-columns:1fr 1.08fr;gap:32px;align-items:stretch">
+        <div style="height:100%;display:flex;flex-direction:column">
           <p class="micro">A controlled loop</p>
           <div class="loop" style="margin-top:10px;padding-top:0;border-top:0;flex-wrap:wrap;justify-content:flex-start;gap:8px">
             <span class="step" style="padding:8px 12px;font-size:var(--fs-label)">Propose</span><span class="arr">→</span>
@@ -1935,7 +1940,7 @@ obs   "16.0"</pre>
             <div class="k">Two problems</div>
             <p style="font-size:var(--fs-small);line-height:1.6"><b>Tools must not cross bounds</b>: no deleting files, no public uploads.<br><b>Long runs must roll back</b>: checkpoints, snapshots, hard stops.</p>
           </div>
-          <div class="scaleband" style="margin-top:14px;font-size:var(--fs-label)">It does not add intelligence; it makes errors <b>visible, stoppable, reproducible</b>.</div>
+          <div class="scaleband" style="margin-top:auto;padding-top:14px;font-size:var(--fs-label)">It does not add intelligence; it makes errors <b>visible, stoppable, reproducible</b>.</div>
         </div>
                 <div class="stack" style="gap:6px">
           <div class="card" style="padding:8px 14px"><div class="k" style="margin-bottom:2px">01 Tool registration &amp; validation</div><p style="margin:0;font-size:var(--fs-label)">Check schemas and types; block illegal proposals immediately</p></div>
@@ -1948,7 +1953,7 @@ obs   "16.0"</pre>
       </div>
       <div class="keyline" style="margin-top:14px">The model provides probability; the harness provides <b>bounds and a way back</b>.</div>
     </div>
-    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">22 / 33</span></div>
+    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">22 / 32</span></div>
   </section>
 
   <!-- ============ S40 · 系统图 ============ -->
@@ -1970,14 +1975,14 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="scaleband" style="margin-top:16px"><b>Skill package</b>: SKILL.md trigger and steps · scripts deterministic tools · references domain docs · assets templates</div>
       <div class="keyline">Loop is runtime; skill is compiled experience; memory is state; harness is boundary.</div>
     </div>
-    <div class="footer"><span>loop · trajectory · compiled procedure</span><span class="pnum">23 / 33</span></div>
+    <div class="footer"><span>loop · trajectory · compiled procedure</span><span class="pnum">23 / 32</span></div>
   </section>
 
   <!-- ============ S36c · Long-running ============ -->
   
   <!-- ============ S41 · 加速 ============ -->
   <section class="slide" data-notes="Timeline: FunSearch (late 2023) put an LLM inside evolutionary search; AlphaGeometry (early 2024) solved geometry; AlphaProof (July 2024) won IMO silver; o1 (September 2024) productized test-time compute; R1 (early 2025) used verifiable rewards for RL; AlphaEvolve (May 2025) improved matrix multiplication; IMO 2025 reached gold-level 35/42; 2026 OpenAI reported a unit-distance counterexample, NS-related claims and 372 result families. These are public claims, not all independently verified. Each jump is generator + verifier + search.">
-    <p class="eyebrow"><b>05</b> / AI × math</p>
+    <div class="sectionbar"><b>04</b><span class="name">AI × math</span><span class="desc">generate, verify, search</span></div>
     <h2>Acceleration: three steps</h2>
     <p class="sub" style="margin-top:8px">Tools → reasoning → scale; each jump is generator + verifier + search.</p>
     <div class="content">
@@ -1992,7 +1997,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
           <div class="ph">2024–25</div>
           <h3>Reasoning: RL + test-time compute</h3>
           <div class="ms"><div class="d">2024.09</div><b>OpenAI o1</b><span>RL learns to think; test-time compute</span></div>
-          <div class="ms"><div class="d">2025.01</div><b>DeepSeek-R1</b><span>RLVR; reasoning behavior emerges</span></div>
+          <div class="ms"><div class="d">2025.01 <span style="color:var(--accent)">· “DeepSeek moment”</span></div><b>DeepSeek-R1</b><span>RLVR; reasoning behavior emerges</span></div>
         </div>
         <div class="phase">
           <div class="ph">2025–26</div>
@@ -2009,7 +2014,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </div>
       <div class="keyline">Every jump is <b>generator + verifier + search</b>.</div>
     </div>
-    <div class="footer"><span>three steps · 2023–2026</span><span class="pnum">24 / 33</span></div>
+    <div class="footer"><span>three steps · 2023–2026</span><span class="pnum">24 / 32</span></div>
   </section>
 
   <!-- ============ S42 · AI math 时间线 ============ -->
@@ -2035,48 +2040,51 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </table>
       <div class="keyline">The keywords change; the underlying move stays: <b>propose, verify, search again</b>.</div>
     </div>
-    <div class="footer"><span>public claims · public sources</span><span class="pnum">25 / 33</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">25 / 32</span></div>
   </section>
 
   <!-- ============ S44 · 共同模式 ============ -->
     <!-- ============ S44 · Generate verify search ============ -->
-  <section class="slide" data-notes="The generator proposes candidates; the verifier gives a signal; search decides the next step. A DAG is structure: nodes are lemmas or subgoals, edges are premise to conclusion, it is acyclic, and proved lemmas are reused. MCTS is policy: nodes are states, branches are candidate actions; repeatedly select, expand, evaluate and backpropagate, balancing exploration and exploitation. The two are not competing routes: DAG owns dependencies, MCTS owns what to try next.">
+    <!-- ============ S44 · Generate verify search and proof graph ============ -->
+  <section class="slide" data-notes="The generator proposes, the verifier signals, search decides the next step. A DAG is structure: nodes are lemmas or subgoals, edges are premise to conclusion, acyclic, and proved lemmas are reused; the agent expands, Lean checks. MCTS is policy: nodes are states, branches are candidate actions; select, expand, evaluate, backpropagate, concentrating budget on promising branches. The mechanism is the speaker's hypothesis, not an OpenAI disclosure. Bottlenecks sit in both system and model: decomposition, shared state, concurrency and budget; the key step, useful lemmas, and a strict proof.">
     <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>Generate → verify → search</h2>
-    <p class="sub" style="margin-top:8px">The generator proposes; the verifier signals; DAG owns dependencies, MCTS owns what to try next.</p>
+    <h2>Generate → verify → search: how proof graphs evolve</h2>
+    <p class="sub" style="margin-top:8px">The mechanism is a hypothesis; the bottlenecks are real.</p>
     <div class="content">
       <div class="chain" style="justify-content:center">
         <span class="chip2">Generate · LLM</span><span class="arr">→</span>
         <span class="chip2">Verify · Lean / tests / numerics</span><span class="arr">→</span>
         <span class="chip2 last">Search · best-of-N / tree / evolution</span><span class="arr">↺</span>
       </div>
-      <p class="micro" style="text-align:center;margin-top:10px">No verifier, no scale; no search, only luck.</p>
       <div class="two even" style="gap:18px;margin-top:18px;align-items:stretch">
         <div class="card" style="padding:14px 16px">
-          <div class="k">DAG · structure</div>
-          <svg viewBox="0 0 360 130" style="width:86%;max-width:330px;display:block;margin:6px auto" role="img" aria-label="DAG: A and B point to C, C points to T">
-            <defs><marker id="dag27e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c2410c"/></marker></defs>
-            <g stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#dag27e)"><path d="M70 38 L145 63"/><path d="M70 92 L145 72"/><path d="M205 65 L285 65"/></g>
+          <div class="k">DAG · proof graph</div>
+          <svg viewBox="0 0 360 130" style="width:84%;max-width:320px;display:block;margin:6px auto" role="img" aria-label="DAG: A and B point to C, C points to T">
+            <defs><marker id="dag26e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c2410c"/></marker></defs>
+            <g stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#dag26e)"><path d="M70 38 L145 63"/><path d="M70 92 L145 72"/><path d="M205 65 L285 65"/></g>
             <g fill="#fff8f2" stroke="#dcd7cb"><rect x="10" y="20" width="60" height="36" rx="7"/><rect x="10" y="74" width="60" height="36" rx="7"/><rect x="145" y="47" width="60" height="36" rx="7"/><rect x="285" y="47" width="60" height="36" rx="7"/></g>
             <g fill="#15171c" font-size="18" text-anchor="middle" dominant-baseline="middle"><text x="40" y="38">A ✓</text><text x="40" y="92">B ✓</text><text x="175" y="65">C</text><text x="315" y="65">T</text></g>
           </svg>
-          <p>Nodes: lemmas / subgoals; edges: premise → conclusion; acyclic, proved lemmas are reused.</p>
+          <p>Nodes: lemmas / subgoals; edges: dependencies; proved lemmas are reused. Agent expands, Lean checks.</p>
         </div>
         <div class="card" style="padding:14px 16px">
-          <div class="k">MCTS · policy</div>
-          <svg viewBox="0 0 360 130" style="width:86%;max-width:330px;display:block;margin:6px auto" role="img" aria-label="MCTS: expand from a root state, orange path gets more budget">
+          <div class="k">MCTS · search</div>
+          <svg viewBox="0 0 360 130" style="width:84%;max-width:320px;display:block;margin:6px auto" role="img" aria-label="MCTS: expand candidate actions, orange path gets more budget">
             <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M180 28 L90 76 M90 76 L45 114 M90 76 L135 114 M180 28 L270 76 M270 76 L225 114 M270 76 L315 114"/></g>
             <path d="M180 28 L180 76 L210 114" stroke="#c2410c" stroke-width="4" fill="none"/>
             <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="180" cy="28" r="10"/><circle cx="90" cy="76" r="9"/><circle cx="270" cy="76" r="9"/><circle cx="45" cy="114" r="6"/><circle cx="135" cy="114" r="6"/><circle cx="225" cy="114" r="6"/><circle cx="315" cy="114" r="6"/></g>
             <g fill="#c2410c"><circle cx="180" cy="76" r="10"/><circle cx="210" cy="114" r="7"/></g>
           </svg>
-          <p>Nodes: states; branches: candidate actions; select → expand → evaluate → backpropagate.</p>
+          <p>Select → expand → evaluate → backpropagate; concentrate budget on promising branches.</p>
         </div>
       </div>
-      <div class="keyline">DAG answers “<b>what depends on what</b>”; MCTS answers “<b>what to try next</b>”.</div>
+      <div class="scaleband" style="margin-top:16px"><b>System bottleneck</b>: decomposition · shared state · concurrency · budget　｜　<b>Model bottleneck</b>: key step · lemmas · strict proof</div>
+      <div class="keyline">Lean guards formal logic; <b>system and model together determine how far we go</b>.</div>
     </div>
-    <div class="footer"><span>generate · verify · search · structure ≠ policy</span><span class="pnum">26 / 33</span></div>
+    <div class="footer"><span>generate · verify · search · proof graph</span><span class="pnum">26 / 32</span></div>
   </section>
+
+
 
 
 
@@ -2084,41 +2092,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
   
 
   <!-- ============ S45 · 猜测 ============ -->
-  <section class="slide" data-notes="This is the speaker's mechanism hypothesis, not an OpenAI disclosure. Left DAG: nodes hold subgoals, edges record dependencies; proved lemmas are fixed and reused. Middle evolution: select a node, the agent attempts, Lean checks; success fixes it, failure repairs or switches path. Right: two bottlenecks. System design includes decomposition, node selection, shared state, budget, and long-run stability at ten-thousand-agent concurrency. Model capability includes the key step, useful lemmas, long-range reasoning, and strict proof writing. Lean checks formal logic; it does not create the key idea.">
-    <p class="eyebrow"><b>05</b> / AI × math</p>
-    <h2>My assessment: proof graphs are evolving; the route is still maturing</h2>
-    <p class="sub" style="margin-top:8px">The mechanism is a hypothesis; the bottlenecks are real.</p>
-    <div class="content" style="margin-top:16px">
-      <div style="display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:16px;align-items:stretch">
-        <div class="card" style="padding:14px 16px">
-          <div class="k">01 · Structure: DAG</div>
-          <svg viewBox="0 0 480 150" style="width:100%;display:block;margin:8px 0" role="img" aria-label="DAG: A and B point to C, C points to T">
-            <defs><marker id="dag29e" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c2410c"/></marker></defs>
-            <g stroke="#c2410c" stroke-width="2.2" fill="none" marker-end="url(#dag29e)"><path d="M98 45 L205 75"/><path d="M98 120 L205 90"/><path d="M279 85 L384 85"/></g>
-            <g fill="#fff8f2" stroke="#dcd7cb"><rect x="22" y="20" width="76" height="48" rx="9"/><rect x="22" y="96" width="76" height="48" rx="9"/><rect x="205" y="60" width="74" height="48" rx="9"/><rect x="384" y="60" width="74" height="48" rx="9"/></g>
-            <g fill="#15171c" font-size="26" text-anchor="middle" dominant-baseline="middle"><text x="60" y="44">A ✓</text><text x="60" y="120">B ✓</text><text x="242" y="84">C</text><text x="421" y="84">T</text></g>
-          </svg>
-          <p>Nodes hold subgoals; edges record dependencies; proved lemmas are reusable.</p>
-        </div>
-        <div class="card" style="padding:14px 16px">
-          <div class="k">02 · Evolution: Agent + Lean</div>
-          <svg viewBox="0 0 480 150" style="width:100%;display:block;margin:8px 0" role="img" aria-label="Search tree expanding from a root state">
-            <g stroke="#dcd7cb" stroke-width="2" fill="none"><path d="M240 42 L90 92 M90 92 L35 136 M90 92 L145 136 M240 42 L390 92 M390 92 L335 136 M390 92 L445 136"/></g>
-            <path d="M240 42 L240 92 L270 136" stroke="#c2410c" stroke-width="5" fill="none"/><path d="M240 92 L205 136" stroke="#c2410c" stroke-width="2" fill="none"/>
-            <g fill="#fffdf8" stroke="#b9b3a6" stroke-width="2"><circle cx="240" cy="42" r="13"/><circle cx="90" cy="92" r="11"/><circle cx="390" cy="92" r="11"/><circle cx="35" cy="136" r="7"/><circle cx="145" cy="136" r="7"/><circle cx="335" cy="136" r="7"/><circle cx="445" cy="136" r="7"/></g>
-            <g fill="#c2410c"><circle cx="240" cy="92" r="13"/><circle cx="205" cy="136" r="7"/><circle cx="270" cy="136" r="9"/></g><text x="300" y="122" fill="#c2410c" font-size="20">feedback ↺</text>
-          </svg>
-          <p>Select a node, let the agent attempt, let Lean check; fix on success.</p>
-        </div>
-        <div class="stack" style="gap:12px">
-          <div class="card" style="padding:14px 16px"><div class="k">03 · System bottleneck</div><div class="big" style="font-size:var(--fs-key)">Organize search</div><p>Decomposition · node selection<br>Shared state · budget<br>Long-run stability at 10⁴ concurrency</p></div>
-          <div class="card accent" style="padding:14px 16px"><div class="k">04 · Model bottleneck</div><div class="big" style="font-size:var(--fs-key)">Find the key step</div><p>Useful lemmas · new constructions<br>Long-range reasoning · strict proof</p></div>
-        </div>
-      </div>
-      <div class="keyline">Lean guards formal logic; <b>system and model together determine how far we go</b>.</div>
-    </div>
-    <div class="footer"><span>proof graph · hypothesis · bottlenecks</span><span class="pnum">27 / 33</span></div>
-  </section>
+  
 
   <!-- ============ S46 · 还没解决 ============ -->
   
@@ -2141,7 +2115,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="keyline" style="margin-top:18px;">Candidate results arrive in batches; <b>verification and understanding matter</b>.</div>
       
     </div>
-    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">28 / 33</span></div>
+    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">27 / 32</span></div>
   </section>
 
   <!-- ============ M2026b · Navier–Stokes ============ -->
@@ -2165,7 +2139,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="keyline" style="margin-top:18px">Check the logic; <b>also audit the problem–statement–paper correspondence</b>.</div>
       
     </div>
-    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">29 / 33</span></div>
+    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">28 / 32</span></div>
   </section>
 
   <!-- ============ S47 · Theorem-cracking system ============ -->
@@ -2191,7 +2165,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </div>
       <div class="keyline" style="margin-top:22px">The model is the CPU; <b>theorem cracking needs the whole machine</b>.</div>
     </div>
-    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">30 / 33</span></div>
+    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">29 / 32</span></div>
   </section>
 
   <!-- ============ S48 · Failure probability ============ -->
@@ -2221,7 +2195,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </div>
       <div class="keyline" style="margin-top:22px">The system does not prevent every error; <b>it makes errors non-fatal</b>.</div>
     </div>
-    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">31 / 33</span></div>
+    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">30 / 32</span></div>
   </section>
 
   <!-- ============ S49 · Systems engineering ============ -->
@@ -2238,15 +2212,15 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">05 · Observability</div><div class="big" style="font-size:var(--fs-sub)">Which layer failed?</div><p style="font-size:var(--fs-small)">Execution · program · tool · search path</p></div>
         <div class="card accent" style="padding:12px 15px"><div class="k">06 · Human boundary</div><div class="big" style="font-size:var(--fs-sub)">When to stop, who owns</div><p style="font-size:var(--fs-small)">Automate execution, gate judgment</p></div>
       </div>
-      <div class="scaleband" style="margin-top:14px;font-size:var(--fs-label)"><b>Low-hanging fruit</b>: hard to prove, easy to disprove; one counterexample settles it · <b>Real systems problem</b>: reproducible, scalable, maintainable</div>
+      <div class="scaleband" style="margin-top:auto;padding-top:14px;font-size:var(--fs-label)"><b>Low-hanging fruit</b>: hard to prove, easy to disprove; one counterexample settles it · <b>Real systems problem</b>: reproducible, scalable, maintainable</div>
       <div class="keyline" style="margin-top:12px">Low-hanging fruit proves direction; <b>the hard part is the whole machine</b>.</div>
     </div>
-    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">32 / 33</span></div>
+    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">31 / 32</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
-    <p class="eyebrow"><b>06</b> / conclusion</p>
+    <div class="sectionbar"><b>05</b><span class="name">Conclusion</span><span class="desc">from token to theorem</span></div>
     <h2>From the next token to the next theorem</h2>
     <div class="content">
       <div class="chain">
@@ -2266,7 +2240,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
         <div style="font-size:var(--fs-display);font-weight:600;color:var(--accent);white-space:nowrap">Thank you</div>
       </div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">33 / 33</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">32 / 32</span></div>
   </section>
 
 </div>
