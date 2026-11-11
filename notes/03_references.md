@@ -2,19 +2,19 @@
 
 > 状态：✅ 已确认 / ⚠️ 需核实 / ⬜ 待补
 > 报告前必须把 ⚠️ 全部处理掉。
-> 当前主讲 44 页：简介 2，全景 3，GRPO 15–16，系统与工程 24–31，AI × math 32–43，结论 44。REFLEX 已整页删除。下表旧 S 引用保留历史，以最新大纲与浏览器为准。
+> 当前主讲 36 页：简介 2，全景 3，GRPO 13–14，系统与工程 19–25，AI × math 26–35，结论 36。REFLEX 已整页删除。下表旧 S 引用保留历史，以最新大纲与浏览器为准。
 
 ## 2026-11-10 补充核对与方法边界
 
 | 来源 | 页面 | 使用范围 |
 |---|---|---|
 | 本人提供的履历 | 2 | 天体力学研究与职位；现单位匿名，不公开业务成绩与联系方式 |
-| Chen & Li, [A Theoretical Framework for Self-Play Theorem Proving Algorithms](https://arxiv.org/abs/2606.01861) | 37 | 定理语义图上的可逆随机游走、prover/conjecturer 与多样性；有条件的理论保证，不是 OpenAI 方法披露，也不是依赖 DAG/MCTS |
-| OpenAI, [Sharing AI progress in mathematics](https://openai.com/index/sharing-ai-progress-in-mathematics/) | 38–39 | 已读官方公告；平均约 3 Pro 小时为算力等价值 |
-| [openai/math](https://github.com/openai/math)，[首发口径的固定版本](https://github.com/openai/math/tree/adc7f1241b42e322a6451854ab7e4b4c146bf78a) | 38–39 | 通过搜索索引读取 README：722 手稿、372 结果族、约 4,000 尝试问题。直接读取仓库超时；没有逐篇检查或本地编译。发布统计不是成功率，当前仓库计数可变化 |
-| OpenAI, [NS 公告](https://openai.com/zh-Hans-CN/index/navier-stokes-solution/)，[openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) | 40 | 已读英文官方正文与检索到的仓库说明；带光滑外力、三维、正黏性、全空间与周期情形、Clay C/D；约 10,000 并发、88h 加 17h 为公司披露 |
-| Bastounis, Circelli & Hansen, [Navier–Stokes lost in translation](https://arxiv.org/abs/2610.08144) | 40 | 自然语言证明与 Lean 证明对应差异的讨论；未据此断言最终定理错误 |
-| Clay Mathematics Institute, [2026-09-11 announcement](https://www.claymath.org/news/navier-stokes-announcement/) | 40 讲稿 | 表述 apparently settled，同时说明评估审慎进行；不写成已授奖 |
+| Chen & Li, [A Theoretical Framework for Self-Play Theorem Proving Algorithms](https://arxiv.org/abs/2606.01861) | 30 | 定理语义图上的可逆随机游走、prover/conjecturer 与多样性；有条件的理论保证，不是 OpenAI 方法披露，也不是依赖 DAG/MCTS |
+| OpenAI, [Sharing AI progress in mathematics](https://openai.com/index/sharing-ai-progress-in-mathematics/) | 30–31 | 已读官方公告；平均约 3 Pro 小时为算力等价值 |
+| [openai/math](https://github.com/openai/math)，[首发口径的固定版本](https://github.com/openai/math/tree/adc7f1241b42e322a6451854ab7e4b4c146bf78a) | 30–31 | 通过搜索索引读取 README：722 手稿、372 结果族、约 4,000 尝试问题。直接读取仓库超时；没有逐篇检查或本地编译。发布统计不是成功率，当前仓库计数可变化 |
+| OpenAI, [NS 公告](https://openai.com/zh-Hans-CN/index/navier-stokes-solution/)，[openai/NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler) | 32 | 已读英文官方正文与检索到的仓库说明；带光滑外力、三维、正黏性、全空间与周期情形、Clay C/D；约 10,000 并发、88h 加 17h 为公司披露 |
+| Bastounis, Circelli & Hansen, [Navier–Stokes lost in translation](https://arxiv.org/abs/2610.08144) | 32 | 自然语言证明与 Lean 证明对应差异的讨论；未据此断言最终定理错误 |
+| Clay Mathematics Institute, [2026-09-11 announcement](https://www.claymath.org/news/navier-stokes-announcement/) | 32 讲稿 | 表述 apparently settled，同时说明评估审慎进行；不写成已授奖 |
 
 **实现猜测**：外部图/树状态 + Agent 提议 + Lean 检查 + 更新节点，是演讲者的假设；MCTS 仅为选点策略的可能实现。“问题爆破”为个人概括，非原文引语。没有从上述来源推断 OpenAI 已采用 DAG/MCTS。
 

@@ -1,6 +1,6 @@
 # LinkedIn post — From the Next Token to the Next Theorem
 
-> Production-history note: the initial build described below had 50 slides. The current deck has 42 slides. Later revisions added a biography focused on celestial mechanics, DAG/MCTS definitions, a clearly labeled proof-graph hypothesis, system/model limitations, and two OpenAI mathematics case studies; the REFLEX case study was removed. Keep the original three-hour production story distinct from later revisions. Current slide map: notes/01_outline.md.
+> Production-history note: the initial build described below had 50 slides. The current deck has 36 slides. Later revisions added a biography focused on celestial mechanics, DAG/MCTS definitions, a clearly labeled proof-graph hypothesis, system/model limitations, and two OpenAI mathematics case studies; the REFLEX case study was removed. Keep the original three-hour production story distinct from later revisions. Current slide map: notes/01_outline.md.
 
 ## English main post
 
