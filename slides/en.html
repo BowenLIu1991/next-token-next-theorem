@@ -52,6 +52,13 @@
     background:linear-gradient(90deg,var(--accent) 0 18%,transparent 18%);
     opacity:.85;
   }
+  .chapter{justify-content:center}
+  .chapter-body{max-width:1000px}
+  .ckicker{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .ctitle{display:flex;align-items:baseline;gap:22px;font-size:var(--fs-cover);line-height:1.05;letter-spacing:-.03em;font-weight:650;margin:0}
+  .ctitle .cnum{font-family:var(--mono);color:var(--accent);font-size:var(--fs-cover);letter-spacing:-.04em}
+  .cdesc{font-size:var(--fs-sub);color:var(--muted);margin:20px 0 0;line-height:1.5}
+  .crule{width:84px;height:4px;background:var(--accent);margin-top:32px}
   .sectionbar{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .sectionbar b{color:var(--accent);font-weight:600}
   .sectionbar .name{font-family:var(--sans);font-size:var(--fs-small);font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink)}
@@ -819,7 +826,7 @@
       <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
-    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 32</span></div>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 37</span></div>
   </section>
 
   <!-- ============ BIO · About me ============ -->
@@ -839,11 +846,11 @@
         <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:var(--fs-small)">Celestial mechanics research</div><p style="font-size:var(--fs-key);line-height:1.8;margin-top:6px">Periodic N-body: existence &amp; stability<br>Restricted four-body elliptic equilibria<br>Linear instability of elliptic rhombi<br>Homographic Lennard–Jones solutions</p><div class="keyline" style="margin-top:18px">Symplectic indices · Variational methods</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">02 / 32</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">02 / 37</span></div>
   </section>
 
   <!-- ============ S1b · Overview map ============ -->
-  <section class="slide" data-notes="32 pages: cover 1, bio 2, overview 3, Token 4–7, model 8, training 9–15, systems 16–23, AI math 24–31, conclusion 32. The six sections form a chain: token → model → training → prediction only → systems → mathematics.">
+  <section class="slide" data-notes="37 pages: cover 1, bio 2, overview 3, Token 4–8, model 9–10, training 11–18, systems 19–27, AI math 28–36, conclusion 37. The six sections form a chain: token → model → training → prediction only → systems → mathematics.">
     <p class="eyebrow"><b>00</b> / overview</p>
     <h2>Overview: from token to theorem</h2>
     <p class="sub" style="margin-top:8px">Click a section card to jump; click a chip for a key page.</p>
@@ -853,52 +860,62 @@
           <div class="k">00 · Opening &amp; Token</div>
           <h3>Token</h3>
           <p>Ten integers · vocabulary · billing</p>
-          <div class="range">p. 4–7</div>
-          <div class="maplinks"><span class="maplink" data-goto="1">Bio</span><span class="maplink" data-goto="3">10 integers</span><span class="maplink" data-goto="6">Vocabulary</span><span class="maplink" data-goto="5">Billing</span></div>
+          <div class="range">p. 4–8</div>
+          <div class="maplinks"><span class="maplink" data-goto="1">Bio</span><span class="maplink" data-goto="4">10 integers</span><span class="maplink" data-goto="7">Vocabulary</span><span class="maplink" data-goto="6">Billing</span></div>
         </div>
-        <div class="card mapcard" data-goto="7" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
           <div class="k">01 · Model</div>
           <h3>One function</h3>
           <p>Input → probability of next token</p>
-          <div class="range">p. 8</div>
-          <div class="maplinks"><span class="maplink" data-goto="7">Distribution</span></div>
+          <div class="range">p. 9–10</div>
+          <div class="maplinks"><span class="maplink" data-goto="9">Distribution</span></div>
         </div>
-        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="10" role="button" tabindex="0">
           <div class="k">02 · Training &amp; problem solving</div>
           <h3>Learning from reward</h3>
           <p>RL loop · GRPO · math and code</p>
-          <div class="range">p. 9–15</div>
-          <div class="maplinks"><span class="maplink" data-goto="8">RL loop</span><span class="maplink" data-goto="11">GRPO</span><span class="maplink" data-goto="15">Stateless</span></div>
+          <div class="range">p. 11–18</div>
+          <div class="maplinks"><span class="maplink" data-goto="11">RL loop</span><span class="maplink" data-goto="14">GRPO</span><span class="maplink" data-goto="19">Stateless</span></div>
         </div>
-        <div class="card mapcard" data-goto="16" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="18" role="button" tabindex="0">
           <div class="k">03 · Systems &amp; engineering</div>
           <h3>Put the model in a system</h3>
           <p>Context · Harness · Skill · long runs</p>
-          <div class="range">p. 16–23</div>
-          <div class="maplinks"><span class="maplink" data-goto="21">Harness</span><span class="maplink" data-goto="16">System map</span><span class="maplink" data-goto="22">Skill</span></div>
+          <div class="range">p. 19–27</div>
+          <div class="maplinks"><span class="maplink" data-goto="25">Harness</span><span class="maplink" data-goto="20">System map</span><span class="maplink" data-goto="26">Skill</span></div>
         </div>
-        <div class="card mapcard" data-goto="23" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="27" role="button" tabindex="0">
           <div class="k">04 · AI × math</div>
           <h3>From tools to systems</h3>
           <p>Acceleration · proof graph · theorem cracking</p>
-          <div class="range">p. 24–31</div>
-          <div class="maplinks"><span class="maplink" data-goto="25">DAG/MCTS</span><span class="maplink" data-goto="26">722 papers</span><span class="maplink" data-goto="27">NS</span><span class="maplink" data-goto="28">Cracking system</span></div>
+          <div class="range">p. 28–36</div>
+          <div class="maplinks"><span class="maplink" data-goto="30">DAG/MCTS</span><span class="maplink" data-goto="31">722 papers</span><span class="maplink" data-goto="32">NS</span><span class="maplink" data-goto="33">Cracking system</span></div>
         </div>
-        <div class="card mapcard" data-goto="31" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="36" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>From token to theorem</h3>
           <p>Probability · verification · direction</p>
-          <div class="range">p. 32</div>
-          <div class="maplinks"><span class="maplink" data-goto="31">Close</span></div>
+          <div class="range">p. 37</div>
+          <div class="maplinks"><span class="maplink" data-goto="36">Close</span></div>
         </div>
       </div>
     </div>
-    <div class="footer"><span>overview · six sections</span><span class="pnum">03 / 32</span></div>
+    <div class="footer"><span>overview · six sections</span><span class="pnum">03 / 37</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
-  <section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
-    <div class="sectionbar"><b>00</b><span class="name">Opening &amp; Token</span><span class="desc">text → token → integers</span></div>
+    <!-- ============ Chapter 00 ============ -->
+  <section class="slide chapter" data-notes="Chapter opening: from text to token.">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 00</div>
+      <h2 class="ctitle"><span class="cnum">00</span>Opening &amp; Token</h2>
+      <p class="cdesc">Text → token → integer, then a vector.</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">04 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
     <h2>What the model sees: ten integers</h2>
     <div class="content">
       <div class="examples">
@@ -944,7 +961,7 @@
         <div class="q"><span class="n">03</span>How do we put it to work?</div>
       </div>
     </div>
-    <div class="footer"><span>token · model · usage</span><span class="pnum">04 / 32</span></div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">05 / 37</span></div>
   </section>
 
   <!-- ============ S3 · 切分 ============ -->
@@ -989,7 +1006,7 @@
       
       <div class="keyline">Subwords are an engineering compromise between <b>sequence length</b> and <b>vocabulary size</b>.</div>
     </div>
-    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">05 / 32</span></div>
+    <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">06 / 37</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
@@ -1016,7 +1033,7 @@
       </div>
       <div class="keyline">A token is the smallest unit of both the model and the bill.</div>
     </div>
-    <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 32</span></div>
+    <div class="footer"><span>usage · billing · caching</span><span class="pnum">07 / 37</span></div>
   </section>
 
 <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，后面的 embedding 就按它取行。词表大小直接决定输入输出两层参数量。">
@@ -1057,7 +1074,7 @@
       <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">Vocabulary row 134437 → [0.12, −0.44, 0.08, …] · 4,096 dims</div>
       <div class="keyline">ID is the <b>row number</b>; the vector is the <b>representation</b>.</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">07 / 32</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">08 / 37</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
@@ -1066,8 +1083,18 @@
   
 
   <!-- ============ S8 · 输入到概率分布 ============ -->
-  <section class="slide" data-notes="模型的任务只有一句话：给定输入，输出词表上每个 token 的概率。数学上先算 logits z，再 softmax 成概率；所有概率加起来等于 1。中间是 Transformer，可能是各种变体。不要把它想成数据库，它在算分布。">
-    <div class="sectionbar"><b>01</b><span class="name">Model</span><span class="desc">one function, one distribution</span></div>
+    <!-- ============ Chapter 01 ============ -->
+  <section class="slide chapter" data-notes="Chapter opening: the model does one thing.">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 01</div>
+      <h2 class="ctitle"><span class="cnum">01</span>Model</h2>
+      <p class="cdesc">One function: input → probability of the next token.</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">09 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="模型的任务只有一句话：给定输入，输出词表上每个 token 的概率。数学上先算 logits z，再 softmax 成概率；所有概率加起来等于 1。中间是 Transformer，可能是各种变体。不要把它想成数据库，它在算分布。">
     <h2>What the model does: input → probability distribution</h2>
     <div class="content">
       <div class="modelrow">
@@ -1126,12 +1153,22 @@
       </div>
       <div class="keyline">A scorer: it gives every token in the vocabulary a <b>score</b>, then turns scores into <b>probabilities</b>.</div>
     </div>
-    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 32</span></div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">10 / 37</span></div>
   </section>
 
   <!-- ============ S12 · 从预测到解题 ============ -->
-  <section class="slide" data-notes="Organize training into two stages: pretraining and post-training. Pretraining learns language, knowledge and regularities from large-scale text, code and other data, producing a base model. Post-training further shapes task behavior. This talk introduces two common components of post-training: SFT learns from demonstrations; RL uses rewards to improve a policy. This is a teaching overview, not an exhaustive or mandatory recipe: post-training may include other methods or iterative stages. SFT and RL belong within post-training rather than being peers of pretraining. We now focus on RL: how reward guides learning and which tasks provide useful feedback. Detailed training material remains available at ?appendix=1.">
-    <div class="sectionbar"><b>02</b><span class="name">Training &amp; problem solving</span><span class="desc">feedback, reward, updates</span></div>
+    <!-- ============ Chapter 02 ============ -->
+  <section class="slide chapter" data-notes="Chapter opening: how training changes the model.">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 02</div>
+      <h2 class="ctitle"><span class="cnum">02</span>Training &amp; problem solving</h2>
+      <p class="cdesc">Feedback, reward and parameter updates.</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">11 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="Organize training into two stages: pretraining and post-training. Pretraining learns language, knowledge and regularities from large-scale text, code and other data, producing a base model. Post-training further shapes task behavior. This talk introduces two common components of post-training: SFT learns from demonstrations; RL uses rewards to improve a policy. This is a teaching overview, not an exhaustive or mandatory recipe: post-training may include other methods or iterative stages. SFT and RL belong within post-training rather than being peers of pretraining. We now focus on RL: how reward guides learning and which tasks provide useful feedback. Detailed training material remains available at ?appendix=1.">
     <h2>Training: pretraining and post-training</h2>
     <div class="content">
       <div class="flow" style="grid-template-columns:.85fr 38px 1.15fr">
@@ -1161,7 +1198,7 @@
       </div>
       <div class="keyline">Our focus is <b>RL</b>: improving <b>problem-solving</b> through reward.</div>
     </div>
-    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">09 / 32</span></div>
+    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">12 / 37</span></div>
   </section>
 
   <template id="training-details">
@@ -1542,7 +1579,7 @@
       <div class="keyline">RL uses <b>outcome feedback</b> to learn <b>how to choose actions</b>.</div>
       
     </div>
-    <div class="footer"><span>reinforcement learning · reward · policy</span><span class="pnum">10 / 32</span></div>
+    <div class="footer"><span>reinforcement learning · reward · policy</span><span class="pnum">13 / 37</span></div>
   </section>
 
   <!-- ============ S14 · Games made RL visible ============ -->
@@ -1564,7 +1601,7 @@
       </div>
       <div class="keyline">A game engine supplies both environment and feedback; strategy grows from repeated attempts.</div>
     </div>
-    <div class="footer"><span>games · delayed reward · repeatable environments</span><span class="pnum">11 / 32</span></div>
+    <div class="footer"><span>games · delayed reward · repeatable environments</span><span class="pnum">14 / 37</span></div>
   </section>
 
   <!-- ============ S15 · Why games work ============ -->
@@ -1637,7 +1674,7 @@
       </div>
       <div class="keyline">Within one question, let the <b>better answer win</b>.</div>
     </div>
-    <div class="footer"><span>GRPO · objective · group-relative advantage</span><span class="pnum">12 / 32</span></div>
+    <div class="footer"><span>GRPO · objective · group-relative advantage</span><span class="pnum">15 / 37</span></div>
   </section>
 
 
@@ -1662,7 +1699,7 @@
       </div>
       <div class="keyline">Cheap feedback enables scale; shared skills enable transfer.</div>
     </div>
-    <div class="footer"><span>feedback · transfer · shared reasoning</span><span class="pnum">13 / 32</span></div>
+    <div class="footer"><span>feedback · transfer · shared reasoning</span><span class="pnum">16 / 37</span></div>
   </section>
 
   <!-- ============ S17 · Shared reasoning skills ============ -->
@@ -1697,7 +1734,7 @@
       <div class="keyline">Checkable goals turn more compute into <b>systematic search and candidate filtering</b>.</div>
       
     </div>
-    <div class="footer"><span>code · math · product design · trading</span><span class="pnum">14 / 32</span></div>
+    <div class="footer"><span>code · math · product design · trading</span><span class="pnum">17 / 37</span></div>
   </section>
 
   <!-- ============ S23 · Correctness and quality ============ -->
@@ -1723,12 +1760,22 @@
       </div>
       <div class="keyline">The environment supplies feedback; <b>loss turns it into parameter updates</b>.</div>
     </div>
-    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">15 / 32</span></div>
+    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">18 / 37</span></div>
   </section>
 
   <!-- ============ S11 · Prediction only ============ -->
-  <section class="slide" data-notes="This is the pivot. After training, the model only does next-token prediction: given context, it returns a distribution over the next token and samples one. Memory is not internal: the client resends history. Computation is not program execution: arithmetic and symbolic derivation are learned recall and pattern completion; exact results belong to code or a calculator. Action and goals are external too: tools execute outside; plans are generated text. Four limits map to three system capabilities: state, computation, reliability; probabilistic output needs verification, stopping and rollback.">
-    <div class="sectionbar"><b>03</b><span class="name">Systems &amp; engineering</span><span class="desc">state, computation, bounds</span></div>
+    <!-- ============ Chapter 03 ============ -->
+  <section class="slide chapter" data-notes="Chapter opening: put the model back in a system.">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 03</div>
+      <h2 class="ctitle"><span class="cnum">03</span>Systems &amp; engineering</h2>
+      <p class="cdesc">State, computation, bounds.</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">19 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="This is the pivot. After training, the model only does next-token prediction: given context, it returns a distribution over the next token and samples one. Memory is not internal: the client resends history. Computation is not program execution: arithmetic and symbolic derivation are learned recall and pattern completion; exact results belong to code or a calculator. Action and goals are external too: tools execute outside; plans are generated text. Four limits map to three system capabilities: state, computation, reliability; probabilistic output needs verification, stopping and rollback.">
     <h2>The model only predicts the next token</h2>
     <p class="sub" style="margin-top:8px">Memory, computation, action and goals live outside that action.</p>
     <div class="content" style="margin-top:16px">
@@ -1747,7 +1794,7 @@
       <div class="scaleband" style="margin-top:16px">Four limits → three system capabilities: <b>state, computation, reliability</b>; probabilistic output needs verification, stopping, rollback.</div>
       <div class="keyline">The model gives only the next token; <b>everything else comes from the system</b>.</div>
     </div>
-    <div class="footer"><span>next-token prediction · four limits · three capabilities</span><span class="pnum">16 / 32</span></div>
+    <div class="footer"><span>next-token prediction · four limits · three capabilities</span><span class="pnum">20 / 37</span></div>
   </section>
 
 
@@ -1783,7 +1830,7 @@
       </div>
       <div class="keyline">Memory owns state, tool calls compute, harness owns bounds: together they form an <b>agent system</b>.</div>
     </div>
-    <div class="footer"><span>model · state · execution framework</span><span class="pnum">17 / 32</span></div>
+    <div class="footer"><span>model · state · execution framework</span><span class="pnum">21 / 37</span></div>
   </section>
 
 <section class="slide" data-notes="最早 GPT-3 只有 2k token，ChatGPT 是 4k；后来 32k、128k，再到 1M。窗口变长带来三个问题：贵、慢、稀释。">
@@ -1805,7 +1852,7 @@
       </div>
       <div class="keyline">A longer window raises the ceiling; relevance decides what lands.</div>
     </div>
-    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">18 / 32</span></div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">22 / 37</span></div>
   </section>
 
   <!-- ============ S30 · Context and memory ============ -->
@@ -1855,7 +1902,7 @@
       </div>
       <div class="keyline">Capacity ≠ effective use; Context decides <b>what goes in</b>, Memory decides <b>what stays</b>.</div>
     </div>
-    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">19 / 32</span></div>
+    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">23 / 37</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -1884,7 +1931,7 @@
       </div>
       <div class="keyline">Deterministic problems need deterministic results; <b>exact computation belongs to a program</b>.</div>
     </div>
-    <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">20 / 32</span></div>
+    <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">24 / 37</span></div>
   </section>
 
 <section class="slide" data-notes="Tool calling is a protocol, not the model executing code. First define the signature: name, arguments, return. The model sees the tool description, emits a tool_call, the runtime validates arguments, executes in a sandbox, and returns stdout / stderr as an observation in the context. In the example, Python computes 4**1.5; the model only has to write the right call. Tool output is still untrusted input: limit permissions, set timeouts, keep logs. The tool description is itself context; clear names and arguments change call quality. Repeated operations should be written as a function and called once, not regenerated token by token; this is another reason for tool calling.">
@@ -1916,7 +1963,7 @@ obs   "16.0"</pre>
       <div class="scaleband" style="margin-top:18px">Tool output is still <b>untrusted input</b>: validate arguments, limit permissions, set timeouts, keep logs.</div>
       <div class="keyline">The model proposes, the program executes; <b>repeated work becomes a function, not tokens</b>.</div>
     </div>
-    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">21 / 32</span></div>
+    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">25 / 37</span></div>
   </section>
 
   <!-- ============ S34b · Harness ============ -->
@@ -1953,7 +2000,7 @@ obs   "16.0"</pre>
       </div>
       <div class="keyline" style="margin-top:14px">The model provides probability; the harness provides <b>bounds and a way back</b>.</div>
     </div>
-    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">22 / 32</span></div>
+    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">26 / 37</span></div>
   </section>
 
   <!-- ============ S40 · 系统图 ============ -->
@@ -1975,14 +2022,24 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="scaleband" style="margin-top:16px"><b>Skill package</b>: SKILL.md trigger and steps · scripts deterministic tools · references domain docs · assets templates</div>
       <div class="keyline">Loop is runtime; skill is compiled experience; memory is state; harness is boundary.</div>
     </div>
-    <div class="footer"><span>loop · trajectory · compiled procedure</span><span class="pnum">23 / 32</span></div>
+    <div class="footer"><span>loop · trajectory · compiled procedure</span><span class="pnum">27 / 37</span></div>
   </section>
 
   <!-- ============ S36c · Long-running ============ -->
   
   <!-- ============ S41 · 加速 ============ -->
-  <section class="slide" data-notes="Timeline: FunSearch (late 2023) put an LLM inside evolutionary search; AlphaGeometry (early 2024) solved geometry; AlphaProof (July 2024) won IMO silver; o1 (September 2024) productized test-time compute; R1 (early 2025) used verifiable rewards for RL; AlphaEvolve (May 2025) improved matrix multiplication; IMO 2025 reached gold-level 35/42; 2026 OpenAI reported a unit-distance counterexample, NS-related claims and 372 result families. These are public claims, not all independently verified. Each jump is generator + verifier + search.">
-    <div class="sectionbar"><b>04</b><span class="name">AI × math</span><span class="desc">generate, verify, search</span></div>
+    <!-- ============ Chapter 04 ============ -->
+  <section class="slide chapter" data-notes="Chapter opening: systems enter mathematical research.">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 04</div>
+      <h2 class="ctitle"><span class="cnum">04</span>AI × math</h2>
+      <p class="cdesc">Generate, verify, search.</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">28 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="Timeline: FunSearch (late 2023) put an LLM inside evolutionary search; AlphaGeometry (early 2024) solved geometry; AlphaProof (July 2024) won IMO silver; o1 (September 2024) productized test-time compute; R1 (early 2025) used verifiable rewards for RL; AlphaEvolve (May 2025) improved matrix multiplication; IMO 2025 reached gold-level 35/42; 2026 OpenAI reported a unit-distance counterexample, NS-related claims and 372 result families. These are public claims, not all independently verified. Each jump is generator + verifier + search.">
     <h2>Acceleration: three steps</h2>
     <p class="sub" style="margin-top:8px">Tools → reasoning → scale; each jump is generator + verifier + search.</p>
     <div class="content">
@@ -2014,7 +2071,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </div>
       <div class="keyline">Every jump is <b>generator + verifier + search</b>.</div>
     </div>
-    <div class="footer"><span>three steps · 2023–2026</span><span class="pnum">24 / 32</span></div>
+    <div class="footer"><span>three steps · 2023–2026</span><span class="pnum">29 / 37</span></div>
   </section>
 
   <!-- ============ S42 · AI math 时间线 ============ -->
@@ -2040,7 +2097,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </table>
       <div class="keyline">The keywords change; the underlying move stays: <b>propose, verify, search again</b>.</div>
     </div>
-    <div class="footer"><span>public claims · public sources</span><span class="pnum">25 / 32</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">30 / 37</span></div>
   </section>
 
   <!-- ============ S44 · 共同模式 ============ -->
@@ -2081,7 +2138,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="scaleband" style="margin-top:16px"><b>System bottleneck</b>: decomposition · shared state · concurrency · budget　｜　<b>Model bottleneck</b>: key step · lemmas · strict proof</div>
       <div class="keyline">Lean guards formal logic; <b>system and model together determine how far we go</b>.</div>
     </div>
-    <div class="footer"><span>generate · verify · search · proof graph</span><span class="pnum">26 / 32</span></div>
+    <div class="footer"><span>generate · verify · search · proof graph</span><span class="pnum">31 / 37</span></div>
   </section>
 
 
@@ -2115,7 +2172,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="keyline" style="margin-top:18px;">Candidate results arrive in batches; <b>verification and understanding matter</b>.</div>
       
     </div>
-    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">27 / 32</span></div>
+    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">32 / 37</span></div>
   </section>
 
   <!-- ============ M2026b · Navier–Stokes ============ -->
@@ -2139,7 +2196,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="keyline" style="margin-top:18px">Check the logic; <b>also audit the problem–statement–paper correspondence</b>.</div>
       
     </div>
-    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">28 / 32</span></div>
+    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">33 / 37</span></div>
   </section>
 
   <!-- ============ S47 · Theorem-cracking system ============ -->
@@ -2165,7 +2222,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </div>
       <div class="keyline" style="margin-top:22px">The model is the CPU; <b>theorem cracking needs the whole machine</b>.</div>
     </div>
-    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">29 / 32</span></div>
+    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">34 / 37</span></div>
   </section>
 
   <!-- ============ S48 · Failure probability ============ -->
@@ -2195,7 +2252,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </div>
       <div class="keyline" style="margin-top:22px">The system does not prevent every error; <b>it makes errors non-fatal</b>.</div>
     </div>
-    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">30 / 32</span></div>
+    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">35 / 37</span></div>
   </section>
 
   <!-- ============ S49 · Systems engineering ============ -->
@@ -2207,7 +2264,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
         <div class="card" style="padding:12px 15px"><div class="k">01 · State consistency</div><div class="big" style="font-size:var(--fs-sub)">Concurrent graph edits</div><p style="font-size:var(--fs-small)">Versions, locks, conflict merge</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">02 · Scheduling &amp; budget</div><div class="big" style="font-size:var(--fs-sub)">Who runs, how long</div><p style="font-size:var(--fs-small)">Concurrency, preemption, cost</p></div>
-        <div class="card" style="padding:12px 15px"><div class="k">03 · Execution failure</div><div class="big" style="font-size:var(--fs-sub)">No duplicate side effects</div><p style="font-size:var(--fs-small)">Idempotency, backoff, caps</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">03 · Execution failure</div><div class="big" style="font-size:var(--fs-sub)">Execution errors / code bugs</div><p style="font-size:var(--fs-small)">Idempotency, backoff, caps</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">04 · Verification interface</div><div class="big" style="font-size:var(--fs-sub)">Natural language ↔ Lean</div><p style="font-size:var(--fs-small)">Semantic gaps and assumptions</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">05 · Observability</div><div class="big" style="font-size:var(--fs-sub)">Which layer failed?</div><p style="font-size:var(--fs-small)">Execution · program · tool · search path</p></div>
         <div class="card accent" style="padding:12px 15px"><div class="k">06 · Human boundary</div><div class="big" style="font-size:var(--fs-sub)">When to stop, who owns</div><p style="font-size:var(--fs-small)">Automate execution, gate judgment</p></div>
@@ -2215,12 +2272,11 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="scaleband" style="margin-top:auto;padding-top:14px;font-size:var(--fs-label)"><b>Low-hanging fruit</b>: hard to prove, easy to disprove; one counterexample settles it · <b>Real systems problem</b>: reproducible, scalable, maintainable</div>
       <div class="keyline" style="margin-top:12px">Low-hanging fruit proves direction; <b>the hard part is the whole machine</b>.</div>
     </div>
-    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">31 / 32</span></div>
+    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">36 / 37</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
-    <div class="sectionbar"><b>05</b><span class="name">Conclusion</span><span class="desc">from token to theorem</span></div>
     <h2>From the next token to the next theorem</h2>
     <div class="content">
       <div class="chain">
@@ -2235,12 +2291,10 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
         <div><p>Verification gives correctness</p></div>
         <div class="last"><p>People set the direction</p></div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:26px">
-        <div class="keyline" style="margin:0">The next theorem still begins with the <b>next token</b>.</div>
-        <div style="font-size:var(--fs-display);font-weight:600;color:var(--accent);white-space:nowrap">Thank you</div>
-      </div>
+      <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
+      <div style="text-align:center;margin-top:34px;font-size:var(--fs-display);font-weight:600;color:var(--accent);letter-spacing:.14em">Thank you</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">32 / 32</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">37 / 37</span></div>
   </section>
 
 </div>

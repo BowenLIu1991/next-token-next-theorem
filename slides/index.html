@@ -52,6 +52,13 @@
     background:linear-gradient(90deg,var(--accent) 0 18%,transparent 18%);
     opacity:.85;
   }
+  .chapter{justify-content:center}
+  .chapter-body{max-width:1000px}
+  .ckicker{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .ctitle{display:flex;align-items:baseline;gap:22px;font-size:var(--fs-cover);line-height:1.05;letter-spacing:-.03em;font-weight:650;margin:0}
+  .ctitle .cnum{font-family:var(--mono);color:var(--accent);font-size:var(--fs-cover);letter-spacing:-.04em}
+  .cdesc{font-size:var(--fs-sub);color:var(--muted);margin:20px 0 0;line-height:1.5}
+  .crule{width:84px;height:4px;background:var(--accent);margin-top:32px}
   .sectionbar{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .sectionbar b{color:var(--accent);font-weight:600}
   .sectionbar .name{font-family:var(--sans);font-size:var(--fs-small);font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink)}
@@ -819,7 +826,7 @@
       <ellipse cx="380" cy="380" rx="250" ry="112" transform="rotate(-18 380 380)"/>
       <circle class="planet" cx="655" cy="268" r="9"/>
     </svg>
-    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 32</span></div>
+    <div class="footer"><span>From Next Token to Next Theorem</span><span class="pnum">01 / 37</span></div>
   </section>
 
   <!-- ============ BIO · 简介 ============ -->
@@ -839,11 +846,11 @@
         <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:var(--fs-small)">天体力学研究</div><p style="font-size:var(--fs-key);line-height:1.8;margin-top:6px">N 体周期解的存在性与稳定性<br>受限四体：椭圆相对平衡<br>平面四体：椭圆菱形解的不稳定性<br>广义 Lennard–Jones 系统的同形解</p><div class="keyline" style="margin-top:18px">辛指标理论 · 辛几何 · 变分方法</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">02 / 32</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">02 / 37</span></div>
   </section>
 
   <!-- ============ S1b · 全景导航 ============ -->
-  <section class="slide" data-notes="当前 32 页：封面 1，简介 2，全景 3，Token 4–7，模型 8，训练与问题求解 9–15，系统 16–23，AI 数学 24–31，结论 32。六段之间是递进关系：token → 模型 → 训练 → 只会预测 → 系统 → 数学应用。">
+  <section class="slide" data-notes="当前 37 页：封面 1，简介 2，全景 3，Token 4–8，模型 9–10，训练与问题求解 11–18，系统 19–27，AI 数学 28–36，结论 37。六段之间是递进关系：token → 模型 → 训练 → 只会预测 → 系统 → 数学应用。">
     <p class="eyebrow"><b>00</b> / 全景</p>
     <h2>全景：从 token 到定理</h2>
     <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
@@ -853,52 +860,62 @@
           <div class="k">00 · 开场与 Token</div>
           <h3>Token</h3>
           <p>十个整数 · 词表 · 计费</p>
-          <div class="range">p. 4–7</div>
-          <div class="maplinks"><span class="maplink" data-goto="1">简介</span><span class="maplink" data-goto="3">10 个整数</span><span class="maplink" data-goto="6">词表</span><span class="maplink" data-goto="5">计费</span></div>
+          <div class="range">p. 4–8</div>
+          <div class="maplinks"><span class="maplink" data-goto="1">简介</span><span class="maplink" data-goto="4">10 个整数</span><span class="maplink" data-goto="7">词表</span><span class="maplink" data-goto="6">计费</span></div>
         </div>
-        <div class="card mapcard" data-goto="7" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
           <div class="k">01 · 模型</div>
           <h3>一个函数</h3>
           <p>输入 → 下一个 token 的概率</p>
-          <div class="range">p. 8</div>
-          <div class="maplinks"><span class="maplink" data-goto="7">概率分布</span></div>
+          <div class="range">p. 9–10</div>
+          <div class="maplinks"><span class="maplink" data-goto="9">概率分布</span></div>
         </div>
-        <div class="card mapcard" data-goto="8" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="10" role="button" tabindex="0">
           <div class="k">02 · 训练与问题求解</div>
           <h3>从奖励中学习</h3>
           <p>RL 循环 · GRPO · 数学与代码</p>
-          <div class="range">p. 9–15</div>
-          <div class="maplinks"><span class="maplink" data-goto="8">RL 循环</span><span class="maplink" data-goto="11">GRPO</span><span class="maplink" data-goto="15">无状态</span></div>
+          <div class="range">p. 11–18</div>
+          <div class="maplinks"><span class="maplink" data-goto="12">RL 循环</span><span class="maplink" data-goto="14">GRPO</span><span class="maplink" data-goto="19">无状态</span></div>
         </div>
-        <div class="card mapcard" data-goto="16" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="18" role="button" tabindex="0">
           <div class="k">03 · 系统与工程</div>
           <h3>把模型放进系统</h3>
           <p>上下文 · Harness · Skill · 长时运行</p>
-          <div class="range">p. 16–23</div>
-          <div class="maplinks"><span class="maplink" data-goto="21">Harness</span><span class="maplink" data-goto="16">系统图</span><span class="maplink" data-goto="22">Skill</span></div>
+          <div class="range">p. 19–27</div>
+          <div class="maplinks"><span class="maplink" data-goto="25">Harness</span><span class="maplink" data-goto="20">系统图</span><span class="maplink" data-goto="26">Skill</span></div>
         </div>
-        <div class="card mapcard" data-goto="23" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="27" role="button" tabindex="0">
           <div class="k">04 · AI × 数学</div>
           <h3>从工具到系统</h3>
           <p>加速 · 证明图 · 定理爆破系统</p>
-          <div class="range">p. 24–31</div>
-          <div class="maplinks"><span class="maplink" data-goto="25">DAG/MCTS</span><span class="maplink" data-goto="26">722 篇</span><span class="maplink" data-goto="27">NS</span><span class="maplink" data-goto="28">爆破系统</span></div>
+          <div class="range">p. 28–36</div>
+          <div class="maplinks"><span class="maplink" data-goto="30">DAG/MCTS</span><span class="maplink" data-goto="31">722 篇</span><span class="maplink" data-goto="32">NS</span><span class="maplink" data-goto="33">爆破系统</span></div>
         </div>
-        <div class="card mapcard" data-goto="31" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="36" role="button" tabindex="0">
           <div class="k">05 · 结论</div>
           <h3>从 token 到定理</h3>
           <p>概率 · 验证 · 方向</p>
-          <div class="range">p. 32</div>
-          <div class="maplinks"><span class="maplink" data-goto="31">结尾</span></div>
+          <div class="range">p. 37</div>
+          <div class="maplinks"><span class="maplink" data-goto="36">结尾</span></div>
         </div>
       </div>
     </div>
-    <div class="footer"><span>overview · six sections</span><span class="pnum">03 / 32</span></div>
+    <div class="footer"><span>overview · six sections</span><span class="pnum">03 / 37</span></div>
   </section>
 
   <!-- ============ S2 · 10 个整数 ============ -->
-  <section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
-    <div class="sectionbar"><b>00</b><span class="name">开场与 Token</span><span class="desc">文字 → token → 整数</span></div>
+    <!-- ============ Chapter 00 ============ -->
+  <section class="slide chapter" data-notes="章节开头：从文字到 token。">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 00</div>
+      <h2 class="ctitle"><span class="cnum">00</span>开场与 Token</h2>
+      <p class="cdesc">文字 → token → 整数，再变成向量。</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">04 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
     <h2>模型看到的，是 10 个整数</h2>
     <div class="content">
       <div class="examples">
@@ -943,7 +960,7 @@
         <div class="q"><span class="n">03</span>我们怎么用它干活？</div>
       </div>
     </div>
-    <div class="footer"><span>token · model · usage</span><span class="pnum">04 / 32</span></div>
+    <div class="footer"><span>token · model · usage</span><span class="pnum">05 / 37</span></div>
   </section>
 
   <!-- ============ S3 · 切分 ============ -->
@@ -988,7 +1005,7 @@
       
       <div class="keyline">子词不是语义单位，是<b>序列长度</b>与<b>词表大小</b>之间的工程折中。</div>
     </div>
-    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">05 / 32</span></div>
+    <div class="footer"><span>英文：1 token ≈ 4 字符 ≈ 0.75 词</span><span class="pnum">06 / 37</span></div>
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
@@ -1015,7 +1032,7 @@
       </div>
       <div class="keyline">Token 是模型的最小单位，也是账单的最小单位。</div>
     </div>
-    <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 32</span></div>
+    <div class="footer"><span>usage · billing · caching</span><span class="pnum">07 / 37</span></div>
   </section>
 
 <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，按行号取出的向量就是 embedding；ID 是地址，向量是表征。词表大小直接决定输入输出两层参数量。">
@@ -1056,7 +1073,7 @@
       <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">词表第 78580 行 → [0.12, −0.44, 0.08, …] · 4096 维</div>
       <div class="keyline">ID 是<b>行号</b>；向量是<b>表征</b>。</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">07 / 32</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">08 / 37</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
@@ -1065,8 +1082,18 @@
   
 
   <!-- ============ S8 · 输入到概率分布 ============ -->
-  <section class="slide" data-notes="模型的任务只有一句话：给定输入，输出词表上每个 token 的概率。输入 token 已按 ID 从 embedding 表取成向量。数学上先算 logits z，再 softmax 成概率；所有概率加起来等于 1。中间是 Transformer，可能是各种变体。不要把它想成数据库，它在算分布。">
-    <div class="sectionbar"><b>01</b><span class="name">模型</span><span class="desc">一个函数，输出概率</span></div>
+    <!-- ============ Chapter 01 ============ -->
+  <section class="slide chapter" data-notes="章节开头：模型只做一件事。">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 01</div>
+      <h2 class="ctitle"><span class="cnum">01</span>模型</h2>
+      <p class="cdesc">一个函数：输入 → 下一个 token 的概率。</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">09 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="模型的任务只有一句话：给定输入，输出词表上每个 token 的概率。输入 token 已按 ID 从 embedding 表取成向量。数学上先算 logits z，再 softmax 成概率；所有概率加起来等于 1。中间是 Transformer，可能是各种变体。不要把它想成数据库，它在算分布。">
     <h2>模型的工作：输入 → 概率分布</h2>
     <div class="content">
       <div class="modelrow">
@@ -1124,12 +1151,22 @@
       </div>
       <div class="keyline">它不查数据库，也不“理解”；它给词表里每个 token <b>打分</b>，再把分数变成<b>概率</b>。</div>
     </div>
-    <div class="footer"><span>transformer · softmax</span><span class="pnum">08 / 32</span></div>
+    <div class="footer"><span>transformer · softmax</span><span class="pnum">10 / 37</span></div>
   </section>
 
   <!-- ============ S12 · 从预测到解题 ============ -->
-  <section class="slide" data-notes="训练先按两个阶段组织：预训练与后训练。预训练从大规模文本、代码等语料学习语言、知识和模式，形成基础模型。后训练进一步塑造任务行为；这里重点介绍其两个常见组成：SFT 从示范答案学习，RL 通过奖励改进策略。这是面向本报告的概览，具体后训练配方可以包含其他方法或反复迭代，不把三种方法放成同一层级。接下来重点解释 RL 怎样通过奖励学习，以及哪些任务能够提供有用的反馈。训练细节仍可通过 ?appendix=1 打开。">
-    <div class="sectionbar"><b>02</b><span class="name">训练与问题求解</span><span class="desc">反馈、奖励与参数更新</span></div>
+    <!-- ============ Chapter 02 ============ -->
+  <section class="slide chapter" data-notes="章节开头：训练怎样改变模型。">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 02</div>
+      <h2 class="ctitle"><span class="cnum">02</span>训练与问题求解</h2>
+      <p class="cdesc">反馈、奖励与参数更新。</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">11 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="训练先按两个阶段组织：预训练与后训练。预训练从大规模文本、代码等语料学习语言、知识和模式，形成基础模型。后训练进一步塑造任务行为；这里重点介绍其两个常见组成：SFT 从示范答案学习，RL 通过奖励改进策略。这是面向本报告的概览，具体后训练配方可以包含其他方法或反复迭代，不把三种方法放成同一层级。接下来重点解释 RL 怎样通过奖励学习，以及哪些任务能够提供有用的反馈。训练细节仍可通过 ?appendix=1 打开。">
     <h2>训练：预训练与后训练</h2>
     <div class="content">
       <div class="flow" style="grid-template-columns:.85fr 38px 1.15fr">
@@ -1159,7 +1196,7 @@
       </div>
       <div class="keyline">重点讲 <b>RL</b>：奖励如何推动<b>问题求解能力</b>提升。</div>
     </div>
-    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">09 / 32</span></div>
+    <div class="footer"><span>pretraining → post-training · SFT + RL</span><span class="pnum">12 / 37</span></div>
   </section>
 
   <template id="training-details">
@@ -1540,7 +1577,7 @@
       <div class="keyline">RL 根据<b>结果反馈</b>，学习<b>怎样选择动作</b>。</div>
       
     </div>
-    <div class="footer"><span>强化学习 · 奖励 · 策略</span><span class="pnum">10 / 32</span></div>
+    <div class="footer"><span>强化学习 · 奖励 · 策略</span><span class="pnum">13 / 37</span></div>
   </section>
 
   <!-- ============ S14 · 游戏让 RL 被看见 ============ -->
@@ -1562,7 +1599,7 @@
       </div>
       <div class="keyline">游戏引擎同时提供环境与反馈；策略从反复尝试里长出来。</div>
     </div>
-    <div class="footer"><span>games · delayed reward · repeatable environments</span><span class="pnum">11 / 32</span></div>
+    <div class="footer"><span>games · delayed reward · repeatable environments</span><span class="pnum">14 / 37</span></div>
   </section>
 
   <!-- ============ S15 · 游戏为何适合 ============ -->
@@ -1635,7 +1672,7 @@
       </div>
       <div class="keyline">同一道题里，让<b>更好的回答胜出</b>。</div>
     </div>
-    <div class="footer"><span>GRPO · objective · group-relative advantage</span><span class="pnum">12 / 32</span></div>
+    <div class="footer"><span>GRPO · objective · group-relative advantage</span><span class="pnum">15 / 37</span></div>
   </section>
 
 
@@ -1660,7 +1697,7 @@
       </div>
       <div class="keyline">反馈便宜，才可大规模试错；技能共享，才可能迁移。</div>
     </div>
-    <div class="footer"><span>feedback · transfer · shared reasoning</span><span class="pnum">13 / 32</span></div>
+    <div class="footer"><span>feedback · transfer · shared reasoning</span><span class="pnum">16 / 37</span></div>
   </section>
 
   <!-- ============ S17 · 共享推理技能 ============ -->
@@ -1695,7 +1732,7 @@
       <div class="keyline">可检查的目标，让更多算力能用于<b>系统搜索与候选筛选</b>。</div>
       
     </div>
-    <div class="footer"><span>编程 · 数学 · 产品设计 · 交易</span><span class="pnum">14 / 32</span></div>
+    <div class="footer"><span>编程 · 数学 · 产品设计 · 交易</span><span class="pnum">17 / 37</span></div>
   </section>
 
   <!-- ============ S23 · 正确与优秀 ============ -->
@@ -1721,12 +1758,22 @@
       </div>
       <div class="keyline">环境提供反馈，<b>loss 把它变成参数更新</b>。</div>
     </div>
-    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">15 / 32</span></div>
+    <div class="footer"><span>environment · feedback · loss · backpropagation</span><span class="pnum">18 / 37</span></div>
   </section>
 
   <!-- ============ S11 · 只会预测 ============ -->
-  <section class="slide" data-notes="这一页是整场的转折。训练结束后，模型唯一会做的是 next-token prediction：给它前文，它给下一个 token 的概率分布，然后采样一个 token。记忆不是模型内部能力：对话历史由客户端每次重发。计算也不是执行程序：算术、符号推导都是训练中学到的记忆与模式补全，精确结果应交给代码或计算器。行动与目标同样不在模型里：工具由外部执行，计划也是生成的文本。四个短板对应三类系统能力：状态、计算、可靠性；概率输出需要验证、停止与回滚。">
-    <div class="sectionbar"><b>03</b><span class="name">系统与工程</span><span class="desc">状态、计算、边界</span></div>
+    <!-- ============ Chapter 03 ============ -->
+  <section class="slide chapter" data-notes="章节开头：把模型放回系统。">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 03</div>
+      <h2 class="ctitle"><span class="cnum">03</span>系统与工程</h2>
+      <p class="cdesc">状态、计算、边界。</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">19 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="这一页是整场的转折。训练结束后，模型唯一会做的是 next-token prediction：给它前文，它给下一个 token 的概率分布，然后采样一个 token。记忆不是模型内部能力：对话历史由客户端每次重发。计算也不是执行程序：算术、符号推导都是训练中学到的记忆与模式补全，精确结果应交给代码或计算器。行动与目标同样不在模型里：工具由外部执行，计划也是生成的文本。四个短板对应三类系统能力：状态、计算、可靠性；概率输出需要验证、停止与回滚。">
     <h2>模型只会预测下一个 token</h2>
     <p class="sub" style="margin-top:8px">记忆、计算、行动与目标，都在这个动作外面。</p>
     <div class="content" style="margin-top:16px">
@@ -1745,7 +1792,7 @@
       <div class="scaleband" style="margin-top:16px">四个短板 → 三类系统能力：<b>状态、计算、可靠性</b>；概率输出需要验证、停止、回滚。</div>
       <div class="keyline">模型只给下一个 token；<b>其余能力都从系统里来</b>。</div>
     </div>
-    <div class="footer"><span>next-token prediction · four limits · three capabilities</span><span class="pnum">16 / 32</span></div>
+    <div class="footer"><span>next-token prediction · four limits · three capabilities</span><span class="pnum">20 / 37</span></div>
   </section>
 
 
@@ -1781,7 +1828,7 @@
       </div>
       <div class="keyline">Memory 管状态，Tool calling 管计算，Harness 管边界：三者合起来才是 <b>Agent 系统</b>。</div>
     </div>
-    <div class="footer"><span>model · state · execution framework</span><span class="pnum">17 / 32</span></div>
+    <div class="footer"><span>model · state · execution framework</span><span class="pnum">21 / 37</span></div>
   </section>
 
 <section class="slide" data-notes="最早 GPT-3 只有 2k token，ChatGPT 是 4k；后来 32k、128k，再到 1M。窗口变长带来三个问题：贵、慢、稀释。">
@@ -1803,7 +1850,7 @@
       </div>
       <div class="keyline">信息密度比窗口长度更重要。</div>
     </div>
-    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">18 / 32</span></div>
+    <div class="footer"><span>context window · 2k → 1M</span><span class="pnum">22 / 37</span></div>
   </section>
 
   <!-- ============ S30 · Context 与 Memory ============ -->
@@ -1853,7 +1900,7 @@
       </div>
       <div class="keyline">窗口容量 ≠ 有效利用；Context 决定<b>放什么</b>，Memory 决定<b>留什么</b>。</div>
     </div>
-    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">19 / 32</span></div>
+    <div class="footer"><span>finite context · context engineering · memory</span><span class="pnum">23 / 37</span></div>
   </section>
 
   <!-- ============ S33 · Tool calling ============ -->
@@ -1882,7 +1929,7 @@
       </div>
       <div class="keyline">确定性问题需要确定结果；<b>精确计算交给程序</b>。</div>
     </div>
-    <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">20 / 32</span></div>
+    <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">24 / 37</span></div>
   </section>
 
 <section class="slide" data-notes="工具调用是协议，不是模型真在执行。先定义签名：名字、参数和返回；模型看到工具描述后，输出一个 tool_call；运行时校验参数，在沙箱里执行，把 stdout / stderr 作为 observation 放回上下文。例子里 4**1.5 由 Python 算，模型只负责写对调用。工具输出仍是不可信输入：要限制权限、设置超时、记录日志；工具描述本身也在上下文里，写得清楚会直接影响调用质量。重复操作写成函数，调用一次，而不是让模型逐 token 生成每一步结果；这是 tool call 的另一个原因。">
@@ -1914,7 +1961,7 @@ obs   "16.0"</pre>
       <div class="scaleband" style="margin-top:18px">工具输出仍是<b>不可信输入</b>：校验参数、限制权限、设置超时、保留日志。</div>
       <div class="keyline">模型提议，程序执行；<b>重复操作写成函数，不必逐 token 重算</b>。</div>
     </div>
-    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">21 / 32</span></div>
+    <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">25 / 37</span></div>
   </section>
 
   <!-- ============ S34b · Harness ============ -->
@@ -1951,7 +1998,7 @@ obs   "16.0"</pre>
       </div>
       <div class="keyline" style="margin-top:14px">模型提供概率；harness 提供<b>边界与退路</b>。</div>
     </div>
-    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">22 / 32</span></div>
+    <div class="footer"><span>permissions · sandbox · retries · verification · stop</span><span class="pnum">26 / 37</span></div>
   </section>
 
   <!-- ============ S40 · 系统图 ============ -->
@@ -1973,14 +2020,24 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       <div class="scaleband" style="margin-top:16px"><b>Skill 包</b>：SKILL.md 触发与步骤 · scripts 确定性工具 · references 领域资料 · assets 模板</div>
       <div class="keyline">loop 是运行时；skill 是编译后的经验；memory 是状态；harness 是边界。</div>
     </div>
-    <div class="footer"><span>loop · trajectory · compiled procedure</span><span class="pnum">23 / 32</span></div>
+    <div class="footer"><span>loop · trajectory · compiled procedure</span><span class="pnum">27 / 37</span></div>
   </section>
 
   <!-- ============ S36c · 长时间运行 ============ -->
   
   <!-- ============ S41 · 加速 ============ -->
-  <section class="slide" data-notes="三年时间线：2023 年底 FunSearch 把 LLM 放进进化搜索；2024 年初 AlphaGeometry 解几何；2024 年 7 月 AlphaProof 在 IMO 拿银牌；2024 年 9 月 o1 把 test-time compute 变成产品；2025 年初 R1 用可验证奖励做 RL；2025 年 5 月 AlphaEvolve 改进矩阵乘法；2025 年 7 月 IMO 金牌级 35/42；2026 年 OpenAI 报告单位距离反例、NS 相关声称与 372 个结果族。这些是公开声称，不是都已核实。每一次跃迁都是生成器 + 验证器 + 搜索。">
-    <div class="sectionbar"><b>04</b><span class="name">AI × 数学</span><span class="desc">生成、验证、搜索</span></div>
+    <!-- ============ Chapter 04 ============ -->
+  <section class="slide chapter" data-notes="章节开头：系统能力进入数学研究。">
+    <div class="chapter-body">
+      <div class="ckicker">Chapter 04</div>
+      <h2 class="ctitle"><span class="cnum">04</span>AI × 数学</h2>
+      <p class="cdesc">生成、验证、搜索。</p>
+      <div class="crule"></div>
+    </div>
+    <div class="footer"><span>chapter open</span><span class="pnum">28 / 37</span></div>
+  </section>
+
+<section class="slide" data-notes="三年时间线：2023 年底 FunSearch 把 LLM 放进进化搜索；2024 年初 AlphaGeometry 解几何；2024 年 7 月 AlphaProof 在 IMO 拿银牌；2024 年 9 月 o1 把 test-time compute 变成产品；2025 年初 R1 用可验证奖励做 RL；2025 年 5 月 AlphaEvolve 改进矩阵乘法；2025 年 7 月 IMO 金牌级 35/42；2026 年 OpenAI 报告单位距离反例、NS 相关声称与 372 个结果族。这些是公开声称，不是都已核实。每一次跃迁都是生成器 + 验证器 + 搜索。">
     <h2>加速：三个台阶</h2>
     <p class="sub" style="margin-top:8px">工具 → 推理 → 规模；每一次跃迁，都是生成器 + 验证器 + 搜索。</p>
     <div class="content">
@@ -2012,7 +2069,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       </div>
       <div class="keyline">每一次跃迁，都是<b>生成器 + 验证器 + 搜索</b>。</div>
     </div>
-    <div class="footer"><span>three steps · 2023–2026</span><span class="pnum">24 / 32</span></div>
+    <div class="footer"><span>three steps · 2023–2026</span><span class="pnum">29 / 37</span></div>
   </section>
 
   <!-- ============ S42 · AI math 时间线 ============ -->
@@ -2038,7 +2095,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       </table>
       <div class="keyline">关键词在变，底层动作没变：<b>提议、验证、再搜索</b>。</div>
     </div>
-    <div class="footer"><span>public claims · public sources</span><span class="pnum">25 / 32</span></div>
+    <div class="footer"><span>public claims · public sources</span><span class="pnum">30 / 37</span></div>
   </section>
 
   <!-- ============ S44 · 共同模式 ============ -->
@@ -2079,7 +2136,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       <div class="scaleband" style="margin-top:16px"><b>系统瓶颈</b>：拆解 · 状态共享 · 并发 · 预算　｜　<b>模型瓶颈</b>：关键一步 · 引理 · 严格证明</div>
       <div class="keyline">Lean 守住形式逻辑；<b>系统与模型共同决定能走多远</b>。</div>
     </div>
-    <div class="footer"><span>generate · verify · search · proof graph</span><span class="pnum">26 / 32</span></div>
+    <div class="footer"><span>generate · verify · search · proof graph</span><span class="pnum">31 / 37</span></div>
   </section>
 
 
@@ -2113,7 +2170,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       <div class="keyline" style="margin-top:18px;">候选成果开始批量生成；<b>验证与理解成为关键工作</b>。</div>
       
     </div>
-    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">27 / 32</span></div>
+    <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">32 / 37</span></div>
   </section>
 
   <!-- ============ M2026b · Navier–Stokes ============ -->
@@ -2137,7 +2194,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       <div class="keyline" style="margin-top:18px">形式证明检查逻辑；<b>原问题、形式陈述与论文的对应仍须审查</b>。</div>
       
     </div>
-    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">28 / 32</span></div>
+    <div class="footer"><span>forced 3D flow · multiagent search · formalization</span><span class="pnum">33 / 37</span></div>
   </section>
 
   <!-- ============ S47 · 定理爆破系统 ============ -->
@@ -2163,7 +2220,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       </div>
       <div class="keyline" style="margin-top:22px">模型是 CPU；<b>定理爆破靠整台机器</b>。</div>
     </div>
-    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">29 / 32</span></div>
+    <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">34 / 37</span></div>
   </section>
 
   <!-- ============ S48 · 出错概率 ============ -->
@@ -2193,11 +2250,11 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       </div>
       <div class="keyline" style="margin-top:22px">系统不是让每一步不犯错；<b>是让错误不致命</b>。</div>
     </div>
-    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">30 / 32</span></div>
+    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">35 / 37</span></div>
   </section>
 
   <!-- ============ S49 · 系统工程难点 ============ -->
-  <section class="slide" data-notes="六个界面同时成立，系统才可靠。状态一致性：多个 agent 并发读写同一张证明图，需要版本、锁、冲突合并。调度与预算：选哪个节点先跑、给多少并发、何时抢占、成本如何回收。执行出错与重试：失败必须可检测，重试必须幂等，副作用不能重复，且有退避和上限。验证接口：自然语言、形式陈述与 Lean 之间可能存在语义偏差，定理陈述和假设要单独审查。可观测性：日志、回放、归因和审计，把失败定位到执行、程序设计、数学工具或搜索路径，才能有效剪枝和升级。人机边界：哪些自动、哪些人审、何时停止、谁负责。低垂的果实是问题本身具有非对称性：证明极难，证伪容易；搜索空间可枚举时，找到一个反例就能得到明确结论，找不到反例仍不能证明。真正的系统问题是长时稳定、并发状态、验证接口、成本与可复现。单点 demo 只能证明某层可用；整机可靠性是跨层问题，不能用模型分数替代。">
+  <section class="slide" data-notes="六个界面同时成立，系统才可靠。状态一致性：多个 agent 并发读写同一张证明图，需要版本、锁、冲突合并。调度与预算：选哪个节点先跑、给多少并发、何时抢占、成本如何回收。执行出错与代码 bug：失败必须可检测，重试必须幂等，副作用不能重复，且有退避和上限。验证接口：自然语言、形式陈述与 Lean 之间可能存在语义偏差，定理陈述和假设要单独审查。可观测性：日志、回放、归因和审计，把失败定位到执行、程序设计、数学工具或搜索路径，才能有效剪枝和升级。人机边界：哪些自动、哪些人审、何时停止、谁负责。低垂的果实是问题本身具有非对称性：证明极难，证伪容易；搜索空间可枚举时，找到一个反例就能得到明确结论，找不到反例仍不能证明。真正的系统问题是长时稳定、并发状态、验证接口、成本与可复现。单点 demo 只能证明某层可用；整机可靠性是跨层问题，不能用模型分数替代。">
     <p class="eyebrow"><b>05</b> / AI × math · 系统难点</p>
     <h2>系统工程难在哪：六个界面</h2>
     <p class="sub" style="margin-top:8px">任何一层单独可用，都不等于整机可靠。</p>
@@ -2205,7 +2262,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
         <div class="card" style="padding:12px 15px"><div class="k">01 · 状态一致性</div><div class="big" style="font-size:var(--fs-sub)">并发读写同一张图</div><p style="font-size:var(--fs-small)">版本、锁、冲突合并</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">02 · 调度与预算</div><div class="big" style="font-size:var(--fs-sub)">先跑谁、跑多久</div><p style="font-size:var(--fs-small)">并发、抢占、成本回收</p></div>
-        <div class="card" style="padding:12px 15px"><div class="k">03 · 执行出错</div><div class="big" style="font-size:var(--fs-sub)">执行出错，副作用不重复</div><p style="font-size:var(--fs-small)">幂等、退避、上限、检查点</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">03 · 执行出错</div><div class="big" style="font-size:var(--fs-sub)">执行出错 / 代码 bug</div><p style="font-size:var(--fs-small)">幂等、退避、上限、检查点</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">04 · 验证接口</div><div class="big" style="font-size:var(--fs-sub)">自然语言 ↔ Lean</div><p style="font-size:var(--fs-small)">语义偏差与假设审查</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">05 · 可观测性</div><div class="big" style="font-size:var(--fs-sub)">失败属于哪一层</div><p style="font-size:var(--fs-small)">执行 · 程序 · 数学工具 · 搜索路径</p></div>
         <div class="card accent" style="padding:12px 15px"><div class="k">06 · 人机边界</div><div class="big" style="font-size:var(--fs-sub)">何时停、谁负责</div><p style="font-size:var(--fs-small)">自动执行，人工把关</p></div>
@@ -2213,12 +2270,11 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       <div class="scaleband" style="margin-top:14px;font-size:var(--fs-label)"><b>低垂的果实</b>：难证明、易证伪；找到一个反例就能定论 · <b>真正的系统问题</b>：可复现、可扩展、可维护</div>
       <div class="keyline" style="margin-top:12px">低垂的果实证明方向；<b>真正的难题是整机</b>。</div>
     </div>
-    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">31 / 32</span></div>
+    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">36 / 37</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
   <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
-    <div class="sectionbar"><b>05</b><span class="name">结论</span><span class="desc">从 token 到定理</span></div>
     <h2>从下一个 token 到下一个定理</h2>
     <div class="content">
       <div class="chain">
@@ -2233,12 +2289,10 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
         <div><p>验证负责正确</p></div>
         <div class="last"><p>人负责方向</p></div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:26px">
-        <div class="keyline" style="margin:0">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
-        <div style="font-size:var(--fs-display);font-weight:600;color:var(--accent);white-space:nowrap">谢谢大家</div>
-      </div>
+      <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
+      <div style="text-align:center;margin-top:34px;font-size:var(--fs-display);font-weight:600;color:var(--accent);letter-spacing:.14em">谢谢大家</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">32 / 32</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">37 / 37</span></div>
   </section>
 
 </div>
