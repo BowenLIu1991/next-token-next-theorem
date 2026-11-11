@@ -2323,13 +2323,13 @@ references/</pre>
   </section>
 
   <!-- ============ S46 · 还没解决 ============ -->
-  <section class="slide" data-notes="这是演讲者的成熟度判断。约 4000 个尝试问题经过结果族聚合与重要性筛选，形成首发 372 族、722 篇手稿；OpenAI 没有声称解决全部尝试问题。发布统计不是严格成功率，不能把未发表的每个问题都算成失败，也不能从总数判定系统与模型各自的贡献。系统瓶颈可能涉及拆解、节点选择、共享状态、并行预算与反馈；模型瓶颈可能涉及引理、关键推理、形式化与新构造。Lean 检查形式推导，不负责创造关键思想。前页外部图/树演进实现仍是演讲者猜测。">
+  <section class="slide" data-notes="这是演讲者的成熟度判断。约 4000 个尝试问题经过结果族聚合与重要性筛选，形成首发 372 族、722 篇手稿；OpenAI 没有声称解决全部尝试问题。发布统计不是严格成功率，不能把未发表的每个问题都算成失败，也不能从总数判定系统与模型各自的贡献。系统瓶颈可能涉及拆解、节点选择、共享状态、并行预算、反馈，以及万级并发下的长时稳定运行；模型瓶颈可能涉及引理、关键推理、形式化与新构造。Lean 检查形式推导，不负责创造关键思想。前页外部图/树演进实现仍是演讲者猜测。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>我的判断：进展显著，技术路线仍在成熟</h2>
     <p class="sub" style="margin-top:8px">OpenAI 披露尝试约 4,000 个问题；发布结果覆盖其中一部分。</p>
     <div class="content" style="margin-top:22px">
       <div class="two even" style="gap:22px;align-items:stretch">
-        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">01 · 系统设计的瓶颈</div><div class="big" style="font-size:30px">如何组织搜索</div><p style="font-size:24px;line-height:1.75">目标拆解与节点选择<br>分支协作与中间状态共享<br>预算分配与验证反馈</p></div>
+        <div class="card" style="padding:20px"><div class="k" style="font-size:17px">01 · 系统设计的瓶颈</div><div class="big" style="font-size:30px">如何组织搜索</div><p style="font-size:22px;line-height:1.7">目标拆解与节点选择<br>分支协作与中间状态共享<br>预算分配与验证反馈<br>万级并发的长时稳定</p></div>
         <div class="card" style="padding:20px"><div class="k" style="font-size:17px">02 · 模型能力的瓶颈</div><div class="big" style="font-size:30px">能否找到关键一步</div><p style="font-size:24px;line-height:1.75">提出有效引理与新构造<br>跨越长程推理的难点<br>将思路写成严格证明</p></div>
       </div>
       <div class="keyline" style="font-size:26px;margin-top:22px">Lean 守住形式逻辑；<b>系统与模型共同决定能走多远</b>。</div>
@@ -2360,7 +2360,7 @@ references/</pre>
   </section>
 
   <!-- ============ M2026b · Navier–Stokes ============ -->
-  <section class="slide" data-notes="来源：OpenAI 2026-09-08 公告及 openai/NavierStokesAndEuler 仓库公开说明。公司声称对正黏性，在三维全空间和周期情形中构造光滑初值、光滑外力，使全局光滑解不存在，对应 Clay 问题 C/D 的破裂路径；公告描述初始静止、演化中有限能量。这里强调有外力的存在性反例，不扩展为无外力情形，不声称得到任意初值的显式解。公司披露约 10000 个并发 agent，88 小时找到论证，额外 17 小时形式化与验证；各组探索不同路线，经 Codex 汇总中间结论，再交叉分享与继续搜索。公告没有说明使用 DAG 或 MCTS；不能用前面的机制示意还原私有实现。这些运行时间与上一页平均 Pro 等价算力不能直接比较。Clay 9 月 11 日公告称 apparently settled，同时说明评估过程将审慎进行。Bastounis、Circelli、Hansen 的 arXiv:2610.08144 指出自然语言证明与 Lean 证明的对应差异，并非据此证明最终定理错误。本轮未编译仓库或独立核查数学证明。">
+  <section class="slide" data-notes="来源：OpenAI 2026-09-08 公告及 openai/NavierStokesAndEuler 仓库公开说明。公司声称对正黏性，在三维全空间和周期情形中构造光滑初值、光滑外力，使全局光滑解不存在，对应 Clay 问题 C/D 的破裂路径；公告描述初始静止、演化中有限能量。这里强调有外力的存在性反例，不扩展为无外力情形，不声称得到任意初值的显式解。公司披露约 10000 个并发 agent，88 小时找到论证，额外 17 小时形式化与验证；各组探索不同路线，经 Codex 汇总中间结论，再交叉分享与继续搜索。公告没有说明使用 DAG 或 MCTS；不能用前面的机制示意还原私有实现。官方口径是约 10,000 个并发 agent；这使人工逐步监督不可行，调度、状态外置、检查点、重试、汇总与停止都必须自动化，长期稳定运行本身是 Harness 的核心挑战。这些运行时间与上一页平均 Pro 等价算力不能直接比较。Clay 9 月 11 日公告称 apparently settled，同时说明评估过程将审慎进行。Bastounis、Circelli、Hansen 的 arXiv:2610.08144 指出自然语言证明与 Lean 证明的对应差异，并非据此证明最终定理错误。本轮未编译仓库或独立核查数学证明。">
     <p class="eyebrow"><b>05</b> / AI × math · 2026-09-08</p>
     <h2>Navier–Stokes：一次长程多 agent 研究</h2>
     <p class="sub" style="margin-top:8px">OpenAI 报告：带光滑外力的三维不可压流体，可在有限时间失去光滑性。</p>
@@ -2376,7 +2376,7 @@ references/</pre>
             <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">88 h</div><p style="font-size:18px">找到论证</p></div>
             <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">+17 h</div><p style="font-size:18px">形式化与验证</p></div>
           </div>
-          <p style="font-size:22px;line-height:1.6;margin:16px 0 0">分组探索 → 汇总中间结论<br>交叉分享 → 继续搜索 → Lean 检查</p>
+          <p style="font-size:20px;line-height:1.65;margin:14px 0 0">分组探索 → 汇总中间结论<br>交叉分享 → 继续搜索 → Lean 检查<br><b style="color:var(--accent)">万级并发 → 调度、检查点、重试、停止自动化</b></p>
         </div>
       </div>
       <div class="keyline" style="font-size:24px;margin-top:18px">形式证明检查逻辑；<b>原问题、形式陈述与论文的对应仍须审查</b>。</div>
