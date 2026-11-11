@@ -850,7 +850,7 @@
           <h3>Token</h3>
           <p>十个整数 · 词表 · 计费</p>
           <div class="range">p. 4–7</div>
-          <div class="maplinks"><span class="maplink" data-goto="1">简介</span><span class="maplink" data-goto="3">10 个整数</span><span class="maplink" data-goto="5">词表</span><span class="maplink" data-goto="6">计费</span></div>
+          <div class="maplinks"><span class="maplink" data-goto="1">简介</span><span class="maplink" data-goto="3">10 个整数</span><span class="maplink" data-goto="6">词表</span><span class="maplink" data-goto="5">计费</span></div>
         </div>
         <div class="card mapcard" data-goto="7" role="button" tabindex="0">
           <div class="k">01 · 模型</div>
@@ -988,7 +988,33 @@
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
-  <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，按行号取出的向量就是 embedding；ID 是地址，向量是内容。词表大小直接决定输入输出两层参数量。">
+  <section class="slide" data-notes="这是 DeepSeek 后台的真实用量：2,599 次请求，2.85 亿 token，27 块钱。平均一次 11 万 token，约一分钱。token 就是账单单位。左下的换算是经验值：英文字符 0.3、中文字符 0.6，实际以 usage 为准。一次调用 100k 输入 + 2k 输出，缓存命中 1 分钱，不命中 1 毛 1，差一个数量级。">
+    <p class="eyebrow"><b>01</b> / token</p>
+    <h2>Token 是单位，也是账单</h2>
+    <p class="sub" style="margin-top:8px">模型按 token 计算，账单也按 token 计算。</p>
+    <div class="content">
+      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:center">
+        <div>
+          <img class="shot" src="assets/figures/deepseek_usage.png" alt="DeepSeek 用量：2.85 亿 token，2,599 次请求，27.18 元">
+          <div class="ratio2" style="margin-top:16px">
+            <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">1 个英文字符</div></div>
+            <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">1 个中文字符</div></div>
+          </div>
+        </div>
+        <div class="calcbox">
+          <p class="micro" style="margin:0">一次调用 · 空闲时段</p>
+          <div class="cline">输入 100k + 输出 2k</div>
+          <div class="cres">¥0.01<span>缓存命中</span></div>
+          <div class="cres">¥0.11<span>缓存未命中</span></div>
+          <div class="scaleband" style="margin-top:16px">同一段上下文，命中与不命中，差一个数量级。</div>
+        </div>
+      </div>
+      <div class="keyline">Token 是模型的最小单位，也是账单的最小单位。</div>
+    </div>
+    <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 33</span></div>
+  </section>
+
+<section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，按行号取出的向量就是 embedding；ID 是地址，向量是内容。词表大小直接决定输入输出两层参数量。">
     <p class="eyebrow"><b>01</b> / token</p>
     <h2>词表：一张固定的映射表</h2>
     <div class="content">
@@ -1025,34 +1051,7 @@
       </div>
       <div class="keyline">ID 是<b>行号</b>；按行号取出的向量，就是 embedding。</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">06 / 33</span></div>
-  </section>
-
-  <!-- ============ S5 · 用量与换算 ============ -->
-  <section class="slide" data-notes="这是 DeepSeek 后台的真实用量：2,599 次请求，2.85 亿 token，27 块钱。平均一次 11 万 token，约一分钱。token 就是账单单位。左下的换算是经验值：英文字符 0.3、中文字符 0.6，实际以 usage 为准。一次调用 100k 输入 + 2k 输出，缓存命中 1 分钱，不命中 1 毛 1，差一个数量级。">
-    <p class="eyebrow"><b>01</b> / token</p>
-    <h2>Token 是单位，也是账单</h2>
-    <p class="sub" style="margin-top:8px">模型按 token 计算，账单也按 token 计算。</p>
-    <div class="content">
-      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:center">
-        <div>
-          <img class="shot" src="assets/figures/deepseek_usage.png" alt="DeepSeek 用量：2.85 亿 token，2,599 次请求，27.18 元">
-          <div class="ratio2" style="margin-top:16px">
-            <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">1 个英文字符</div></div>
-            <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">1 个中文字符</div></div>
-          </div>
-        </div>
-        <div class="calcbox">
-          <p class="micro" style="margin:0">一次调用 · 空闲时段</p>
-          <div class="cline">输入 100k + 输出 2k</div>
-          <div class="cres">¥0.01<span>缓存命中</span></div>
-          <div class="cres">¥0.11<span>缓存未命中</span></div>
-          <div class="scaleband" style="margin-top:16px">同一段上下文，命中与不命中，差一个数量级。</div>
-        </div>
-      </div>
-      <div class="keyline">Token 是模型的最小单位，也是账单的最小单位。</div>
-    </div>
-    <div class="footer"><span>usage · billing · caching</span><span class="pnum">07 / 33</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">07 / 33</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->

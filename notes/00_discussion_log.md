@@ -4,7 +4,13 @@
 
 ---
 
-## 第七十三轮：合并 GRPO 两页，33 页（当前）
+## 第七十四轮：Token 账单页前移，33 页（当前）
+
+- “Token 是单位，也是账单”从第 7 页前移到第 6 页，放在词表之前。
+- 词表页与 embedding 已是合并状态：保留“ID 是行号，按行号取出的向量就是 embedding”的收束。
+- 页码不变，总页数仍为 33。
+
+## 第七十三轮：合并 GRPO 两页，33 页
 
 - 合并“GRPO 目标函数”和“GRPO 同一道题比较一组回答”：左侧目标函数与组内优势公式，右侧 G=4 示例、更新方向与 no critic。
 - 游戏页更名“游戏：在环境中学习和提高”，并标出公司：Google DeepMind（Atari DQN、AlphaGo、AlphaStar）与 OpenAI（OpenAI Five）。

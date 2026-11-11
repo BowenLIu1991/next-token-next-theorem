@@ -850,7 +850,7 @@
           <h3>Token</h3>
           <p>Ten integers · vocabulary · billing</p>
           <div class="range">p. 4–7</div>
-          <div class="maplinks"><span class="maplink" data-goto="1">Bio</span><span class="maplink" data-goto="3">10 integers</span><span class="maplink" data-goto="5">Vocabulary</span><span class="maplink" data-goto="6">Billing</span></div>
+          <div class="maplinks"><span class="maplink" data-goto="1">Bio</span><span class="maplink" data-goto="3">10 integers</span><span class="maplink" data-goto="6">Vocabulary</span><span class="maplink" data-goto="5">Billing</span></div>
         </div>
         <div class="card mapcard" data-goto="7" role="button" tabindex="0">
           <div class="k">01 · Model</div>
@@ -989,7 +989,33 @@
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
-  <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，后面的 embedding 就按它取行。词表大小直接决定输入输出两层参数量。">
+  <section class="slide" data-notes="Real DeepSeek usage: 2599 requests, 285 million tokens, about 27 RMB. Average 110k tokens per request, roughly one cent. A token is the billing unit. Rule-of-thumb ratios: 0.3 token per English character, 0.6 per Chinese character. A single call with 100k input and 2k output costs 0.01 RMB with cache hit and 0.11 RMB without: an order of magnitude.">
+    <p class="eyebrow"><b>01</b> / token</p>
+    <h2>Tokens: the unit of model and bill</h2>
+    <p class="sub" style="margin-top:8px">The model computes in tokens; the bill does too.</p>
+    <div class="content">
+      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:center">
+        <div>
+          <img class="shot" src="../assets/figures/deepseek_usage.png" alt="DeepSeek usage: 285 million tokens, 2599 requests, 27.18 RMB">
+          <div class="ratio2" style="margin-top:16px">
+            <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">per English character</div></div>
+            <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">per Chinese character</div></div>
+          </div>
+        </div>
+        <div class="calcbox">
+          <p class="micro" style="margin:0">One call · off-peak</p>
+          <div class="cline">100k input + 2k output</div>
+          <div class="cres">¥0.01<span>cache hit</span></div>
+          <div class="cres">¥0.11<span>cache miss</span></div>
+          <div class="scaleband" style="margin-top:16px">Same context, cache hit vs miss: an order of magnitude.</div>
+        </div>
+      </div>
+      <div class="keyline">A token is the smallest unit of both the model and the bill.</div>
+    </div>
+    <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 33</span></div>
+  </section>
+
+<section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，后面的 embedding 就按它取行。词表大小直接决定输入输出两层参数量。">
     <p class="eyebrow"><b>01</b> / token</p>
     <h2>The vocabulary: a fixed lookup table</h2>
     <div class="content">
@@ -1026,34 +1052,7 @@
       </div>
       <div class="keyline">An ID is a <b>row number</b>; the vector at that row is its embedding.</div>
     </div>
-    <div class="footer"><span>vocabulary</span><span class="pnum">06 / 33</span></div>
-  </section>
-
-  <!-- ============ S5 · 用量与换算 ============ -->
-  <section class="slide" data-notes="Real DeepSeek usage: 2599 requests, 285 million tokens, about 27 RMB. Average 110k tokens per request, roughly one cent. A token is the billing unit. Rule-of-thumb ratios: 0.3 token per English character, 0.6 per Chinese character. A single call with 100k input and 2k output costs 0.01 RMB with cache hit and 0.11 RMB without: an order of magnitude.">
-    <p class="eyebrow"><b>01</b> / token</p>
-    <h2>Tokens: the unit of model and bill</h2>
-    <p class="sub" style="margin-top:8px">The model computes in tokens; the bill does too.</p>
-    <div class="content">
-      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:center">
-        <div>
-          <img class="shot" src="../assets/figures/deepseek_usage.png" alt="DeepSeek usage: 285 million tokens, 2599 requests, 27.18 RMB">
-          <div class="ratio2" style="margin-top:16px">
-            <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">per English character</div></div>
-            <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">per Chinese character</div></div>
-          </div>
-        </div>
-        <div class="calcbox">
-          <p class="micro" style="margin:0">One call · off-peak</p>
-          <div class="cline">100k input + 2k output</div>
-          <div class="cres">¥0.01<span>cache hit</span></div>
-          <div class="cres">¥0.11<span>cache miss</span></div>
-          <div class="scaleband" style="margin-top:16px">Same context, cache hit vs miss: an order of magnitude.</div>
-        </div>
-      </div>
-      <div class="keyline">A token is the smallest unit of both the model and the bill.</div>
-    </div>
-    <div class="footer"><span>usage · billing · caching</span><span class="pnum">07 / 33</span></div>
+    <div class="footer"><span>vocabulary</span><span class="pnum">07 / 33</span></div>
   </section>
 
   <!-- ============ S6 · 价格 ============ -->
