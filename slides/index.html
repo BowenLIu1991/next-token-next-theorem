@@ -2443,7 +2443,7 @@ references/</pre>
   </section>
 
   <!-- ============ S49 · 系统工程难点 ============ -->
-  <section class="slide" data-notes="六个界面同时成立，系统才可靠。状态一致性：多个 agent 并发读写同一张证明图，需要版本、锁、冲突合并。调度与预算：选哪个节点先跑、给多少并发、何时抢占、成本如何回收。失败与重试：错误必须可检测，重试必须幂等，副作用不能重复，且有退避和上限。验证接口：自然语言、形式陈述与 Lean 之间可能存在语义偏差，定理陈述和假设要单独审查。可观测性：日志、回放、归因和审计，才能知道为什么失败。人机边界：哪些自动、哪些人审、何时停止、谁负责。低垂的果实是形式化、可自动判分、验证便宜的问题；真正的系统问题是长时稳定、并发状态、验证接口、成本与可复现。单点 demo 只能证明某层可用；整机可靠性是跨层问题，不能用模型分数替代。">
+  <section class="slide" data-notes="六个界面同时成立，系统才可靠。状态一致性：多个 agent 并发读写同一张证明图，需要版本、锁、冲突合并。调度与预算：选哪个节点先跑、给多少并发、何时抢占、成本如何回收。失败与重试：错误必须可检测，重试必须幂等，副作用不能重复，且有退避和上限。验证接口：自然语言、形式陈述与 Lean 之间可能存在语义偏差，定理陈述和假设要单独审查。可观测性：日志、回放、归因和审计，才能知道为什么失败。人机边界：哪些自动、哪些人审、何时停止、谁负责。低垂的果实是问题本身具有非对称性：证明极难，证伪容易；搜索空间可枚举时，找到一个反例就能得到明确结论，找不到反例仍不能证明。真正的系统问题是长时稳定、并发状态、验证接口、成本与可复现。单点 demo 只能证明某层可用；整机可靠性是跨层问题，不能用模型分数替代。">
     <p class="eyebrow"><b>05</b> / AI × math · 系统难点</p>
     <h2>系统工程难在哪：六个界面</h2>
     <p class="sub" style="margin-top:8px">任何一层单独可用，都不等于整机可靠。</p>
@@ -2456,7 +2456,7 @@ references/</pre>
         <div class="card" style="padding:12px 15px"><div class="k">05 · 可观测性</div><div class="big" style="font-size:21px">失败可归因</div><p style="font-size:16px">日志、回放、审计</p></div>
         <div class="card accent" style="padding:12px 15px"><div class="k">06 · 人机边界</div><div class="big" style="font-size:21px">何时停、谁负责</div><p style="font-size:16px">自动执行，人工把关</p></div>
       </div>
-      <div class="scaleband" style="margin-top:14px;font-size:14px"><b>低垂的果实</b>：形式化、可判分、可验证 · <b>真正的系统问题</b>：可复现、可扩展、可维护</div>
+      <div class="scaleband" style="margin-top:14px;font-size:14px"><b>低垂的果实</b>：难证明、易证伪；找到一个反例就能定论 · <b>真正的系统问题</b>：可复现、可扩展、可维护</div>
       <div class="keyline" style="font-size:24px;margin-top:12px">低垂的果实证明方向；<b>真正的难题是整机</b>。</div>
     </div>
     <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">43 / 53</span></div>
