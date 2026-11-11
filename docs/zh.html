@@ -1014,7 +1014,7 @@
     <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 33</span></div>
   </section>
 
-<section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，按行号取出的向量就是 embedding；ID 是地址，向量是内容。词表大小直接决定输入输出两层参数量。">
+<section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，按行号取出的向量就是 embedding；ID 是地址，向量是表征。词表大小直接决定输入输出两层参数量。">
     <p class="eyebrow"><b>01</b> / token</p>
     <h2>词表：一张固定的映射表</h2>
     <div class="content">
@@ -1050,7 +1050,7 @@
         </div>
       </div>
       <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">词表第 78580 行 → [0.12, −0.44, 0.08, …] · 4096 维</div>
-      <div class="keyline">ID 是<b>行号</b>；向量是<b>内容</b>。</div>
+      <div class="keyline">ID 是<b>行号</b>；向量是<b>表征</b>。</div>
     </div>
     <div class="footer"><span>vocabulary</span><span class="pnum">07 / 33</span></div>
   </section>
@@ -1586,7 +1586,19 @@
               <mo>]</mo>
             </math>
           </div>
-          <p class="micro" style="margin:8px 0 0">L<sub>i,t</sub> = min[ρÂ, clip(ρ,1±ε)Â] − βD<sub>KL</sub></p>
+          <div class="mathblock" style="font-size:var(--fs-label);margin-top:4px">
+            <math display="block">
+              <msub><mi>L</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>=</mo>
+              <mtext>min</mtext><mo>[</mo>
+              <msub><mi>ρ</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>θ</mi><mo>)</mo>
+              <msub><mover><mi>A</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>,</mo>
+              <mtext>clip</mtext><mo>(</mo>
+              <msub><mi>ρ</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>θ</mi><mo>)</mo>
+              <mo>,</mo><mn>1</mn><mo>−</mo><mi>ε</mi><mo>,</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo>
+              <msub><mover><mi>A</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub>
+              <mo>]</mo><mo>−</mo><mi>β</mi><msub><mi>D</mi><mtext>KL</mtext></msub>
+            </math>
+          </div>
           <div class="k" style="margin-top:12px">组内优势</div>
           <div class="mathblock" style="font-size:var(--fs-small);margin-top:2px">
             <math display="block">
@@ -1612,7 +1624,7 @@
           </div>
           <div class="card accent" style="padding:10px 15px;margin-top:8px">
             <div class="k">优势决定更新方向</div>
-            <p style="font-size:var(--fs-body);margin:0;line-height:1.65"><b style="color:var(--accent)">Â &gt; 0</b> 提高概率 · <b style="color:var(--accent)">Â &lt; 0</b> 降低概率 · <b style="color:var(--accent)">Â ≈ 0</b> 贡献很小</p>
+            <p style="font-size:var(--fs-body);margin:0;line-height:1.65"><b style="color:var(--accent)">Â &gt; 0</b> 提高概率 · <b style="color:var(--accent)">Â &lt; 0</b> 降低概率 · <b style="color:var(--accent)">Â ≈ 0</b> 贡献小</p>
           </div>
           <p class="micro" style="margin-top:8px">不需要 critic；组均值就是基线。</p>
         </div>

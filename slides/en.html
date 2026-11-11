@@ -1051,7 +1051,7 @@
         </div>
       </div>
       <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">Vocabulary row 134437 → [0.12, −0.44, 0.08, …] · 4,096 dims</div>
-      <div class="keyline">ID is the <b>row number</b>; the vector is the <b>content</b>.</div>
+      <div class="keyline">ID is the <b>row number</b>; the vector is the <b>representation</b>.</div>
     </div>
     <div class="footer"><span>vocabulary</span><span class="pnum">07 / 33</span></div>
   </section>
@@ -1588,7 +1588,19 @@
               <mo>]</mo>
             </math>
           </div>
-          <p class="micro" style="margin:8px 0 0">L<sub>i,t</sub> = min[ρÂ, clip(ρ,1±ε)Â] − βD<sub>KL</sub></p>
+          <div class="mathblock" style="font-size:var(--fs-label);margin-top:4px">
+            <math display="block">
+              <msub><mi>L</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>=</mo>
+              <mtext>min</mtext><mo>[</mo>
+              <msub><mi>ρ</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>θ</mi><mo>)</mo>
+              <msub><mover><mi>A</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>,</mo>
+              <mtext>clip</mtext><mo>(</mo>
+              <msub><mi>ρ</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>θ</mi><mo>)</mo>
+              <mo>,</mo><mn>1</mn><mo>−</mo><mi>ε</mi><mo>,</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo>
+              <msub><mover><mi>A</mi><mo>^</mo></mover><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub>
+              <mo>]</mo><mo>−</mo><mi>β</mi><msub><mi>D</mi><mtext>KL</mtext></msub>
+            </math>
+          </div>
           <div class="k" style="margin-top:12px">Group advantage</div>
           <div class="mathblock" style="font-size:var(--fs-small);margin-top:2px">
             <math display="block">
