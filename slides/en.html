@@ -826,11 +826,11 @@
         <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:17px">Celestial mechanics research</div><p style="font-size:24px;line-height:1.8;margin-top:6px">Periodic N-body: existence &amp; stability<br>Restricted four-body elliptic equilibria<br>Linear instability of elliptic rhombi<br>Homographic Lennard–Jones solutions</p><div class="keyline" style="font-size:22px;margin-top:18px">Symplectic indices · Variational methods</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 44</span></div>
   </section>
 
   <!-- ============ S1b · Overview map ============ -->
-  <section class="slide" data-notes="42 pages. Biography 2, overview 3, Token 4–9, model 10, training and rewards 11–22, statelessness 23, limitations 24, applications 25–31, AI math 32–41, closing 42. DAG/MCTS definitions 36, hypothesis 37, maturity 38, batch release 39, NS 40. REFLEX was removed at the speaker's request.">
+  <section class="slide" data-notes="44 pages. Biography 2, overview 3, Token 4–9, model 10, training and rewards 11–22, statelessness 23, limitations 24, applications 25–31, AI math 32–43, closing 44. DAG/MCTS definitions 36, hypothesis 37, maturity 38, batch release 39, NS 40. REFLEX was removed at the speaker's request.">
     <p class="eyebrow"><b>00</b> / overview</p>
     <h2>Overview: from token to theorem</h2>
     <p class="sub" style="margin-top:8px">Click a section card to jump; click a tag for a key page.</p>
@@ -868,15 +868,15 @@
           <div class="k">04 · AI × math</div>
           <h3>From tools to systems</h3>
           <p>Acceleration · mechanisms · theorem cracking</p>
-          <div class="range">p. 32–41</div>
+          <div class="range">p. 32–43</div>
           <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 papers</span><span class="maplink" data-goto="39">NS</span><span class="maplink" data-goto="40">System</span></div>
         </div>
-        <div class="card mapcard" data-goto="41" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="43" role="button" tabindex="0">
           <div class="k">05 · Conclusion</div>
           <h3>From token to theorem</h3>
           <p>Probability · verification · direction</p>
-          <div class="range">p. 42</div>
-          <div class="maplinks"><span class="maplink" data-goto="41">Close</span></div>
+          <div class="range">p. 44</div>
+          <div class="maplinks"><span class="maplink" data-goto="43">Close</span></div>
         </div>
       </div>
       
@@ -2362,7 +2362,7 @@ references/</pre>
   </section>
 
   <!-- ============ M2026b · Navier–Stokes ============ -->
-  <section class="slide" data-notes="Sources: OpenAI September 8 announcement and public openai/NavierStokesAndEuler repository description. OpenAI claims finite-time breakdown for smooth data and smooth forcing, for positive viscosity, in whole space and periodic 3D settings: the C/D route in the Clay formulation. Do not extend the claim to unforced NS or explicit solutions for arbitrary data. Company-reported execution: roughly 10000 concurrent agents, 88 hours to find the argument, plus 17 hours for Lean formalization and verification. Groups explored routes, with useful intermediate results consolidated through Codex and shared across groups. The announcement does not disclose DAG or MCTS usage; our mechanism diagrams are not a reconstruction of this private system. The reported scale is about 10,000 concurrent agents, not merely 1,000. At that scale, step-by-step human supervision is impossible: scheduling, external state, checkpoints, retries, consolidation and stopping must be automated. Long-running stability is therefore a core harness problem. Elapsed-time figures are not comparable to the prior slide's average Pro compute equivalents. Clay's September 11 announcement says apparently settled and describes an unhurried evaluation process. Bastounis, Circelli and Hansen, arXiv:2610.08144, discuss mismatches between the written and formal proofs, not a disproof of the final result. No local build or independent mathematical proof audit was performed.">
+  <section class="slide" data-notes="Sources: OpenAI September 8 announcement and public openai/NavierStokesAndEuler repository description. OpenAI claims finite-time breakdown for smooth data and smooth forcing, for positive viscosity, in whole space and periodic 3D settings: the C/D route in the Clay formulation. Do not extend the claim to unforced NS or explicit solutions for arbitrary data. Company-reported execution: roughly 10000 concurrent agents, 88 hours to find the argument, plus 17 hours for Lean formalization and verification. Groups explored routes, with useful intermediate results consolidated through Codex and shared across groups. The announcement does not disclose DAG or MCTS usage; our mechanism diagrams are not a reconstruction of this private system. The reported scale is about 10,000 concurrent agents, not merely 1,000. OpenAI also reports about 2.7 million messages and 130 billion output tokens for NS, and 4.9 million messages and 300 billion output tokens across all attempted problems. At that scale, step-by-step human supervision is impossible: scheduling, external state, checkpoints, retries, consolidation and stopping must be automated. Long-running stability is therefore a core harness problem. Elapsed-time figures are not comparable to the prior slide's average Pro compute equivalents. Clay's September 11 announcement says apparently settled and describes an unhurried evaluation process. Bastounis, Circelli and Hansen, arXiv:2610.08144, discuss mismatches between the written and formal proofs, not a disproof of the final result. No local build or independent mathematical proof audit was performed.">
     <p class="eyebrow"><b>05</b> / AI × math · 2026-09-08</p>
     <h2>Navier–Stokes: a long-running multiagent effort</h2>
     <p class="sub" style="margin-top:8px">OpenAI reports finite-time breakdown in smooth, forced 3D incompressible flow.</p>
@@ -2373,10 +2373,11 @@ references/</pre>
       <div class="two" style="grid-template-columns:1fr 1.15fr;gap:22px;margin-top:18px;align-items:stretch">
         <div class="card" style="padding:18px 20px"><div class="k" style="font-size:16px">Scope of the reported result</div><p style="font-size:22px;line-height:1.6">Positive viscosity; smooth data &amp; force<br>Whole space ℝ³ and periodic flow<br>Finite-time breakdown; Clay C / D</p><p style="font-size:18px;color:var(--muted)">A breakdown construction; unforced NS is separate.</p></div>
         <div>
-          <div class="three" style="gap:10px">
-            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">≈10⁴</div><p style="font-size:18px">Concurrent agents</p></div>
-            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">88 h</div><p style="font-size:18px">Find the argument</p></div>
-            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">+17 h</div><p style="font-size:18px">Formalize &amp; check</p></div>
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+            <div class="card" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">≈10⁴</div><p style="font-size:16px">Agents</p></div>
+            <div class="card" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">88 h</div><p style="font-size:16px">Find argument</p></div>
+            <div class="card" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">+17 h</div><p style="font-size:16px">Formalize</p></div>
+            <div class="card accent" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">130B</div><p style="font-size:16px">Output tokens</p></div>
           </div>
           <p style="font-size:20px;line-height:1.65;margin:14px 0 0">Explore in groups → consolidate findings<br>Share → search further → Lean checks<br><b style="color:var(--accent)">10k agents → scheduling, checkpoints, retries, stopping</b></p>
         </div>
@@ -2388,7 +2389,7 @@ references/</pre>
   </section>
 
   <!-- ============ S47 · Theorem-cracking system ============ -->
-  <section class="slide" data-notes="A system view: the model is not the whole machine; it is the CPU. Five layers: workload is the theorem and proof graph; CPU is the LLM proposing the next step; scheduler is the loop and harness managing concurrency, budget, retries, checkpoints and stopping; verifier is Lean and tools checking correctness and doing computation; state is context, memory and logs holding the graph, budget and trajectory. Mathematics defines the problem and correctness; systems engineering determines throughput, cost and long-run stability. A token prediction is like a micro-instruction; the system organizes many candidates into a checkable proof. Do not describe it as the model solving the theorem alone.">
+  <section class="slide" data-notes="A system view: the model is not the whole machine; it is the CPU. Five layers: workload is the theorem and proof graph; CPU is the LLM proposing the next step; scheduler is the loop and harness managing concurrency, budget, retries, checkpoints and stopping; verifier is Lean and tools checking correctness and doing computation; state is context, memory and logs holding the graph, budget and trajectory. Mathematics defines the problem and correctness; systems engineering determines throughput, cost and long-run stability. The architecture is reusable because a new problem mainly changes the workload and verifier while CPU, scheduler, state and fault-tolerance layers persist. This is a methodological claim, not a proven universal solver. A token prediction is like a micro-instruction; the system organizes many candidates into a checkable proof. Do not describe it as the model solving the theorem alone.">
     <p class="eyebrow"><b>05</b> / AI × math · systems view</p>
     <h2>Theorem-cracking system: LLM as CPU</h2>
     <p class="sub" style="margin-top:8px">Not just a mathematics problem; a machine for throughput and stability.</p>
@@ -2404,12 +2405,63 @@ references/</pre>
         <div class="stack" style="gap:10px">
           <div class="card" style="padding:12px 16px"><div class="k">01 · Not only mathematics</div><p style="font-size:18px;line-height:1.5">Decomposition, scheduling, state, verification</p></div>
           <div class="card" style="padding:12px 16px"><div class="k">02 · Throughput</div><p style="font-size:18px;line-height:1.5">Concurrency, caching, reclamation, cost</p></div>
-          <div class="card accent" style="padding:12px 16px"><div class="k">03 · Stability</div><p style="font-size:18px;line-height:1.5">Long runs, recovery, auditability</p></div>
+          <div class="card" style="padding:12px 16px"><div class="k">03 · Stability</div><p style="font-size:18px;line-height:1.5">Long runs, recovery, auditability</p></div>
+          <div class="card accent" style="padding:12px 16px"><div class="k">04 · Scalable</div><p style="font-size:18px;line-height:1.5">Swap problems, not the system</p></div>
         </div>
       </div>
       <div class="keyline" style="font-size:26px;margin-top:22px">The model is the CPU; <b>theorem cracking needs the whole machine</b>.</div>
     </div>
     <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">41 / 53</span></div>
+  </section>
+
+  <!-- ============ S48 · Failure probability ============ -->
+  <section class="slide" data-notes="An illustrative calculation, not a measured OpenAI success rate. Assume independent steps with success p; end-to-end success is p^n. For p=0.99: 100 steps 36.6%, 1,000 steps 0.0043%, 10,000 steps about 2e-44. For p=0.999: 100 steps 90.5%, 1,000 steps 36.8%, 10,000 steps 0.0045%. With up to three retries per step and independent failures, the step success becomes 1-(1-p)^3; for p=0.99 that is about 0.999999, giving about 99% over 10,000 steps. Real errors are correlated, detection is imperfect, and retries can duplicate side effects. Systems need detection, retries, rollback, idempotency, checkpoints and retry caps. High-frequency reads and writes on the proof graph amplify the problem.">
+    <p class="eyebrow"><b>05</b> / AI × math · reliability</p>
+    <h2>Failure probability: long chains amplify 1%</h2>
+    <p class="sub" style="margin-top:8px">The proof graph is read and written constantly; errors compound along dependencies.</p>
+    <div class="content" style="margin-top:18px">
+      <div class="two" style="grid-template-columns:1.3fr .7fr;gap:24px;align-items:start">
+        <div class="card" style="padding:14px 18px">
+          <div class="k">End-to-end success · illustrative</div>
+          <table style="width:100%;border-collapse:collapse;font-size:20px;margin-top:8px">
+            <thead><tr style="font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-align:right"><th style="text-align:left;padding:0 0 8px">Per step</th><th style="padding:0 0 8px">100</th><th style="padding:0 0 8px">1,000</th><th style="padding:0 0 8px">10,000</th></tr></thead>
+            <tbody>
+              <tr style="border-top:1px solid var(--line)"><td style="padding:9px 0;font-family:var(--mono)">99%</td><td style="text-align:right;font-family:var(--mono)">37%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">0.0043%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">≈0</td></tr>
+              <tr style="border-top:1px solid var(--line)"><td style="padding:9px 0;font-family:var(--mono)">99.9%</td><td style="text-align:right;font-family:var(--mono)">90%</td><td style="text-align:right;font-family:var(--mono)">37%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">0.0045%</td></tr>
+              <tr style="border-top:1px solid var(--line)"><td style="padding:9px 0;font-family:var(--mono)">99% + 3 retries</td><td style="text-align:right;font-family:var(--mono)">≈100%</td><td style="text-align:right;font-family:var(--mono)">99.9%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">99%</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:15px;color:var(--muted);margin-top:10px">Assumes independent failures; real errors correlate, and retries are not free.</p>
+        </div>
+        <div class="stack" style="gap:8px">
+          <div class="card" style="padding:11px 14px"><div class="k">Detect errors</div><p style="font-size:17px;margin:0">Lean, tests, assertions first</p></div>
+          <div class="card" style="padding:11px 14px"><div class="k">Retry safely</div><p style="font-size:17px;margin:0">Backoff, caps, no duplicate effects</p></div>
+          <div class="card accent" style="padding:11px 14px"><div class="k">Roll back state</div><p style="font-size:17px;margin:0">Checkpoints, idempotency, recovery</p></div>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:26px;margin-top:22px">The system does not prevent every error; <b>it makes errors non-fatal</b>.</div>
+    </div>
+    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">42 / 53</span></div>
+  </section>
+
+  <!-- ============ S49 · Systems engineering ============ -->
+  <section class="slide" data-notes="The system is reliable only when six interfaces hold at once. State consistency: many agents read and write the same proof graph, requiring versions, locks and conflict resolution. Scheduling and budget: which node runs first, how much concurrency, when to preempt, how to recover cost. Failure and retry: errors must be detectable, retries idempotent, side effects not duplicated, with backoff and caps. Verification interface: natural language, formal statements and Lean can diverge semantically; statements and assumptions need separate review. Observability: logs, replay, attribution and audit explain failures. Human boundary: what is automated, what is reviewed, when to stop, who owns the outcome. Low-hanging fruit means formal, automatically scorable problems with cheap verification. The real systems problem is long-run stability, concurrent state, verification interfaces, cost and reproducibility. A single-layer demo does not prove whole-system reliability; model scores cannot substitute for it.">
+    <p class="eyebrow"><b>05</b> / AI × math · systems difficulty</p>
+    <h2>Systems engineering: six interfaces</h2>
+    <p class="sub" style="margin-top:8px">Each layer can work alone; the whole machine still may not be reliable.</p>
+    <div class="content" style="margin-top:20px">
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+        <div class="card" style="padding:12px 15px"><div class="k">01 · State consistency</div><div class="big" style="font-size:21px">Concurrent graph edits</div><p style="font-size:16px">Versions, locks, conflict merge</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">02 · Scheduling &amp; budget</div><div class="big" style="font-size:21px">Who runs, how long</div><p style="font-size:16px">Concurrency, preemption, cost</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">03 · Failure &amp; retry</div><div class="big" style="font-size:21px">No duplicate effects</div><p style="font-size:16px">Idempotency, backoff, caps</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">04 · Verification interface</div><div class="big" style="font-size:21px">Natural language ↔ Lean</div><p style="font-size:16px">Semantic gaps and assumptions</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">05 · Observability</div><div class="big" style="font-size:21px">Attribute failures</div><p style="font-size:16px">Logs, replay, audit</p></div>
+        <div class="card accent" style="padding:12px 15px"><div class="k">06 · Human boundary</div><div class="big" style="font-size:21px">When to stop, who owns</div><p style="font-size:16px">Automate execution, gate judgment</p></div>
+      </div>
+      <div class="scaleband" style="margin-top:14px;font-size:14px"><b>Low-hanging fruit</b>: formal, scorable, cheap to verify · <b>Real systems problem</b>: reproducible, scalable, maintainable</div>
+      <div class="keyline" style="font-size:24px;margin-top:12px">Low-hanging fruit proves direction; <b>the hard part is the whole machine</b>.</div>
+    </div>
+    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">43 / 53</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
@@ -2431,7 +2483,7 @@ references/</pre>
       </div>
       <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">42 / 42</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">42 / 44</span></div>
   </section>
 
 </div>

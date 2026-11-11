@@ -826,11 +826,11 @@
         <div class="card" style="padding:22px;display:flex;flex-direction:column;justify-content:center"><div class="k" style="font-size:17px">天体力学研究</div><p style="font-size:24px;line-height:1.8;margin-top:6px">N 体周期解的存在性与稳定性<br>受限四体：椭圆相对平衡<br>平面四体：椭圆菱形解的不稳定性<br>广义 Lennard–Jones 系统的同形解</p><div class="keyline" style="font-size:22px;margin-top:18px">辛指标理论 · 辛几何 · 变分方法</div></div>
       </div>
     </div>
-    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 42</span></div>
+    <div class="footer"><span>celestial mechanics · stability · applied AI</span><span class="pnum">2 / 44</span></div>
   </section>
 
   <!-- ============ S1b · 全景导航 ============ -->
-  <section class="slide" data-notes="当前 42 页：简介 2，全景 3，Token 4–9，模型 10，训练与 RL 11–22，无状态 23，四短板 24，应用 25–31，AI 数学 32–41，结论 42。DAG/MCTS 定义 36，机制猜测 37，局限 38，批量结果 39，NS 40。REFLEX 整页已按要求删除。">
+  <section class="slide" data-notes="当前 44 页：简介 2，全景 3，Token 4–9，模型 10，训练与 RL 11–22，无状态 23，四短板 24，应用 25–31，AI 数学 32–43，结论 44。DAG/MCTS 定义 36，机制猜测 37，局限 38，批量结果 39，NS 40。REFLEX 整页已按要求删除。">
     <p class="eyebrow"><b>00</b> / 全景</p>
     <h2>全景：从 token 到定理</h2>
     <p class="sub" style="margin-top:8px">点击章节卡片跳转；点击小标签直达关键页。</p>
@@ -868,15 +868,15 @@
           <div class="k">04 · AI × 数学</div>
           <h3>从工具到系统</h3>
           <p>加速 · 机制 · 定理爆破系统</p>
-          <div class="range">p. 32–41</div>
+          <div class="range">p. 32–43</div>
           <div class="maplinks"><span class="maplink" data-goto="35">DAG/MCTS</span><span class="maplink" data-goto="38">722 篇</span><span class="maplink" data-goto="39">NS</span><span class="maplink" data-goto="40">爆破系统</span></div>
         </div>
-        <div class="card mapcard" data-goto="41" role="button" tabindex="0">
+        <div class="card mapcard" data-goto="43" role="button" tabindex="0">
           <div class="k">05 · 结论</div>
           <h3>从 token 到定理</h3>
           <p>概率 · 验证 · 方向</p>
-          <div class="range">p. 42</div>
-          <div class="maplinks"><span class="maplink" data-goto="41">结尾</span></div>
+          <div class="range">p. 44</div>
+          <div class="maplinks"><span class="maplink" data-goto="43">结尾</span></div>
         </div>
       </div>
       
@@ -2360,7 +2360,7 @@ references/</pre>
   </section>
 
   <!-- ============ M2026b · Navier–Stokes ============ -->
-  <section class="slide" data-notes="来源：OpenAI 2026-09-08 公告及 openai/NavierStokesAndEuler 仓库公开说明。公司声称对正黏性，在三维全空间和周期情形中构造光滑初值、光滑外力，使全局光滑解不存在，对应 Clay 问题 C/D 的破裂路径；公告描述初始静止、演化中有限能量。这里强调有外力的存在性反例，不扩展为无外力情形，不声称得到任意初值的显式解。公司披露约 10000 个并发 agent，88 小时找到论证，额外 17 小时形式化与验证；各组探索不同路线，经 Codex 汇总中间结论，再交叉分享与继续搜索。公告没有说明使用 DAG 或 MCTS；不能用前面的机制示意还原私有实现。官方口径是约 10,000 个并发 agent；这使人工逐步监督不可行，调度、状态外置、检查点、重试、汇总与停止都必须自动化，长期稳定运行本身是 Harness 的核心挑战。这些运行时间与上一页平均 Pro 等价算力不能直接比较。Clay 9 月 11 日公告称 apparently settled，同时说明评估过程将审慎进行。Bastounis、Circelli、Hansen 的 arXiv:2610.08144 指出自然语言证明与 Lean 证明的对应差异，并非据此证明最终定理错误。本轮未编译仓库或独立核查数学证明。">
+  <section class="slide" data-notes="来源：OpenAI 2026-09-08 公告及 openai/NavierStokesAndEuler 仓库公开说明。公司声称对正黏性，在三维全空间和周期情形中构造光滑初值、光滑外力，使全局光滑解不存在，对应 Clay 问题 C/D 的破裂路径；公告描述初始静止、演化中有限能量。这里强调有外力的存在性反例，不扩展为无外力情形，不声称得到任意初值的显式解。公司披露约 10000 个并发 agent，88 小时找到论证，额外 17 小时形式化与验证；各组探索不同路线，经 Codex 汇总中间结论，再交叉分享与继续搜索。公告没有说明使用 DAG 或 MCTS；不能用前面的机制示意还原私有实现。官方口径是约 10,000 个并发 agent；公告还披露 NS 约 270 万条消息、1300 亿输出 token，所有尝试问题合计约 490 万条消息、3000 亿输出 token；这使人工逐步监督不可行，调度、状态外置、检查点、重试、汇总与停止都必须自动化，长期稳定运行本身是 Harness 的核心挑战。这些运行时间与上一页平均 Pro 等价算力不能直接比较。Clay 9 月 11 日公告称 apparently settled，同时说明评估过程将审慎进行。Bastounis、Circelli、Hansen 的 arXiv:2610.08144 指出自然语言证明与 Lean 证明的对应差异，并非据此证明最终定理错误。本轮未编译仓库或独立核查数学证明。">
     <p class="eyebrow"><b>05</b> / AI × math · 2026-09-08</p>
     <h2>Navier–Stokes：一次长程多 agent 研究</h2>
     <p class="sub" style="margin-top:8px">OpenAI 报告：带光滑外力的三维不可压流体，可在有限时间失去光滑性。</p>
@@ -2371,10 +2371,11 @@ references/</pre>
       <div class="two" style="grid-template-columns:1fr 1.15fr;gap:22px;margin-top:18px;align-items:stretch">
         <div class="card" style="padding:18px 20px"><div class="k" style="font-size:16px">结果范围 · 公司声称</div><p style="font-size:22px;line-height:1.6">正黏性 · 光滑初值与外力<br>全空间 ℝ³ 与周期情形<br>有限时奇性 · 对应 Clay C / D</p><p style="font-size:18px;color:var(--muted)">构造破裂情形；无外力问题另需讨论。</p></div>
         <div>
-          <div class="three" style="gap:10px">
-            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">≈10⁴</div><p style="font-size:18px">并发 agent</p></div>
-            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">88 h</div><p style="font-size:18px">找到论证</p></div>
-            <div class="card" style="min-height:100px;padding:12px"><div class="big" style="font-size:36px">+17 h</div><p style="font-size:18px">形式化与验证</p></div>
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+            <div class="card" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">≈10⁴</div><p style="font-size:16px">并发 agent</p></div>
+            <div class="card" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">88 h</div><p style="font-size:16px">找到论证</p></div>
+            <div class="card" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">+17 h</div><p style="font-size:16px">形式化与验证</p></div>
+            <div class="card accent" style="min-height:100px;padding:10px"><div class="big" style="font-size:30px">130B</div><p style="font-size:16px">输出 token</p></div>
           </div>
           <p style="font-size:20px;line-height:1.65;margin:14px 0 0">分组探索 → 汇总中间结论<br>交叉分享 → 继续搜索 → Lean 检查<br><b style="color:var(--accent)">万级并发 → 调度、检查点、重试、停止自动化</b></p>
         </div>
@@ -2386,7 +2387,7 @@ references/</pre>
   </section>
 
   <!-- ============ S47 · 定理爆破系统 ============ -->
-  <section class="slide" data-notes="把前面收束成系统视角：模型不是整台机器，只是 CPU。定理爆破系统可以分成五层：工作负载是定理与证明图；CPU 是 LLM，负责提议下一步；调度是 loop 与 harness，负责并发、预算、重试、检查点与停止；验证是 Lean 与工具，负责对错与计算；状态是 context、memory 与日志，保存图、预算和运行轨迹。数学定义问题与正确性标准；系统工程决定吞吐、成本与长时稳定。单次 token 预测像一条微指令，系统把大量候选组织成可验证的证明。不要说成模型单独解定理。">
+  <section class="slide" data-notes="把前面收束成系统视角：模型不是整台机器，只是 CPU。定理爆破系统可以分成五层：工作负载是定理与证明图；CPU 是 LLM，负责提议下一步；调度是 loop 与 harness，负责并发、预算、重试、检查点与停止；验证是 Lean 与工具，负责对错与计算；状态是 context、memory 与日志，保存图、预算和运行轨迹。数学定义问题与正确性标准；系统工程决定吞吐、成本与长时稳定。这套架构的可扩展性在于：换问题主要换工作负载与验证器，CPU、调度、状态与容错层可以复用；这是方法判断，不是已经证明的通用性。单次 token 预测像一条微指令，系统把大量候选组织成可验证的证明。不要说成模型单独解定理。">
     <p class="eyebrow"><b>05</b> / AI × math · 系统视角</p>
     <h2>定理爆破系统：LLM 是 CPU</h2>
     <p class="sub" style="margin-top:8px">问题不只是一道数学题，而是一台机器的吞吐与稳定性。</p>
@@ -2402,12 +2403,63 @@ references/</pre>
         <div class="stack" style="gap:10px">
           <div class="card" style="padding:12px 16px"><div class="k">01 · 不只是数学</div><p style="font-size:18px;line-height:1.5">拆解、调度、状态、验证都是工程</p></div>
           <div class="card" style="padding:12px 16px"><div class="k">02 · 吞吐</div><p style="font-size:18px;line-height:1.5">并发、缓存、回收、成本</p></div>
-          <div class="card accent" style="padding:12px 16px"><div class="k">03 · 稳定</div><p style="font-size:18px;line-height:1.5">长时运行、可恢复、可审计</p></div>
+          <div class="card" style="padding:12px 16px"><div class="k">03 · 稳定</div><p style="font-size:18px;line-height:1.5">长时运行、可恢复、可审计</p></div>
+          <div class="card accent" style="padding:12px 16px"><div class="k">04 · 可扩展</div><p style="font-size:18px;line-height:1.5">换问题，不换系统</p></div>
         </div>
       </div>
       <div class="keyline" style="font-size:26px;margin-top:22px">模型是 CPU；<b>定理爆破靠整台机器</b>。</div>
     </div>
     <div class="footer"><span>theorem cracking · CPU · harness</span><span class="pnum">41 / 53</span></div>
+  </section>
+
+  <!-- ============ S48 · 出错概率 ============ -->
+  <section class="slide" data-notes="这是示意计算，不是 OpenAI 的实测成功率。假设每一步独立、单步成功率 p，n 步端到端为 p^n。p=0.99 时：100 步 36.6%，1000 步 0.0043%，10000 步约 2e-44。p=0.999 时：100 步 90.5%，1000 步 36.8%，10000 步 0.0045%。若每步最多重试 3 次且失败独立，单步成功率变为 1-(1-p)^3；p=0.99 时约 0.999999，10000 步约 99%。真实系统错误相关、检测不完美、重试有副作用，所以必须可检测、可重试、可回滚，并设置重试上限。证明图被高频增删改查，会把这个问题放大；检查点、幂等性和日志是系统能力，不是附属功能。">
+    <p class="eyebrow"><b>05</b> / AI × math · 可靠性</p>
+    <h2>出错概率：长链路会把 1% 放大</h2>
+    <p class="sub" style="margin-top:8px">证明图被高频增删改查；单步错误会沿依赖链累积。</p>
+    <div class="content" style="margin-top:18px">
+      <div class="two" style="grid-template-columns:1.3fr .7fr;gap:24px;align-items:start">
+        <div class="card" style="padding:14px 18px">
+          <div class="k">端到端成功率 · 示意计算</div>
+          <table style="width:100%;border-collapse:collapse;font-size:20px;margin-top:8px">
+            <thead><tr style="font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-align:right"><th style="text-align:left;padding:0 0 8px">单步</th><th style="padding:0 0 8px">100 步</th><th style="padding:0 0 8px">1,000 步</th><th style="padding:0 0 8px">10,000 步</th></tr></thead>
+            <tbody>
+              <tr style="border-top:1px solid var(--line)"><td style="padding:9px 0;font-family:var(--mono)">99%</td><td style="text-align:right;font-family:var(--mono)">37%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">0.0043%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">≈0</td></tr>
+              <tr style="border-top:1px solid var(--line)"><td style="padding:9px 0;font-family:var(--mono)">99.9%</td><td style="text-align:right;font-family:var(--mono)">90%</td><td style="text-align:right;font-family:var(--mono)">37%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">0.0045%</td></tr>
+              <tr style="border-top:1px solid var(--line)"><td style="padding:9px 0;font-family:var(--mono)">99% + 3 次重试</td><td style="text-align:right;font-family:var(--mono)">≈100%</td><td style="text-align:right;font-family:var(--mono)">99.9%</td><td style="text-align:right;font-family:var(--mono);color:var(--accent)">99%</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:15px;color:var(--muted);margin-top:10px">假设失败独立；真实系统有相关性，重试不是免费的。</p>
+        </div>
+        <div class="stack" style="gap:8px">
+          <div class="card" style="padding:11px 14px"><div class="k">错误可检测</div><p style="font-size:17px;margin:0">Lean、测试、断言先发现</p></div>
+          <div class="card" style="padding:11px 14px"><div class="k">失败可重试</div><p style="font-size:17px;margin:0">退避、上限、不重复副作用</p></div>
+          <div class="card accent" style="padding:11px 14px"><div class="k">状态可回滚</div><p style="font-size:17px;margin:0">检查点、幂等、可恢复</p></div>
+        </div>
+      </div>
+      <div class="keyline" style="font-size:26px;margin-top:22px">系统不是让每一步不犯错；<b>是让错误不致命</b>。</div>
+    </div>
+    <div class="footer"><span>failure probability · retries · rollback</span><span class="pnum">42 / 53</span></div>
+  </section>
+
+  <!-- ============ S49 · 系统工程难点 ============ -->
+  <section class="slide" data-notes="六个界面同时成立，系统才可靠。状态一致性：多个 agent 并发读写同一张证明图，需要版本、锁、冲突合并。调度与预算：选哪个节点先跑、给多少并发、何时抢占、成本如何回收。失败与重试：错误必须可检测，重试必须幂等，副作用不能重复，且有退避和上限。验证接口：自然语言、形式陈述与 Lean 之间可能存在语义偏差，定理陈述和假设要单独审查。可观测性：日志、回放、归因和审计，才能知道为什么失败。人机边界：哪些自动、哪些人审、何时停止、谁负责。低垂的果实是形式化、可自动判分、验证便宜的问题；真正的系统问题是长时稳定、并发状态、验证接口、成本与可复现。单点 demo 只能证明某层可用；整机可靠性是跨层问题，不能用模型分数替代。">
+    <p class="eyebrow"><b>05</b> / AI × math · 系统难点</p>
+    <h2>系统工程难在哪：六个界面</h2>
+    <p class="sub" style="margin-top:8px">任何一层单独可用，都不等于整机可靠。</p>
+    <div class="content" style="margin-top:20px">
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+        <div class="card" style="padding:12px 15px"><div class="k">01 · 状态一致性</div><div class="big" style="font-size:21px">并发读写同一张图</div><p style="font-size:16px">版本、锁、冲突合并</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">02 · 调度与预算</div><div class="big" style="font-size:21px">先跑谁、跑多久</div><p style="font-size:16px">并发、抢占、成本回收</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">03 · 失败与重试</div><div class="big" style="font-size:21px">错误不重复副作用</div><p style="font-size:16px">幂等、退避、上限、检查点</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">04 · 验证接口</div><div class="big" style="font-size:21px">自然语言 ↔ Lean</div><p style="font-size:16px">语义偏差与假设审查</p></div>
+        <div class="card" style="padding:12px 15px"><div class="k">05 · 可观测性</div><div class="big" style="font-size:21px">失败可归因</div><p style="font-size:16px">日志、回放、审计</p></div>
+        <div class="card accent" style="padding:12px 15px"><div class="k">06 · 人机边界</div><div class="big" style="font-size:21px">何时停、谁负责</div><p style="font-size:16px">自动执行，人工把关</p></div>
+      </div>
+      <div class="scaleband" style="margin-top:14px;font-size:14px"><b>低垂的果实</b>：形式化、可判分、可验证 · <b>真正的系统问题</b>：可复现、可扩展、可维护</div>
+      <div class="keyline" style="font-size:24px;margin-top:12px">低垂的果实证明方向；<b>真正的难题是整机</b>。</div>
+    </div>
+    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">43 / 53</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
@@ -2429,7 +2481,7 @@ references/</pre>
       </div>
       <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
     </div>
-    <div class="footer"><span>from next token to next theorem</span><span class="pnum">42 / 42</span></div>
+    <div class="footer"><span>from next token to next theorem</span><span class="pnum">42 / 44</span></div>
   </section>
 
 </div>
