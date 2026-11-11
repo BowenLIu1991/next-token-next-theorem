@@ -23,7 +23,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - **奖励与问题求解**：从 Atari、AlphaGo 等游戏案例，讲到数学与代码的共享技能、测试与反例，以及产品设计和交易的反馈边界。
 - **算力与搜索**：RL 改进策略，算力扩大可验证搜索；有限搜索空间、有解且可靠判定时，穷举可找到满足规范的解，成本可能很高。
 - **使用**：context／memory、tool calling、harness、系统图与 skill 如何组合成 agent 系统。
-- **AI × math**：FunSearch、AlphaGeometry、AlphaProof、o1 / R1、AlphaEvolve、IMO 2025，以及 2026 年 OpenAI 的公开声称。
+- **AI × math**：FunSearch、AlphaGeometry、AlphaProof、OpenAI o1、DeepSeek R1、IMO 2025，以及 2026 年 OpenAI 的公开声称。
 - **结论**：概率负责广度，验证负责正确，人负责方向。
 
 贯穿全场的一个例子是《天体力学基础》：
@@ -36,17 +36,17 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 
 ## 幻灯片
 
-- **36 页**，16:9，1280 × 720。
+- **33 页**，16:9，1280 × 720。
 - 页底解释性小字已删除；正文只保留必要短标签与页码，减少视觉噪声。
 - 字体统一为两类：Sans 用于标题、正文与卡片；Mono 用于 token、ID、数字、代码、eyebrow 与页码。字号收为 9 级：72 / 44 / 32 / 24 / 22 / 18 / 16 / 14 / 12 px。
 - 第 2 页为天体力学研究简介，现单位匿名为“某美国电商公司”；第 3 页为全景导航。
-- Token 4–8：10 个整数、切分、词表、Token 与账单（合并旧用量与价格两页）、ID → 向量。
-- 模型 9：输入 → 下一个 token 的概率分布。
-- 训练 10–18：预训练/后训练、RL 循环、游戏与打砖块（合并）、GRPO 目标与组内比较、数学/代码反馈优势与迁移（合并）、编程行动场所、四类任务、环境/反馈/参数更新总结。旧“正确与优秀”页删除。
-- 转折 19：“模型只会预测下一个 token”合并旧“四个短板”，收束为状态、计算、可靠性三类系统能力。
-- 系统 20–25：Context window、Context 与 Memory、Tool calling、Harness、系统图、Skill 与长时间运行（合并）。
-- AI × 数学 26–35：加速时间线（合并）、公开表述、生成→验证→搜索、DAG/MCTS、证明图判断与瓶颈（合并）、OpenAI 批量结果、NS、定理爆破系统、出错概率、六个系统界面。
-- 结论 36：“从下一个 token 到下一个定理”。
+- Token 4–7：10 个整数、切分、词表（ID 行号与 embedding）、Token 与账单（合并旧用量与价格两页）。
+- 模型 8：输入 → 下一个 token 的概率分布。
+- 训练 9–15：预训练/后训练、RL 循环、游戏与环境反馈（合并）、GRPO 公式与组内比较、数学/代码反馈优势与迁移（合并）、四类任务、环境/反馈/参数更新总结。旧“正确与优秀”页删除。
+- 转折 17：“模型只会预测下一个 token”合并旧“四个短板”，收束为状态、计算、可靠性三类系统能力。
+- 系统 16–23：Context window、Context 与 Memory、计算/记忆、Tool calling、Harness、系统图、Skill 与长时间运行（合并）。
+- AI × 数学 24–32：加速时间线（合并）、公开表述、生成→验证→搜索（含 DAG/MCTS）、证明图判断与瓶颈（合并）、OpenAI 批量结果、NS、定理爆破系统、出错概率、六个系统界面。
+- 结论 33：“从下一个 token 到下一个定理”。
 - 主讲与备份模式分别按当前顺序自动生成页码。
 - 原训练细节保存为 **12 页备份**，不计入主讲或主讲 PDF；用 `?appendix=1` 打开，支持正常翻页与备注。
 - 单文件 HTML，无外部 JS / CDN；公式用 MathML + STIX。
@@ -98,7 +98,7 @@ python3 assets/demos/render_pdf.py --html docs/zh.html --out docs/from-next-toke
 python3 assets/demos/render_pdf.py --html docs/index.html --appendix --out /path/to/training-appendix.pdf
 ```
 
-脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 36 页的满版 PDF。依赖：
+脚本从 HTML 自动统计页数，用 Chrome 逐页截图（`?clean=1`），再用 Pillow 合成 13.333 × 7.5 英寸、当前 33 页的满版 PDF。依赖：
 
 ```bash
 python3 -m pip install pillow pypdf
@@ -120,8 +120,8 @@ python3 -m pip install pillow pypdf
 │   ├── from-next-token-to-next-theorem-zh.pdf   # 中文
 │   └── .nojekyll
 ├── slides/
-│   ├── en.html                   # English source (36 main pages)
-│   ├── index.html                # 中文源文件（36 页主讲，自包含）
+│   ├── en.html                   # English source (33 main pages)
+│   ├── index.html                # 中文源文件（33 页主讲，自包含）
 │   └── README.md                 # 操作与排版约定
 ├── notes/
 │   ├── 00_discussion_log.md      # 讨论与决策记录
@@ -193,13 +193,14 @@ sed -i '' 's#\.\./assets/figures/#assets/figures/#g' docs/index.html
 3. 每个概念给定义、例子、失败模式。
 4. 主动讲边界，比只讲成功案例更能建立信任。
 5. 数字标注来源；公司声称与同行评议分开写。
+6. 页面语言凝练：标题、图、卡片已经表达的信息不重复写；解释放讲稿。
 
 ---
 
 ## 状态
 
-- [x] 36 页 HTML 幻灯片（English + 中文）
-- [x] PDF 导出（两版各 36 页）
+- [x] 33 页 HTML 幻灯片（English + 中文）
+- [x] PDF 导出（两版各 33 页）
 - [x] GitHub Pages 目录（`docs/`，英文主站）
 - [x] 讲稿、提纲、文献、Q&A
 - [x] tokenizer 实测数据
