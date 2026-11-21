@@ -1936,9 +1936,10 @@
     <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">24 / 38</span></div>
   </section>
 
-<section class="slide" data-notes="工具调用是协议，不是模型真在执行。先定义签名：名字、参数和返回；模型看到工具描述后，输出一个 tool_call；运行时校验参数，在沙箱里执行，把 stdout / stderr 作为 observation 放回上下文。例子里 4**1.5 由 Python 算，模型只负责写对调用。工具输出仍是不可信输入：要限制权限、设置超时、记录日志；工具描述本身也在上下文里，写得清楚会直接影响调用质量。重复操作写成函数，调用一次，而不是让模型逐 token 生成每一步结果；这是 tool call 的另一个原因。">
+<section class="slide" data-notes="关键问题：LLM 的数学推理是概率生成，可能算错；Tool calling 把确定性计算交给程序，形成一道护栏。工具调用是协议，不是模型真在执行。先定义签名：名字、参数和返回；模型看到工具描述后，输出一个 tool_call；运行时校验参数，在沙箱里执行，把 stdout / stderr 作为 observation 放回上下文。例子里 4**1.5 由 Python 算，模型只负责写对调用。工具输出仍是不可信输入：要限制权限、设置超时、记录日志；工具描述本身也在上下文里，写得清楚会直接影响调用质量。重复操作写成函数，调用一次，而不是让模型逐 token 生成每一步结果；这是 tool call 的另一个原因。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Tool calling：算不准，就交给程序</h2>
+    <p class="sub" style="margin-top:8px">数学推理是概率生成，结果可能错；需要程序给出确定结果。</p>
     <div class="content">
       <div class="two" style="gap:34px;align-items:stretch">
         <div class="panel" style="padding:18px 20px">
@@ -1963,7 +1964,7 @@ obs   "16.0"</pre>
         </div>
       </div>
       <div class="scaleband" style="margin-top:18px">工具输出仍是<b>不可信输入</b>：校验参数、限制权限、设置超时、保留日志。</div>
-      <div class="keyline">模型提议，程序执行；<b>重复操作写成函数，不必逐 token 重算</b>。</div>
+      <div class="keyline">模型提议，程序执行；<b>确定性计算，是概率推理的护栏</b>。</div>
     </div>
     <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">25 / 38</span></div>
   </section>

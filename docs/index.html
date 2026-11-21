@@ -1938,9 +1938,10 @@
     <div class="footer"><span>recall · decomposition · sampling</span><span class="pnum">24 / 38</span></div>
   </section>
 
-<section class="slide" data-notes="Tool calling is a protocol, not the model executing code. First define the signature: name, arguments, return. The model sees the tool description, emits a tool_call, the runtime validates arguments, executes in a sandbox, and returns stdout / stderr as an observation in the context. In the example, Python computes 4**1.5; the model only has to write the right call. Tool output is still untrusted input: limit permissions, set timeouts, keep logs. The tool description is itself context; clear names and arguments change call quality. Repeated operations should be written as a function and called once, not regenerated token by token; this is another reason for tool calling.">
+<section class="slide" data-notes="The key problem: LLM math is probabilistically generated and can be wrong; tool calling hands deterministic computation to a program as a guardrail. Tool calling is a protocol, not the model executing code. First define the signature: name, arguments, return. The model sees the tool description, emits a tool_call, the runtime validates arguments, executes in a sandbox, and returns stdout / stderr as an observation in the context. In the example, Python computes 4**1.5; the model only has to write the right call. Tool output is still untrusted input: limit permissions, set timeouts, keep logs. The tool description is itself context; clear names and arguments change call quality. Repeated operations should be written as a function and called once, not regenerated token by token; this is another reason for tool calling.">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Tool calling: let a program do the arithmetic</h2>
+    <p class="sub" style="margin-top:8px">Math reasoning is probabilistic and can be wrong; a program supplies the exact result.</p>
     <div class="content">
       <div class="two" style="gap:34px;align-items:stretch">
         <div class="panel" style="padding:18px 20px">
@@ -1958,14 +1959,14 @@ obs   "16.0"</pre>
           
         </div>
         <div class="stack" style="gap:10px">
-          <div class="card" style="padding:12px 14px"><div class="k">01 Define</div><p style="font-size:var(--fs-label)">Name, arguments, return, boundary; the description is context too.</p></div>
+          <div class="card" style="padding:12px 14px"><div class="k">01 Define</div><p style="font-size:var(--fs-label)">Name, args, return, limits; description is context too.</p></div>
           <div class="card" style="padding:12px 14px"><div class="k">02 Call</div><p style="font-size:var(--fs-label)">The model emits a tool_call; it proposes, does not execute.</p></div>
-          <div class="card" style="padding:12px 14px"><div class="k">03 Execute</div><p style="font-size:var(--fs-label)">The runtime validates arguments and runs in a sandbox; timeouts and permissions are system concerns.</p></div>
+          <div class="card" style="padding:12px 14px"><div class="k">03 Execute</div><p style="font-size:var(--fs-label)">Validate args, run sandboxed; timeouts and permissions external.</p></div>
           <div class="card accent" style="padding:12px 14px"><div class="k">04 Observe</div><p style="font-size:var(--fs-label)">stdout / stderr return to the context; the model decides to continue or stop.</p></div>
         </div>
       </div>
       <div class="scaleband" style="margin-top:18px">Tool output is still <b>untrusted input</b>: validate arguments, limit permissions, set timeouts, keep logs.</div>
-      <div class="keyline">The model proposes, the program executes; <b>repeated work becomes a function, not tokens</b>.</div>
+      <div class="keyline">The model proposes, the program executes: <b>exact computation is the guardrail</b>.</div>
     </div>
     <div class="footer"><span>function calling · schema · sandbox · observation</span><span class="pnum">25 / 38</span></div>
   </section>
