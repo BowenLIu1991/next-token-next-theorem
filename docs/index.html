@@ -810,14 +810,16 @@
   #fullscreen-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   #fullscreen-toggle:disabled{cursor:not-allowed;opacity:.65}
   #clock{
-    position:fixed;right:18px;top:64px;z-index:55;
+    position:fixed;right:18px;top:62px;z-index:55;
     font-family:var(--mono);font-size:var(--fs-label);
     letter-spacing:.08em;font-variant-numeric:tabular-nums;
-    color:rgba(21,23,28,.45);
-    background:transparent;border:0;padding:2px;
-    opacity:0;pointer-events:none;transition:opacity .3s ease;
+    color:rgba(21,23,28,.42);
+    background:rgba(246,244,238,.68);
+    border:1px solid rgba(220,215,203,.6);
+    border-radius:5px;padding:3px 8px;
+    pointer-events:none;
+    box-shadow:0 1px 4px rgba(0,0,0,.03);
   }
-  body.is-fullscreen #clock{opacity:1}
   body.clean #clock,body.print #clock{display:none!important}
   body.clean #fullscreen-toggle,body.print #fullscreen-toggle{display:none!important}
 
