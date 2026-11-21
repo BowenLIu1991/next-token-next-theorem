@@ -1778,7 +1778,7 @@
     <div class="footer"><span>chapter open</span><span class="pnum">19 / 38</span></div>
   </section>
 
-<section class="slide" data-notes="This is the pivot. After training, the model only does next-token prediction: given context, it returns a distribution over the next token and samples one. Memory is not internal: the client resends history. Computation is not program execution: arithmetic and symbolic derivation are learned recall and pattern completion; exact results belong to code or a calculator. Action and goals are external too: tools execute outside; plans are generated text. Four limits map to three system capabilities: state, computation, reliability; probabilistic output needs verification, stopping and rollback.">
+<section class="slide" data-notes="This is the pivot. After training, the model only does next-token prediction: given context, it returns a distribution over the next token and samples one. Memory is not internal: the client resends history. Computation is not program execution: arithmetic and symbolic derivation are learned recall and pattern completion; exact results belong to code or a calculator. Action and goals are external too: tools execute outside; the model has no persistent goal state, and a plan is generated text, not an executable, checkable, rollback-capable controller. A harness holds the goal, checks progress and decides whether to continue or stop. Four limits map to three system capabilities: state, computation, reliability; probabilistic output needs verification, stopping and rollback.">
     <h2>The model only predicts the next token</h2>
     <p class="sub" style="margin-top:8px">Memory, computation, action and goals live outside that action.</p>
     <div class="content" style="margin-top:16px">
@@ -1792,7 +1792,7 @@
         <div class="card" style="padding:12px 14px"><div class="k">01 · No saved state</div><p>The client resends the history</p></div>
         <div class="card accent" style="padding:12px 14px"><div class="k">02 · Computation is recall</div><p>Like a times table: memory, not an algorithm</p></div>
         <div class="card" style="padding:12px 14px"><div class="k">03 · No direct action</div><p>Tools execute outside</p></div>
-        <div class="card" style="padding:12px 14px"><div class="k">04 · No persistent goal</div><p>Plans are generated text</p></div>
+        <div class="card" style="padding:12px 14px"><div class="k">04 · No persistent goal</div><p>Plans are text, not a controller<br>Goals are held outside</p></div>
       </div>
       <div class="scaleband" style="margin-top:16px">Four limits → three system capabilities: <b>state, computation, reliability</b>; probabilistic output needs verification, stopping, rollback.</div>
       <div class="keyline">The model gives only the next token; <b>everything else comes from the system</b>.</div>

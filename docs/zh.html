@@ -1776,7 +1776,7 @@
     <div class="footer"><span>chapter open</span><span class="pnum">19 / 38</span></div>
   </section>
 
-<section class="slide" data-notes="这一页是整场的转折。训练结束后，模型唯一会做的是 next-token prediction：给它前文，它给下一个 token 的概率分布，然后采样一个 token。记忆不是模型内部能力：对话历史由客户端每次重发。计算也不是执行程序：算术、符号推导都是训练中学到的记忆与模式补全，精确结果应交给代码或计算器。行动与目标同样不在模型里：工具由外部执行，计划也是生成的文本。四个短板对应三类系统能力：状态、计算、可靠性；概率输出需要验证、停止与回滚。">
+<section class="slide" data-notes="这一页是整场的转折。训练结束后，模型唯一会做的是 next-token prediction：给它前文，它给下一个 token 的概率分布，然后采样一个 token。记忆不是模型内部能力：对话历史由客户端每次重发。计算也不是执行程序：算术、符号推导都是训练中学到的记忆与模式补全，精确结果应交给代码或计算器。行动与目标同样不在模型里：工具由外部执行；模型没有常驻目标状态，计划只是生成的文本，不是可执行、可检查、可回滚的控制器。目标由外部 harness 保存、检查进度，并决定继续或停止。四个短板对应三类系统能力：状态、计算、可靠性；概率输出需要验证、停止与回滚。">
     <h2>模型只会预测下一个 token</h2>
     <p class="sub" style="margin-top:8px">记忆、计算、行动与目标，都在这个动作外面。</p>
     <div class="content" style="margin-top:16px">
@@ -1790,7 +1790,7 @@
         <div class="card" style="padding:12px 14px"><div class="k">01 · 不保存状态</div><p>对话历史由客户端每次重发</p></div>
         <div class="card accent" style="padding:12px 14px"><div class="k">02 · 计算是记忆</div><p>像九九表：调用记忆，不是算法</p></div>
         <div class="card" style="padding:12px 14px"><div class="k">03 · 不直接行动</div><p>工具由外部执行</p></div>
-        <div class="card" style="padding:12px 14px"><div class="k">04 · 不维护目标</div><p>计划也是生成的文本</p></div>
+        <div class="card" style="padding:12px 14px"><div class="k">04 · 无持久目标</div><p>计划只是文本，不是控制器<br>目标由外部保存、检查、推进</p></div>
       </div>
       <div class="scaleband" style="margin-top:16px">四个短板 → 三类系统能力：<b>状态、计算、可靠性</b>；概率输出需要验证、停止、回滚。</div>
       <div class="keyline">模型只给下一个 token；<b>其余能力都从系统里来</b>。</div>
