@@ -1857,7 +1857,7 @@
   </section>
 
   <!-- ============ S30 · Context 与 Memory ============ -->
-  <section class="slide" data-notes="把 Context 有限、Context engineering 与 Memory 合成一页。窗口从 4k 到 1M，但长文仍会大海捞针，中间信息最易被稀释；容量不等于有效利用。工程上把窗口当工作台：system、历史、检索、工具、当前问题分层放；太长就检索，太散就结构化，超窗就摘要或交给子 agent。Memory 只留信号：任务、约束、决定、已验证事实；闲聊、重复、过期信息是噪声。写入、检索、压缩、遗忘四步，对应工作/情节/语义/程序四层。">
+  <section class="slide" data-notes="把 Context 有限、Context engineering 与 Memory 合成一页。窗口从 4k 到 1M，但长文仍会大海捞针，中间信息最易被稀释；容量不等于有效利用。早期全局 attention 的成本随长度平方增长；长上下文多用滑窗 + 全局混合省算力，但长程注意力衰减，久远信息回忆不准。工程上把窗口当工作台：system、历史、检索、工具、当前问题分层放；太长就检索，太散就结构化，超窗就摘要或交给子 agent。Memory 只留信号：任务、约束、决定、已验证事实；闲聊、重复、过期信息是噪声。写入、检索、压缩、遗忘四步，对应工作/情节/语义/程序四层。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Context 与 Memory：有限窗口，怎么放</h2>
     <p class="sub" style="margin-top:8px">窗口是预算，不是仓库：先放对，再决定留什么。</p>
@@ -1872,6 +1872,7 @@
             <div class="heat"><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.40"></i><i style="--a:0.40"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.30"></i><i style="--a:0.20"></i><i style="--a:0.20"></i><i style="--a:0.30"></i><i style="--a:0.50"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.35"></i><i style="--a:0.18"></i><i style="--a:0.10"></i><i style="--a:0.10"></i><i style="--a:0.18"></i><i style="--a:0.35"></i><i style="--a:0.50"></i></div>
           </div>
           <p style="font-size:var(--fs-label);margin-top:8px;font-weight:500">容量 ≠ 有效利用。</p>
+          <p style="font-size:var(--fs-micro);line-height:1.55;margin-top:10px;padding-top:8px;border-top:1px solid var(--line)">早期：全局 attention，成本随长度平方增长。<br>现在：滑窗 + 全局混合省算力；长程注意力衰减，问很久以前的事就不准。</p>
         </div>
         <div class="card" style="padding:14px 16px;justify-content:flex-start">
           <div class="k">02 · 怎么放</div>

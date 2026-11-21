@@ -1859,7 +1859,7 @@
   </section>
 
   <!-- ============ S30 · Context and memory ============ -->
-  <section class="slide" data-notes="This merges three pages: finite context, context engineering, and memory. The window grew from 4k to 1M, but long documents still suffer from the needle-in-a-haystack problem, and the middle is diluted first. Capacity is not effective use. Treat the window as a workbench: system, history, retrieved documents, tool results, and the current question each get a layer. Too long: retrieve. Too scattered: structure. Overflow: summarize or use sub-agents. Memory keeps signal—tasks, constraints, decisions, verified facts—and drops noise such as chat, repetition, stale information, and raw logs. Write, retrieve, compress, forget; working, episodic, semantic, procedural.">
+  <section class="slide" data-notes="This merges three pages: finite context, context engineering, and memory. The window grew from 4k to 1M, but long documents still suffer from the needle-in-a-haystack problem, and the middle is diluted first. Capacity is not effective use. Early models used global attention with quadratic cost; long contexts mix sliding and global attention to save compute, but long-range attention fades, so distant details are recalled less accurately. Treat the window as a workbench: system, history, retrieved documents, tool results, and the current question each get a layer. Too long: retrieve. Too scattered: structure. Overflow: summarize or use sub-agents. Memory keeps signal—tasks, constraints, decisions, verified facts—and drops noise such as chat, repetition, stale information, and raw logs. Write, retrieve, compress, forget; working, episodic, semantic, procedural.">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Context and memory: a finite window, used well</h2>
     <p class="sub" style="margin-top:8px">The window is a budget, not a warehouse: place the right things, then decide what stays.</p>
@@ -1874,6 +1874,7 @@
             <div class="heat"><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.85"></i><i style="--a:0.80"></i><i style="--a:0.70"></i><i style="--a:0.55"></i><i style="--a:0.40"></i><i style="--a:0.40"></i><i style="--a:0.55"></i><i style="--a:0.70"></i><i style="--a:0.80"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.30"></i><i style="--a:0.20"></i><i style="--a:0.20"></i><i style="--a:0.30"></i><i style="--a:0.50"></i><i style="--a:0.65"></i><i style="--a:0.50"></i><i style="--a:0.35"></i><i style="--a:0.18"></i><i style="--a:0.10"></i><i style="--a:0.10"></i><i style="--a:0.18"></i><i style="--a:0.35"></i><i style="--a:0.50"></i></div>
           </div>
           <p style="font-size:var(--fs-label);margin-top:8px;font-weight:500">Capacity ≠ effective use.</p>
+          <p style="font-size:var(--fs-micro);line-height:1.55;margin-top:10px;padding-top:8px;border-top:1px solid var(--line)">Early: global attention, quadratic cost.<br>Now: sliding + global attention to save compute; long-range attention fades, so old details are less accurate.</p>
         </div>
         <div class="card" style="padding:14px 16px;justify-content:flex-start">
           <div class="k">02 · Placement</div>
