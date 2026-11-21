@@ -24,7 +24,7 @@ token → 模型 → 训练 → 使用 → AI × math → 结论
 - **算力与搜索**：RL 改进策略，算力扩大可验证搜索；有限搜索空间、有解且可靠判定时，穷举可找到满足规范的解，成本可能很高。
 - **使用**：context／memory、tool calling、harness、系统图与 skill 如何组合成 agent 系统。
 - **AI × math**：FunSearch、AlphaGeometry、AlphaProof、OpenAI o1、DeepSeek R1、IMO 2025，以及 2026 年 OpenAI 的公开声称。
-- **结论**：概率负责广度，验证负责正确，人负责方向。
+- **结论**：token → 概率 → 候选 → 验证 → 定理；人负责选题与方向。
 
 贯穿全场的一个例子是《天体力学基础》：
 

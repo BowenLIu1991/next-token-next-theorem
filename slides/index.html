@@ -2140,7 +2140,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
   
 
   <!-- ============ M2026a · 批量结果 ============ -->
-  <section class="slide" data-notes="核对日期 2026-11-10。OpenAI 10 月 6 日公告及 openai/math 发布版 README（adc7f1241b42e322a6451854ab7e4b4c146bf78a）给出首发 722 篇手稿、372 个相关结果族，评测尝试约 4000 个问题。一个结果族可能包含主结果、辅助论证、推论与替代证明，因此不能称为解决 700 个独立问题，也不能直接用 372/4000 算成功率。仓库持续修订，本页固定展示首发规模。公司报告平均每项结果约 3 小时 ChatGPT Pro 思考的等价算力，不是实际耗时。部分成果附 Lean；正确性、形式化覆盖范围、原创性与重要性需逐项审查。本轮未逐篇审查或本地编译。">
+  <section class="slide" data-notes="核对日期 2026-11-10。OpenAI 10 月 6 日公告及 openai/math 发布版 README（adc7f1241b42e322a6451854ab7e4b4c146bf78a）给出首发 722 篇手稿、372 个相关结果族，评测尝试约 4000 个问题。一个结果族可能包含主结果、辅助论证、推论与替代证明，因此不能称为解决 700 个独立问题，也不能直接用 372/4000 算成功率。仓库持续修订，本页固定展示首发规模。公司报告平均每项结果约 3 小时 ChatGPT Pro 思考的等价算力：不是实际耗时，也不是价格，而是每个结果的平均推理预算。部分成果附 Lean；正确性、形式化覆盖范围、原创性与重要性需逐项审查。本轮未逐篇审查或本地编译。">
     <p class="eyebrow"><b>05</b> / AI × math · 2026-10-06</p>
     <h2>OpenAI：批量生成研究级数学结果</h2>
     <p class="sub" style="margin-top:8px">从单题演示，到一整批可供审查与接续研究的手稿。</p>
@@ -2152,9 +2152,9 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px;align-items:stretch">
         <div class="card" style="padding:16px 20px;grid-column:span 2"><div class="k" style="font-size:var(--fs-small)">公开了什么</div><p style="font-size:var(--fs-sub);line-height:1.55">论文与证明材料<br>部分结果的 Lean 形式化<br>10 份推理摘要与算力统计</p></div>
-        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:var(--fs-small)">我怎么读这组数字</div><p style="font-size:var(--fs-body);line-height:1.55">结果族可含多篇手稿<br>约 3 Pro 小时：算力等价值<br>正确性、原创性、重要性待审</p></div>
+        <div class="card" style="padding:16px 20px;align-self:start"><div class="k" style="font-size:var(--fs-small)">我怎么读这组数字</div><p style="font-size:var(--fs-body);line-height:1.55">约 3 Pro 小时：算力等价值</p></div>
       </div>
-      <div class="keyline" style="margin-top:18px;">候选成果开始批量生成；<b>验证与理解成为关键工作</b>。</div>
+      <div class="keyline" style="margin-top:18px;">候选成果开始批量生成；<b>验证成为关键工作</b>。</div>
       
     </div>
     <div class="footer"><span>manuscripts · result families · verification</span><span class="pnum">31 / 37</span></div>
@@ -2261,7 +2261,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
-  <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
+  <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <h2>从下一个 token 到下一个定理</h2>
     <div class="content">
       <div class="chain">
@@ -2270,11 +2270,6 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
         <span class="chip2">候选</span><span class="arr">→</span>
         <span class="chip2">验证</span><span class="arr">→</span>
         <span class="chip2 last">定理</span>
-      </div>
-      <div class="closing">
-        <div><p>概率负责广度</p></div>
-        <div><p>验证负责正确</p></div>
-        <div class="last"><p>人负责方向</p></div>
       </div>
       <div class="keyline">下一个定理，仍然从<b>下一个 token</b> 开始。</div>
     </div>

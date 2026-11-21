@@ -2142,7 +2142,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
   
 
   <!-- ============ M2026a · Mathematics release ============ -->
-  <section class="slide" data-notes="Sources checked on 2026-11-10: OpenAI's October 6 announcement and search-indexed launch README at openai/math commit adc7f1241b42e322a6451854ab7e4b4c146bf78a. Launch counts: 722 manuscripts in 372 related result families, from approximately 4000 attempted problems. Families can include main results, companion arguments, consequences and alternative proofs. Neither 722 independent solved problems nor a 372/4000 success rate follows. The repository evolves. The reported average of about three ChatGPT Pro thinking hours per result is a compute equivalent, not elapsed time. Some results have Lean formalizations; coverage, assumptions, correspondence, novelty and significance require individual review. No local Lean build or paper-by-paper mathematical verification was performed.">
+  <section class="slide" data-notes="Sources checked on 2026-11-10: OpenAI's October 6 announcement and search-indexed launch README at openai/math commit adc7f1241b42e322a6451854ab7e4b4c146bf78a. Launch counts: 722 manuscripts in 372 related result families, from approximately 4000 attempted problems. Families can include main results, companion arguments, consequences and alternative proofs. Neither 722 independent solved problems nor a 372/4000 success rate follows. The repository evolves. The reported average of about three ChatGPT Pro thinking hours per result is a compute equivalent: not elapsed time, not a price, but the average inference budget per result. Some results have Lean formalizations; coverage, assumptions, correspondence, novelty and significance require individual review. No local Lean build or paper-by-paper mathematical verification was performed.">
     <p class="eyebrow"><b>05</b> / AI × math · 2026-10-06</p>
     <h2>OpenAI: research mathematics at batch scale</h2>
     <p class="sub" style="margin-top:8px">From a single demonstration to a collection for review and follow-on research.</p>
@@ -2154,7 +2154,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px;align-items:stretch">
         <div class="card" style="padding:16px 20px;grid-column:span 2"><div class="k" style="font-size:var(--fs-small)">What was released</div><p style="font-size:var(--fs-sub);line-height:1.55">Manuscripts and proof artifacts<br>Lean formalizations for some results<br>10 reasoning summaries; compute data</p></div>
-        <div class="card" style="padding:16px 20px"><div class="k" style="font-size:var(--fs-small)">How I read the numbers</div><p style="font-size:var(--fs-body);line-height:1.55">One family: several papers<br>3 Pro hours: compute equivalent<br>Truth, novelty, significance: review</p></div>
+        <div class="card" style="padding:16px 20px;align-self:start"><div class="k" style="font-size:var(--fs-small)">How I read the numbers</div><p style="font-size:var(--fs-body);line-height:1.55">3 Pro hours: compute equivalent</p></div>
       </div>
       <div class="keyline" style="margin-top:18px;">Candidate results arrive in batches; <b>verification and understanding matter</b>.</div>
       
@@ -2263,7 +2263,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
-  <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。概率负责广度，验证负责正确，人负责方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
+  <section class="slide" data-notes="结论：token 给概率，概率给候选；验证器把候选筛成定理；人负责选题和方向。下一个定理，仍然从下一个 token 开始。对天体力学：先用在可验证的内层——数值实验、形式化、文献；长期预测与外推仍要人把关。">
     <h2>From the next token to the next theorem</h2>
     <div class="content">
       <div class="chain">
@@ -2272,11 +2272,6 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
         <span class="chip2">candidate</span><span class="arr">→</span>
         <span class="chip2">verification</span><span class="arr">→</span>
         <span class="chip2 last">theorem</span>
-      </div>
-      <div class="closing">
-        <div><p>Probability gives breadth</p></div>
-        <div><p>Verification gives correctness</p></div>
-        <div class="last"><p>People set the direction</p></div>
       </div>
       <div class="keyline">The next theorem still begins with the <b>next token</b>.</div>
     </div>
