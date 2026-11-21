@@ -106,7 +106,7 @@
 **标题**：这句话，模型看到 10 个整数
 
 ```
-Celestial mechanics is the poetry of orbits.
+三体问题 is a classic problem in celestial mechanics.
 → 10 tokens
 → [69126, 90010, 52347, 382, 290, 38153, 328, 503, 24043, 13]
 ```

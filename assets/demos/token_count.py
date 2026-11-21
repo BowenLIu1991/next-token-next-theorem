@@ -7,7 +7,7 @@ Run:
 import tiktoken
 
 SAMPLES = {
-    "english": "Celestial mechanics is the poetry of orbits.",
+    "english": "三体问题 is a classic problem in celestial mechanics.",
     "chinese": "天体力学是研究天体运动的学科。",
     "mixed": "三体问题 is a classic problem in celestial mechanics.",
     "code": "def f(x):\n    return x**2\n",

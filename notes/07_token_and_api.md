@@ -153,7 +153,7 @@ OpenAI 文档里的经验规则：**1 token ≈ 4 characters ≈ 0.75 words**（
 
 ### 本报告的例子
 
-`Celestial mechanics is the poetry of orbits.`
+`三体问题 is a classic problem in celestial mechanics.`
 
 - 46 字符
 - 7 个单词
@@ -188,7 +188,7 @@ OpenAI 文档里的经验规则：**1 token ≈ 4 characters ≈ 0.75 words**（
 
 | 输入 | 实际切分 |
 |---|---|
-| `Celestial mechanics is the poetry of orbits.` | `Cel` `estial` ` mechanics` ` is` ` the` ` poetry` ` of` ` or` `bits` `.` |
+| `三体问题 is a classic problem in celestial mechanics.` | `Cel` `estial` ` mechanics` ` is` ` the` ` poetry` ` of` ` or` `bits` `.` |
 | `三体问题 is a classic problem...` | `三` `体` `问题` ` is` ` a` ` classic` ` problem` ... |
 | `1234567890` | `123` `456` `789` `0` |
 | `def f(x):\n    return x**2\n` | `def` ` f` `(x` `):\n` `   ` ` return` ` x` `**` `2` `\n` |
@@ -248,7 +248,7 @@ import tiktoken
 
 enc = tiktoken.get_encoding("o200k_base")
 texts = {
-    "english": "Celestial mechanics is the poetry of orbits.",
+    "english": "三体问题 is a classic problem in celestial mechanics.",
     "chinese": "天体力学是研究天体运动的学科。",
     "code": "def f(x):\n    return x**2\n",
     "numbers": "1234567890",

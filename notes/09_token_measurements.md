@@ -18,7 +18,7 @@
 
 样本内容：
 
-- 英文：`Celestial mechanics is the poetry of orbits.`
+- 英文：`三体问题 is a classic problem in celestial mechanics.`
 - 中文：`天体力学是研究天体运动的学科。`
 - 中英混排：`三体问题 is a classic problem in celestial mechanics.`
 - 代码：`def f(x):\n    return x**2\n`
@@ -65,7 +65,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | ID | 4087 | 20121 | 31936 | 5557 | 37887 | 4531 | 867 | 7074 | 11343 | 8590 |
 
-和英文 `Celestial mechanics is the poetry of orbits.`（46 字符 → 10 token）并排：两种文字、两句话，都是 10 个整数。中文并不是"一字一 token"：`系统`、`介绍` 各占一个 token。
+和英文 `三体问题 is a classic problem in celestial mechanics.`（46 字符 → 10 token）并排：两种文字、两句话，都是 10 个整数。中文并不是"一字一 token"：`系统`、`介绍` 各占一个 token。
 
 ---
 
