@@ -2255,7 +2255,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
   <!-- ============ S49 · Systems engineering ============ -->
   <section class="slide" data-notes="The system is reliable only when six interfaces hold at once. State consistency: many agents read and write the same proof graph, requiring versions, locks and conflict resolution. Scheduling and budget: which node runs first, how much concurrency, when to preempt, how to recover cost. Failure and retry: errors must be detectable, retries idempotent, side effects not duplicated, with backoff and caps. Verification interface: natural language, formal statements and Lean can diverge semantically; statements and assumptions need separate review. Observability: logs, replay, attribution and audit locate the failure in execution, program design, mathematical tooling or the search path, so pruning and upgrades are targeted. Human boundary: what is automated, what is reviewed, when to stop, who owns the outcome. Low-hanging fruit means an asymmetric problem: hard to prove, easy to disprove. When the search space is enumerable, one counterexample settles the question; failure to find one proves nothing. The real systems problem is long-run stability, concurrent state, verification interfaces, cost and reproducibility. The real systems problem is long-run stability, concurrent state, verification interfaces, cost and reproducibility. A single-layer demo does not prove whole-system reliability; model scores cannot substitute for it.">
     <p class="eyebrow"><b>05</b> / AI × math · systems difficulty</p>
-    <h2>Systems engineering: six interfaces</h2>
+    <h2>Systems engineering: six challenges</h2>
     <p class="sub" style="margin-top:8px">Each layer can work alone; the whole machine still may not be reliable.</p>
     <div class="content" style="margin-top:20px">
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
@@ -2269,7 +2269,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
       <div class="scaleband" style="margin-top:auto;padding-top:14px;font-size:var(--fs-label)"><b>Low-hanging fruit</b>: hard to prove, easy to disprove; one counterexample settles it · <b>Real systems problem</b>: reproducible, scalable, maintainable</div>
       <div class="keyline" style="margin-top:12px">Low-hanging fruit proves direction; <b>the hard part is the whole machine</b>.</div>
     </div>
-    <div class="footer"><span>systems engineering · six interfaces</span><span class="pnum">35 / 37</span></div>
+    <div class="footer"><span>systems engineering · six challenges</span><span class="pnum">35 / 37</span></div>
   </section>
 
   <!-- ============ S53 · 结论 ============ -->
