@@ -781,7 +781,7 @@
     .slide{position:relative!important;inset:auto!important;width:1280px;height:720px;
       opacity:1!important;pointer-events:auto;page-break-after:always;break-after:page}
     .slide:last-child{page-break-after:auto;break-after:auto}
-    #hint,#notes,#fullscreen-toggle{display:none!important}
+    #hint,#notes,#fullscreen-toggle,#clock{display:none!important}
     *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
 
@@ -809,6 +809,16 @@
   #fullscreen-toggle:hover{border-color:var(--accent);color:var(--accent)}
   #fullscreen-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   #fullscreen-toggle:disabled{cursor:not-allowed;opacity:.65}
+  #clock{
+    position:fixed;right:18px;top:64px;z-index:55;
+    font-family:var(--mono);font-size:var(--fs-label);
+    letter-spacing:.08em;font-variant-numeric:tabular-nums;
+    color:rgba(21,23,28,.45);
+    background:transparent;border:0;padding:2px;
+    opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  body.is-fullscreen #clock{opacity:1}
+  body.clean #clock,body.print #clock{display:none!important}
   body.clean #fullscreen-toggle,body.print #fullscreen-toggle{display:none!important}
 
 </style>
@@ -2287,6 +2297,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
 
 <div id="hint">← → 翻页 · N 讲稿 · F 全屏</div>
 <button id="fullscreen-toggle" type="button" aria-pressed="false" title="全屏显示（F）；Esc 退出">⛶ 全屏</button>
+<div id="clock" aria-hidden="true">--:--</div>
 <div id="notes"></div>
 
 <script>
@@ -2332,6 +2343,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
   const fullscreenButton = document.getElementById('fullscreen-toggle');
   function updateFullscreenButton(){
     const active = Boolean(document.fullscreenElement);
+    document.body.classList.toggle('is-fullscreen', active);
     fullscreenButton.textContent = active ? '退出全屏' : '⛶ 全屏';
     fullscreenButton.setAttribute('aria-pressed', String(active));
   }
@@ -2349,6 +2361,14 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
   fullscreenButton.addEventListener('click', toggleFullscreen);
   document.addEventListener('fullscreenchange', updateFullscreenButton);
   updateFullscreenButton();
+
+  const clock = document.getElementById('clock');
+  function updateClock(){
+    const now = new Date();
+    clock.textContent = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
 
   document.addEventListener('keydown', e => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
