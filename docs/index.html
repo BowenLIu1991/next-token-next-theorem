@@ -1566,14 +1566,14 @@
   <section class="slide" data-notes="This is a memory aid, not a strict mechanism. Pretraining is like reading a textbook: massive text and code, learning language, knowledge and patterns. SFT is like studying worked examples: demonstration answers teach response style and task behavior. RL is like solving problems or taking exams: attempts, scores, feedback, and policy improvement. The stages overlap, and real recipes iterate; the analogy only fixes the division of labor.">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>Three stages: textbook, worked examples, problems</h2>
-    <p class="sub" style="margin-top:8px">A simple analogy for the division of labor.</p>
+    <p class="sub" style="margin-top:8px">Read widely, follow demonstrations, and refine search policy through trial and error.</p>
     <div class="content">
       <div class="three">
         <div class="card"><div class="k">01 · Pretraining</div><div class="big">Read books</div><p>Massive text and code; language, knowledge and patterns.</p></div>
         <div class="card"><div class="k">02 · SFT</div><div class="big">Study examples</div><p>Demonstration answers; response style and task behavior.</p></div>
         <div class="card accent"><div class="k">03 · RL</div><div class="big">Solve problems</div><p>Attempts, scores, feedback; improve the policy.</p></div>
       </div>
-      <div class="keyline">Read the textbook, study examples, then solve problems.</div>
+      <div class="keyline">Pretraining builds the base; <b>RL polishes the depth of problem solving</b>.</div>
     </div>
     <div class="footer"><span>pretraining · SFT · RL</span><span class="pnum">12 / 37</span></div>
   </section>
@@ -1598,8 +1598,8 @@
   <!-- ============ S14 · Games made RL visible ============ -->
   <section class="slide" data-notes="Start with famous games, not as the origin of RL. Atari DQN (2015 Nature) learned from pixels and score; AlphaGo (2016) combined supervision, self-play and search; OpenAI Five and AlphaStar (2019) showed teamwork and strategy. Common traits: clear rules, measurable outcomes, repeatable attempts. Then Breakout makes reward learning concrete: try actions, observe score, learn delayed-benefit strategy. The game engine supplies both environment and feedback; real environments still cost time and compute.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>Games: learn and improve in an environment</h2>
-    <p class="sub" style="margin-top:8px">Clear rules, measurable outcomes, repeatable attempts.</p>
+    <h2>Games: clear rules and immediate payoff</h2>
+    <p class="sub" style="margin-top:8px">Closed loops and explicit scores allow cheap, unbounded trial and error.</p>
     <div class="content">
       <div class="timeline">
         <div class="tl"><div class="year">2015</div><div class="co">Google DeepMind</div><h4>Atari · DQN</h4><p>Pixels → actions<br>Reward: game score</p></div>
@@ -1699,7 +1699,7 @@
   <section class="slide" data-notes="Three shared advantages. First, a relatively closed environment: math works inside axioms and inference rules; code inside language specs and runtime. Second, traceable errors: proofs can be checked step by step; tests, stack traces and line numbers locate code errors. Third, public corpora are relatively clean: GitHub code repos are well structured; math papers are relatively concise, rigorous and correct. Math training reasons, checks, catches errors and iterates in a logical environment; programming training runs, checks results, debugs and iterates in a compiler environment. They also share decomposition, symbolic constraints, state tracking and multi-step consistency. Evidence exists for transfer: math RL improves code; code training improves state tracking. Transfer depends on method, mix and evaluation, not a universal bidirectional theorem.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
     <h2>Math and code: directly traceable feedback, transferable skills</h2>
-    <p class="sub" style="margin-top:8px">Closed environments, traceable errors, clean data.</p>
+    <p class="sub" style="margin-top:8px">Self-contained boundaries and fine-grained attribution make autonomous trial-and-error viable.</p>
     <div class="content">
       <div class="three tight">
         <div class="card"><div class="k">01 · Closed environment</div><div class="big">Axioms · runtime</div><p>Math uses definitions and inference rules; code uses language specs and runtime.</p></div>
@@ -1724,7 +1724,7 @@
   <section class="slide" data-notes="Compare four domains on one slide, without the Kepler-period reward example. The advantages of code and mathematics apply to specified subtasks: compilation, tests, errors, answer checks, proof checking and counterexamples provide feedback under defined rules or assumptions. Tests are partial; formal checks establish the stated proposition. Product value has slower, plural real-world feedback; non-consensus choices do not inherently create value. Trading rewards include profit, risk and cost, while information is incomplete and markets change; backtests do not guarantee future returns. This is an analytical comparison, not an empirical capability ranking. RL needs compatible goals, environments and feedback to improve problem solving.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
     <h2>Four tasks, different feedback conditions</h2>
-    <p class="sub" style="margin-top:8px">Code, math, product design, trading: how do goals, environments and feedback fit?</p>
+    <p class="sub" style="margin-top:8px">The more self-contained the environment, the easier reinforcement learning converges.</p>
     <div class="content" style="margin-top:22px">
       <div class="two even" style="gap:18px;align-items:stretch">
         <div class="card" style="padding:16px 20px">
@@ -1756,8 +1756,8 @@
   <!-- ============ S24 · Summary: environment, feedback, parameter update ============ -->
   <section class="slide" data-notes="This summarizes the reward section. Many mathematical and coding tasks are well defined: rules, assumptions and goals are explicit, and outputs can be checked. Put such a task into an executable environment; the model repeatedly makes next-token predictions and produces candidates. The environment evaluates outputs, and errors can be traced through the steps. Write this feedback as an optimizable loss or objective, then improve the model through backpropagation and parameter updates. Supervised learning usually backpropagates through a loss such as cross-entropy. Reinforcement learning turns reward into a policy-gradient objective; the environment itself is not differentiated, but parameter updates still follow a computable objective. Feedback may be partial, loss design shapes behavior, and independent evaluation is still required after training. Capability improves when environment, feedback and objective form a loop.">
     <p class="eyebrow"><b>03</b> / reward &amp; problem solving</p>
-    <h2>Summary: environment, feedback, updates</h2>
-    <p class="sub" style="margin-top:8px">Well-defined tasks let a model predict, receive checks and iterate in an environment.</p>
+    <h2>Three pillars of RL: environment, feedback, and updates</h2>
+    <p class="sub" style="margin-top:8px">Verifiable, closed-domain problems give the model actionable gradients within trial-and-error loops.</p>
     <div class="content">
       <div class="loop" style="gap:10px">
         <span class="step">Problem + environment</span><span class="arr">→</span>
@@ -2024,8 +2024,8 @@ obs   "16.0"</pre>
   <!-- ============ S36b · Skill ============ -->
   <section class="slide" data-notes="A skill packages a procedure: SKILL.md says when to use it, the steps and checkpoints; scripts/ holds deterministic operations; references/ holds domain docs; assets/ holds templates. The loop observes, acts and revises, with state outside, for hours or days. It leaves a trajectory: successes, failures, repairs, tool calls, checkpoints. Extract the repeatable part into a skill, load it next time. Loop is runtime; skill is compiled experience; memory is state; harness is boundary.">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Skill: compile the loop into a reusable capability</h2>
-    <p class="sub" style="margin-top:8px">The loop produces experience; a skill turns it into a loadable procedure.</p>
+    <h2>Skill: packaging debugged workflows into reusable procedures</h2>
+    <p class="sub" style="margin-top:8px">Distill proven steps from execution traces so subsequent runs load them directly.</p>
     <div class="content">
       <div class="three tight">
         <div class="card"><div class="k">01 · Run</div><div class="big">Loop</div><div class="loop" style="margin-top:12px;padding-top:0;border-top:0;justify-content:flex-start;gap:6px"><span class="step">Observe</span><span class="arr">→</span><span class="step">Act</span><span class="arr">↺</span></div><p>State lives outside; runs for hours or days.</p></div>
@@ -2101,7 +2101,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
   <section class="slide" data-notes="The generator proposes, the verifier signals, search decides the next step. A DAG (directed acyclic graph) is structure: nodes are lemmas or subgoals, edges are premise to conclusion, acyclic, and proved lemmas are reused; the agent expands, Lean checks. MCTS (Monte Carlo tree search) is policy: nodes are states, branches are candidate actions; select, expand, evaluate, backpropagate, concentrating budget on promising branches. The mechanism is the speaker's hypothesis, not an OpenAI disclosure. Bottlenecks sit in both system and model: decomposition, shared state, concurrency and budget; the key step, useful lemmas, and a strict proof.">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>Generate → verify → search: how proof graphs evolve</h2>
-    <p class="sub" style="margin-top:8px">The mechanism is a hypothesis; the bottlenecks are real.</p>
+    <p class="sub" style="margin-top:8px">Implementations vary, but the dual bottlenecks of systems and mathematics are universal.</p>
     <div class="content">
       <div class="chain" style="justify-content:center">
         <span class="chip2">Generate · LLM</span><span class="arr">→</span>
@@ -2267,7 +2267,7 @@ references/</pre></div><p>Load on demand; reuse next time.</p></div>
         <div class="card accent" style="padding:12px 15px"><div class="k">06 · Human boundary</div><div class="big" style="font-size:var(--fs-sub)">When to stop, who owns</div><p style="font-size:var(--fs-small)">Automate execution, gate judgment</p></div>
       </div>
       <div class="scaleband" style="margin-top:auto;padding-top:14px;font-size:var(--fs-label)"><b>Low-hanging fruit</b>: hard to prove, easy to disprove; one counterexample settles it · <b>Real systems problem</b>: reproducible, scalable, maintainable</div>
-      <div class="keyline" style="margin-top:12px">Low-hanging fruit proves direction; <b>the hard part is the whole machine</b>.</div>
+      <div class="keyline" style="margin-top:12px">A single counterexample validates the direction; <b>long-horizon reliability requires whole-machine engineering</b>.</div>
     </div>
     <div class="footer"><span>systems engineering · six challenges</span><span class="pnum">35 / 37</span></div>
   </section>

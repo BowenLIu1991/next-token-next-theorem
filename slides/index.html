@@ -1564,14 +1564,14 @@
   <section class="slide" data-notes="这是一个帮助记忆的类比，不是严格机制。预训练像读教材：海量文本与代码，学语言、知识与模式。SFT 像看例题：给示范答案，学回答方式与任务行为。RL 像做题或考试：尝试、评分、反馈，改进策略。三阶段有重叠，实际配方也会迭代；类比只用于记住分工。">
     <p class="eyebrow"><b>03</b> / training</p>
     <h2>训练三阶段：读教材、看例题、做题目</h2>
-    <p class="sub" style="margin-top:8px">一个简单的类比，帮助记住三阶段的分工。</p>
+    <p class="sub" style="margin-top:8px">通读知识、看懂范例、通过真题校正解题策略。</p>
     <div class="content">
       <div class="three">
         <div class="card"><div class="k">01 · 预训练</div><div class="big">读教材</div><p>海量文本与代码；学语言、知识与模式。</p></div>
         <div class="card"><div class="k">02 · SFT</div><div class="big">看例题</div><p>给示范答案；学回答方式与任务行为。</p></div>
-        <div class="card accent"><div class="k">03 · RL</div><div class="big">做题 / 考试</div><p>尝试、评分、反馈；改进策略。</p></div>
+        <div class="card accent"><div class="k">03 · RL</div><div class="big">真题演练</div><p>依客观判据评分扣分，在试错中调整策略。</p></div>
       </div>
-      <div class="keyline">先读教材，再看例题，最后做题。</div>
+      <div class="keyline">预训练打底，范例规范格式；<b>求解深度靠强化学习试错打磨</b>。</div>
     </div>
     <div class="footer"><span>pretraining · SFT · RL</span><span class="pnum">12 / 37</span></div>
   </section>
@@ -1596,8 +1596,8 @@
   <!-- ============ S14 · 游戏让 RL 被看见 ============ -->
   <section class="slide" data-notes="先讲著名游戏案例，不把游戏当作 RL 的起点。Atari DQN 2015 年 Nature 论文从像素与分数学习；AlphaGo 2016 年结合监督学习、自我对弈与搜索；OpenAI Five 与 AlphaStar 2019 年展示团队协作与策略。共同点是规则明确、结果可衡量、可反复尝试。再用打砖块把奖励学习讲具体：尝试不同动作，观察得分，学习具有延迟收益的策略。游戏引擎同时提供环境与反馈；真实环境的时间和算力仍有成本。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>游戏：在环境中学习和提高</h2>
-    <p class="sub" style="margin-top:8px">规则明确、结果可衡量、可反复尝试。</p>
+    <h2>游戏：规则清晰，输赢立现</h2>
+    <p class="sub" style="margin-top:8px">环境闭环、得分明确，可无限次低成本试错。</p>
     <div class="content">
       <div class="timeline">
         <div class="tl"><div class="year">2015</div><div class="co">Google DeepMind</div><h4>Atari · DQN</h4><p>像素 → 动作<br>奖励：游戏分数</p></div>
@@ -1608,7 +1608,7 @@
       <div class="three tight" style="margin-top:20px">
         <div class="card"><div class="k">尝试</div><div class="big">不同动作</div><p>探索时机与方向。</p></div>
         <div class="card"><div class="k">观察</div><div class="big">结果得分</div><p>漏球，或清除更多砖块。</p></div>
-        <div class="card accent"><div class="k">学习</div><div class="big">更好的策略</div><p>学会具有延迟收益的动作。</p></div>
+        <div class="card accent"><div class="k">收敛</div><div class="big">长线打法</div><p>摸索出牺牲眼前即时分数、换取长远更高回报的策略。</p></div>
       </div>
       <div class="keyline">游戏引擎同时提供环境与反馈；策略从反复尝试里长出来。</div>
     </div>
@@ -1697,7 +1697,7 @@
   <section class="slide" data-notes="数学和代码的共同优势收成三点。第一，外部环境相对封闭：数学在公理化系统中工作，代码在语言规范与运行环境中工作。第二，错误可追溯：证明可以逐步检查，代码可以借测试、异常栈和行号定位。第三，公开语料相对干净：GitHub 代码仓结构清晰；数学论文相对简洁、严谨、正确。数学训练在逻辑环境中推理、检验、识别错误并迭代；编程训练在编译器环境中运行、检验结果、调试并迭代。代码与数学还共享分解、符号约束、状态追踪与多步一致性等技能。已有迁移证据：数学 RL 提升代码表现；代码训练改善状态追踪。迁移依训练方法、配比与评估任务，不是普遍的双向提升定理。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
     <h2>数学与代码：反馈直接可追溯，能力可迁移</h2>
-    <p class="sub" style="margin-top:8px">封闭环境、可追溯错误、干净数据，让试错可以规模化。</p>
+    <p class="sub" style="margin-top:8px">自洽闭环、错误归因到行与步，让大规模自主试错成为可能。</p>
     <div class="content">
       <div class="three tight">
         <div class="card"><div class="k">01 · 外部环境封闭</div><div class="big">公理系统 · 运行环境</div><p>数学靠定义与推理规则；代码靠语言规范与运行时。</p></div>
@@ -1722,16 +1722,16 @@
   <section class="slide" data-notes="四类任务放在同一页比较，不再用 Kepler 周期题的奖励示例。编程和数学的优势适用于明确子任务：编译、测试、报错、答案检查、证明检查或反例能提供反馈；测试有限，形式证明验证特定陈述。产品设计的用户价值和独特路线需要更慢、多元的现实反馈，非共识选择不保证价值。交易的盈亏、风险和成本可衡量，但信息不完备、市场变化，回测不保证未来收益。此页是反馈条件的分析对比，不是模型能力排名。RL 改进问题求解需要目标、环境与反馈相互配合。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
     <h2>四类任务，不同的反馈条件</h2>
-    <p class="sub" style="margin-top:8px">编程、数学、产品设计、交易：目标、环境与反馈怎样配合？</p>
+    <p class="sub" style="margin-top:8px">环境越自洽、判据越确定，强化学习越容易收敛。</p>
     <div class="content" style="margin-top:22px">
       <div class="two even" style="gap:18px;align-items:stretch">
         <div class="card" style="padding:16px 20px">
           <div class="k">01 · 编程</div><div class="big" style="font-size:var(--fs-sub)">可执行的检查</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:var(--fs-body);line-height:1.7"><li>目标：满足指定功能与规范</li><li>反馈：编译、测试、报错</li><li>试验：本地反复运行与修订</li></ul>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:var(--fs-body);line-height:1.7"><li>目标：满足指定功能与规范</li><li>反馈：编译、测试、报错</li><li>试验：看单测红绿灯，改到通过为止</li></ul>
         </div>
         <div class="card" style="padding:16px 20px">
           <div class="k">02 · 数学</div><div class="big" style="font-size:var(--fs-sub)">明确的假设与目标</div>
-          <ul style="padding-left:18px;margin:10px 0 0;font-size:var(--fs-body);line-height:1.7"><li>目标：在给定假设下求解或证明</li><li>反馈：答案检查、证明检查、反例</li><li>试验：反复生成与验证候选</li></ul>
+          <ul style="padding-left:18px;margin:10px 0 0;font-size:var(--fs-body);line-height:1.7"><li>目标：在给定假设下求解或证明</li><li>反馈：答案检查、证明检查、反例</li><li>试验：推演证明、构造反例、验证引理链</li></ul>
         </div>
         <div class="card accent" style="padding:16px 20px">
           <div class="k">03 · 产品设计</div><div class="big" style="font-size:var(--fs-sub)">长周期的现实反馈</div>
@@ -1754,8 +1754,8 @@
   <!-- ============ S24 · 总结：环境、反馈与参数更新 ============ -->
   <section class="slide" data-notes="这是奖励章节的总结。数学和编程中的许多任务定义良好：规则、假设和目标明确，输出可以检查。把这些任务放进可执行的环境，让模型不断做 next-token 预测并产生候选答案，环境就能对输出进行评判，错误也能沿步骤追溯。把这种反馈写成可优化的 loss 或目标，便可通过反向传播和参数迭代改进模型。监督学习通常直接对交叉熵等损失反向传播；强化学习则把奖励转成策略梯度的目标，环境本身并不可微，但参数更新仍沿可计算的目标进行。反馈可能是部分的，loss 设计会塑造行为，训练后仍需独立评估。能力提升来自环境、反馈与优化目标形成闭环。">
     <p class="eyebrow"><b>03</b> / 奖励与问题求解</p>
-    <h2>总结：环境、反馈与参数更新</h2>
-    <p class="sub" style="margin-top:8px">良好定义的问题，让模型可以在环境中反复预测、接受检查并迭代。</p>
+    <h2>强化学习走通的三要素</h2>
+    <p class="sub" style="margin-top:8px">判据明确的封闭问题，让模型在试错闭环中获得有效梯度。</p>
     <div class="content">
       <div class="loop" style="gap:10px">
         <span class="step">问题与环境</span><span class="arr">→</span>
@@ -2022,13 +2022,13 @@ obs   "16.0"</pre>
   <!-- ============ S36b · Skill ============ -->
   <section class="slide" data-notes="Skill 把一套做法封装成可复用能力：一个 SKILL.md 说明何时用、按什么步骤做、检查点是什么；scripts/ 放确定性脚本；references/ 放领域资料；assets/ 放模板。Loop 在环境里反复观察、行动、修正，状态放在外部，可以持续数小时或数天；它留下轨迹：成功路径、失败与修复、工具调用、检查点。把轨迹里可重复的部分提炼成 skill，下一轮按需加载。Loop 是运行时，skill 是编译后的经验；memory 是状态，harness 是边界。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Skill：把 loop 固化成可复用能力</h2>
-    <p class="sub" style="margin-top:8px">loop 产生经验；skill 把经验变成下一轮可加载的流程。</p>
+    <h2>Skill：把排错经验打包成规范流程</h2>
+    <p class="sub" style="margin-top:8px">在执行轨迹里沉淀有效步骤，下一轮按需加载，不再重复踩坑。</p>
     <div class="content">
       <div class="three tight">
-        <div class="card"><div class="k">01 · 跑起来</div><div class="big">Loop</div><div class="loop" style="margin-top:12px;padding-top:0;border-top:0;justify-content:flex-start;gap:6px"><span class="step">观察</span><span class="arr">→</span><span class="step">行动</span><span class="arr">↺</span></div><p>状态放到外部；可以持续数小时或数天。</p></div>
-        <div class="card"><div class="k">02 · 提炼</div><div class="big">轨迹</div><div class="chain" style="margin-top:12px"><span class="c">成功</span><span class="c">失败</span><span class="c">修复</span><span class="c">检查点</span></div><p>提炼可重复步骤；去掉偶然。</p></div>
-        <div class="card accent"><div class="k">03 · 固化</div><div class="big">Skill</div><div class="panel" style="margin-top:12px;padding:10px 12px"><pre style="margin:0;font-family:var(--mono);font-size:var(--fs-micro);line-height:1.55;color:#cfd2d9;white-space:pre-wrap">SKILL.md
+        <div class="card"><div class="k">01 · 长程运行</div><div class="big">Loop</div><div class="loop" style="margin-top:12px;padding-top:0;border-top:0;justify-content:flex-start;gap:6px"><span class="step">观察</span><span class="arr">→</span><span class="step">行动</span><span class="arr">↺</span></div><p>状态放到外部；可以持续数小时或数天。</p></div>
+        <div class="card"><div class="k">02 · 沉淀轨迹</div><div class="big">轨迹</div><div class="chain" style="margin-top:12px"><span class="c">成功</span><span class="c">失败</span><span class="c">修复</span><span class="c">检查点</span></div><p>提炼可重复步骤；去掉偶然。</p></div>
+        <div class="card accent"><div class="k">03 · 打包流程</div><div class="big">Skill</div><div class="panel" style="margin-top:12px;padding:10px 12px"><pre style="margin:0;font-family:var(--mono);font-size:var(--fs-micro);line-height:1.55;color:#cfd2d9;white-space:pre-wrap">SKILL.md
 scripts/
 references/</pre></div><p>按需加载，下一轮直接用。</p></div>
       </div>
@@ -2099,7 +2099,7 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
   <section class="slide" data-notes="生成器给候选，验证器给信号，搜索决定下一步。DAG（directed acyclic graph，有向无环图）是结构：节点是引理或子目标，边是前提到结论，无环，已证引理复用；Agent 扩展，Lean 检查。MCTS（Monte Carlo tree search，蒙特卡洛树搜索）是策略：节点是状态，分支是候选动作，选择、扩展、评估、回传，预算集中在高潜分支。机制是演讲者的猜测，不是 OpenAI 披露的实现。瓶颈同时在系统和模型：系统要拆解、共享状态、并发与预算；模型要找到关键一步、提出引理、写成严格证明。">
     <p class="eyebrow"><b>05</b> / AI × math</p>
     <h2>生成 → 验证 → 搜索：证明图如何演进</h2>
-    <p class="sub" style="margin-top:8px">机制是猜测；瓶颈是现实的。</p>
+    <p class="sub" style="margin-top:8px">算法实现各家有别，但工程与数学的双重瓶颈摆在所有人面前。</p>
     <div class="content">
       <div class="chain" style="justify-content:center">
         <span class="chip2">生成 · LLM</span><span class="arr">→</span>
@@ -2264,8 +2264,8 @@ references/</pre></div><p>按需加载，下一轮直接用。</p></div>
         <div class="card" style="padding:12px 15px"><div class="k">05 · 可观测性</div><div class="big" style="font-size:var(--fs-sub)">失败属于哪一层</div><p style="font-size:var(--fs-small)">执行 · 程序 · 数学工具 · 搜索路径</p></div>
         <div class="card accent" style="padding:12px 15px"><div class="k">06 · 人机边界</div><div class="big" style="font-size:var(--fs-sub)">何时停、谁负责</div><p style="font-size:var(--fs-small)">自动执行，人工把关</p></div>
       </div>
-      <div class="scaleband" style="margin-top:14px;font-size:var(--fs-label)"><b>低垂的果实</b>：难证明、易证伪；找到一个反例就能定论 · <b>真正的系统问题</b>：可复现、可扩展、可维护</div>
-      <div class="keyline" style="margin-top:12px">低垂的果实证明方向；<b>真正的难题是整机</b>。</div>
+      <div class="scaleband" style="margin-top:14px;font-size:var(--fs-label)"><b>非对称任务</b>：证明极难但证伪容易，找到一个反例即可定论 · <b>真实系统工程</b>：支撑长时、大规模、可复现与高并发</div>
+      <div class="keyline" style="margin-top:12px">单点反例证明路径可行；<b>长程运行拼的是整机工程</b>。</div>
     </div>
     <div class="footer"><span>systems engineering · six challenges</span><span class="pnum">35 / 37</span></div>
   </section>
