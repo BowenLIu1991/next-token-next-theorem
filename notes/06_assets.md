@@ -30,7 +30,7 @@
 | Token | S2–S4 | 英文 + 中文（各 10 token）两个例子、词表账本、规模标尺 |
 | 模型 | S8–S11 | 输入 → 概率分布（MathML softmax）、采样、无状态 |
 | 训练 | S12–S24 | 知识 → 行为 → 策略、交叉熵、PPL、压缩、SFT、RL、RL 时间线 |
-| 应用 | S27–S36 | 条件分布偏移、CoT、上下文膨胀条、大海捞针热图、工具调用、Agent、记忆网格、harness |
+| 应用 | S27–S36 | 条件分布偏移、CoT、上下文增长条、大海捞针热图、工具调用、Agent、记忆网格、harness |
 | 应用总图 | S37 | LLM 中心；prompt/context 内圈；memory/agent loop 中圈；harness 外圈 |
 | AI × math | S38–S43 | 加速前后对比、三阶段时间线、公开表述表、生成/验证/搜索流程、猜测网格、已解决/未解决 |
 | 结论 | S44 | token → 概率 → 候选 → 验证 → 定理 |

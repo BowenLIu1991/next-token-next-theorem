@@ -1804,7 +1804,7 @@
   <!-- ============ S24d · Two limits of the model ============ -->
   
 
-  <!-- ============ S29 · Context 膨胀 ============ -->
+  <!-- ============ S29 · Context growth ============ -->
   <section class="slide" data-notes="This is a functional overview. The model generates text or proposes tool calls from its current input. Prompt refers to instructions, questions and examples within that input; context is all input content visible to the current call. Memory stores state across calls and supplies it when needed. The loop is the control flow coordinating model calls, tool execution and feedback. The harness is the execution framework that hosts these mechanisms and manages tools, permissions, checks and logs. These concepts describe input, state, control flow and an execution framework; they overlap rather than form peer components. The rings organize the explanation, not a strict software layering or a computer hardware architecture.">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>Put the model back in the system</h2>
@@ -1838,7 +1838,7 @@
 
 <section class="slide" data-notes="最早 GPT-3 只有 2k token，ChatGPT 是 4k；后来 32k、128k，再到 1M。窗口变长带来三个问题：贵、慢、稀释。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>The inflation of the context window</h2>
+    <h2>The growth of the context window</h2>
     <p class="sub" style="margin-top:8px">Context is every token the model can see in this call; the window is its limit.</p>
     <div class="content">
       <div class="ctxbars">

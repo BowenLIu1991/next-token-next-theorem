@@ -1802,7 +1802,7 @@
   <!-- ============ S24d · 模型的两个短板 ============ -->
   
 
-  <!-- ============ S29 · Context 膨胀 ============ -->
+  <!-- ============ S29 · Context 增长 ============ -->
   <section class="slide" data-notes="把前面几页收成一张功能示意图：模型根据当前输入生成文本或工具调用提议；prompt 是输入中的指令、问题和示例，context 是这次调用可见的全部输入内容；memory 是跨调用保存、按需取回的状态；loop 是组织多次调用、工具执行与反馈的控制流程；harness 是承载这些机制的执行框架，管理工具、权限、检查与日志。这些概念分属输入、状态、控制流程和执行框架，存在包含与交叠关系。图中同心环用于组织讲解，不代表严格的软件分层或计算机硬件结构。">
     <p class="eyebrow"><b>04</b> / application</p>
     <h2>把模型放回系统里</h2>
@@ -1836,7 +1836,7 @@
 
 <section class="slide" data-notes="最早 GPT-3 只有 2k token，ChatGPT 是 4k；后来 32k、128k，再到 1M。窗口变长带来三个问题：贵、慢、稀释。">
     <p class="eyebrow"><b>04</b> / application</p>
-    <h2>Context window 的膨胀</h2>
+    <h2>Context window 的增长</h2>
     <p class="sub" style="margin-top:8px">Context 是这次调用模型能看到的全部 token；窗口是它的上限。</p>
     <div class="content">
       <div class="ctxbars">

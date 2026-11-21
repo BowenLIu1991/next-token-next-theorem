@@ -130,7 +130,7 @@
 **页面**：
 
 1. 第 24 页：训练之后的四个短板——不保存状态、Context 有限、计算是记忆与模式补全、输出是概率；对应 Context/Memory、Function calling、Harness
-2. 第 25 页：Context window 的膨胀（2k → 1M）
+2. 第 25 页：Context window 的增长（2k → 1M）
 3. 第 26 页：Context 与 Memory——有限窗口，怎么放；大海捞针、窗口内容分层、信号与噪声、写取压忘、工作/情节/语义/程序
 4. 第 27 页：Tool calling——签名、调用、沙箱执行、观察；工具输出仍是不可信输入
 5. 第 28 页：Harness——权限与沙箱、超时与重试、验证与回滚、日志与停止
