@@ -857,9 +857,9 @@
         <div class="card mapcard" data-goto="2" role="button" tabindex="0">
           <div class="k">00 · 开场与 Token</div>
           <h3>Token</h3>
-          <p>十个整数 · 词表 · 计费</p>
+          <p>一串整数 · 词表 · 计费</p>
           <div class="range">p. 3–7</div>
-          <div class="maplinks"><span class="maplink" data-goto="3">10 个整数</span><span class="maplink" data-goto="6">词表</span><span class="maplink" data-goto="5">计费</span></div>
+          <div class="maplinks"><span class="maplink" data-goto="3">一串整数</span><span class="maplink" data-goto="6">词表</span><span class="maplink" data-goto="5">计费</span></div>
         </div>
         <div class="card mapcard" data-goto="7" role="button" tabindex="0">
           <div class="k">01 · 模型</div>
@@ -913,46 +913,30 @@
     <div class="footer"><span>chapter open</span><span class="pnum">03 / 37</span></div>
   </section>
 
-<section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
-    <h2>模型看到的，是 10 个整数</h2>
-    <div class="content">
-      <div class="examples">
-        <div class="panel">
-          <div class="exlabel">EN · 一句话</div>
-          <div class="sentence">Celestial mechanics is the poetry of orbits.</div>
-          <div class="tokens">
-            <span class="tok"><span class="tok-t">Cel</span><span class="tok-id">69126</span></span>
-            <span class="tok"><span class="tok-t">estial</span><span class="tok-id">90010</span></span>
-            <span class="tok"><span class="tok-t">▁mechanics</span><span class="tok-id">52347</span></span>
-            <span class="tok"><span class="tok-t">▁is</span><span class="tok-id">382</span></span>
-            <span class="tok"><span class="tok-t">▁the</span><span class="tok-id">290</span></span>
-            <span class="tok"><span class="tok-t">▁poetry</span><span class="tok-id">38153</span></span>
-            <span class="tok"><span class="tok-t">▁of</span><span class="tok-id">328</span></span>
-            <span class="tok"><span class="tok-t">▁or</span><span class="tok-id">503</span></span>
-            <span class="tok"><span class="tok-t">bits</span><span class="tok-id">24043</span></span>
-            <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
-          </div>
-          <div class="idrow"><b>46</b> 个字符 &nbsp;→&nbsp; <b>10</b> 个 token &nbsp;→&nbsp; 10 个整数 &nbsp;&nbsp;·&nbsp;&nbsp; ▁ 表示前导空格</div>
+<section class="slide" data-notes="以这一句中英混排为例：53 个字符，被切分为 11 个 token，映射为 11 个整数。注意前导空格：在词与词之间，空格本身也是 token 的一部分。强调：模型在最底层既看不到汉字笔画，也看不到英文字母，它看到的纯粹是一串离散整数。这自然引出三个核心问题：01 这串整数是怎么查表切分出来的？02 模型怎么用它们计算下一个 token 的概率？03 我们怎么把这个预测动作组织成能证明定理的完整系统？">
+    <h2>模型看到的，是一串整数</h2>
+    <div class="content" style="margin-top:24px">
+      <div class="panel" style="padding:28px 32px">
+        <div class="exlabel" style="font-size:var(--fs-label);margin-bottom:10px">输入 · 中英混排句子</div>
+        <div class="sentence" style="font-size:var(--fs-key);color:#fff;margin-bottom:22px">三体问题 is a classic problem in celestial mechanics.</div>
+        <div class="tokens" style="gap:10px">
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">三</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">3236</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">体</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">7074</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">问题</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">28917</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁is</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">382</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁a</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">261</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁classic</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13686</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁problem</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">4792</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁in</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">306</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁celestial</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">134437</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁mechanics</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">52347</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">.</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13</span></span>
         </div>
-        <div class="panel">
-          <div class="exlabel">中文 · 《天体力学基础》内容简介</div>
-          <div class="sentence">本书系统地介绍了天体力学</div>
-          <div class="tokens">
-            <span class="tok"><span class="tok-t">本</span><span class="tok-id">4087</span></span>
-            <span class="tok"><span class="tok-t">书</span><span class="tok-id">20121</span></span>
-            <span class="tok"><span class="tok-t">系统</span><span class="tok-id">31936</span></span>
-            <span class="tok"><span class="tok-t">地</span><span class="tok-id">5557</span></span>
-            <span class="tok"><span class="tok-t">介绍</span><span class="tok-id">37887</span></span>
-            <span class="tok"><span class="tok-t">了</span><span class="tok-id">4531</span></span>
-            <span class="tok"><span class="tok-t">天</span><span class="tok-id">867</span></span>
-            <span class="tok"><span class="tok-t">体</span><span class="tok-id">7074</span></span>
-            <span class="tok"><span class="tok-t">力</span><span class="tok-id">11343</span></span>
-            <span class="tok"><span class="tok-t">学</span><span class="tok-id">8590</span></span>
-          </div>
-          <div class="idrow"><b>12</b> 个字符 &nbsp;→&nbsp; <b>10</b> 个 token &nbsp;→&nbsp; 10 个整数 &nbsp;&nbsp;·&nbsp;&nbsp; 系统 / 介绍 各占一个 token</div>
+        <div class="idrow" style="margin-top:22px;padding-top:16px;font-size:var(--fs-label)">
+          <b>53</b> 个字符 &nbsp;→&nbsp; <b>11</b> 个 token &nbsp;→&nbsp; <b>11</b> 个整数编号 &nbsp;&nbsp;·&nbsp;&nbsp; ▁ 表示前导空格
         </div>
       </div>
-      <div class="qgrid">
+      <div class="qgrid" style="margin-top:36px">
         <div class="q"><span class="n">01</span>这串整数是怎么来的？</div>
         <div class="q"><span class="n">02</span>它怎么预测下一个？</div>
         <div class="q"><span class="n">03</span>我们怎么用它干活？</div>
@@ -1043,13 +1027,13 @@
           
           <div class="ledger">
             <div class="ledger-head"><span>ID</span><span>片段</span><span></span></div>
-            <div class="ledger-row"><span class="ln">867</span><span class="tk">天</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">382</span><span class="tk">▁is</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">3236</span><span class="tk">三</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">4792</span><span class="tk">▁problem</span><span class="tag"></span></div>
             <div class="ledger-row"><span class="ln">7074</span><span class="tk">体</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">8590</span><span class="tk">学</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">11343</span><span class="tk">力</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">20121</span><span class="tk">书</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">31936</span><span class="tk">系统</span><span class="tag"></span></div>
-            <div class="ledger-row hl"><span class="ln">78580</span><span class="tk">基础</span><span class="tag">← 本次查询</span></div>
+            <div class="ledger-row"><span class="ln">28917</span><span class="tk">问题</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">52347</span><span class="tk">▁mechanics</span><span class="tag"></span></div>
+            <div class="ledger-row hl"><span class="ln">134437</span><span class="tk">▁celestial</span><span class="tag">← 本次查询</span></div>
             <div class="ledger-row special"><span class="ln">199999</span><span class="tk">&lt;|endoftext|&gt;</span><span class="tag">特殊</span></div>
             <div class="ledger-foot"><span>只展示 8 行</span><span>共 200,019 行</span></div>
           </div>
@@ -1069,7 +1053,7 @@
           <div class="calc">200,019 × 4,096 <span>≈</span> <b>8.2 亿参数</b></div>
         </div>
       </div>
-      <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">ID 78580（无语义） → embedding 第 78580 行 → [0.12, −0.44, 0.08, …] · 4096 维</div>
+      <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">ID 134437（无语义） → embedding 第 134437 行 → [0.12, −0.44, 0.08, …] · 4096 维</div>
       <div class="keyline">编号是<b>地址</b>；4096 维向量是<b>语义表征</b>。</div>
     </div>
     <div class="footer"><span>vocabulary</span><span class="pnum">07 / 37</span></div>

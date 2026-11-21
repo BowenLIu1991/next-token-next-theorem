@@ -857,9 +857,9 @@
         <div class="card mapcard" data-goto="2" role="button" tabindex="0">
           <div class="k">00 · Opening &amp; Token</div>
           <h3>Token</h3>
-          <p>Ten integers · vocabulary · billing</p>
+          <p>Sequence of integers · vocabulary · billing</p>
           <div class="range">p. 3–7</div>
-          <div class="maplinks"><span class="maplink" data-goto="3">10 integers</span><span class="maplink" data-goto="6">Vocabulary</span><span class="maplink" data-goto="5">Billing</span></div>
+          <div class="maplinks"><span class="maplink" data-goto="3">Integer sequence</span><span class="maplink" data-goto="6">Vocabulary</span><span class="maplink" data-goto="5">Billing</span></div>
         </div>
         <div class="card mapcard" data-goto="7" role="button" tabindex="0">
           <div class="k">01 · Model</div>
@@ -913,47 +913,30 @@
     <div class="footer"><span>chapter open</span><span class="pnum">03 / 37</span></div>
   </section>
 
-<section class="slide" data-notes="先看英文，再看中文：两句都是 10 个 token、10 个整数；中文 12 个字也是 10 个 token，系统/介绍 各占一个 token。停 5 秒再说话。强调：不是字母、不是单词，是整数。三个问题对应后面的 token、模型、使用。">
-    <h2>What the model sees: ten integers</h2>
-    <div class="content">
-      <div class="examples">
-        <div class="panel">
-          <div class="exlabel">EN · one sentence</div>
-          <div class="sentence">Celestial mechanics is the poetry of orbits.</div>
-          <div class="tokens">
-            <span class="tok"><span class="tok-t">Cel</span><span class="tok-id">69126</span></span>
-            <span class="tok"><span class="tok-t">estial</span><span class="tok-id">90010</span></span>
-            <span class="tok"><span class="tok-t">▁mechanics</span><span class="tok-id">52347</span></span>
-            <span class="tok"><span class="tok-t">▁is</span><span class="tok-id">382</span></span>
-            <span class="tok"><span class="tok-t">▁the</span><span class="tok-id">290</span></span>
-            <span class="tok"><span class="tok-t">▁poetry</span><span class="tok-id">38153</span></span>
-            <span class="tok"><span class="tok-t">▁of</span><span class="tok-id">328</span></span>
-            <span class="tok"><span class="tok-t">▁or</span><span class="tok-id">503</span></span>
-            <span class="tok"><span class="tok-t">bits</span><span class="tok-id">24043</span></span>
-            <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
-          </div>
-          <div class="idrow"><b>46</b> characters &nbsp;→&nbsp; <b>10</b> tokens &nbsp;→&nbsp; 10 integers &nbsp;&nbsp;·&nbsp;&nbsp; ▁ marks a leading space</div>
+<section class="slide" data-notes="Take this sentence: 58 characters, tokenized into 11 tokens, mapped to 11 discrete integers. Notice the leading spaces: in natural language, spaces are part of the token itself. Emphasize: at the lowest level, the model sees neither letters nor concepts, but purely a sequence of integers. This raises three fundamental questions: 01 How are these integers looked up and cut? 02 How does the model compute probabilities for the next token? 03 How do we orchestrate next-token prediction into a complete theorem-proving system?">
+    <h2>What the model sees is a sequence of integers</h2>
+    <div class="content" style="margin-top:24px">
+      <div class="panel" style="padding:28px 32px">
+        <div class="exlabel" style="font-size:var(--fs-label);margin-bottom:10px">Input sentence</div>
+        <div class="sentence" style="font-size:var(--fs-key);color:#fff;margin-bottom:22px">Three-body problem is a classic problem in celestial mechanics.</div>
+        <div class="tokens" style="gap:10px">
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">Three</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">25843</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">-body</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">19146</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">problem</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">4792</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁is</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">382</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁a</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">261</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁classic</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13686</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁problem</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">4792</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁in</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">306</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁celestial</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">134437</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁mechanics</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">52347</span></span>
+          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">.</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13</span></span>
         </div>
-        <div class="panel">
-          <div class="exlabel">Chinese · Foundations of Celestial Mechanics</div>
-          <div class="sentence">本书系统地介绍了天体力学</div>
-          <div class="tokens">
-            <span class="tok"><span class="tok-t">本</span><span class="tok-id">4087</span></span>
-            <span class="tok"><span class="tok-t">书</span><span class="tok-id">20121</span></span>
-            <span class="tok"><span class="tok-t">系统</span><span class="tok-id">31936</span></span>
-            <span class="tok"><span class="tok-t">地</span><span class="tok-id">5557</span></span>
-            <span class="tok"><span class="tok-t">介绍</span><span class="tok-id">37887</span></span>
-            <span class="tok"><span class="tok-t">了</span><span class="tok-id">4531</span></span>
-            <span class="tok"><span class="tok-t">天</span><span class="tok-id">867</span></span>
-            <span class="tok"><span class="tok-t">体</span><span class="tok-id">7074</span></span>
-            <span class="tok"><span class="tok-t">力</span><span class="tok-id">11343</span></span>
-            <span class="tok"><span class="tok-t">学</span><span class="tok-id">8590</span></span>
-          </div>
-          <div class="idrow"><b>12</b> characters &nbsp;→&nbsp; <b>10</b> tokens &nbsp;→&nbsp; 10 integers &nbsp;&nbsp;·&nbsp;&nbsp; two-character words often map to one token</div>
-          
+        <div class="idrow" style="margin-top:22px;padding-top:16px;font-size:var(--fs-label)">
+          <b>58</b> characters &nbsp;→&nbsp; <b>11</b> tokens &nbsp;→&nbsp; <b>11</b> integers &nbsp;&nbsp;·&nbsp;&nbsp; ▁ marks a leading space
         </div>
       </div>
-      <div class="qgrid">
+      <div class="qgrid" style="margin-top:36px">
         <div class="q"><span class="n">01</span>Where do these integers come from?</div>
         <div class="q"><span class="n">02</span>How does it predict the next one?</div>
         <div class="q"><span class="n">03</span>How do we put it to work?</div>
@@ -1044,11 +1027,11 @@
           
           <div class="ledger">
             <div class="ledger-head"><span>ID</span><span>Token</span><span></span></div>
-            <div class="ledger-row"><span class="ln">290</span><span class="tk">▁the</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">2392</span><span class="tk">▁book</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">2500</span><span class="tk">This</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">18864</span><span class="tk">▁fundamental</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">23753</span><span class="tk">▁concepts</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">382</span><span class="tk">▁is</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">4792</span><span class="tk">▁problem</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">13686</span><span class="tk">▁classic</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">19146</span><span class="tk">-body</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">25843</span><span class="tk">Three</span><span class="tag"></span></div>
             <div class="ledger-row"><span class="ln">52347</span><span class="tk">▁mechanics</span><span class="tag"></span></div>
             <div class="ledger-row hl"><span class="ln">134437</span><span class="tk">▁celestial</span><span class="tag">← query</span></div>
             <div class="ledger-row special"><span class="ln">199999</span><span class="tk">&lt;|endoftext|&gt;</span><span class="tag">special</span></div>
