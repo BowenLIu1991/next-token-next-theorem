@@ -33,13 +33,14 @@ CHROME = os.environ.get(
 W, H = 1280, 720
 
 
-def screenshot(url: str, out: Path, profile: Path) -> None:
+def screenshot(url: str, out: Path, profile: Path, scale: int = 3) -> None:
     cmd = [
         CHROME,
         "--headless=new",
         "--disable-gpu",
         "--hide-scrollbars",
-        "--window-size=1280,720",
+        f"--window-size={W},{H}",
+        f"--force-device-scale-factor={scale}",
         f"--user-data-dir={profile}",
         "--virtual-time-budget=4000",
         "--run-all-compositor-stages-before-draw",
@@ -53,6 +54,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--html", default="docs/index.html", help="HTML file to render")
     ap.add_argument("--out", default="docs/from-next-token-to-next-theorem.pdf", help="PDF output")
+    ap.add_argument("--scale", type=int, default=3, help="Device scale factor (default: 3 for 4K / 288 DPI)")
+    ap.add_argument("--quality", type=int, default=92, help="JPEG quality for PDF compression (default: 92)")
     ap.add_argument("--contact-sheet", help="Optional overview PNG for visual review")
     ap.add_argument("--appendix", action="store_true", help="Render the preserved training-detail appendix")
     args = ap.parse_args()
@@ -73,6 +76,10 @@ def main() -> None:
     if not Path(CHROME).exists():
         raise SystemExit(f"Chrome not found: {CHROME}")
 
+    target_w, target_h = W * args.scale, H * args.scale
+    dpi = 96.0 * args.scale
+    print(f"Rendering {pages} pages at {target_w}x{target_h} (Scale {args.scale}, {dpi:.0f} DPI, Quality {args.quality})...")
+
     tmp = Path(tempfile.mkdtemp(prefix="opencode-pdf-"))
     profile = tmp / "chrome-profile"
     try:
@@ -82,10 +89,10 @@ def main() -> None:
             if args.appendix:
                 url += "&appendix=1"
             png = tmp / f"page-{i:02d}.png"
-            screenshot(url, png, profile)
+            screenshot(url, png, profile, scale=args.scale)
             im = Image.open(png).convert("RGB")
-            if im.size != (W, H):
-                raise SystemExit(f"page {i + 1}: expected {W}x{H}, got {im.size}")
+            if im.size != (target_w, target_h):
+                raise SystemExit(f"page {i + 1}: expected {target_w}x{target_h}, got {im.size}")
             images.append(im)
             print(f"  {i + 1:02d}/{pages}")
 
@@ -99,7 +106,8 @@ def main() -> None:
         images[0].save(
             out_path,
             "PDF",
-            resolution=96.0,
+            resolution=dpi,
+            quality=args.quality,
             save_all=True,
             append_images=images[1:],
         )

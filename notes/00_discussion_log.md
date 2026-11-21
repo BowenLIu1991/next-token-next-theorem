@@ -4,7 +4,20 @@
 
 ---
 
-## 第八十七轮：拆分子词展示（当前）
+## 第八十八轮：提升 PDF 清晰度至 4K / 288 DPI（当前）
+
+- 问题诊断：
+  - 原 PDF 渲染脚本 `assets/demos/render_pdf.py` 采用默认逻辑分辨率 1280×720（96 DPI），未设置 device scale factor，导致在大屏、Retina 屏或放大查看时文字及微小符号出现模糊马赛克与锯齿。
+- 优化方案：
+  - 在 `render_pdf.py` 中引入 `--force-device-scale-factor=3`（Scale 3，支持 CLI 参数 `--scale` 自定义）。
+  - 物理渲染分辨率提升至 **3840 × 2160**（4K Ultra HD 级，9 倍像素量）。
+  - PDF 嵌入分辨率设置为 **288.0 DPI**（接近 300 DPI 印刷标准），页面物理大小精准维持在 960 × 540 pt (13.333 × 7.50 in，标准 16:9 出血版式)。
+  - 编码压缩质量设置为 `quality=92`（支持 `--quality` 自定义），彻底消除文字周边的 JPEG 压缩噪点与伪影。
+- 实测对比：
+  - 在 PDF 阅读器中放大 300% 时，文字、公式及图表线条平滑锐利，笔画细节完美呈现。
+  - 同步重构中英双语 37 页 PDF 与 LinkedIn 10 页精选 Carousel PDF。
+
+## 第八十七轮：拆分子词展示
 
 - 贯彻“Token 不等于单词”的核心理念，将例句中的 `celestial` 与 `mechanics` 拆解为子词：
   - `celestial` → `▁cel` (69126) + `estial` (90010)
