@@ -913,30 +913,33 @@
     <div class="footer"><span>chapter open</span><span class="pnum">03 / 37</span></div>
   </section>
 
-<section class="slide" data-notes="Take this sentence: 58 characters, tokenized into 11 tokens, mapped to 11 discrete integers. Notice the leading spaces: in natural language, spaces are part of the token itself. Emphasize: at the lowest level, the model sees neither letters nor concepts, but purely a sequence of integers. This raises three fundamental questions: 01 How are these integers looked up and cut? 02 How does the model compute probabilities for the next token? 03 How do we orchestrate next-token prediction into a complete theorem-proving system?">
-    <h2>What the model sees is a sequence of integers</h2>
-    <div class="content" style="margin-top:24px">
-      <div class="panel" style="padding:28px 32px">
-        <div class="exlabel" style="font-size:var(--fs-label);margin-bottom:10px">Input sentence</div>
-        <div class="sentence" style="font-size:var(--fs-key);color:#fff;margin-bottom:22px">Three-body problem is a classic problem in celestial mechanics.</div>
-        <div class="tokens" style="gap:10px">
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">Three</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">25843</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">-body</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">19146</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">problem</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">4792</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁is</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">382</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁a</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">261</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁classic</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13686</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁problem</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">4792</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁in</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">306</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁celestial</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">134437</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">▁mechanics</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">52347</span></span>
-          <span class="tok" style="padding:8px 12px"><span class="tok-t" style="font-size:var(--fs-body)">.</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13</span></span>
+<section class="slide" data-notes="Take this sentence: 53 characters, tokenized into 13 tokens, mapped to 13 discrete integers. Notice the leading spaces: in natural language, spaces are part of the token itself. Note especially the orange and blue boxes: 'celestial' is split into 'cel' and 'estial'; 'mechanics' is split into 'mechan' and 'ics'. A token is neither an entire word nor a single character: it can be a root, an affix, or a subword fragment. This raises three fundamental questions: 01 How are these integers looked up and cut? 02 How does the model compute probabilities for the next token? 03 How do we orchestrate next-token prediction into a complete theorem-proving system?">
+        <h2>What the model sees is a sequence of integers</h2>
+    <div class="content" style="margin-top:22px">
+      <div class="panel" style="padding:24px 28px">
+        <div class="exlabel" style="font-size:var(--fs-label);margin-bottom:8px">Input sentence</div>
+        <div class="sentence" style="font-size:var(--fs-key);color:#fff;margin-bottom:18px">三体问题 is a classic problem in celestial mechanics.</div>
+        <div class="tokens" style="gap:7px">
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">三</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">3236</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">体</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">7074</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">问题</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">28917</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">▁is</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">382</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">▁a</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">261</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">▁classic</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13686</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">▁problem</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">4792</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">▁in</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">306</span></span>
+          <span class="tok" style="padding:7px 10px;border-color:var(--accent);background:rgba(194,65,12,.14)"><span class="tok-t" style="font-size:var(--fs-body)">▁cel</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">69126</span></span>
+          <span class="tok" style="padding:7px 10px;border-color:var(--accent);background:rgba(194,65,12,.14)"><span class="tok-t" style="font-size:var(--fs-body)">estial</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">90010</span></span>
+          <span class="tok" style="padding:7px 10px;border-color:var(--accent-2);background:rgba(29,78,216,.14)"><span class="tok-t" style="font-size:var(--fs-body)">▁mechan</span><span class="tok-id" style="font-size:var(--fs-label);color:#60a5fa">23281</span></span>
+          <span class="tok" style="padding:7px 10px;border-color:var(--accent-2);background:rgba(29,78,216,.14)"><span class="tok-t" style="font-size:var(--fs-body)">ics</span><span class="tok-id" style="font-size:var(--fs-label);color:#60a5fa">828</span></span>
+          <span class="tok" style="padding:7px 10px"><span class="tok-t" style="font-size:var(--fs-body)">.</span><span class="tok-id" style="font-size:var(--fs-label);color:var(--accent)">13</span></span>
         </div>
-        <div class="idrow" style="margin-top:22px;padding-top:16px;font-size:var(--fs-label)">
-          <b>58</b> characters &nbsp;→&nbsp; <b>11</b> tokens &nbsp;→&nbsp; <b>11</b> integers &nbsp;&nbsp;·&nbsp;&nbsp; ▁ marks a leading space
+        <div class="idrow" style="margin-top:16px;padding-top:14px;font-size:var(--fs-label);line-height:1.6">
+          <div><b>53</b> characters &nbsp;→&nbsp; <b>13</b> tokens &nbsp;→&nbsp; <b>13</b> integers &nbsp;&nbsp;·&nbsp;&nbsp; ▁ marks a leading space</div>
+          <div style="margin-top:4px;color:var(--panel-ink)"><b>Tokens are not whole words</b>: celestial → <span style="color:var(--accent)"><b>cel</b> + <b>estial</b></span> &nbsp;·&nbsp; mechanics → <span style="color:#60a5fa"><b>mechan</b> + <b>ics</b></span> (subwords)</div>
         </div>
       </div>
-      <div class="qgrid" style="margin-top:36px">
+      <div class="qgrid" style="margin-top:28px">
         <div class="q"><span class="n">01</span>Where do these integers come from?</div>
         <div class="q"><span class="n">02</span>How does it predict the next one?</div>
         <div class="q"><span class="n">03</span>How do we put it to work?</div>
@@ -947,25 +950,27 @@
 
   <!-- ============ S3 · 切分 ============ -->
   <section class="slide" data-notes="指着 celestial：cel + estial。指着 ▁is：空格属于 token。中文不是一个字一个 token。然后讲三个数字：英文平均单词约 5 字符，平均 token 约 4 字符，所以 1 词约 1.3 token；词表一般 5–20 万。为什么是子词：字母级序列太长，词级词表爆炸，子词是折中。">
-    <p class="eyebrow"><b>01</b> / token</p>
+        <p class="eyebrow"><b>01</b> / token</p>
     <h2>Tokenization is table lookup</h2>
     <div class="content">
       <div class="panel">
-        <div class="sentence">Three-body problem is a classic problem in celestial mechanics.</div>
+        <div class="sentence">三体问题 is a classic problem in celestial mechanics.</div>
         <div class="tokens">
-          <span class="tok"><span class="tok-t">Three</span><span class="tok-id">25843</span></span>
-          <span class="tok"><span class="tok-t">-body</span><span class="tok-id">19146</span></span>
-          <span class="tok"><span class="tok-t">problem</span><span class="tok-id">4792</span></span>
+          <span class="tok"><span class="tok-t">三</span><span class="tok-id">3236</span></span>
+          <span class="tok"><span class="tok-t">体</span><span class="tok-id">7074</span></span>
+          <span class="tok"><span class="tok-t">问题</span><span class="tok-id">28917</span></span>
           <span class="tok"><span class="tok-t">▁is</span><span class="tok-id">382</span></span>
           <span class="tok"><span class="tok-t">▁a</span><span class="tok-id">261</span></span>
           <span class="tok"><span class="tok-t">▁classic</span><span class="tok-id">13686</span></span>
           <span class="tok"><span class="tok-t">▁problem</span><span class="tok-id">4792</span></span>
           <span class="tok"><span class="tok-t">▁in</span><span class="tok-id">306</span></span>
-          <span class="tok"><span class="tok-t">▁celestial</span><span class="tok-id">134437</span></span>
-          <span class="tok"><span class="tok-t">▁mechanics</span><span class="tok-id">52347</span></span>
+          <span class="tok" style="border-color:var(--accent);background:rgba(194,65,12,.14)"><span class="tok-t">▁cel</span><span class="tok-id">69126</span></span>
+          <span class="tok" style="border-color:var(--accent);background:rgba(194,65,12,.14)"><span class="tok-t">estial</span><span class="tok-id">90010</span></span>
+          <span class="tok" style="border-color:var(--accent-2);background:rgba(29,78,216,.14)"><span class="tok-t">▁mechan</span><span class="tok-id">23281</span></span>
+          <span class="tok" style="border-color:var(--accent-2);background:rgba(29,78,216,.14)"><span class="tok-t">ics</span><span class="tok-id">828</span></span>
           <span class="tok"><span class="tok-t">.</span><span class="tok-id">13</span></span>
         </div>
-        <div class="idrow">▁ marks a leading space &nbsp;·&nbsp; Celestial → Cel + estial</div>
+        <div class="idrow">▁ marks a leading space &nbsp;·&nbsp; celestial → cel + estial &nbsp;·&nbsp; mechanics → mechan + ics</div>
       </div>
 
       <div class="stats4">
@@ -984,7 +989,6 @@
         <span class="accent">Subwords: the compromise</span>
       </div>
 
-      
       <div class="keyline">Subwords are an engineering compromise between <b>sequence length</b> and <b>vocabulary size</b>.</div>
     </div>
     <div class="footer"><span>English: 1 token ≈ 4 characters ≈ 0.75 words</span><span class="pnum">05 / 37</span></div>
@@ -1025,15 +1029,15 @@
       <div class="two">
         <div>
           
-          <div class="ledger">
+                    <div class="ledger">
             <div class="ledger-head"><span>ID</span><span>Token</span><span></span></div>
             <div class="ledger-row"><span class="ln">382</span><span class="tk">▁is</span><span class="tag"></span></div>
+            <div class="ledger-row"><span class="ln">828</span><span class="tk">ics</span><span class="tag">suffix</span></div>
+            <div class="ledger-row"><span class="ln">3236</span><span class="tk">三</span><span class="tag"></span></div>
             <div class="ledger-row"><span class="ln">4792</span><span class="tk">▁problem</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">13686</span><span class="tk">▁classic</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">19146</span><span class="tk">-body</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">25843</span><span class="tk">Three</span><span class="tag"></span></div>
-            <div class="ledger-row"><span class="ln">52347</span><span class="tk">▁mechanics</span><span class="tag"></span></div>
-            <div class="ledger-row hl"><span class="ln">134437</span><span class="tk">▁celestial</span><span class="tag">← query</span></div>
+            <div class="ledger-row"><span class="ln">23281</span><span class="tk">▁mechan</span><span class="tag">root</span></div>
+            <div class="ledger-row"><span class="ln">69126</span><span class="tk">▁cel</span><span class="tag">prefix</span></div>
+            <div class="ledger-row hl"><span class="ln">90010</span><span class="tk">estial</span><span class="tag">← query</span></div>
             <div class="ledger-row special"><span class="ln">199999</span><span class="tk">&lt;|endoftext|&gt;</span><span class="tag">special</span></div>
             <div class="ledger-foot"><span>8 rows shown</span><span>200,019 rows in total</span></div>
           </div>
@@ -1053,7 +1057,7 @@
           <div class="calc">200,019 × 4,096 <span>≈</span> <b>820M parameters</b></div>
         </div>
       </div>
-      <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">ID 134437 (no meaning) → embedding row 134437 → [0.12, −0.44, 0.08, …] · 4,096 dims</div>
+      <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">ID 90010 (subword fragment) → embedding row 90010 → [0.12, −0.44, 0.08, …] · 4,096 dims</div>
       <div class="keyline">The ID is an <b>address</b>; the 4,096-dim vector is the <b>semantic representation</b>.</div>
     </div>
     <div class="footer"><span>vocabulary</span><span class="pnum">07 / 37</span></div>

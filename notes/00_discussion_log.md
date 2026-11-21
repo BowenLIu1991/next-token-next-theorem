@@ -4,7 +4,18 @@
 
 ---
 
-## 第八十六轮：贯通统一例句（当前）
+## 第八十七轮：拆分子词展示（当前）
+
+- 贯彻“Token 不等于单词”的核心理念，将例句中的 `celestial` 与 `mechanics` 拆解为子词：
+  - `celestial` → `▁cel` (69126) + `estial` (90010)
+  - `mechanics` → `▁mechan` (23281) + `ics` (828)
+- 第 04 页：
+  - 13 个 token 胶囊中，用暖橙色高亮 `▁cel` + `estial`，科技蓝高亮 `▁mechan` + `ics`，建立视觉强连结。
+  - 下方注脚明确点出：`Token 不等于单词：celestial → cel + estial · mechanics → mechan + ics（子词 Subword）`。
+- 第 05 页：面板同步展示这 13 个 token，并在“为什么是子词”中直观佐证长词拆分子词的工程折中。
+- 第 07 页：ledger 词表表格列出 `ics`（后缀）、`▁mechan`（词根）、`▁cel`（前缀）、`estial`（本次查询），并演示 ID 90010 无语义子词取出行向量。
+
+## 第八十六轮：贯通统一例句
 
 - 将全篇 Token 章节的切分示例彻底统一为中英混排天体力学名句：`三体问题 is a classic problem in celestial mechanics.`
 - 第 04 页：
