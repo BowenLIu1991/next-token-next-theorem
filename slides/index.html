@@ -345,10 +345,6 @@
   table.price th:first-child{text-align:left}
   table.price td{padding:15px 0;border-bottom:1px solid #e8e3d7;text-align:right;font-family:var(--mono)}
   table.price td:first-child{text-align:left;font-family:var(--sans);font-size:var(--fs-label)}
-  .calcbox{border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:20px 22px}
-  .calcbox .cline{font-family:var(--mono);font-size:var(--fs-label);color:var(--muted);margin-top:8px}
-  .calcbox .cres{font-family:var(--mono);font-size:var(--fs-display);margin-top:14px;letter-spacing:-.02em}
-  .calcbox .cres span{font-family:var(--sans);font-size:var(--fs-micro);color:var(--muted);margin-left:8px;letter-spacing:0}
 
   /* ---------- agent ---------- */
   .agent{display:grid;grid-template-columns:1.7fr .8fr;gap:26px;align-items:start}
@@ -361,10 +357,6 @@
 
   /* ---------- screenshots ---------- */
   .shot{width:100%;display:block;border-radius:12px}
-  .ratio2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px}
-  .ratio2 .item{border-top:1px solid var(--line);padding-top:10px}
-  .ratio2 .big{font-family:var(--mono);font-size:var(--fs-key);color:var(--accent);letter-spacing:-.02em}
-  .ratio2 .lbl{font-size:var(--fs-micro);color:var(--muted);margin-top:3px}
 
   /* ---------- math band ---------- */
   .mathband{display:flex;align-items:center;gap:34px;margin-top:24px;padding:14px 0;
@@ -995,28 +987,21 @@
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
-  <section class="slide" data-notes="这是 DeepSeek 后台的真实用量：2,599 次请求，2.85 亿 token，27 块钱。平均一次 11 万 token，约一分钱。token 就是账单单位。左下的换算是经验值：英文字符 0.3、中文字符 0.6，实际以 usage 为准。一次调用 100k 输入 + 2k 输出，缓存命中 1 分钱，不命中 1 毛 1，差一个数量级。">
-    <p class="eyebrow"><b>01</b> / token</p>
+  <section class="slide" data-notes="这是 DeepSeek 后台的真实用量：2,599 次请求，2.85 亿 token，27 块钱。平均一次 11 万 token，约一分钱。token 就是账单单位。下面的换算是经验值：英文字符 0.3、中文字符 0.6，实际以 API 返回的 usage 为准。">
+        <p class="eyebrow"><b>01</b> / token</p>
     <h2>Token 是单位，也是账单</h2>
-    <p class="sub" style="margin-top:8px">模型按 token 计算，账单也按 token 计算。</p>
-    <div class="content">
-      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:stretch">
-        <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%">
-          <img class="shot" src="../assets/figures/deepseek_usage.png" alt="DeepSeek 用量：2.85 亿 token，2,599 次请求，27.18 元">
-          <div class="ratio2" style="margin-top:16px">
-            <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">1 个英文字符</div></div>
-            <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">1 个中文字符</div></div>
-          </div>
-        </div>
-        <div class="calcbox">
-          <p class="micro" style="margin:0">一次调用 · 空闲时段</p>
-          <div class="cline">输入 100k + 输出 2k</div>
-          <div class="cres">¥0.01<span>缓存命中</span></div>
-          <div class="cres">¥0.11<span>缓存未命中</span></div>
-          <div class="scaleband" style="margin-top:16px">同一段上下文，命中与不命中，差一个数量级。</div>
-        </div>
+    <p class="sub" style="margin-top:8px">模型按 token 计算，账单也按 token 结算。</p>
+    <div class="content" style="margin-top:18px">
+      <div style="width:860px;margin:0 auto;background:#13151a;padding:10px;border-radius:12px;border:1px solid #2b2e35">
+        <img src="../assets/figures/deepseek_usage.png" style="width:100%;display:block;border-radius:7px" alt="DeepSeek 用量：2.85 亿 token，2,599 次请求，27.18 元">
       </div>
-      <div class="keyline">Token 是模型的最小单位，也是账单的最小单位。</div>
+      <div class="stats4" style="margin-top:22px;grid-template-columns:repeat(4,1fr);gap:18px">
+        <div class="item"><div class="num" style="font-size:24px">2,599 次</div><div class="lbl">API 请求<br>真实科研任务</div></div>
+        <div class="item"><div class="num" style="font-size:24px">2.85 亿</div><div class="lbl">累计 Token<br>处理总量</div></div>
+        <div class="item"><div class="num" style="font-size:24px">≈ 0.3</div><div class="lbl">Token / 英文字符<br>约 3–4 字符 / token</div></div>
+        <div class="item"><div class="num" style="font-size:24px">≈ 0.6</div><div class="lbl">Token / 中文字符<br>约 1.5–2 汉字 / token</div></div>
+      </div>
+      <div class="keyline" style="margin-top:22px">Token 是模型的最小<b>计算单元</b>，也是 API 的最小<b>计费单位</b>。</div>
     </div>
     <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 37</span></div>
   </section>

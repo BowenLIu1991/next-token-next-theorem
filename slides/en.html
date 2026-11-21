@@ -345,10 +345,6 @@
   table.price th:first-child{text-align:left}
   table.price td{padding:15px 0;border-bottom:1px solid #e8e3d7;text-align:right;font-family:var(--mono)}
   table.price td:first-child{text-align:left;font-family:var(--sans);font-size:var(--fs-label)}
-  .calcbox{border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:20px 22px}
-  .calcbox .cline{font-family:var(--mono);font-size:var(--fs-label);color:var(--muted);margin-top:8px}
-  .calcbox .cres{font-family:var(--mono);font-size:var(--fs-display);margin-top:14px;letter-spacing:-.02em}
-  .calcbox .cres span{font-family:var(--sans);font-size:var(--fs-micro);color:var(--muted);margin-left:8px;letter-spacing:0}
 
   /* ---------- agent ---------- */
   .agent{display:grid;grid-template-columns:1.7fr .8fr;gap:26px;align-items:start}
@@ -361,10 +357,6 @@
 
   /* ---------- screenshots ---------- */
   .shot{width:100%;display:block;border-radius:12px}
-  .ratio2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px}
-  .ratio2 .item{border-top:1px solid var(--line);padding-top:10px}
-  .ratio2 .big{font-family:var(--mono);font-size:var(--fs-key);color:var(--accent);letter-spacing:-.02em}
-  .ratio2 .lbl{font-size:var(--fs-micro);color:var(--muted);margin-top:3px}
 
   /* ---------- math band ---------- */
   .mathband{display:flex;align-items:center;gap:34px;margin-top:24px;padding:14px 0;
@@ -995,28 +987,21 @@
   </section>
 
   <!-- ============ S4 · 词表 ============ -->
-  <section class="slide" data-notes="Real DeepSeek usage: 2599 requests, 285 million tokens, about 27 RMB. Average 110k tokens per request, roughly one cent. A token is the billing unit. Rule-of-thumb ratios: 0.3 token per English character, 0.6 per Chinese character. A single call with 100k input and 2k output costs 0.01 RMB with cache hit and 0.11 RMB without: an order of magnitude.">
-    <p class="eyebrow"><b>01</b> / token</p>
+  <section class="slide" data-notes="Real DeepSeek usage: 2599 requests, 285 million tokens, about 27 RMB. Average 110k tokens per request, roughly one cent. A token is the billing unit. The ratios below are rules of thumb: 0.3 token per English character, 0.6 per Chinese character; trust the usage field in the API response instead.">
+        <p class="eyebrow"><b>01</b> / token</p>
     <h2>Tokens: the unit of model and bill</h2>
-    <p class="sub" style="margin-top:8px">The model computes in tokens; the bill does too.</p>
-    <div class="content">
-      <div class="two" style="grid-template-columns:1.12fr .88fr;gap:28px;align-items:stretch">
-        <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%">
-          <img class="shot" src="../assets/figures/deepseek_usage.png" alt="DeepSeek usage: 285 million tokens, 2599 requests, 27.18 RMB">
-          <div class="ratio2" style="margin-top:16px">
-            <div class="item"><div class="big">≈ 0.3 token</div><div class="lbl">per English character</div></div>
-            <div class="item"><div class="big">≈ 0.6 token</div><div class="lbl">per Chinese character</div></div>
-          </div>
-        </div>
-        <div class="calcbox">
-          <p class="micro" style="margin:0">One call · off-peak</p>
-          <div class="cline">100k input + 2k output</div>
-          <div class="cres">¥0.01<span>cache hit</span></div>
-          <div class="cres">¥0.11<span>cache miss</span></div>
-          <div class="scaleband" style="margin-top:16px">Same context, cache hit vs miss: an order of magnitude.</div>
-        </div>
+    <p class="sub" style="margin-top:8px">The model computes in tokens; the bill is settled in tokens.</p>
+    <div class="content" style="margin-top:18px">
+      <div style="width:860px;margin:0 auto;background:#13151a;padding:10px;border-radius:12px;border:1px solid #2b2e35">
+        <img src="../assets/figures/deepseek_usage.png" style="width:100%;display:block;border-radius:7px" alt="DeepSeek usage: 285 million tokens, 2599 requests, 27.18 RMB">
       </div>
-      <div class="keyline">A token is the smallest unit of both the model and the bill.</div>
+      <div class="stats4" style="margin-top:22px;grid-template-columns:repeat(4,1fr);gap:18px">
+        <div class="item"><div class="num" style="font-size:24px">2,599</div><div class="lbl">API requests<br>real research tasks</div></div>
+        <div class="item"><div class="num" style="font-size:24px">285M</div><div class="lbl">tokens processed<br>in total</div></div>
+        <div class="item"><div class="num" style="font-size:24px">≈ 0.3</div><div class="lbl">token / English char<br>≈ 3–4 chars / token</div></div>
+        <div class="item"><div class="num" style="font-size:24px">≈ 0.6</div><div class="lbl">token / Chinese char<br>≈ 1.5–2 chars / token</div></div>
+      </div>
+      <div class="keyline" style="margin-top:22px">A token is the smallest <b>unit of computation</b> in the model and the smallest <b>unit of billing</b> in the API.</div>
     </div>
     <div class="footer"><span>usage · billing · caching</span><span class="pnum">06 / 37</span></div>
   </section>

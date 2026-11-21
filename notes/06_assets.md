@@ -10,7 +10,6 @@
 | 文件 | 页面 | 内容 |
 |---|---|---|
 | `assets/figures/deepseek_usage.png` | S5 | 余额 + 2.85 亿 token / 2,599 次请求 |
-| `assets/figures/deepseek_pricing.png` | S6 | 缓存命中 / 未命中 / 输出价格 |
 | `assets/figures/agent_client.png` | S34 | Agent 客户端：Thought / 工具 / 上下文 |
 
 原始完整截图：

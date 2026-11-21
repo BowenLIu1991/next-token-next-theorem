@@ -4,7 +4,20 @@
 
 ---
 
-## 第八十八轮：提升 PDF 清晰度至 4K / 288 DPI（当前）
+## 第八十九轮：删除第 06 页缓存计费面板（当前）
+
+- 用户反馈：「一次调用 · 空闲时段 / 输入 100k + 输出 2k / ¥0.01 缓存命中 / ¥0.11 缓存未命中 / 差一个数量级」与主线「从下一个 token 到下一个定理」无关，属于模型服务商的计费细节，要求删除。
+- 版面重构（中英同步）：
+  - 删除右侧 `.calcbox` 计费面板，连同 `data-notes` 中的缓存计费讲解。
+  - 改为单列布局：DeepSeek 后台用量截图（880px 宽、4K 源图，清晰可读）居中置顶。
+  - 截图下方用四栏数据点承接论证：2,599 次请求 / 2.85 亿 token / ≈0.3 token 每英文字符 / ≈0.6 token 每中文字符。
+  - 底部 keyline 收敛回主线：Token 是模型的最小计算单元，也是 API 的最小计费单位。
+- 清理：
+  - 移除不再使用的 CSS：`.calcbox`、`.calcbox .cline`、`.calcbox .cres`、`.ratio2` 系列。
+  - 删除无引用资产 `assets/figures/deepseek_pricing.png`。
+  - 同步 `notes/01_outline.md`、`notes/02_slide_script.md`（S8 改写为「token 是单位，也是账单」）、`notes/06_assets.md`。
+
+## 第八十八轮：提升 PDF 清晰度至 4K / 288 DPI
 
 - 问题诊断：
   - 原 PDF 渲染脚本 `assets/demos/render_pdf.py` 采用默认逻辑分辨率 1280×720（96 DPI），未设置 device scale factor，导致在大屏、Retina 屏或放大查看时文字及微小符号出现模糊马赛克与锯齿。
