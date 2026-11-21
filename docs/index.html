@@ -239,7 +239,7 @@
   .ledger-head span:nth-child(1){text-align:right;padding-right:16px}
   .ledger-head span:nth-child(2){padding-left:16px}
   .ledger-row{display:grid;grid-template-columns:96px 1fr 92px;align-items:center;
-    border-top:1px solid #ece7db;height:34px}
+    border-top:1px solid #ece7db;height:32px}
   .ledger-row .ln{font-family:var(--mono);font-size:var(--fs-micro);color:var(--muted);text-align:right;
     padding-right:16px;border-right:1px solid var(--line);height:100%;display:flex;align-items:center;justify-content:flex-end}
   .ledger-row .tk{font-family:var(--mono);font-size:var(--fs-small);padding-left:16px}
@@ -1042,7 +1042,8 @@
 <section class="slide" data-notes="指着一行：ID 就是行号。词表就是一张 200,019 行的表，训练前定好、之后不变。特殊 token 也占一行。行号是索引，后面的 embedding 就按它取行。词表大小直接决定输入输出两层参数量。">
     <p class="eyebrow"><b>01</b> / token</p>
     <h2>The vocabulary: a fixed lookup table</h2>
-    <div class="content">
+    <p class="sub" style="margin-top:8px">The vocabulary only assigns IDs; an ID carries no meaning by itself.</p>
+    <div class="content" style="justify-content:flex-start;margin-top:14px">
       <div class="two">
         <div>
           
@@ -1074,8 +1075,8 @@
           <div class="calc">200,019 × 4,096 <span>≈</span> <b>820M parameters</b></div>
         </div>
       </div>
-      <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">Vocabulary row 134437 → [0.12, −0.44, 0.08, …] · 4,096 dims</div>
-      <div class="keyline">ID is the <b>row number</b>; the vector is the <b>representation</b>.</div>
+      <div class="scaleband" style="margin-top:12px;font-family:var(--mono);font-size:var(--fs-label)">ID 134437 (no meaning) → embedding row 134437 → [0.12, −0.44, 0.08, …] · 4,096 dims</div>
+      <div class="keyline">The ID is an <b>address</b>; the 4,096-dim vector is the <b>semantic representation</b>.</div>
     </div>
     <div class="footer"><span>vocabulary</span><span class="pnum">08 / 39</span></div>
   </section>
