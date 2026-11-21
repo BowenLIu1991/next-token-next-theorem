@@ -32,7 +32,7 @@
 | 训练 | S12–S24 | 知识 → 行为 → 策略、交叉熵、PPL、压缩、SFT、RL、RL 时间线 |
 | 应用 | S27–S36 | 条件分布偏移、CoT、上下文增长条、大海捞针热图、工具调用、Agent、记忆网格、harness |
 | 应用总图 | S37 | LLM 中心；prompt/context 内圈；memory/agent loop 中圈；harness 外圈 |
-| AI × math | S38–S43 | 加速前后对比、三阶段时间线、公开表述表、生成/验证/搜索流程、猜测网格、已解决/未解决 |
+| AI × math | S38–S43 | 加速前后对比、三阶段时间线、生成/验证/搜索流程、猜测网格、已解决/未解决 |
 | 结论 | S44 | token → 概率 → 候选 → 验证 → 定理 |
 
 > 公式统一用 MathML + STIX Two Math，不依赖外部 JS / CDN。
