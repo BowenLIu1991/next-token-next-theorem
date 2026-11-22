@@ -3,6 +3,8 @@
 
 A 45-minute talk on how large language models actually work — and how next-token prediction becomes mathematical problem solving.
 
+**v1.0 定稿** · 2026-11-22 · 37 页 · 中英双语 · 4K / 288 DPI PDF
+
 [**English slides**](https://bowenliu1991.github.io/next-token-next-theorem/) · [**中文版**](https://bowenliu1991.github.io/next-token-next-theorem/zh.html) · [**English PDF**](docs/from-next-token-to-next-theorem.pdf) · [**中文 PDF**](docs/from-next-token-to-next-theorem-zh.pdf)
 
 ---
